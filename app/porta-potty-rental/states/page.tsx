@@ -378,26 +378,11 @@ const states = [
 export default function StatesPage() {
   return (
     <div className="min-h-screen relative">
-      {/* Background Image with Multiple Fallbacks and Debugging */}
+      {/* Background Image - Using Direct Blob URL for v0 Preview */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('/images/blue-porta-potties-background.jpg')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-        onError={(e) => {
-          console.log("Background image failed to load")
-          e.currentTarget.style.backgroundImage = "linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)"
-        }}
-      />
-
-      {/* Fallback gradient background that shows while image loads */}
-      <div
-        className="absolute inset-0 bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 opacity-100"
-        style={{
-          backgroundImage: 'url("/images/blue-porta-potties-background.jpg")',
+          backgroundImage: `url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/pexels-fotios-photos-2949748.jpg-8r5o6TrYaMZ63IgGA8k8A7QKcc9Rf8.jpeg')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
