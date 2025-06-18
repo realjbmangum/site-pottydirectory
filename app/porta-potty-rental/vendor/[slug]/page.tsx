@@ -3,6 +3,67 @@ import { Button } from "@/components/ui/button"
 
 // Mock vendor data - in a real app, this would come from your database
 const getVendorData = (slug: string) => {
+  // Charlotte vendor data
+  if (slug === "charlotte-premium-porta-potty-services-nc") {
+    return {
+      id: "nc-1",
+      name: "Charlotte Premium Porta Potty Services",
+      city: "Charlotte",
+      state: "NC",
+      address: "2150 South Blvd, Charlotte, NC 28203",
+      phone: "(704) 555-0199",
+      email: "info@charlotteportapotty.com",
+      website: "https://charlotteportapotty.com",
+      description:
+        "Premier porta potty rental service in Charlotte and surrounding areas. We specialize in luxury portable restrooms for weddings, corporate events, and construction sites. Family-owned business with over 12 years of experience serving the greater Charlotte metropolitan area.",
+      features: {
+        urinal: true,
+        handWashing: true,
+        sanitizer: true,
+        lockingDoor: true,
+        mirror: true,
+      },
+      type: "Luxury" as const,
+      dailyRate: 3 as const,
+      rating: 4.9,
+      reviewCount: 89,
+      yearsInBusiness: 12,
+      serviceAreas: ["Charlotte", "Concord", "Gastonia", "Rock Hill", "Matthews", "Huntersville"],
+      images: [
+        "/images/luxury-porta-potty-interior.jpg",
+        "/images/premium-portable-restroom-exterior.jpg",
+        "/images/hand-washing-station.jpg",
+      ],
+      reviews: [
+        {
+          id: 1,
+          name: "Jennifer Martinez",
+          rating: 5,
+          date: "2024-01-20",
+          comment:
+            "Outstanding service for our wedding! The luxury units were spotless and the staff was incredibly professional. Highly recommend for any special event.",
+        },
+        {
+          id: 2,
+          name: "Robert Thompson",
+          rating: 5,
+          date: "2024-01-15",
+          comment:
+            "Used them for our construction site. Reliable delivery, clean units, and great customer service. Will definitely use again.",
+        },
+        {
+          id: 3,
+          name: "Sarah Wilson",
+          rating: 4,
+          date: "2024-01-08",
+          comment:
+            "Great quality porta potties for our corporate event. Professional setup and pickup. Very satisfied with the service.",
+        },
+      ],
+    }
+  }
+
+  // Default Miami vendor data (keep existing)
   return {
     id: "1",
     name: "Miami Portable Restrooms",
