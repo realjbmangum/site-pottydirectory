@@ -33,7 +33,6 @@ export default function PageBackground({ children, variant = "default", classNam
         className="fixed inset-0 w-full h-[120vh] bg-cover bg-center bg-no-repeat will-change-transform"
         style={{
           backgroundImage: `url('/images/porta-potty-event-background.jpg')`,
-          opacity: 0.75,
           top: "-10vh",
         }}
       />
