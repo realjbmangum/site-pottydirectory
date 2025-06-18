@@ -51,14 +51,14 @@ export default function PageBackground({ children, variant = "default", classNam
 
       {/* Gradient Overlays for different variants */}
       {variant === "hero" && (
-        <div className="fixed inset-0 bg-gradient-to-br from-white/70 via-white/60 to-primary-50/65" />
+        <div className="fixed inset-0 bg-gradient-to-br from-white/20 via-transparent to-primary-50/20" />
       )}
 
       {variant === "default" && (
-        <div className="fixed inset-0 bg-gradient-to-br from-white/65 via-white/60 to-white/55" />
+        <div className="fixed inset-0 bg-gradient-to-br from-white/15 via-transparent to-white/10" />
       )}
 
-      {variant === "minimal" && <div className="fixed inset-0 bg-white/70" />}
+      {variant === "minimal" && <div className="fixed inset-0 bg-white/20" />}
 
       {/* Content */}
       <div className="relative z-10">{children}</div>

@@ -400,7 +400,7 @@ export default function StatesPage() {
                 <Link
                   key={state.code}
                   href={`/porta-potty-rental/states/${state.slug}`}
-                  className="glass-effect-strong rounded-xl shadow-modern hover:shadow-modern-hover transition-all duration-300 p-4 sm:p-6 group relative overflow-hidden backdrop-blur-sm"
+                  className="bg-white/90 backdrop-blur-sm rounded-xl shadow-modern hover:shadow-modern-hover transition-all duration-300 p-4 sm:p-6 group relative overflow-hidden border border-white/20"
                 >
                   {/* Flag Background */}
                   <div
@@ -414,7 +414,7 @@ export default function StatesPage() {
                   />
 
                   {/* Enhanced Gradient Overlay for better text readability */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/85 via-white/70 to-white/55 group-hover:from-white/75 group-hover:via-white/60 group-hover:to-white/45 transition-all duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-white/30 to-white/20 group-hover:from-white/50 group-hover:via-white/40 group-hover:to-white/30 transition-all duration-300" />
 
                   {/* Content */}
                   <div className="relative z-10 text-center">
