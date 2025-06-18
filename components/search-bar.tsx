@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Search, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -17,11 +18,19 @@ export default function SearchBar({
   className = "",
 }: SearchBarProps) {
   const [query, setQuery] = useState("")
+  const router = useRouter()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (onSearch && query.trim()) {
-      onSearch(query.trim())
+    const searchQuery = query.trim()
+
+    if (searchQuery) {
+      if (onSearch) {
+        onSearch(searchQuery)
+      } else {
+        // Navigate to search page
+        router.push(`/porta-potty-rental/search?q=${encodeURIComponent(searchQuery)}`)
+      }
     }
   }
 
