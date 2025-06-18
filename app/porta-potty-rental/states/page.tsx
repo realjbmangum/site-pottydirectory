@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { MapPin, ArrowRight } from "lucide-react"
 import type { Metadata } from "next"
+import PageBackground from "@/components/page-background"
 
 export const metadata: Metadata = {
   title: "Porta Potty Rental by State - Find Local Portable Restroom Rentals",
@@ -377,98 +378,88 @@ const states = [
 
 export default function StatesPage() {
   return (
-    <div className="min-h-screen relative">
-      {/* Background Image - Using Direct Blob URL for v0 Preview */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/pexels-fotios-photos-2949748.jpg-8r5o6TrYaMZ63IgGA8k8A7QKcc9Rf8.jpeg')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      />
+    <PageBackground variant="default">
+      <div className="min-h-screen">
+        {/* Content */}
+        <div className="relative z-10 py-8 sm:py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Header */}
+            <div className="text-center mb-8 sm:mb-12">
+              <h1 className="heading-lg text-secondary-900 mb-4 sm:mb-6 text-shadow-soft">
+                Porta Potty Rental by State
+              </h1>
+              <p className="text-base sm:text-lg text-secondary-700 max-w-3xl mx-auto leading-relaxed font-medium text-shadow-soft">
+                Find reliable porta potty rental companies in your state. Browse our directory of verified portable
+                restroom rental services with competitive pricing and excellent customer reviews.
+              </p>
+            </div>
 
-      {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/85 via-white/75 to-primary-50/80" />
+            {/* States Grid - Mobile First */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-6">
+              {states.map((state) => (
+                <Link
+                  key={state.code}
+                  href={`/porta-potty-rental/states/${state.slug}`}
+                  className="glass-effect-strong rounded-xl shadow-modern hover:shadow-modern-hover transition-all duration-300 p-4 sm:p-6 group relative overflow-hidden backdrop-blur-sm"
+                >
+                  {/* Flag Background */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-90 transition-opacity duration-300"
+                    style={{
+                      backgroundImage: `url(${state.flagUrl})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
+                    }}
+                  />
 
-      {/* Content */}
-      <div className="relative z-10 py-8 sm:py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center mb-8 sm:mb-12">
-            <h1 className="heading-lg text-secondary-900 mb-4 sm:mb-6 drop-shadow-sm">Porta Potty Rental by State</h1>
-            <p className="text-base sm:text-lg text-secondary-700 max-w-3xl mx-auto leading-relaxed font-medium drop-shadow-sm">
-              Find reliable porta potty rental companies in your state. Browse our directory of verified portable
-              restroom rental services with competitive pricing and excellent customer reviews.
-            </p>
-          </div>
+                  {/* Enhanced Gradient Overlay for better text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/85 via-white/70 to-white/55 group-hover:from-white/75 group-hover:via-white/60 group-hover:to-white/45 transition-all duration-300" />
 
-          {/* States Grid - Mobile First */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-6">
-            {states.map((state) => (
-              <Link
-                key={state.code}
-                href={`/porta-potty-rental/states/${state.slug}`}
-                className="glass-effect rounded-xl shadow-modern hover:shadow-modern-hover transition-all duration-300 p-4 sm:p-6 group relative overflow-hidden backdrop-blur-sm"
-              >
-                {/* Flag Background */}
-                <div
-                  className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-90 transition-opacity duration-300"
-                  style={{
-                    backgroundImage: `url(${state.flagUrl})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                  }}
-                />
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-lg font-bold text-secondary-900 group-hover:text-primary-600 transition-colors duration-200 text-shadow-soft">
+                        {state.name}
+                      </h3>
+                      <div className="gradient-primary p-2 rounded-lg shadow-modern group-hover:shadow-modern-lg transition-all duration-300">
+                        <MapPin className="h-4 w-4 text-white" />
+                      </div>
+                    </div>
 
-                {/* Enhanced Gradient Overlay for better text readability */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/85 via-white/70 to-white/55 group-hover:from-white/75 group-hover:via-white/60 group-hover:to-white/45 transition-all duration-300" />
+                    <p className="text-sm text-secondary-800 mb-3 font-semibold">
+                      {state.vendorCount} porta potty rental compan{state.vendorCount !== 1 ? "ies" : "y"} available
+                    </p>
 
-                {/* Content */}
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-lg font-bold text-secondary-900 group-hover:text-primary-600 transition-colors duration-200 drop-shadow-sm">
-                      {state.name}
-                    </h3>
-                    <div className="gradient-primary p-2 rounded-lg shadow-modern group-hover:shadow-modern-lg transition-all duration-300">
-                      <MapPin className="h-4 w-4 text-white" />
+                    <div className="flex items-center text-primary-600 text-sm font-bold group-hover:text-primary-700 transition-colors duration-200">
+                      <span>View {state.name} Porta Potty Rental</span>
+                      <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform duration-200" />
                     </div>
                   </div>
+                </Link>
+              ))}
+            </div>
 
-                  <p className="text-sm text-secondary-800 mb-3 font-semibold">
-                    {state.vendorCount} porta potty rental compan{state.vendorCount !== 1 ? "ies" : "y"} available
-                  </p>
-
-                  <div className="flex items-center text-primary-600 text-sm font-bold group-hover:text-primary-700 transition-colors duration-200">
-                    <span>View {state.name} Porta Potty Rental</span>
-                    <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform duration-200" />
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          {/* Bottom CTA */}
-          <div className="text-center mt-12 sm:mt-16">
-            <div className="glass-effect rounded-2xl p-6 sm:p-8 shadow-modern-lg max-w-2xl mx-auto backdrop-blur-md">
-              <h2 className="heading-sm text-secondary-900 mb-4 drop-shadow-sm">Can't Find Your State?</h2>
-              <p className="text-secondary-700 mb-6 font-medium">
-                We're constantly adding new porta potty rental companies to our directory. Contact us to add your state
-                or business.
-              </p>
-              <Link
-                href="/porta-potty-rental/contact"
-                className="inline-flex items-center px-6 py-3 gradient-primary text-white font-semibold rounded-lg shadow-modern hover:shadow-modern-lg transition-all duration-300"
-              >
-                Contact Us
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Link>
+            {/* Bottom CTA */}
+            <div className="text-center mt-12 sm:mt-16">
+              <div className="glass-effect-strong rounded-2xl p-6 sm:p-8 shadow-modern-lg max-w-2xl mx-auto backdrop-blur-md">
+                <h2 className="heading-sm text-secondary-900 mb-4 text-shadow-soft">Can't Find Your State?</h2>
+                <p className="text-secondary-700 mb-6 font-medium">
+                  We're constantly adding new porta potty rental companies to our directory. Contact us to add your
+                  state or business.
+                </p>
+                <Link
+                  href="/porta-potty-rental/contact"
+                  className="inline-flex items-center px-6 py-3 gradient-primary text-white font-semibold rounded-lg shadow-modern hover:shadow-modern-lg transition-all duration-300"
+                >
+                  Contact Us
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </PageBackground>
   )
 }

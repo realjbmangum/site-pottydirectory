@@ -177,6 +177,33 @@ html {
   animation: fadeInUp 0.6s ease-out;
 }
 
+/* Grid animation */
+@keyframes gridMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(60px, 60px);
+  }
+}
+
+/* Floating particles animation */
+@keyframes floatParticles {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 1;
+  }
+}
+
+.animate-particles {
+  animation: floatParticles 6s ease-in-out infinite;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
