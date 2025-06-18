@@ -117,9 +117,7 @@ export default function HomePage() {
               <div className="space-y-4 sm:space-y-6">
                 <h1 className="heading-hero text-gray-900">
                   <span className="block text-shadow-soft">Find A</span>
-                  <span className="block bg-gradient-to-r from-accent-400 via-accent-500 to-accent-600 bg-clip-text text-transparent text-shadow-soft">
-                    PORTA POTTY
-                  </span>
+                  <span className="block text-primary-600 text-shadow-soft">PORTA POTTY</span>
                   <span className="block text-shadow-soft">Near You</span>
                 </h1>
 
