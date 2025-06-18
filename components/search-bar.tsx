@@ -1,8 +1,8 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Search, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -18,30 +18,43 @@ export default function SearchBar({
   className = "",
 }: SearchBarProps) {
   const [query, setQuery] = useState("")
+  const router = useRouter()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (onSearch && query.trim()) {
-      onSearch(query.trim())
+    const searchQuery = query.trim()
+
+    if (searchQuery) {
+      if (onSearch) {
+        onSearch(searchQuery)
+      } else {
+        // Navigate to search page
+        router.push(`/porta-potty-rental/search?q=${encodeURIComponent(searchQuery)}`)
+      }
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`flex w-full max-w-2xl ${className}`}>
-      <div className="relative flex-1">
-        <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+    <form onSubmit={handleSubmit} className={`w-full max-w-2xl ${className}`}>
+      <div className="relative flex items-center bg-white rounded-2xl shadow-modern-lg border border-gray-200 overflow-hidden hover:shadow-modern-xl transition-all duration-300">
+        <div className="absolute left-4 z-10">
+          <MapPin className="h-5 w-5 text-gray-400" />
+        </div>
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={placeholder}
-          className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-gray-900 bg-white"
+          className="flex-1 pl-12 pr-4 py-4 text-base text-gray-900 placeholder-gray-400 bg-transparent border-none outline-none focus:ring-0"
         />
+        <Button
+          type="submit"
+          className="m-2 px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-xl font-semibold transition-all duration-200 hover:scale-105 active:scale-95 shadow-modern hover:shadow-modern-lg"
+        >
+          <Search className="h-5 w-5 mr-2" />
+          Search
+        </Button>
       </div>
-      <Button type="submit" className="px-6 py-3 bg-primary-600 hover:bg-primary-700 rounded-r-lg rounded-l-none">
-        <Search className="h-5 w-5 mr-2" />
-        Search
-      </Button>
     </form>
   )
 }
