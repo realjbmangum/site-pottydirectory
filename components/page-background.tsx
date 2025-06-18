@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import { useEffect, useRef } from "react"
 
 interface PageBackgroundProps {
   children: React.ReactNode
@@ -9,23 +10,40 @@ interface PageBackgroundProps {
 }
 
 export default function PageBackground({ children, variant = "default", className = "" }: PageBackgroundProps) {
+  const backgroundRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (backgroundRef.current) {
+        const scrolled = window.pageYOffset
+        const rate = scrolled * -0.5
+        backgroundRef.current.style.transform = `translate3d(0, ${rate}px, 0)`
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
   return (
     <div className={`relative min-h-screen ${className}`}>
-      {/* Background Image */}
+      {/* Parallax Background Image */}
       <div
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat"
+        ref={backgroundRef}
+        className="fixed inset-0 w-full h-[120vh] bg-cover bg-center bg-no-repeat will-change-transform"
         style={{
-          backgroundImage: `url('/images/porta-potty-event-background.png')`,
-          backgroundAttachment: "fixed",
+          backgroundImage: `url('/images/porta-potty-event-background.jpg')`,
+          opacity: 0.75,
+          top: "-10vh",
         }}
       />
 
       {/* Animated Grid Overlay */}
-      <div className="fixed inset-0 opacity-20">
+      <div className="fixed inset-0 opacity-15">
         <div
           className="absolute inset-0 animate-pulse"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fillRule='evenodd'%3E%3Cg fill='%23ffffff' fillOpacity='0.4'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fillRule='evenodd'%3E%3Cg fill='%23ffffff' fillOpacity='0.3'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
             backgroundSize: "60px 60px",
             animation: "gridMove 20s linear infinite",
           }}
@@ -34,14 +52,14 @@ export default function PageBackground({ children, variant = "default", classNam
 
       {/* Gradient Overlays for different variants */}
       {variant === "hero" && (
-        <div className="fixed inset-0 bg-gradient-to-br from-white/95 via-white/85 to-primary-50/90" />
+        <div className="fixed inset-0 bg-gradient-to-br from-white/90 via-white/80 to-primary-50/85" />
       )}
 
       {variant === "default" && (
-        <div className="fixed inset-0 bg-gradient-to-br from-white/90 via-white/85 to-white/80" />
+        <div className="fixed inset-0 bg-gradient-to-br from-white/85 via-white/80 to-white/75" />
       )}
 
-      {variant === "minimal" && <div className="fixed inset-0 bg-white/95" />}
+      {variant === "minimal" && <div className="fixed inset-0 bg-white/90" />}
 
       {/* Content */}
       <div className="relative z-10">{children}</div>
