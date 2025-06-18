@@ -15,7 +15,7 @@ const getVendorData = (slug: string) => {
       email: "info@charlotteportapotty.com",
       website: "https://charlotteportapotty.com",
       description:
-        "Premier porta potty rental service in Charlotte and surrounding areas. We specialize in luxury portable restrooms for weddings, corporate events, and construction sites. Family-owned business with over 12 years of experience serving the greater Charlotte metropolitan area.",
+        "Premier porta potty rental service in Charlotte and surrounding areas. We specialize in luxury portable restrooms for weddings, corporate events, birthday parties, and construction sites. Family-owned business with over 12 years of experience serving the greater Charlotte metropolitan area.",
       features: {
         urinal: true,
         handWashing: true,
@@ -30,9 +30,14 @@ const getVendorData = (slug: string) => {
       yearsInBusiness: 12,
       serviceAreas: ["Charlotte", "Concord", "Gastonia", "Rock Hill", "Matthews", "Huntersville"],
       images: [
-        "/images/luxury-porta-potty-interior.jpg",
-        "/images/premium-portable-restroom-exterior.jpg",
-        "/images/hand-washing-station.jpg",
+        "/images/wedding-porta-potty-setup.jpg",
+        "/images/birthday-party-porta-potty.jpg",
+        "/images/construction-site-porta-potty.jpg",
+      ],
+      imageDescriptions: [
+        "Luxury porta potty setup at outdoor wedding venue",
+        "Colorful porta potty rental at kids birthday party",
+        "Standard porta potty units at construction site",
       ],
       reviews: [
         {
@@ -41,7 +46,7 @@ const getVendorData = (slug: string) => {
           rating: 5,
           date: "2024-01-20",
           comment:
-            "Outstanding service for our wedding! The luxury units were spotless and the staff was incredibly professional. Highly recommend for any special event.",
+            "Outstanding service for our wedding! The luxury units were spotless and perfectly positioned. The staff was incredibly professional and the units blended beautifully with our outdoor venue. Highly recommend for any special event.",
         },
         {
           id: 2,
@@ -49,15 +54,15 @@ const getVendorData = (slug: string) => {
           rating: 5,
           date: "2024-01-15",
           comment:
-            "Used them for our construction site. Reliable delivery, clean units, and great customer service. Will definitely use again.",
+            "Used them for our construction site for 6 months. Reliable delivery, clean units, and great customer service. They handled all the maintenance and never missed a scheduled service. Will definitely use again.",
         },
         {
           id: 3,
           name: "Sarah Wilson",
-          rating: 4,
+          rating: 5,
           date: "2024-01-08",
           comment:
-            "Great quality porta potties for our corporate event. Professional setup and pickup. Very satisfied with the service.",
+            "Perfect for my daughter's 8th birthday party! They provided a fun, colorful unit that the kids loved. Clean, safe, and the delivery team was so friendly. Made our backyard party stress-free!",
         },
       ],
     }
@@ -215,18 +220,18 @@ export default function VendorDetailPage({ params }: { params: { slug: string } 
               <div className="grid grid-cols-1 gap-4">
                 <img
                   src={vendor.images[0] || "/placeholder.svg"}
-                  alt={`${vendor.name} - Main`}
+                  alt={vendor.imageDescriptions?.[0] || `${vendor.name} - Main`}
                   className="w-full h-64 object-cover rounded-lg"
                 />
                 <div className="grid grid-cols-2 gap-4">
                   <img
                     src={vendor.images[1] || "/placeholder.svg"}
-                    alt={`${vendor.name} - Image 2`}
+                    alt={vendor.imageDescriptions?.[1] || `${vendor.name} - Image 2`}
                     className="w-full h-32 object-cover rounded-lg"
                   />
                   <img
                     src={vendor.images[2] || "/placeholder.svg"}
-                    alt={`${vendor.name} - Image 3`}
+                    alt={vendor.imageDescriptions?.[2] || `${vendor.name} - Image 3`}
                     className="w-full h-32 object-cover rounded-lg"
                   />
                 </div>
