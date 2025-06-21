@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import PortaPottyLogo from "@/components/porta-potty-logo"
+import Image from "next/image"
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -14,20 +14,23 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 sm:h-20">
           {/* Logo */}
-          <Link href="/porta-potty-rental" className="flex items-center gap-4 group">
-            <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-              <PortaPottyLogo size="md" className="filter brightness-0 invert" />
-            </div>
-            <div className="hidden sm:block">
-              <div className="text-2xl font-bold text-gray-900 group-hover:text-primary-600 transition-colors duration-200">
-                Porta Potty Directory
+          <Link href="/porta-potty-rental" className="group">
+            <div className="py-4 px-6 shadow-lg rounded-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <Image
+                  src="/images/portapotty-logo.png"
+                  alt="Porta Potty Directory Logo"
+                  width={48}
+                  height={48}
+                  className="w-12 h-12 object-contain"
+                />
+                <div className="text-center sm:text-left">
+                  <div className="text-xl md:text-2xl font-bold text-blue-600 group-hover:text-blue-700 transition-colors duration-200">
+                    Porta Potty Directory
+                  </div>
+                  <p className="text-sm text-gray-500">Find Local Porta Potty Rentals</p>
+                </div>
               </div>
-              <p className="text-base text-gray-600 -mt-1">Nationwide Porta Potty Rentals</p>
-            </div>
-            <div className="sm:hidden">
-              <span className="text-xl font-bold text-gray-900 group-hover:text-primary-600 transition-colors duration-200">
-                Porta Potty Directory
-              </span>
             </div>
           </Link>
 
