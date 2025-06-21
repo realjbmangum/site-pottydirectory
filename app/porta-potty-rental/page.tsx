@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import type { Metadata } from "next"
 import PortaPottyLogo from "@/components/porta-potty-logo"
 import PageBackground from "@/components/page-background"
+import { vendorService } from "@/lib/vendor-service"
 
 export const metadata: Metadata = {
   title: "Best Porta Potty Rental Directory - Find Local Portable Restroom Rentals",
@@ -28,59 +29,10 @@ export const metadata: Metadata = {
   },
 }
 
-// Mock data for featured vendors with SEO-optimized slugs
-const featuredVendors = [
-  {
-    id: "1",
-    name: "Miami Porta Potty Rental",
-    city: "Miami",
-    state: "FL",
-    features: {
-      urinal: true,
-      handWashing: true,
-      sanitizer: true,
-      lockingDoor: true,
-      mirror: true,
-    },
-    type: "Luxury" as const,
-    dailyRate: 4 as const,
-    slug: "miami-premium-porta-potty-rental-fl",
-  },
-  {
-    id: "2",
-    name: "Austin Porta Potty Rental",
-    city: "Austin",
-    state: "TX",
-    features: {
-      urinal: false,
-      handWashing: true,
-      sanitizer: true,
-      lockingDoor: true,
-      mirror: false,
-    },
-    type: "Standard" as const,
-    dailyRate: 2 as const,
-    slug: "austin-event-porta-potty-rental-tx",
-  },
-  {
-    id: "3",
-    name: "Denver Porta Potty Rental",
-    city: "Denver",
-    state: "CO",
-    features: {
-      urinal: true,
-      handWashing: false,
-      sanitizer: true,
-      lockingDoor: true,
-      mirror: true,
-    },
-    type: "Standard" as const,
-    dailyRate: 3 as const,
-    slug: "denver-construction-porta-potty-rental-co",
-  },
-]
+export default async function HomePage() {
+  // Fetch featured vendors from Supabase
+  const featuredVendors = await vendorService.getFeaturedVendors(3)
 
-export default function HomePage() {
   return (
     <PageBackground variant="hero">
       <div className="min-h-screen">
@@ -205,11 +157,17 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12 sm:mb-16">
-              {featuredVendors.map((vendor) => (
-                <VendorCard key={vendor.id} vendor={vendor} />
-              ))}
-            </div>
+            {featuredVendors.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12 sm:mb-16">
+                {featuredVendors.map((vendor) => (
+                  <VendorCard key={vendor.id} vendor={vendor} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-gray-600">Loading featured vendors...</p>
+              </div>
+            )}
 
             <div className="text-center">
               <Button
