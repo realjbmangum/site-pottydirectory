@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight, CheckCircle, Sparkles, Award, Clock, Truck, FileText, Search } from "lucide-react"
+import { ArrowRight, Sparkles, Clock, Truck, FileText, Search, Heart, Hammer, Music, PartyPopper } from "lucide-react"
 import SearchBar from "@/components/search-bar"
 import VendorCard from "@/components/vendor-card"
 import { Button } from "@/components/ui/button"
@@ -137,7 +137,7 @@ export default function HomePage() {
 
               {/* Why People Use PottyDirectory */}
               <div className="space-y-6">
-                <h2 className="text-2xl font-bold text-gray-900 text-shadow-soft">Why People Use PottyDirectory</h2>
+                <h2 className="text-2xl font-bold text-white text-shadow-soft">Why People Use PottyDirectory</h2>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto px-4">
                   <div className="glass-effect-strong rounded-2xl p-6 hover:scale-105 transition-all duration-300 group">
@@ -292,179 +292,63 @@ export default function HomePage() {
         </section>
 
         {/* Why Choose Us Section */}
-        <section className="py-16 sm:py-20 lg:py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-              <div className="space-y-8">
-                <div className="space-y-4">
-                  <div className="inline-flex items-center px-4 py-2 glass-effect text-green-700 rounded-full text-sm font-semibold">
-                    <Award className="h-4 w-4 mr-2" />
-                    Why Choose Us
-                  </div>
-                  <h2 className="heading-lg text-gray-900 text-shadow-soft">
-                    Why Choose Our Porta Potty Rental Directory?
-                  </h2>
-                  <p className="body-md text-gray-700 text-shadow-soft">
-                    We connect you with the most reliable porta potty rental companies in your area, ensuring you get
-                    the best service for your portable restroom needs.
-                  </p>
-                </div>
-
-                <div className="space-y-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="flex-shrink-0 p-2 bg-green-100 rounded-xl">
-                      <CheckCircle className="h-6 w-6 text-green-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 mb-2">Verified Porta Potty Rental Companies</h3>
-                      <p className="text-gray-700">
-                        All porta potty rental vendors are thoroughly vetted and insured for your complete peace of
-                        mind.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start space-x-4">
-                    <div className="flex-shrink-0 p-2 bg-primary-100 rounded-xl">
-                      <CheckCircle className="h-6 w-6 text-primary-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 mb-2">Best Porta Potty Rental Prices</h3>
-                      <p className="text-gray-700">
-                        Compare competitive pricing from multiple porta potty rental companies in your area.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start space-x-4">
-                    <div className="flex-shrink-0 p-2 bg-accent-100 rounded-xl">
-                      <CheckCircle className="h-6 w-6 text-accent-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 mb-2">Quality Porta Potty Rental Service</h3>
-                      <p className="text-gray-700">
-                        We maintain high standards to ensure you get clean, reliable portable restrooms every time.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="relative">
-                <div className="glass-effect-strong rounded-2xl p-8 sm:p-10">
-                  <div className="grid grid-cols-2 gap-6 sm:gap-8">
-                    <div className="text-center">
-                      <div className="text-3xl sm:text-4xl font-bold text-primary-600 mb-2">500+</div>
-                      <div className="text-sm sm:text-base text-gray-600">Porta Potty Companies</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl sm:text-4xl font-bold text-accent-600 mb-2">10K+</div>
-                      <div className="text-sm sm:text-base text-gray-600">Satisfied Customers</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl sm:text-4xl font-bold text-green-600 mb-2">50</div>
-                      <div className="text-sm sm:text-base text-gray-600">States Covered</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl sm:text-4xl font-bold text-purple-600 mb-2">4.8★</div>
-                      <div className="text-sm sm:text-base text-gray-600">Average Rating</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Services Showcase */}
-        <section className="py-16 sm:py-20 lg:py-24">
+        <section className="py-16 sm:py-20 lg:py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12 sm:mb-16 space-y-4">
               <div className="inline-flex items-center px-4 py-2 glass-effect text-blue-700 rounded-full text-sm font-semibold">
                 <Sparkles className="h-4 w-4 mr-2" />
                 Perfect For Every Event
               </div>
-              <h2 className="heading-lg text-gray-900 text-shadow-soft">Porta Potty Rentals for Every Occasion</h2>
-              <p className="body-md text-gray-700 max-w-3xl mx-auto text-shadow-soft">
+              <h2 className="heading-lg text-gray-900">Porta Potty Rentals for Every Occasion</h2>
+              <p className="body-md text-gray-700 max-w-3xl mx-auto">
                 From intimate gatherings to large-scale events, we have the perfect portable restroom solution
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {/* Wedding Events */}
+              {/* Weddings */}
               <div className="text-center group">
                 <div className="relative mb-6">
-                  <div className="w-20 h-20 bg-gradient-to-br from-pink-100 to-pink-200 rounded-2xl flex items-center justify-center mx-auto shadow-modern group-hover:shadow-modern-lg transition-all duration-300">
-                    <svg className="w-10 h-10 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                      />
-                    </svg>
+                  <div className="w-20 h-20 bg-pink-100 rounded-2xl flex items-center justify-center mx-auto shadow-modern group-hover:shadow-modern-lg transition-all duration-300">
+                    <Heart className="w-10 h-10 text-pink-600" />
                   </div>
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-pink-300 rounded-full opacity-60"></div>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Weddings</h3>
-                <p className="text-gray-700 text-sm">Elegant luxury units for your special day</p>
+                <p className="text-gray-700 text-sm">Luxury restroom trailers for your special day</p>
               </div>
 
               {/* Construction Sites */}
               <div className="text-center group">
                 <div className="relative mb-6">
-                  <div className="w-20 h-20 bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl flex items-center justify-center mx-auto shadow-modern group-hover:shadow-modern-lg transition-all duration-300">
-                    <svg className="w-10 h-10 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-                      />
-                    </svg>
+                  <div className="w-20 h-20 bg-yellow-100 rounded-2xl flex items-center justify-center mx-auto shadow-modern group-hover:shadow-modern-lg transition-all duration-300">
+                    <Hammer className="w-10 h-10 text-yellow-600" />
                   </div>
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-orange-300 rounded-full opacity-60"></div>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Construction</h3>
-                <p className="text-gray-700 text-sm">Durable units for job sites and projects</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Construction Sites</h3>
+                <p className="text-gray-700 text-sm">Rugged, job-ready porta potties built for crews</p>
               </div>
 
-              {/* Festivals & Events */}
+              {/* Festivals */}
               <div className="text-center group">
                 <div className="relative mb-6">
-                  <div className="w-20 h-20 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center mx-auto shadow-modern group-hover:shadow-modern-lg transition-all duration-300">
-                    <svg className="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
-                      />
-                    </svg>
+                  <div className="w-20 h-20 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto shadow-modern group-hover:shadow-modern-lg transition-all duration-300">
+                    <Music className="w-10 h-10 text-purple-600" />
                   </div>
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-purple-300 rounded-full opacity-60"></div>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Festivals</h3>
-                <p className="text-gray-700 text-sm">High-capacity solutions for large crowds</p>
+                <p className="text-gray-700 text-sm">High-volume rentals for large public events</p>
               </div>
 
-              {/* Private Parties */}
+              {/* Backyard Parties */}
               <div className="text-center group">
                 <div className="relative mb-6">
-                  <div className="w-20 h-20 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mx-auto shadow-modern group-hover:shadow-modern-lg transition-all duration-300">
-                    <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
+                  <div className="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto shadow-modern group-hover:shadow-modern-lg transition-all duration-300">
+                    <PartyPopper className="w-10 h-10 text-green-600" />
                   </div>
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-300 rounded-full opacity-60"></div>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Private Parties</h3>
-                <p className="text-gray-700 text-sm">Clean, convenient units for backyard events</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Backyard Parties</h3>
+                <p className="text-gray-700 text-sm">Clean, private units for family gatherings</p>
               </div>
             </div>
           </div>
