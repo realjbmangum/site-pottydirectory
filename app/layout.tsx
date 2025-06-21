@@ -20,10 +20,10 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://portapottypro.com"),
+  metadataBase: new URL("https://portapottydirectory.com"),
   title: {
-    default: "Porta Potty Rental Directory - Find Local Portable Restroom Rentals | PortaPotty Pro",
-    template: "%s | PortaPotty Pro - Porta Potty Rental Directory",
+    default: "Porta Potty Directory - Find Local Portable Restroom Rentals",
+    template: "%s | Porta Potty Directory",
   },
   description:
     "Find reliable porta potty rental companies near you. Compare prices, features, and book portable restroom rentals for events, construction sites, and outdoor gatherings. Trusted porta potty rental directory with verified vendors nationwide.",
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
     "portable restroom services",
     "porta potty rental directory",
   ],
-  authors: [{ name: "PortaPotty Pro" }],
-  creator: "PortaPotty Pro",
-  publisher: "PortaPotty Pro",
+  authors: [{ name: "Porta Potty Directory" }],
+  creator: "Porta Potty Directory",
+  publisher: "Porta Potty Directory",
   formatDetection: {
     email: false,
     address: false,
@@ -50,9 +50,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://portapottypro.com",
-    siteName: "PortaPotty Pro - Porta Potty Rental Directory",
-    title: "Find Local Porta Potty Rental Companies | PortaPotty Pro",
+    url: "https://portapottydirectory.com",
+    siteName: "Porta Potty Directory",
+    title: "Find Local Porta Potty Rental Companies | Porta Potty Directory",
     description:
       "Discover trusted porta potty rental companies in your area. Compare features, prices, and book portable restroom rentals for any event or project.",
     images: [
@@ -60,17 +60,17 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "PortaPotty Pro - Porta Potty Rental Directory",
+        alt: "Porta Potty Directory - Find Local Porta Potty Rentals",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Find Local Porta Potty Rental Companies | PortaPotty Pro",
+    title: "Find Local Porta Potty Rental Companies | Porta Potty Directory",
     description:
       "Discover trusted porta potty rental companies in your area. Compare features, prices, and book portable restroom rentals.",
     images: ["/og-image.jpg"],
-    creator: "@portapottypro",
+    creator: "@portapottydirectory",
   },
   robots: {
     index: true,
@@ -99,7 +99,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <head>
-        <link rel="canonical" href="https://portapottypro.com" />
+        <link rel="canonical" href="https://portapottydirectory.com" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

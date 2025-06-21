@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <Link href="/porta-potty-rental" className="flex items-center space-x-2 mb-4">
               <PortaPottyLogo size="lg" className="text-primary-400" />
-              <span className="text-xl font-bold">PortaPotty Pro</span>
+              <span className="text-xl font-bold">Porta Potty Directory</span>
             </Link>
             <p className="text-gray-300 mb-4">
               Find reliable porta potty rentals in your area. Compare prices, features, and book the perfect portable
@@ -64,7 +64,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} PortaPotty Pro. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Porta Potty Directory. All rights reserved.</p>
         </div>
       </div>
     </footer>

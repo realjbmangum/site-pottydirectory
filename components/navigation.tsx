@@ -20,12 +20,12 @@ export default function Navigation() {
             </div>
             <div className="hidden sm:block">
               <span className="text-xl lg:text-2xl font-bold bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">
-                PortaPotty Pro
+                Porta Potty Directory
               </span>
-              <p className="text-xs text-secondary-600 -mt-1">Porta Potty Rental Directory</p>
+              <p className="text-xs text-secondary-600 -mt-1">Find Local Porta Potty Rentals</p>
             </div>
             <span className="sm:hidden text-lg font-bold bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">
-              PortaPotty Pro
+              Porta Potty Directory
             </span>
           </Link>
 

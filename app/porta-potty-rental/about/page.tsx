@@ -105,7 +105,7 @@ export default function AboutPage() {
         {/* Hero Section */}
         <section className="py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-6 text-shadow-strong">About PortaPotty Pro</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-6 text-shadow-strong">About Porta Potty Directory</h1>
             <p className="text-xl text-gray-700 leading-relaxed text-shadow-soft">
               We're the leading platform connecting customers with reliable porta potty rental companies across the
               United States. Our mission is to make finding and booking portable restroom rentals simple, transparent,
@@ -142,7 +142,7 @@ export default function AboutPage() {
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Why Choose PortaPotty Pro?</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Why Choose Porta Potty Directory?</h2>
               <p className="text-lg text-gray-600">
                 We're committed to providing the best experience for both customers and vendors.
               </p>
