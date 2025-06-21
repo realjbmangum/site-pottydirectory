@@ -1,5 +1,5 @@
 import Link from "next/link"
-import PortaPottyLogo from "@/components/porta-potty-logo"
+import Image from "next/image"
 
 export default function Footer() {
   return (
@@ -9,12 +9,19 @@ export default function Footer() {
           {/* Logo and Description */}
           <div className="col-span-1 md:col-span-2">
             <Link href="/porta-potty-rental" className="flex items-center space-x-2 mb-4">
-              <PortaPottyLogo size="lg" />
+              <Image
+                src="/images/portapotty-logo.png"
+                alt="Porta Potty Directory Logo"
+                width={32}
+                height={32}
+                className="w-8 h-8 object-contain"
+              />
               <span className="text-xl font-bold">Porta Potty Directory</span>
             </Link>
             <p className="text-gray-300 mb-4">
-              Find reliable porta potty rentals in your area. Compare prices, features, and book the perfect portable
-              restroom for your event.
+              Your trusted source for porta potty rentals near me and portable toilet providers nationwide. Find
+              reliable event and construction site rentals with ease. Compare porta potty pricing and features from
+              verified vendors to get the best portable restroom solution for your needs.
             </p>
           </div>
 
