@@ -31,12 +31,16 @@ export default function TestVendorsPage() {
     })
 
     const envVars = {
-      url: process.env.NEXT_PUBLIC_SUPABASE_URL,
-      key: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-      useSupabase: process.env.NEXT_PUBLIC_USE_SUPABASE,
+      url: process.env.NEXT_PUBLIC_SUPABASE_URL || "NOT_SET",
+      key: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "NOT_SET",
+      useSupabase: process.env.NEXT_PUBLIC_USE_SUPABASE || "NOT_SET",
+      // Also check if they exist at all
+      urlExists: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+      keyExists: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      useSupabaseExists: !!process.env.NEXT_PUBLIC_USE_SUPABASE,
     }
 
-    if (envVars.url && envVars.key) {
+    if (envVars.urlExists && envVars.keyExists) {
       setTestResults((prev) =>
         prev.map((r) =>
           r.step === "Environment Variables"
