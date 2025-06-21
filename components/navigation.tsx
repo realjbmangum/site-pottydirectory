@@ -14,23 +14,19 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 sm:h-20">
           {/* Logo */}
-          <Link href="/porta-potty-rental" className="group">
-            <div className="py-4 px-6 shadow-lg rounded-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
-              <div className="flex flex-col sm:flex-row items-center gap-4">
-                <Image
-                  src="/images/portapotty-logo.png"
-                  alt="Porta Potty Directory Logo"
-                  width={48}
-                  height={48}
-                  className="w-12 h-12 object-contain"
-                />
-                <div className="text-center sm:text-left">
-                  <div className="text-xl md:text-2xl font-bold text-blue-600 group-hover:text-blue-700 transition-colors duration-200">
-                    Porta Potty Directory
-                  </div>
-                  <p className="text-sm text-gray-500">Find Local Porta Potty Rentals</p>
-                </div>
+          <Link href="/porta-potty-rental" className="flex items-center gap-3 group">
+            <Image
+              src="/images/portapotty-logo.png"
+              alt="Porta Potty Directory Logo"
+              width={48}
+              height={48}
+              className="w-10 h-10 md:w-12 md:h-12 object-contain"
+            />
+            <div>
+              <div className="text-blue-600 font-bold text-xl md:text-2xl group-hover:text-blue-700 transition-colors duration-200">
+                Porta Potty Directory
               </div>
+              <p className="text-gray-500 text-sm">Find Local Porta Potty Rentals</p>
             </div>
           </Link>
 
