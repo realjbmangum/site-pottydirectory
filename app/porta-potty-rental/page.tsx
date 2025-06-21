@@ -1,12 +1,11 @@
 import Link from "next/link"
 import { ArrowRight, Sparkles, Clock, Truck, FileText, Search, Heart, Hammer, Music, PartyPopper } from "lucide-react"
 import SearchBar from "@/components/search-bar"
-import VendorCard from "@/components/vendor-card"
 import { Button } from "@/components/ui/button"
 import type { Metadata } from "next"
 import PortaPottyLogo from "@/components/porta-potty-logo"
 import PageBackground from "@/components/page-background"
-import { vendorService } from "@/lib/vendor-service"
+import VendorsGrid from "@/components/vendors-grid"
 
 export const metadata: Metadata = {
   title: "Best Porta Potty Rental Directory - Find Local Portable Restroom Rentals",
@@ -29,10 +28,59 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function HomePage() {
-  // Fetch featured vendors from Supabase
-  const featuredVendors = await vendorService.getFeaturedVendors(3)
+// Mock data for featured vendors with SEO-optimized slugs (fallback if Supabase isn't configured)
+const featuredVendors = [
+  {
+    id: "1",
+    name: "Miami Porta Potty Rental",
+    city: "Miami",
+    state: "FL",
+    features: {
+      urinal: true,
+      handWashing: true,
+      sanitizer: true,
+      lockingDoor: true,
+      mirror: true,
+    },
+    type: "Luxury" as const,
+    dailyRate: 4 as const,
+    slug: "miami-premium-porta-potty-rental-fl",
+  },
+  {
+    id: "2",
+    name: "Austin Porta Potty Rental",
+    city: "Austin",
+    state: "TX",
+    features: {
+      urinal: false,
+      handWashing: true,
+      sanitizer: true,
+      lockingDoor: true,
+      mirror: false,
+    },
+    type: "Standard" as const,
+    dailyRate: 2 as const,
+    slug: "austin-event-porta-potty-rental-tx",
+  },
+  {
+    id: "3",
+    name: "Denver Porta Potty Rental",
+    city: "Denver",
+    state: "CO",
+    features: {
+      urinal: true,
+      handWashing: false,
+      sanitizer: true,
+      lockingDoor: true,
+      mirror: true,
+    },
+    type: "Standard" as const,
+    dailyRate: 3 as const,
+    slug: "denver-construction-porta-potty-rental-co",
+  },
+]
 
+export default function HomePage() {
   return (
     <PageBackground variant="hero">
       <div className="min-h-screen">
@@ -142,44 +190,22 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* Featured Porta Potty Rental Companies */}
+        {/* Vendors from Database */}
         <section className="py-16 sm:py-20 lg:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12 sm:mb-16 space-y-4">
               <div className="inline-flex items-center px-4 py-2 glass-effect text-primary-700 rounded-full text-sm font-semibold">
                 <Sparkles className="h-4 w-4 mr-2" />
-                Featured Companies
+                Our Vendors
               </div>
-              <h2 className="heading-lg text-gray-900 text-shadow-soft">Top-Rated Porta Potty Rental Companies</h2>
+              <h2 className="heading-lg text-gray-900 text-shadow-soft">Porta Potty Rental Companies</h2>
               <p className="body-md text-gray-700 max-w-3xl mx-auto text-shadow-soft">
-                Discover trusted porta potty rental companies in popular locations. Compare features, prices, and book
-                your portable restroom rental today.
+                Browse our directory of trusted porta potty rental companies across the United States.
               </p>
             </div>
 
-            {featuredVendors.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12 sm:mb-16">
-                {featuredVendors.map((vendor) => (
-                  <VendorCard key={vendor.id} vendor={vendor} />
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <p className="text-gray-600">Loading featured vendors...</p>
-              </div>
-            )}
-
-            <div className="text-center">
-              <Button
-                asChild
-                className="bg-primary-500 hover:bg-primary-600 text-white text-lg px-8 py-4 rounded-xl font-semibold shadow-modern hover:shadow-modern-lg hover:scale-105 active:scale-95 transition-all duration-200"
-              >
-                <Link href="/porta-potty-rental/states">
-                  Browse All States for Porta Potty Rental
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-            </div>
+            {/* Vendors Grid Component */}
+            <VendorsGrid />
           </div>
         </section>
 
@@ -249,7 +275,6 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* Why Choose Us Section */}
         {/* Services Showcase */}
         <section className="py-16 sm:py-20 lg:py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
