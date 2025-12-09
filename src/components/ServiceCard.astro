@@ -1,0 +1,38 @@
+---
+interface Props {
+  name: string;
+  slug: string;
+  description: string;
+  icon: string;
+}
+
+const { name, slug, description, icon } = Astro.props;
+
+const icons: Record<string, string> = {
+  'hard-hat': '🏗️',
+  'calendar': '🎪',
+  'heart': '💒',
+  'alert': '🚨',
+  'clock': '⏰',
+  'star': '⭐',
+};
+---
+
+<a
+  href={`/services/${slug}`}
+  class="block bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-all group"
+>
+  <div class="text-4xl mb-4">{icons[icon] || '🚽'}</div>
+  <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors mb-2">
+    {name}
+  </h3>
+  <p class="text-gray-600 text-sm">
+    {description}
+  </p>
+  <div class="mt-4 flex items-center text-primary-600 text-sm font-medium">
+    <span>Find providers</span>
+    <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </div>
+</a>

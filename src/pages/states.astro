@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StateCard from '../components/StateCard.astro';
+import states from '../data/states.json';
+import { getVendorCountByState } from '../lib/supabase';
+
+let stateCounts: Record<string, number> = {};
+
+try {
+  stateCounts = await getVendorCountByState();
+} catch (error) {
+  console.error('Error fetching state counts:', error);
+}
+
+const statesWithCounts = states.map(state => ({
+  ...state,
+  count: stateCounts[state.name] || 0
+}));
+---
+
+<BaseLayout
+  title="Browse Porta Potty Rentals by State"
+  description="Find portable restroom rental companies in all 50 states. Browse our directory to find trusted porta potty providers near you."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Browse by State</h1>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        Find porta potty rental companies in your state. Select a state below to view available providers.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+      {statesWithCounts.map((state) => (
+        <StateCard
+          name={state.name}
+          abbr={state.abbr}
+          slug={state.slug}
+          count={state.count}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

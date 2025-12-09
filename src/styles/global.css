@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #2563eb;
+  --color-secondary: #64748b;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+html {
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-gray-50 text-gray-900 antialiased;
+}
+
+/* Card hover effects */
+.vendor-card {
+  @apply transition-all duration-200 ease-in-out;
+}
+
+.vendor-card:hover {
+  @apply shadow-lg -translate-y-1;
+}
+
+/* State card hover */
+.state-card {
+  @apply transition-all duration-200 ease-in-out;
+}
+
+.state-card:hover {
+  @apply shadow-md border-primary-300;
+}
+
+/* Service badge styles */
+.service-badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800;
+}
+
+/* Ad container placeholder */
+.ad-container {
+  @apply bg-gray-100 border border-dashed border-gray-300 rounded-lg p-4 text-center text-gray-400 text-sm;
+  min-height: 90px;
+}
+
+.ad-container::before {
+  content: 'Ad Space';
+}
+
+.ad-container:has(ins) {
+  @apply bg-transparent border-0 p-0;
+}
+
+.ad-container:has(ins)::before {
+  content: none;
+}
+
+/* Hero gradient */
+.hero-gradient {
+  @apply bg-gradient-to-br from-primary-600 via-primary-700 to-blue-900;
+}

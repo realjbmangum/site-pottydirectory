@@ -1,0 +1,81 @@
+---
+import type { Vendor } from '../lib/supabase';
+import { formatPhone, ensureHttps } from '../lib/utils';
+
+interface Props {
+  vendor: Vendor;
+}
+
+const { vendor } = Astro.props;
+---
+
+<article class="vendor-card bg-white rounded-xl shadow-md overflow-hidden">
+  <div class="p-6">
+    <!-- Header -->
+    <div class="flex items-start justify-between mb-4">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-900">
+          <a href={`/listing/${vendor.slug}`} class="hover:text-primary-600 transition-colors">
+            {vendor.business_name}
+          </a>
+        </h3>
+        <p class="text-gray-500 text-sm flex items-center mt-1">
+          <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          {vendor.city}, {vendor.state}
+        </p>
+      </div>
+      <span class="text-3xl">🚽</span>
+    </div>
+
+    <!-- Services -->
+    <div class="mb-4">
+      <div class="flex flex-wrap gap-2">
+        {vendor.services_offered.slice(0, 3).map((service) => (
+          <span class="service-badge">{service}</span>
+        ))}
+        {vendor.services_offered.length > 3 && (
+          <span class="service-badge bg-gray-100 text-gray-600">
+            +{vendor.services_offered.length - 3} more
+          </span>
+        )}
+      </div>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="space-y-2 mb-4">
+      {vendor.phone && (
+        <div class="flex items-center text-gray-600 text-sm">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          <a href={`tel:${vendor.phone}`} class="hover:text-primary-600">
+            {formatPhone(vendor.phone)}
+          </a>
+        </div>
+      )}
+    </div>
+
+    <!-- Actions -->
+    <div class="flex gap-3">
+      <a
+        href={`/listing/${vendor.slug}`}
+        class="flex-1 text-center bg-primary-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
+      >
+        View Details
+      </a>
+      {vendor.website && (
+        <a
+          href={ensureHttps(vendor.website)}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+        >
+          Website
+        </a>
+      )}
+    </div>
+  </div>
+</article>

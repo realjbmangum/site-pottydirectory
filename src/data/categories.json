@@ -1,0 +1,44 @@
+[
+  {
+    "id": "construction",
+    "name": "Construction Sites",
+    "slug": "construction",
+    "description": "Portable restrooms for job sites, building projects, and industrial locations",
+    "icon": "hard-hat"
+  },
+  {
+    "id": "events",
+    "name": "Events & Festivals",
+    "slug": "events",
+    "description": "Porta potties for concerts, fairs, sporting events, and outdoor gatherings",
+    "icon": "calendar"
+  },
+  {
+    "id": "weddings",
+    "name": "Weddings & Parties",
+    "slug": "weddings",
+    "description": "Luxury restroom trailers and upscale portable facilities for special occasions",
+    "icon": "heart"
+  },
+  {
+    "id": "emergency",
+    "name": "Emergency Services",
+    "slug": "emergency",
+    "description": "Rapid deployment porta potties for disaster relief and emergency situations",
+    "icon": "alert"
+  },
+  {
+    "id": "long-term",
+    "name": "Long-Term Rentals",
+    "slug": "long-term",
+    "description": "Extended rental programs for ongoing projects and permanent installations",
+    "icon": "clock"
+  },
+  {
+    "id": "luxury",
+    "name": "Luxury Trailers",
+    "slug": "luxury",
+    "description": "Premium restroom trailers with climate control, running water, and upscale finishes",
+    "icon": "star"
+  }
+]

@@ -1,0 +1,30 @@
+---
+interface Props {
+  name: string;
+  abbr: string;
+  slug: string;
+  count?: number;
+}
+
+const { name, abbr, slug, count = 0 } = Astro.props;
+---
+
+<a
+  href={`/state/${slug}`}
+  class="state-card block bg-white rounded-lg border border-gray-200 p-4 hover:border-primary-300 transition-all"
+>
+  <div class="flex items-center justify-between">
+    <div>
+      <h3 class="font-semibold text-gray-900">{name}</h3>
+      <p class="text-sm text-gray-500">{abbr}</p>
+    </div>
+    <div class="text-right">
+      {count > 0 ? (
+        <span class="text-2xl font-bold text-primary-600">{count}</span>
+        <p class="text-xs text-gray-500">providers</p>
+      ) : (
+        <span class="text-gray-400 text-sm">Coming soon</span>
+      )}
+    </div>
+  </div>
+</a>

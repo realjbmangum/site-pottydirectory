@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import categories from '../data/categories.json';
+---
+
+<BaseLayout
+  title="Porta Potty Services"
+  description="Find portable restroom rentals for construction sites, events, weddings, emergencies, and more. Browse our service categories to find the right solution."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Porta Potty Services</h1>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        Find the right portable restroom solution for any occasion. From construction sites to luxury events, we've got you covered.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {categories.map((category) => (
+        <ServiceCard
+          name={category.name}
+          slug={category.slug}
+          description={category.description}
+          icon={category.icon}
+        />
+      ))}
+    </div>
+
+    <!-- Info Section -->
+    <div class="mt-16 bg-gray-50 rounded-xl p-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">How to Choose the Right Porta Potty</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">For Construction Sites</h3>
+          <p class="text-gray-600 mb-4">
+            Standard units work well for most construction projects. Plan for 1 unit per 10 workers for a standard 40-hour work week.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">For Events</h3>
+          <p class="text-gray-600 mb-4">
+            Calculate based on attendance and event duration. A 4-hour event with 100 guests typically needs 2-3 units.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">For Weddings</h3>
+          <p class="text-gray-600 mb-4">
+            Consider luxury restroom trailers for upscale events. They offer climate control, running water, and elegant interiors.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">ADA Compliance</h3>
+          <p class="text-gray-600 mb-4">
+            Most events and job sites require at least one ADA-compliant unit. Check local regulations for specific requirements.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

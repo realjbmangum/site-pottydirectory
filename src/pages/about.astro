@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import siteConfig from '../data/site-config.json';
+---
+
+<BaseLayout
+  title="About Us"
+  description={`Learn about ${siteConfig.name} and our mission to connect customers with trusted porta potty rental companies.`}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold text-gray-900 mb-8">About {siteConfig.name}</h1>
+
+    <div class="prose prose-lg max-w-none">
+      <p class="text-xl text-gray-600 mb-8">
+        {siteConfig.name} is the leading online directory connecting customers with portable restroom rental companies across the United States.
+      </p>
+
+      <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-4">Our Mission</h2>
+      <p class="text-gray-600 mb-6">
+        We created {siteConfig.name} to simplify the process of finding reliable porta potty rental services. Whether you're planning a construction project, organizing an outdoor event, or hosting a wedding, we help you find the right provider quickly and easily.
+      </p>
+
+      <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-4">What We Offer</h2>
+      <ul class="list-disc list-inside text-gray-600 space-y-2 mb-6">
+        <li>Comprehensive directory of {siteConfig.stats.providers} verified providers</li>
+        <li>Coverage across all {siteConfig.stats.states} states</li>
+        <li>Easy search by location and service type</li>
+        <li>Detailed provider profiles with services and contact info</li>
+        <li>Free listings for porta potty rental businesses</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-4">For Rental Companies</h2>
+      <p class="text-gray-600 mb-6">
+        Are you a portable restroom rental company? Get listed on {siteConfig.name} and reach customers actively searching for your services.
+        <a href="/submit" class="text-primary-600 hover:underline">Submit your business</a> today - it's free!
+      </p>
+
+      <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-4">Contact Us</h2>
+      <p class="text-gray-600">
+        Have questions or feedback? We'd love to hear from you.
+        <a href="/contact" class="text-primary-600 hover:underline">Get in touch</a>
+        or email us at
+        <a href={`mailto:${siteConfig.contact.email}`} class="text-primary-600 hover:underline">
+          {siteConfig.contact.email}
+        </a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

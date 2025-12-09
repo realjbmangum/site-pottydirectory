@@ -1,0 +1,160 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SearchBar from '../components/SearchBar.astro';
+import StateCard from '../components/StateCard.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import VendorCard from '../components/VendorCard.astro';
+import AdSlot from '../components/AdSlot.astro';
+import siteConfig from '../data/site-config.json';
+import states from '../data/states.json';
+import categories from '../data/categories.json';
+import { getFeaturedVendors, getVendorCountByState } from '../lib/supabase';
+
+// Get data
+let featuredVendors = [];
+let stateCounts: Record<string, number> = {};
+
+try {
+  featuredVendors = await getFeaturedVendors(6);
+  stateCounts = await getVendorCountByState();
+} catch (error) {
+  console.error('Error fetching data:', error);
+}
+
+// Get popular states (those with most providers)
+const statesWithCounts = states.map(state => ({
+  ...state,
+  count: stateCounts[state.name] || 0
+})).sort((a, b) => b.count - a.count);
+
+const popularStates = statesWithCounts.slice(0, 12);
+---
+
+<BaseLayout>
+  <!-- Hero Section -->
+  <section class="hero-gradient text-white py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6">
+        {siteConfig.tagline}
+      </h1>
+      <p class="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+        The largest directory of portable restroom rental companies across the United States
+      </p>
+
+      <!-- Stats -->
+      <div class="flex justify-center gap-8 md:gap-16 mb-10">
+        <div>
+          <div class="text-3xl md:text-4xl font-bold">{siteConfig.stats.providers}</div>
+          <div class="text-blue-200 text-sm">Verified Providers</div>
+        </div>
+        <div>
+          <div class="text-3xl md:text-4xl font-bold">{siteConfig.stats.states}</div>
+          <div class="text-blue-200 text-sm">States Covered</div>
+        </div>
+        <div>
+          <div class="text-3xl md:text-4xl font-bold">{siteConfig.stats.rating}★</div>
+          <div class="text-blue-200 text-sm">Avg. Rating</div>
+        </div>
+      </div>
+
+      <SearchBar
+        placeholder="Search by city or state..."
+        class="max-w-2xl mx-auto"
+      />
+    </div>
+  </section>
+
+  <!-- Ad Banner -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <AdSlot slot="header" />
+  </div>
+
+  <!-- Services Section -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Porta Potty Services</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          Find the right portable restroom solution for your needs
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {categories.map((category) => (
+          <ServiceCard
+            name={category.name}
+            slug={category.slug}
+            description={category.description}
+            icon={category.icon}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Browse by State Section -->
+  <section class="py-16 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center mb-8">
+        <div>
+          <h2 class="text-3xl font-bold text-gray-900 mb-2">Browse by State</h2>
+          <p class="text-gray-600">Find porta potty providers in your area</p>
+        </div>
+        <a href="/states" class="text-primary-600 hover:text-primary-700 font-medium">
+          View All States →
+        </a>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {popularStates.map((state) => (
+          <StateCard
+            name={state.name}
+            abbr={state.abbr}
+            slug={state.slug}
+            count={state.count}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Vendors Section -->
+  {featuredVendors.length > 0 && (
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Featured Providers</h2>
+          <p class="text-gray-600">Top-rated porta potty rental companies</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {featuredVendors.map((vendor) => (
+            <VendorCard vendor={vendor} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-primary-600 rounded-2xl p-8 md:p-12 text-center text-white">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">
+          Own a Porta Potty Rental Business?
+        </h2>
+        <p class="text-blue-100 mb-6 max-w-xl mx-auto">
+          Get listed on Potty Directory and reach thousands of customers looking for portable restroom rentals.
+        </p>
+        <a
+          href="/submit"
+          class="inline-block bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+        >
+          Add Your Business Free
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Ad -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+    <AdSlot slot="footer" />
+  </div>
+</BaseLayout>

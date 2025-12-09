@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import VendorCard from '../../components/VendorCard.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import states from '../../data/states.json';
+import { getVendorsByState } from '../../lib/supabase';
+
+export function getStaticPaths() {
+  return states.map((state) => ({
+    params: { slug: state.slug },
+    props: { state }
+  }));
+}
+
+const { state } = Astro.props;
+
+let vendors = [];
+try {
+  vendors = await getVendorsByState(state.name);
+} catch (error) {
+  console.error('Error fetching vendors:', error);
+}
+
+// Group vendors by city
+const vendorsByCity = vendors.reduce((acc, vendor) => {
+  const city = vendor.city || 'Other';
+  if (!acc[city]) acc[city] = [];
+  acc[city].push(vendor);
+  return acc;
+}, {} as Record<string, typeof vendors>);
+
+const cities = Object.keys(vendorsByCity).sort();
+---
+
+<BaseLayout
+  title={`Porta Potty Rentals in ${state.name}`}
+  description={`Find portable restroom rental companies in ${state.name}. Browse ${vendors.length} verified porta potty providers for construction, events, weddings, and more.`}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-6 text-sm">
+      <a href="/" class="text-gray-500 hover:text-primary-600">Home</a>
+      <span class="mx-2 text-gray-400">/</span>
+      <a href="/states" class="text-gray-500 hover:text-primary-600">States</a>
+      <span class="mx-2 text-gray-400">/</span>
+      <span class="text-gray-900">{state.name}</span>
+    </nav>
+
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">
+        Porta Potty Rentals in {state.name}
+      </h1>
+      <p class="text-xl text-gray-600">
+        {vendors.length > 0
+          ? `Browse ${vendors.length} portable restroom rental companies in ${state.name}`
+          : `No providers listed yet in ${state.name}. Be the first to add your business!`}
+      </p>
+    </div>
+
+    <!-- Ad -->
+    <div class="mb-8">
+      <AdSlot slot="header" />
+    </div>
+
+    {vendors.length > 0 ? (
+      <>
+        {cities.map((city) => (
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">
+              {city}, {state.abbr}
+              <span class="text-gray-400 font-normal text-lg ml-2">
+                ({vendorsByCity[city].length} {vendorsByCity[city].length === 1 ? 'provider' : 'providers'})
+              </span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {vendorsByCity[city].map((vendor) => (
+                <VendorCard vendor={vendor} />
+              ))}
+            </div>
+          </section>
+        ))}
+      </>
+    ) : (
+      <div class="text-center py-16 bg-gray-50 rounded-xl">
+        <div class="text-6xl mb-4">🚽</div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">No Providers Yet</h2>
+        <p class="text-gray-600 mb-6">
+          We don't have any porta potty rental companies listed in {state.name} yet.
+        </p>
+        <a
+          href="/submit"
+          class="inline-block bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors"
+        >
+          Add Your Business
+        </a>
+      </div>
+    )}
+
+    <!-- Bottom Ad -->
+    <div class="mt-8">
+      <AdSlot slot="footer" />
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,27 @@
+---
+import siteConfig from '../data/site-config.json';
+
+interface Props {
+  slot: 'header' | 'sidebar' | 'in-content' | 'footer';
+}
+
+const { slot } = Astro.props;
+const adsenseId = siteConfig.monetization?.adsenseId;
+---
+
+<div class="ad-container" data-slot={slot}>
+  {adsenseId ? (
+    <>
+      <ins
+        class="adsbygoogle"
+        style="display:block"
+        data-ad-client={adsenseId}
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </>
+  ) : null}
+</div>

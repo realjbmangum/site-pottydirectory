@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import siteConfig from '../data/site-config.json';
+---
+
+<BaseLayout
+  title="Terms of Service"
+  description={`Terms of Service for ${siteConfig.name}`}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold text-gray-900 mb-8">Terms of Service</h1>
+
+    <div class="prose prose-lg max-w-none text-gray-600">
+      <p class="text-sm text-gray-500 mb-8">Last updated: December 2024</p>
+
+      <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Acceptance of Terms</h2>
+      <p>
+        By accessing and using {siteConfig.name}, you accept and agree to be bound by these
+        Terms of Service. If you do not agree to these terms, please do not use our website.
+      </p>
+
+      <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Use of Service</h2>
+      <p>
+        You agree to use our service only for lawful purposes and in accordance with these
+        Terms. You agree not to:
+      </p>
+      <ul class="list-disc list-inside space-y-2 mt-4">
+        <li>Submit false or misleading business information</li>
+        <li>Use the service to spam or harass others</li>
+        <li>Attempt to gain unauthorized access to our systems</li>
+        <li>Scrape or collect data without permission</li>
+        <li>Violate any applicable laws or regulations</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Business Listings</h2>
+      <p>
+        By submitting a business listing, you represent that you have the authority to do so
+        and that the information provided is accurate. We reserve the right to remove any
+        listing at our discretion.
+      </p>
+
+      <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Disclaimer</h2>
+      <p>
+        The information on this website is provided "as is" without warranty of any kind.
+        We do not guarantee the accuracy, completeness, or reliability of any business
+        listings or information displayed on our site. We are not responsible for the
+        quality of services provided by listed companies.
+      </p>
+
+      <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Limitation of Liability</h2>
+      <p>
+        {siteConfig.name} shall not be liable for any indirect, incidental, special, or
+        consequential damages arising from your use of the service or any business listed
+        on our website.
+      </p>
+
+      <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Changes to Terms</h2>
+      <p>
+        We reserve the right to modify these terms at any time. Continued use of the service
+        after changes constitutes acceptance of the new terms.
+      </p>
+
+      <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Contact</h2>
+      <p>
+        Questions about these Terms should be sent to{' '}
+        <a href={`mailto:${siteConfig.contact.email}`} class="text-primary-600 hover:underline">
+          {siteConfig.contact.email}
+        </a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

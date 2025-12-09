@@ -1,0 +1,32 @@
+{
+  "name": "Potty Directory",
+  "tagline": "Find Porta Potty Rentals Near You",
+  "description": "The largest directory of portable restroom rental companies across the United States. Find trusted porta potty providers for construction sites, events, weddings, and more.",
+  "domain": "www.pottydirectory.com",
+  "location": {
+    "country": "United States",
+    "coverage": "Nationwide"
+  },
+  "contact": {
+    "email": "hello@pottydirectory.com"
+  },
+  "social": {
+    "twitter": "",
+    "facebook": "",
+    "instagram": ""
+  },
+  "colors": {
+    "primary": "#2563eb",
+    "secondary": "#64748b"
+  },
+  "stats": {
+    "providers": "1,400+",
+    "states": "50",
+    "rating": "4.8"
+  },
+  "monetization": {
+    "adsenseId": "",
+    "amazonTag": "",
+    "stripeEnabled": false
+  }
+}
