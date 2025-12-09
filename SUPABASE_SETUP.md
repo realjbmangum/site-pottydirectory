@@ -127,16 +127,47 @@ Add the same variables to Cloudflare Pages:
 | `submissions` | New business submission requests (public insert) |
 | `contact_messages` | Contact form messages (public insert) |
 
-## Sample Data
+---
 
-20 sample vendors across 10 states:
-- Alabama (5)
-- Georgia (3)
-- Florida (2)
-- Texas (3)
-- California (2)
-- New York (1)
-- Illinois (1)
-- Colorado (1)
-- Washington (1)
-- Arizona (1)
+## Schema Migration v2 - Add Location & Rating Fields
+
+Run this SQL in Supabase SQL Editor to add new fields for Outscraper data:
+
+```sql
+-- Add location fields
+ALTER TABLE vendors ADD COLUMN IF NOT EXISTS latitude DECIMAL(10, 8);
+ALTER TABLE vendors ADD COLUMN IF NOT EXISTS longitude DECIMAL(11, 8);
+ALTER TABLE vendors ADD COLUMN IF NOT EXISTS street_address TEXT;
+ALTER TABLE vendors ADD COLUMN IF NOT EXISTS postal_code VARCHAR(10);
+
+-- Add rating/review fields
+ALTER TABLE vendors ADD COLUMN IF NOT EXISTS rating DECIMAL(2, 1);
+ALTER TABLE vendors ADD COLUMN IF NOT EXISTS review_count INTEGER DEFAULT 0;
+
+-- Add photo field
+ALTER TABLE vendors ADD COLUMN IF NOT EXISTS photo_url TEXT;
+
+-- Create index for geo queries (optional, for future "near me" feature)
+CREATE INDEX IF NOT EXISTS idx_vendors_location ON vendors(latitude, longitude);
+```
+
+### Updated Vendor Schema
+
+| Column | Type | Description |
+|--------|------|-------------|
+| id | UUID | Primary key |
+| business_name | TEXT | Company name |
+| city | TEXT | City name |
+| state | TEXT | Full state name |
+| phone | TEXT | Formatted phone |
+| website | TEXT | Company website URL |
+| services_offered | TEXT[] | Array of services |
+| slug | TEXT | URL-friendly identifier |
+| latitude | DECIMAL | GPS latitude |
+| longitude | DECIMAL | GPS longitude |
+| street_address | TEXT | Street address |
+| postal_code | VARCHAR | ZIP code |
+| rating | DECIMAL | Google rating (1-5) |
+| review_count | INTEGER | Number of Google reviews |
+| photo_url | TEXT | Business photo URL |
+| created_at | TIMESTAMPTZ | Record creation date |
