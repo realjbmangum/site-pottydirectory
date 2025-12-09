@@ -10,8 +10,8 @@ const { name, abbr, slug, count = 0 } = Astro.props;
 ---
 
 <a
-  href={`/state/${slug}`}
-  class="state-card block bg-white rounded-lg border border-gray-200 p-4 hover:border-primary-300 transition-all"
+  href={`/${slug}`}
+  class="state-card block bg-white rounded-xl border border-gray-200 p-5 hover:border-primary-300 hover:shadow-lg transition-all duration-200"
 >
   <div class="flex items-center justify-between">
     <div>

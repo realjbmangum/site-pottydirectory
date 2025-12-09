@@ -51,3 +51,19 @@ export function getStateName(abbr: string, states: Array<{name: string, abbr: st
   const state = states.find(s => s.abbr === abbr);
   return state?.name || abbr;
 }
+
+// Convert city name to URL slug
+export function citySlug(city: string): string {
+  return city
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
+
+// Convert slug back to city name (title case)
+export function cityFromSlug(slug: string): string {
+  return slug
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}

@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import VendorCard from '../../../components/VendorCard.astro';
+import AdSlot from '../../../components/AdSlot.astro';
+import states from '../../../data/states.json';
+import { getAllCitiesWithState, getVendorsByCity } from '../../../lib/supabase';
+import { citySlug, cityFromSlug } from '../../../lib/utils';
+
+export async function getStaticPaths() {
+  let allCities: { city: string; state: string; count: number }[] = [];
+
+  try {
+    allCities = await getAllCitiesWithState();
+  } catch (error) {
+    console.error('Error fetching cities:', error);
+  }
+
+  return allCities.map((cityData) => {
+    const stateInfo = states.find(s => s.name === cityData.state);
+    return {
+      params: {
+        state: stateInfo?.slug || cityData.state.toLowerCase().replace(/\s+/g, '-'),
+        city: citySlug(cityData.city)
+      },
+      props: {
+        stateName: cityData.state,
+        stateSlug: stateInfo?.slug || cityData.state.toLowerCase().replace(/\s+/g, '-'),
+        stateAbbr: stateInfo?.abbr || '',
+        cityName: cityData.city,
+        citySlugValue: citySlug(cityData.city)
+      }
+    };
+  });
+}
+
+const { stateName, stateSlug, stateAbbr, cityName, citySlugValue } = Astro.props;
+
+let vendors = [];
+try {
+  vendors = await getVendorsByCity(stateName, cityName);
+} catch (error) {
+  console.error('Error fetching vendors:', error);
+}
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: stateName, href: `/${stateSlug}` },
+  { label: cityName }
+];
+---
+
+<BaseLayout
+  title={`Porta Potty Rentals in ${cityName}, ${stateAbbr} | ${vendors.length} Local Providers`}
+  description={`Find ${vendors.length} portable restroom rental companies in ${cityName}, ${stateName}. Compare local porta potty providers for construction, events, weddings, and more.`}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <Breadcrumb items={breadcrumbs} />
+
+    <!-- Header -->
+    <div class="mb-10">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        Porta Potty Rentals in {cityName}, {stateAbbr}
+      </h1>
+      <p class="text-xl text-gray-600">
+        {vendors.length > 0
+          ? `Compare ${vendors.length} portable restroom ${vendors.length === 1 ? 'provider' : 'providers'} in ${cityName}`
+          : `No providers listed in ${cityName} yet.`}
+      </p>
+    </div>
+
+    <!-- Ad -->
+    <div class="mb-8">
+      <AdSlot slot="header" />
+    </div>
+
+    {vendors.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {vendors.map((vendor) => (
+          <VendorCard vendor={vendor} citySlug={citySlugValue} stateSlug={stateSlug} />
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-16 bg-gray-50 rounded-xl">
+        <div class="text-6xl mb-4">🚽</div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">No Providers Yet</h2>
+        <p class="text-gray-600 mb-6">
+          We don't have any porta potty rental companies listed in {cityName} yet.
+        </p>
+        <a
+          href="/submit"
+          class="inline-block bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors"
+        >
+          Add Your Business
+        </a>
+      </div>
+    )}
+
+    <!-- Local SEO Content -->
+    <div class="mt-12 bg-gray-50 rounded-xl p-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">
+        Porta Potty Rentals in {cityName}, {stateName}
+      </h2>
+      <p class="text-gray-600 mb-4">
+        Looking for portable restroom rentals in {cityName}? Our directory features trusted local providers
+        offering a range of services including standard porta potties, handicap accessible units, luxury
+        restroom trailers, and more.
+      </p>
+      <p class="text-gray-600">
+        Whether you need portable restrooms for a construction site, outdoor event, wedding, or emergency
+        situation, our {cityName} providers can help. Contact multiple providers to compare prices and
+        find the best solution for your needs.
+      </p>
+    </div>
+
+    <!-- Bottom Ad -->
+    <div class="mt-8">
+      <AdSlot slot="footer" />
+    </div>
+  </div>
+</BaseLayout>

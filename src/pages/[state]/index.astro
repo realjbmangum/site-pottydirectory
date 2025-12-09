@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import states from '../../data/states.json';
+import { getCitiesByState } from '../../lib/supabase';
+import { citySlug } from '../../lib/utils';
+
+export function getStaticPaths() {
+  return states.map((state) => ({
+    params: { state: state.slug },
+    props: { state }
+  }));
+}
+
+const { state } = Astro.props;
+
+let cities: { city: string; count: number }[] = [];
+try {
+  cities = await getCitiesByState(state.name);
+} catch (error) {
+  console.error('Error fetching cities:', error);
+}
+
+const totalVendors = cities.reduce((sum, c) => sum + c.count, 0);
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'States', href: '/states' },
+  { label: state.name }
+];
+---
+
+<BaseLayout
+  title={`Porta Potty Rentals in ${state.name} | Find Local Providers`}
+  description={`Find portable restroom rental companies in ${state.name}. Browse ${totalVendors} verified providers across ${cities.length} cities for construction, events, weddings, and more.`}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <Breadcrumb items={breadcrumbs} />
+
+    <!-- Header -->
+    <div class="mb-10">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        Porta Potty Rentals in {state.name}
+      </h1>
+      <p class="text-xl text-gray-600">
+        {totalVendors > 0
+          ? `Browse ${totalVendors} portable restroom providers across ${cities.length} ${cities.length === 1 ? 'city' : 'cities'} in ${state.name}`
+          : `No providers listed yet in ${state.name}. Be the first to add your business!`}
+      </p>
+    </div>
+
+    <!-- Ad -->
+    <div class="mb-8">
+      <AdSlot slot="header" />
+    </div>
+
+    {cities.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {cities.map((cityData) => (
+          <a
+            href={`/${state.slug}/${citySlug(cityData.city)}`}
+            class="group bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-lg hover:border-primary-300 transition-all duration-200"
+          >
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="text-xl font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">
+                  {cityData.city}
+                </h2>
+                <p class="text-gray-500 text-sm mt-1">{state.name}</p>
+              </div>
+              <div class="text-right">
+                <span class="text-3xl font-bold text-primary-600">{cityData.count}</span>
+                <p class="text-xs text-gray-500">{cityData.count === 1 ? 'provider' : 'providers'}</p>
+              </div>
+            </div>
+            <div class="mt-4 flex items-center text-primary-600 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+              <span>View providers</span>
+              <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-16 bg-gray-50 rounded-xl">
+        <div class="text-6xl mb-4">🚽</div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">No Providers Yet</h2>
+        <p class="text-gray-600 mb-6">
+          We don't have any porta potty rental companies listed in {state.name} yet.
+        </p>
+        <a
+          href="/submit"
+          class="inline-block bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors"
+        >
+          Add Your Business
+        </a>
+      </div>
+    )}
+
+    <!-- Bottom Ad -->
+    <div class="mt-12">
+      <AdSlot slot="footer" />
+    </div>
+  </div>
+</BaseLayout>

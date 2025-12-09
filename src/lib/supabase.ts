@@ -104,6 +104,58 @@ export async function getFeaturedVendors(limit = 6) {
   return data as Vendor[];
 }
 
+export async function getVendorsByCity(state: string, city: string) {
+  const { data, error } = await supabase
+    .from('vendors')
+    .select('*')
+    .eq('state', state)
+    .eq('city', city)
+    .order('business_name');
+
+  if (error) throw error;
+  return data as Vendor[];
+}
+
+export async function getCitiesByState(state: string) {
+  const { data, error } = await supabase
+    .from('vendors')
+    .select('city, state')
+    .eq('state', state);
+
+  if (error) throw error;
+
+  // Get unique cities with counts
+  const cityCounts: Record<string, number> = {};
+  data?.forEach((vendor) => {
+    cityCounts[vendor.city] = (cityCounts[vendor.city] || 0) + 1;
+  });
+
+  return Object.entries(cityCounts)
+    .map(([city, count]) => ({ city, count }))
+    .sort((a, b) => a.city.localeCompare(b.city));
+}
+
+export async function getAllCitiesWithState() {
+  const { data, error } = await supabase
+    .from('vendors')
+    .select('city, state');
+
+  if (error) throw error;
+
+  // Get unique city-state combinations
+  const cityStateMap = new Map<string, { city: string; state: string; count: number }>();
+  data?.forEach((vendor) => {
+    const key = `${vendor.city}-${vendor.state}`;
+    if (cityStateMap.has(key)) {
+      cityStateMap.get(key)!.count++;
+    } else {
+      cityStateMap.set(key, { city: vendor.city, state: vendor.state, count: 1 });
+    }
+  });
+
+  return Array.from(cityStateMap.values());
+}
+
 export async function submitVendor(submission: Omit<Submission, 'id' | 'status' | 'created_at'>) {
   const { data, error } = await supabase
     .from('submissions')

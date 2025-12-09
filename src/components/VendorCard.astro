@@ -4,18 +4,21 @@ import { formatPhone, ensureHttps } from '../lib/utils';
 
 interface Props {
   vendor: Vendor;
+  stateSlug: string;
+  citySlug: string;
 }
 
-const { vendor } = Astro.props;
+const { vendor, stateSlug, citySlug } = Astro.props;
+const vendorUrl = `/${stateSlug}/${citySlug}/${vendor.slug}`;
 ---
 
-<article class="vendor-card bg-white rounded-xl shadow-md overflow-hidden">
+<article class="vendor-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
   <div class="p-6">
     <!-- Header -->
     <div class="flex items-start justify-between mb-4">
       <div>
         <h3 class="text-lg font-semibold text-gray-900">
-          <a href={`/listing/${vendor.slug}`} class="hover:text-primary-600 transition-colors">
+          <a href={vendorUrl} class="hover:text-primary-600 transition-colors">
             {vendor.business_name}
           </a>
         </h3>
@@ -61,7 +64,7 @@ const { vendor } = Astro.props;
     <!-- Actions -->
     <div class="flex gap-3">
       <a
-        href={`/listing/${vendor.slug}`}
+        href={vendorUrl}
         class="flex-1 text-center bg-primary-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
       >
         View Details
