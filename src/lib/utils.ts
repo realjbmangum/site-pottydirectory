@@ -7,7 +7,8 @@ export function slugify(text: string): string {
 }
 
 // Format phone number for display
-export function formatPhone(phone: string): string {
+export function formatPhone(phone: string | null | undefined): string {
+  if (!phone) return '';
   const cleaned = phone.replace(/\D/g, '');
   if (cleaned.length === 10) {
     return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
@@ -16,7 +17,8 @@ export function formatPhone(phone: string): string {
 }
 
 // Truncate text with ellipsis
-export function truncate(text: string, length: number): string {
+export function truncate(text: string | null | undefined, length: number): string {
+  if (!text) return '';
   if (text.length <= length) return text;
   return text.slice(0, length).trim() + '...';
 }
