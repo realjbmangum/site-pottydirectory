@@ -13,12 +13,15 @@ interface Props {
 }
 
 const {
-  title = siteConfig.name,
+  title = siteConfig.seoTitle || siteConfig.name,
   description = siteConfig.description,
   ogImage = '/og-image.png'
 } = Astro.props;
 
-const fullTitle = title === siteConfig.name ? title : `${title} | ${siteConfig.name}`;
+// If title is the SEO title or site name, use as-is; otherwise append brand
+const fullTitle = (title === siteConfig.seoTitle || title === siteConfig.name)
+  ? title
+  : `${title} | ${siteConfig.name}`;
 const siteUrl = `https://${siteConfig.domain}`;
 
 // Site-wide Organization schema
