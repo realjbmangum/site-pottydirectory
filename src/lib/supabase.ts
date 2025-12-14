@@ -190,6 +190,82 @@ export async function sendContactMessage(message: Omit<ContactMessage, 'id' | 'c
   return data;
 }
 
+// Content types
+export interface ContentQuestion {
+  id: string;
+  site_id: string;
+  question: string;
+  category: string;
+  source: string;
+  priority: string;
+  score: number;
+  content_type: string;
+  status: string;
+  answer_short: string | null;
+  answer_long: string | null;
+  suggested_word_count: number;
+  published_url: string | null;
+  published_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+// Get published FAQs for the site
+export async function getPublishedFAQs(siteId: string = 'potty') {
+  const { data, error } = await supabase
+    .from('content_questions')
+    .select('*')
+    .eq('site_id', siteId)
+    .eq('status', 'published')
+    .eq('content_type', 'faq')
+    .order('category')
+    .order('priority', { ascending: false })
+    .order('score', { ascending: false });
+
+  if (error) throw error;
+  return data as ContentQuestion[];
+}
+
+// Get published blog posts for the site
+export async function getPublishedBlogs(siteId: string = 'potty') {
+  const { data, error } = await supabase
+    .from('content_questions')
+    .select('*')
+    .eq('site_id', siteId)
+    .eq('status', 'published')
+    .eq('content_type', 'blog')
+    .order('published_at', { ascending: false });
+
+  if (error) throw error;
+  return data as ContentQuestion[];
+}
+
+// Helper to create slug from question
+export function questionToSlug(question: string): string {
+  return question
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '') // Remove special chars
+    .replace(/\s+/g, '-') // Spaces to dashes
+    .replace(/-+/g, '-') // Multiple dashes to single
+    .slice(0, 60) // Limit length
+    .replace(/-$/, ''); // Remove trailing dash
+}
+
+// Get a single blog post by ID
+export async function getBlogById(id: string, siteId: string = 'potty') {
+  const { data, error } = await supabase
+    .from('content_questions')
+    .select('*')
+    .eq('id', id)
+    .eq('site_id', siteId)
+    .eq('status', 'published')
+    .eq('content_type', 'blog')
+    .single();
+
+  if (error) throw error;
+  return data as ContentQuestion;
+}
+
 export async function getSiteStats() {
   const { data, error, count } = await supabase
     .from('vendors')

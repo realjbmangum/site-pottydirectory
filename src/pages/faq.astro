@@ -2,127 +2,42 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import StructuredData from '../components/StructuredData.astro';
+import { getPublishedFAQs, type ContentQuestion } from '../lib/supabase';
 
 const breadcrumbs = [
   { label: 'Home', href: '/' },
   { label: 'FAQ' }
 ];
 
-const faqs = [
-  {
-    category: 'Renting Basics',
-    questions: [
-      {
-        q: 'How much does it cost to rent a porta potty?',
-        a: 'Standard porta potty rentals typically cost $75-$150 per day or $175-$400 per month. Luxury restroom trailers range from $500-$1,500+ per day. Prices vary by location, rental duration, and provider. <a href="/pricing" class="text-primary-600 hover:underline">See our full pricing guide</a>.'
-      },
-      {
-        q: 'How far in advance should I book?',
-        a: 'We recommend booking 2-3 weeks in advance, especially during peak season (April-September). For large events or holidays, book 4-6 weeks ahead. Last-minute rentals may be available but often cost more.'
-      },
-      {
-        q: 'What is included in a porta potty rental?',
-        a: 'Standard rentals typically include: delivery and pickup, the unit itself, toilet paper, hand sanitizer, and weekly servicing (waste pump-out, restocking, and cleaning). Delivery fees may be extra depending on distance.'
-      },
-      {
-        q: 'How many porta potties do I need?',
-        a: 'For events: plan 1 unit per 50 guests for events up to 4 hours, or 1 per 35 guests for longer events. Add 20% more if alcohol is served. For construction: OSHA requires 1 toilet per 20 workers. <a href="/calculator" class="text-primary-600 hover:underline">Use our calculator</a> for an exact estimate.'
-      },
-      {
-        q: 'Can I rent a porta potty for just one day?',
-        a: 'Yes, most providers offer single-day rentals. However, daily rates are higher than weekly or monthly rates. For events lasting a weekend, a 3-day or weekly rate may be more economical.'
-      }
-    ]
-  },
-  {
-    category: 'Delivery & Setup',
-    questions: [
-      {
-        q: 'Where should I place the porta potty?',
-        a: 'Choose a flat, level surface accessible by delivery truck. Keep units at least 25-50 feet from food areas. For events, place near the action but not in the main gathering area. Ensure clear access for servicing.'
-      },
-      {
-        q: 'How much space does a porta potty need?',
-        a: 'A standard porta potty is about 4 feet wide x 4 feet deep x 7.5 feet tall. ADA accessible units are larger (about 5x5 feet). Allow extra space around each unit for door swing and user access.'
-      },
-      {
-        q: 'Can porta potties be delivered anywhere?',
-        a: 'Porta potties can be delivered to most locations with truck access. Providers may charge extra for difficult placements (up hills, through narrow gates, etc.). Discuss any access concerns when booking.'
-      },
-      {
-        q: 'Do I need a permit for a porta potty?',
-        a: 'Permit requirements vary by city and county. Public events often require permits. Private property (backyards, construction sites) usually doesn\'t. Check with your local municipality or ask the rental company.'
-      }
-    ]
-  },
-  {
-    category: 'Servicing & Maintenance',
-    questions: [
-      {
-        q: 'How often are porta potties cleaned?',
-        a: 'Standard service is once per week. This includes pumping out waste, restocking supplies, and sanitizing the unit. For high-traffic events or construction sites, you can request 2-3 services per week or daily service.'
-      },
-      {
-        q: 'What does servicing include?',
-        a: 'Servicing includes: pumping out the waste tank, adding deodorizer chemicals, restocking toilet paper and hand sanitizer, wiping down surfaces, and checking for damage or issues.'
-      },
-      {
-        q: 'What if the porta potty needs service between scheduled visits?',
-        a: 'Most providers offer on-call service for emergencies or high-volume situations. There may be an extra fee for unscheduled service calls. Discuss expectations upfront when booking.'
-      },
-      {
-        q: 'Are porta potties sanitary?',
-        a: 'Yes, when properly maintained. Modern porta potties are treated with industrial-strength deodorizers and sanitizers. Regular servicing keeps them clean. For extra peace of mind, request more frequent service.'
-      }
-    ]
-  },
-  {
-    category: 'Types & Options',
-    questions: [
-      {
-        q: 'What types of porta potties are available?',
-        a: 'Common types include: Standard units (basic), Deluxe units (with sink/flushing), ADA accessible (wheelchair-friendly), Luxury trailers (climate-controlled with running water), and Hand wash stations. <a href="/pricing" class="text-primary-600 hover:underline">Compare types and prices</a>.'
-      },
-      {
-        q: 'Do I need an ADA accessible unit?',
-        a: 'For public events, at least one ADA accessible unit is required. These feature wider doors, grab bars, and enough space for wheelchairs. Even for private events, it\'s considerate to include one for guests with mobility needs.'
-      },
-      {
-        q: 'What is a luxury restroom trailer?',
-        a: 'Luxury restroom trailers are climate-controlled mobile bathrooms with flushing toilets, running water sinks, mirrors, lighting, and sometimes separate men\'s/women\'s stalls. They\'re popular for weddings and upscale events.'
-      },
-      {
-        q: 'Do porta potties have lights inside?',
-        a: 'Standard units don\'t have lights, but many have translucent roofs that allow daylight in. Some deluxe models have battery or solar-powered lights. Luxury trailers have full electric lighting.'
-      },
-      {
-        q: 'Are there porta potties for cold weather?',
-        a: 'Standard porta potties work in cold weather, but the hand sanitizer may freeze. Providers can add antifreeze solutions. For comfort in winter, luxury trailers with heating are recommended.'
-      }
-    ]
-  },
-  {
-    category: 'Events & Construction',
-    questions: [
-      {
-        q: 'What\'s different about renting for a wedding?',
-        a: 'Weddings typically call for luxury restroom trailers for guest comfort. Consider separate men\'s/women\'s facilities, an attendant for the evening, and placement that keeps trailers out of photos but convenient for guests.'
-      },
-      {
-        q: 'What are OSHA requirements for construction sites?',
-        a: 'OSHA requires employers to provide toilet facilities. Requirements: 1 toilet for 1-20 workers, 2 for 20-35, 3 for 35-55, 4 for 55-80, 5 for 80-110, and 6 for 110-150 workers. Add more for larger crews.'
-      },
-      {
-        q: 'Can porta potties be used for multi-day festivals?',
-        a: 'Yes, but plan for more units and more frequent servicing. Large festivals may need daily pump-outs. Work with your provider to create a servicing schedule that matches attendance patterns.'
-      },
-      {
-        q: 'What about disasters and emergency situations?',
-        a: 'Many providers offer rapid deployment for disasters, emergency shelters, and relief operations. Units can often be delivered within 24-48 hours. Contact local providers about emergency availability.'
-      }
-    ]
+// Fetch published FAQs from Supabase
+let faqData: ContentQuestion[] = [];
+let fetchError = '';
+
+try {
+  faqData = await getPublishedFAQs('potty');
+} catch (e) {
+  fetchError = e instanceof Error ? e.message : 'Failed to load FAQs';
+  console.error('FAQ fetch error:', e);
+}
+
+// Group FAQs by category
+const faqsByCategory = faqData.reduce((acc, faq) => {
+  const category = faq.category || 'General';
+  if (!acc[category]) {
+    acc[category] = [];
   }
-];
+  acc[category].push({
+    q: faq.question,
+    a: faq.answer_short || ''
+  });
+  return acc;
+}, {} as Record<string, { q: string; a: string }[]>);
+
+// Convert to array format for rendering
+const faqs = Object.entries(faqsByCategory).map(([category, questions]) => ({
+  category: category.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+  questions
+}));
 
 // Build FAQ schema for Google rich results
 const allQuestions = faqs.flatMap(cat => cat.questions);
@@ -155,48 +70,64 @@ const faqSchemaData = {
       </p>
     </div>
 
-    <!-- Quick Links -->
-    <div class="bg-gradient-to-r from-brand-50 to-emerald-50 rounded-xl p-6 mb-10 border border-brand-200 shadow-sm">
-      <h2 class="text-sm font-semibold text-brand-500 uppercase tracking-wide mb-3">Jump to Section</h2>
-      <div class="flex flex-wrap gap-2">
-        {faqs.map((section) => (
-          <a
-            href={`#${section.category.toLowerCase().replace(/\s+/g, '-')}`}
-            class="px-4 py-2 bg-white border border-brand-200 rounded-lg text-sm font-medium text-gray-700 hover:border-brand-500 hover:bg-brand-50 hover:text-brand-600 transition-colors shadow-sm"
-          >
-            {section.category}
-          </a>
-        ))}
+    {fetchError && (
+      <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-8">
+        Error loading FAQs: {fetchError}
       </div>
-    </div>
+    )}
 
-    <!-- FAQ Sections -->
-    {faqs.map((section) => (
-      <div class="mb-12" id={section.category.toLowerCase().replace(/\s+/g, '-')}>
-        <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-          <span class="w-2 h-8 bg-primary-500 rounded-full mr-3"></span>
-          {section.category}
-        </h2>
-        <div class="space-y-4">
-          {section.questions.map((faq) => (
-            <details class="group bg-white rounded-xl border border-gray-200 overflow-hidden">
-              <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 transition-colors">
-                <h3 class="font-semibold text-gray-900 pr-4">{faq.q}</h3>
-                <span class="flex-shrink-0 ml-4 text-gray-400 group-open:rotate-180 transition-transform">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </span>
-              </summary>
-              <div class="px-5 pb-5 text-gray-600 border-t border-gray-100 pt-4" set:html={faq.a} />
-            </details>
-          ))}
-        </div>
+    {faqs.length === 0 && !fetchError && (
+      <div class="bg-yellow-50 border border-yellow-200 text-yellow-700 px-4 py-3 rounded-lg mb-8 text-center">
+        No FAQs published yet. Check back soon!
       </div>
-    ))}
+    )}
+
+    {faqs.length > 0 && (
+      <>
+        <!-- Quick Links -->
+        <div class="bg-gradient-to-r from-brand-50 to-emerald-50 rounded-xl p-6 mb-10 border border-brand-200 shadow-sm">
+          <h2 class="text-sm font-semibold text-brand-500 uppercase tracking-wide mb-3">Jump to Section</h2>
+          <div class="flex flex-wrap gap-2">
+            {faqs.map((section) => (
+              <a
+                href={`#${section.category.toLowerCase().replace(/\s+/g, '-')}`}
+                class="px-4 py-2 bg-white border border-brand-200 rounded-lg text-sm font-medium text-gray-700 hover:border-brand-500 hover:bg-brand-50 hover:text-brand-600 transition-colors shadow-sm"
+              >
+                {section.category}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- FAQ Sections -->
+        {faqs.map((section) => (
+          <div class="mb-12" id={section.category.toLowerCase().replace(/\s+/g, '-')}>
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+              <span class="w-2 h-8 bg-primary-500 rounded-full mr-3"></span>
+              {section.category}
+            </h2>
+            <div class="space-y-4">
+              {section.questions.map((faq) => (
+                <details class="group bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+                  <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 transition-colors">
+                    <h3 class="font-semibold text-gray-900 pr-4">{faq.q}</h3>
+                    <span class="flex-shrink-0 ml-4 text-gray-400 group-open:rotate-180 transition-transform">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </span>
+                  </summary>
+                  <div class="px-5 pb-5 text-gray-600 border-t border-gray-100 pt-4 prose prose-sm max-w-none" set:html={faq.a} />
+                </details>
+              ))}
+            </div>
+          </div>
+        ))}
+      </>
+    )}
 
     <!-- Still Have Questions CTA -->
-    <div class="bg-gradient-to-br from-primary-600 to-blue-700 rounded-2xl p-8 text-center text-white">
+    <div class="bg-gradient-to-br from-primary-600 to-blue-700 rounded-2xl p-8 text-center text-white mt-12">
       <h2 class="text-2xl font-bold mb-4">Still Have Questions?</h2>
       <p class="text-blue-100 mb-6 max-w-xl mx-auto">
         Contact local providers for specific pricing and availability, or use our tools to plan your rental.
@@ -216,5 +147,14 @@ const faqSchemaData = {
 <style>
   details[open] summary {
     background-color: #f9fafb;
+  }
+
+  .prose a {
+    color: #2563eb;
+    text-decoration: underline;
+  }
+
+  .prose a:hover {
+    color: #1d4ed8;
   }
 </style>
