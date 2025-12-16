@@ -56,7 +56,7 @@ export interface ContactMessage {
 // Helper functions
 export async function getVendors(state?: string) {
   let query = supabase
-    .from('vendors')
+    .from('potty')
     .select('*')
     .order('business_name');
 
@@ -71,7 +71,7 @@ export async function getVendors(state?: string) {
 
 export async function getVendorBySlug(slug: string) {
   const { data, error } = await supabase
-    .from('vendors')
+    .from('potty')
     .select('*')
     .eq('slug', slug)
     .single();
@@ -82,7 +82,7 @@ export async function getVendorBySlug(slug: string) {
 
 export async function getVendorsByState(state: string) {
   const { data, error } = await supabase
-    .from('vendors')
+    .from('potty')
     .select('*')
     .eq('state', state)
     .order('city')
@@ -94,7 +94,7 @@ export async function getVendorsByState(state: string) {
 
 export async function getVendorCountByState() {
   const { data, error } = await supabase
-    .from('vendors')
+    .from('potty')
     .select('state');
 
   if (error) throw error;
@@ -108,7 +108,7 @@ export async function getVendorCountByState() {
 
 export async function getFeaturedVendors(limit = 6) {
   const { data, error } = await supabase
-    .from('vendors')
+    .from('potty')
     .select('*')
     .limit(limit);
 
@@ -118,7 +118,7 @@ export async function getFeaturedVendors(limit = 6) {
 
 export async function getVendorsByCity(state: string, city: string) {
   const { data, error } = await supabase
-    .from('vendors')
+    .from('potty')
     .select('*')
     .eq('state', state)
     .eq('city', city)
@@ -130,7 +130,7 @@ export async function getVendorsByCity(state: string, city: string) {
 
 export async function getCitiesByState(state: string) {
   const { data, error } = await supabase
-    .from('vendors')
+    .from('potty')
     .select('city, state')
     .eq('state', state);
 
@@ -149,7 +149,7 @@ export async function getCitiesByState(state: string) {
 
 export async function getAllCitiesWithState() {
   const { data, error } = await supabase
-    .from('vendors')
+    .from('potty')
     .select('city, state');
 
   if (error) throw error;
@@ -268,7 +268,7 @@ export async function getBlogById(id: string, siteId: string = 'potty') {
 
 export async function getSiteStats() {
   const { data, error, count } = await supabase
-    .from('vendors')
+    .from('potty')
     .select('state, rating', { count: 'exact' });
 
   if (error) throw error;

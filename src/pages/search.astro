@@ -188,7 +188,7 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
       try {
         // Query Supabase directly with ilike for fuzzy search
         const response = await fetch(
-          `${supabaseUrl}/rest/v1/vendors?or=(business_name.ilike.*${encodeURIComponent(query)}*,city.ilike.*${encodeURIComponent(query)}*,state.ilike.*${encodeURIComponent(query)}*)&order=rating.desc.nullslast&limit=50`,
+          `${supabaseUrl}/rest/v1/potty?or=(business_name.ilike.*${encodeURIComponent(query)}*,city.ilike.*${encodeURIComponent(query)}*,state.ilike.*${encodeURIComponent(query)}*)&order=rating.desc.nullslast&limit=50`,
           {
             headers: {
               'apikey': supabaseKey,

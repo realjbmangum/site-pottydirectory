@@ -13,7 +13,7 @@ const supabase = createClient(url, key);
 
 async function test() {
   const { data, error } = await supabase
-    .from('vendors')
+    .from('potty')
     .select('business_name, city, state')
     .eq('state', 'South Carolina')
     .limit(30);
