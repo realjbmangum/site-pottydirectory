@@ -56,18 +56,36 @@ export interface ContactMessage {
 
 // Helper functions
 export async function getVendors(state?: string) {
-  let query = supabase
-    .from('potty')
-    .select('*')
-    .order('business_name');
+  // Fetch all vendors - Supabase default limit is 1000, so we need to paginate
+  const allVendors: Vendor[] = [];
+  const pageSize = 1000;
+  let offset = 0;
+  let hasMore = true;
 
-  if (state) {
-    query = query.eq('state', state);
+  while (hasMore) {
+    let query = supabase
+      .from('potty')
+      .select('*')
+      .order('business_name')
+      .range(offset, offset + pageSize - 1);
+
+    if (state) {
+      query = query.eq('state', state);
+    }
+
+    const { data, error } = await query;
+    if (error) throw error;
+
+    if (data && data.length > 0) {
+      allVendors.push(...(data as Vendor[]));
+      offset += pageSize;
+      hasMore = data.length === pageSize;
+    } else {
+      hasMore = false;
+    }
   }
 
-  const { data, error } = await query;
-  if (error) throw error;
-  return data as Vendor[];
+  return allVendors;
 }
 
 export async function getVendorBySlug(slug: string) {
