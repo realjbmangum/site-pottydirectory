@@ -114,20 +114,38 @@ export async function getVendorsByState(state: string) {
 }
 
 export async function getVendorCountByState() {
-  const { data, error } = await supabase
-    .from('potty')
-    .select('state');
+  // Paginate to get all vendors (Supabase default limit is 1000)
+  const allData: { state: string }[] = [];
+  const pageSize = 1000;
+  let offset = 0;
+  let hasMore = true;
 
-  if (error) throw error;
+  while (hasMore) {
+    const { data, error } = await supabase
+      .from('potty')
+      .select('state')
+      .range(offset, offset + pageSize - 1);
+
+    if (error) throw error;
+
+    if (data && data.length > 0) {
+      allData.push(...data);
+      offset += pageSize;
+      hasMore = data.length === pageSize;
+    } else {
+      hasMore = false;
+    }
+  }
 
   const counts: Record<string, number> = {};
-  data?.forEach((vendor) => {
+  allData.forEach((vendor) => {
     counts[vendor.state] = (counts[vendor.state] || 0) + 1;
   });
   return counts;
 }
 
 export async function getFeaturedVendors(limit = 6) {
+  // First try to get explicitly featured vendors
   const { data, error } = await supabase
     .from('potty')
     .select('*')
@@ -135,7 +153,24 @@ export async function getFeaturedVendors(limit = 6) {
     .limit(limit);
 
   if (error) throw error;
-  return data as Vendor[];
+
+  // If we have featured vendors, return them
+  if (data && data.length > 0) {
+    return data as Vendor[];
+  }
+
+  // Fallback: get highest rated vendors with good review counts
+  const { data: fallbackData, error: fallbackError } = await supabase
+    .from('potty')
+    .select('*')
+    .gte('rating', 4.5)
+    .gte('review_count', 10)
+    .order('rating', { ascending: false })
+    .order('review_count', { ascending: false })
+    .limit(limit);
+
+  if (fallbackError) throw fallbackError;
+  return (fallbackData || []) as Vendor[];
 }
 
 export async function getVendorsByCity(state: string, city: string) {
@@ -289,23 +324,40 @@ export async function getBlogById(id: string, siteId: string = 'potty') {
 }
 
 export async function getSiteStats() {
-  const { data, error, count } = await supabase
-    .from('potty')
-    .select('state, rating', { count: 'exact' });
+  // Paginate to get all vendors for accurate stats
+  const allData: { state: string; rating: number | null }[] = [];
+  const pageSize = 1000;
+  let offset = 0;
+  let hasMore = true;
 
-  if (error) throw error;
+  while (hasMore) {
+    const { data, error } = await supabase
+      .from('potty')
+      .select('state, rating')
+      .range(offset, offset + pageSize - 1);
+
+    if (error) throw error;
+
+    if (data && data.length > 0) {
+      allData.push(...data);
+      offset += pageSize;
+      hasMore = data.length === pageSize;
+    } else {
+      hasMore = false;
+    }
+  }
 
   // Count unique states
-  const uniqueStates = new Set(data?.map(v => v.state) || []);
+  const uniqueStates = new Set(allData.map(v => v.state));
 
   // Calculate average rating (only vendors with ratings)
-  const ratingsData = data?.filter(v => v.rating && v.rating > 0) || [];
+  const ratingsData = allData.filter(v => v.rating && v.rating > 0);
   const avgRating = ratingsData.length > 0
     ? ratingsData.reduce((sum, v) => sum + (v.rating || 0), 0) / ratingsData.length
     : 0;
 
   return {
-    providers: count || 0,
+    providers: allData.length,
     states: uniqueStates.size,
     avgRating: avgRating.toFixed(1)
   };
