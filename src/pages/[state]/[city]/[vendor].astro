@@ -44,7 +44,7 @@ const breadcrumbs = [
 
 <BaseLayout
   title={`${vendor.business_name} | Porta Potty Rentals in ${vendor.city}, ${stateInfo?.abbr || vendor.state}`}
-  description={`${vendor.business_name} provides portable restroom rentals in ${vendor.city}, ${vendor.state}. Services: ${vendor.services_offered.join(', ')}. Call ${formatPhone(vendor.phone)} for a quote.`}
+  description={vendor.description || `${vendor.business_name} provides portable restroom rentals in ${vendor.city}, ${vendor.state}. Services: ${vendor.services_offered.join(', ')}. Call ${formatPhone(vendor.phone)} for a quote.`}
 >
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <Breadcrumb items={breadcrumbs} />
@@ -209,6 +209,16 @@ const breadcrumbs = [
             </div>
           </div>
         </div>
+
+        <!-- About / Description -->
+        {vendor.description && (
+          <div class="mb-10">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">About {vendor.business_name}</h2>
+            <div class="bg-gray-50 rounded-xl border border-gray-200 p-6">
+              <p class="text-gray-700 leading-relaxed whitespace-pre-line">{vendor.description}</p>
+            </div>
+          </div>
+        )}
 
         <!-- Social Media -->
         {(vendor.linkedin || vendor.instagram || vendor.facebook) && (
@@ -375,7 +385,7 @@ const breadcrumbs = [
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": vendor.business_name,
-      "description": `Portable restroom rentals in ${vendor.city}, ${vendor.state}. Services: ${vendor.services_offered.join(', ')}.`,
+      "description": vendor.description || `Portable restroom rentals in ${vendor.city}, ${vendor.state}. Services: ${vendor.services_offered.join(', ')}.`,
       "image": vendor.photo_url || undefined,
       "address": {
         "@type": "PostalAddress",

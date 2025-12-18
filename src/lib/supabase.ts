@@ -27,6 +27,7 @@ export interface Vendor {
   linkedin?: string;
   instagram?: string;
   facebook?: string;
+  description?: string;
   created_at: string;
 }
 
