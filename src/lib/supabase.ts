@@ -28,6 +28,8 @@ export interface Vendor {
   instagram?: string;
   facebook?: string;
   description?: string;
+  featured?: boolean;
+  verified?: boolean;
   created_at: string;
 }
 
@@ -129,6 +131,7 @@ export async function getFeaturedVendors(limit = 6) {
   const { data, error } = await supabase
     .from('potty')
     .select('*')
+    .eq('featured', true)
     .limit(limit);
 
   if (error) throw error;

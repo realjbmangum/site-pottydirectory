@@ -49,8 +49,8 @@ function isOpenNow(hours: Record<string, string> | undefined): boolean {
 
 const hasHours = vendor.hours && Object.keys(vendor.hours).length > 0;
 const openNow = isOpenNow(vendor.hours);
-// Verified badge for high-quality vendors (4.5+ rating with 10+ reviews)
-const isVerified = rating >= 4.5 && reviewCount >= 10;
+// Verified badge: manually verified OR high-quality (4.5+ rating with 10+ reviews)
+const isVerified = vendor.verified || (rating >= 4.5 && reviewCount >= 10);
 ---
 
 <article
