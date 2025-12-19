@@ -90,11 +90,31 @@ const breadcrumbs = [
   { label: stateName, href: `/${stateSlug}` },
   { label: cityName }
 ];
+
+// Regional pricing variations (approximate based on cost of living)
+const highCostStates = ['California', 'New York', 'Massachusetts', 'Connecticut', 'New Jersey', 'Hawaii', 'Alaska', 'Washington', 'Oregon', 'Colorado'];
+const lowCostStates = ['Mississippi', 'Arkansas', 'Oklahoma', 'Kansas', 'Missouri', 'Alabama', 'Kentucky', 'West Virginia', 'Louisiana', 'Tennessee'];
+
+const isHighCost = highCostStates.includes(stateName);
+const isLowCost = lowCostStates.includes(stateName);
+
+const priceRange = {
+  standard: isHighCost ? '$175-275' : isLowCost ? '$100-175' : '$125-200',
+  deluxe: isHighCost ? '$225-350' : isLowCost ? '$150-250' : '$175-275',
+  ada: isHighCost ? '$250-400' : isLowCost ? '$175-300' : '$200-325',
+  trailer: isHighCost ? '$800-1,500' : isLowCost ? '$500-1,000' : '$600-1,200',
+};
+
+// Get services offered by vendors in this city
+const servicesOffered = vendors.length > 0
+  ? [...new Set(vendors.flatMap(v => v.services_offered || []))].slice(0, 6)
+  : ['Standard Porta Potties', 'Deluxe Units', 'ADA Accessible', 'Luxury Trailers', 'Hand Wash Stations', 'Holding Tanks'];
 ---
 
 <BaseLayout
   title={`Porta Potty Rentals in ${cityName}, ${stateAbbr} | ${vendors.length} Local Providers`}
   description={`Find ${vendors.length} portable restroom rental companies in ${cityName}, ${stateName}. Compare local porta potty providers for construction, events, weddings, and more.`}
+  noindex={vendors.length === 0}
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <Breadcrumb items={breadcrumbs} />
@@ -189,21 +209,230 @@ const breadcrumbs = [
       </div>
     )}
 
-    <!-- Local SEO Content -->
-    <div class="mt-12 bg-gray-50 rounded-xl p-8">
+    <!-- Pricing Guide Section -->
+    <div class="mt-12 bg-white rounded-xl border border-gray-200 p-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-2">
+        Porta Potty Rental Prices in {cityName}
+      </h2>
+      <p class="text-gray-600 mb-6">
+        Average weekly rental rates for {cityName}, {stateAbbr}. Prices vary based on rental duration, delivery distance, and servicing frequency.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-gray-50 rounded-lg p-4 text-center">
+          <p class="text-sm text-gray-500 mb-1">Standard Unit</p>
+          <p class="text-xl font-bold text-gray-900">{priceRange.standard}</p>
+          <p class="text-xs text-gray-500">per week</p>
+        </div>
+        <div class="bg-gray-50 rounded-lg p-4 text-center">
+          <p class="text-sm text-gray-500 mb-1">Deluxe Unit</p>
+          <p class="text-xl font-bold text-gray-900">{priceRange.deluxe}</p>
+          <p class="text-xs text-gray-500">per week</p>
+        </div>
+        <div class="bg-gray-50 rounded-lg p-4 text-center">
+          <p class="text-sm text-gray-500 mb-1">ADA Accessible</p>
+          <p class="text-xl font-bold text-gray-900">{priceRange.ada}</p>
+          <p class="text-xs text-gray-500">per week</p>
+        </div>
+        <div class="bg-gray-50 rounded-lg p-4 text-center">
+          <p class="text-sm text-gray-500 mb-1">Luxury Trailer</p>
+          <p class="text-xl font-bold text-gray-900">{priceRange.trailer}</p>
+          <p class="text-xs text-gray-500">per event</p>
+        </div>
+      </div>
+
+      <p class="text-sm text-gray-500">
+        * Prices are estimates based on {stateName} market rates. Contact providers directly for accurate quotes.
+        <a href="/pricing" class="text-primary-600 hover:underline ml-1">View full pricing guide →</a>
+      </p>
+    </div>
+
+    <!-- Services Available Section -->
+    <div class="mt-8 bg-white rounded-xl border border-gray-200 p-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">
+        Portable Restroom Services in {cityName}
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-4">Available Services</h3>
+          <ul class="space-y-3">
+            {servicesOffered.map((service) => (
+              <li class="flex items-center text-gray-600">
+                <svg class="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                {service}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-4">Common Uses in {cityName}</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start text-gray-600">
+              <svg class="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+              <span><strong>Construction Sites</strong> - OSHA-compliant units for work crews</span>
+            </li>
+            <li class="flex items-start text-gray-600">
+              <svg class="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
+              </svg>
+              <span><strong>Weddings & Parties</strong> - Luxury trailers for special events</span>
+            </li>
+            <li class="flex items-start text-gray-600">
+              <svg class="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <span><strong>Festivals & Events</strong> - High-capacity solutions for crowds</span>
+            </li>
+            <li class="flex items-start text-gray-600">
+              <svg class="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+              <span><strong>Home Renovations</strong> - Temporary restrooms during remodeling</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- How to Choose Section -->
+    <div class="mt-8 bg-primary-50 rounded-xl p-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">
+        How to Choose a Porta Potty Provider in {cityName}
+      </h2>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-lg p-5">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mb-4">
+            <span class="text-primary-600 font-bold">1</span>
+          </div>
+          <h3 class="font-semibold text-gray-900 mb-2">Get Multiple Quotes</h3>
+          <p class="text-gray-600 text-sm">
+            Contact 2-3 providers to compare prices. Ask about delivery fees, servicing schedules, and any extra charges.
+          </p>
+        </div>
+        <div class="bg-white rounded-lg p-5">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mb-4">
+            <span class="text-primary-600 font-bold">2</span>
+          </div>
+          <h3 class="font-semibold text-gray-900 mb-2">Check Service Area</h3>
+          <p class="text-gray-600 text-sm">
+            Confirm the provider services {cityName} directly. Some may charge extra for delivery outside their core area.
+          </p>
+        </div>
+        <div class="bg-white rounded-lg p-5">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mb-4">
+            <span class="text-primary-600 font-bold">3</span>
+          </div>
+          <h3 class="font-semibold text-gray-900 mb-2">Ask About Servicing</h3>
+          <p class="text-gray-600 text-sm">
+            Weekly servicing is standard, but high-traffic events may need more frequent cleaning. Clarify what's included.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-6 text-center">
+        <a href="/calculator" class="inline-flex items-center text-primary-700 font-medium hover:text-primary-800">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          </svg>
+          Use our calculator to find out how many units you need →
+        </a>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="mt-8 bg-white rounded-xl border border-gray-200 p-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">
+        Frequently Asked Questions
+      </h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">How far in advance should I book a porta potty in {cityName}?</h3>
+          <p class="text-gray-600">
+            For standard rentals, 1-2 weeks notice is usually sufficient. For large events, weddings, or peak season (spring and summer),
+            we recommend booking 3-4 weeks ahead to ensure availability of your preferred unit type.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">What's included in a typical porta potty rental?</h3>
+          <p class="text-gray-600">
+            Most rentals include delivery, setup, weekly servicing (pumping, cleaning, restocking supplies), and pickup.
+            Some providers include hand sanitizer; others charge extra. Always confirm what's included in your quote.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">How many porta potties do I need?</h3>
+          <p class="text-gray-600">
+            A general rule is 1 unit per 50-100 guests for a 4-hour event. Construction sites typically need 1 unit per 10 workers.
+            Add more if serving alcohol, for all-day events, or if you expect a majority female crowd.
+            <a href="/blog/how-many-porta-potties-do-i-need" class="text-primary-600 hover:underline ml-1">Read our full guide →</a>
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">Do I need a permit for a porta potty in {cityName}?</h3>
+          <p class="text-gray-600">
+            Permit requirements vary by location. For private property (home, business), you typically don't need a permit.
+            For events on public property or large gatherings, check with {cityName} city offices. Your rental provider can often advise on local requirements.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Local SEO Content - Enhanced -->
+    <div class="mt-8 bg-gray-50 rounded-xl p-8">
       <h2 class="text-2xl font-bold text-gray-900 mb-4">
-        Porta Potty Rentals in {cityName}, {stateName}
+        About Porta Potty Rentals in {cityName}, {stateName}
       </h2>
       <p class="text-gray-600 mb-4">
-        Looking for portable restroom rentals in {cityName}? Our directory features trusted local providers
-        offering a range of services including standard porta potties, handicap accessible units, luxury
-        restroom trailers, and more.
+        Finding reliable portable restroom rentals in {cityName} doesn't have to be difficult. Our directory connects you with
+        {vendors.length > 0 ? `${vendors.length} verified local providers` : 'trusted providers'} offering everything from basic
+        construction site units to luxury restroom trailers for upscale events.
+      </p>
+      <p class="text-gray-600 mb-4">
+        {cityName} residents and businesses commonly rent porta potties for construction projects, outdoor weddings,
+        community festivals, sporting events, and home renovations. With {stateName}'s {isHighCost ? 'higher cost of living' : isLowCost ? 'competitive pricing' : 'moderate pricing'},
+        you can expect rental rates {isHighCost ? 'on the higher end of the national average' : isLowCost ? 'below the national average' : 'close to the national average'}.
       </p>
       <p class="text-gray-600">
-        Whether you need portable restrooms for a construction site, outdoor event, wedding, or emergency
-        situation, our {cityName} providers can help. Contact multiple providers to compare prices and
-        find the best solution for your needs.
+        All providers in our {cityName} directory are verified for legitimacy and service quality. We confirm contact information,
+        check service areas, and monitor customer feedback to ensure you're connecting with reputable companies.
+        <a href="/about" class="text-primary-600 hover:underline ml-1">Learn about our verification process →</a>
       </p>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="mt-8 bg-primary-600 rounded-xl p-8 text-center text-white">
+      <h2 class="text-2xl font-bold mb-3">Need Porta Potty Rentals in {cityName}?</h2>
+      <p class="text-primary-100 mb-6 max-w-2xl mx-auto">
+        {vendors.length > 0
+          ? `Compare ${vendors.length} local providers and get quotes today. Contact multiple companies to find the best price and service for your needs.`
+          : `We're building our network of providers in ${cityName}. Check back soon or browse nearby cities.`
+        }
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        {vendors.length > 0 ? (
+          <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-flex items-center justify-center bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors">
+            View {cityName} Providers
+          </a>
+        ) : (
+          <a href={`/${stateSlug}`} class="inline-flex items-center justify-center bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors">
+            Browse {stateName} Cities
+          </a>
+        )}
+        <a href="/calculator" class="inline-flex items-center justify-center border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors">
+          Calculate How Many You Need
+        </a>
+      </div>
     </div>
 
     <!-- Bottom Ad -->

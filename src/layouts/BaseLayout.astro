@@ -10,12 +10,14 @@ interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  noindex?: boolean;
 }
 
 const {
   title = siteConfig.seoTitle || siteConfig.name,
   description = siteConfig.description,
-  ogImage = '/og-image.png'
+  ogImage = '/og-image.png',
+  noindex = false
 } = Astro.props;
 
 // If title is the SEO title or site name, use as-is; otherwise append brand
@@ -65,6 +67,7 @@ const websiteData = {
       title={fullTitle}
       description={description}
       ogImage={ogImage}
+      noindex={noindex}
     />
     <StructuredData type="Organization" data={organizationData} />
     <StructuredData type="WebSite" data={websiteData} />

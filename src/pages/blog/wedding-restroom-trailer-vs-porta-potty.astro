@@ -13,7 +13,11 @@ const articleData = {
   description: post.description,
   datePublished: post.publishedAt,
   dateModified: post.updatedAt,
-  author: { '@type': 'Organization', name: siteConfig.name, url: siteUrl },
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
   publisher: {
     '@type': 'Organization',
     name: siteConfig.name,
@@ -47,10 +51,16 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
         {post.title}
       </h1>
       <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
-      <div class="mt-6 flex items-center text-sm text-gray-500">
-        <span>{post.readTime}</span>
-        <span class="mx-2">•</span>
-        <span>Updated December 2024</span>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
       </div>
     </header>
 

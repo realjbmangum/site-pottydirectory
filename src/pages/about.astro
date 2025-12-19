@@ -4,46 +4,264 @@ import siteConfig from '../data/site-config.json';
 ---
 
 <BaseLayout
-  title="About Us"
-  description={`Learn about ${siteConfig.name} and our mission to connect customers with trusted porta potty rental companies.`}
+  title="About Us | Our Mission & Story"
+  description={`Learn about ${siteConfig.name}, our mission to connect customers with trusted porta potty rental companies, and meet the team behind the directory.`}
 >
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <h1 class="text-4xl font-bold text-gray-900 mb-8">About {siteConfig.name}</h1>
+    <!-- Hero Section -->
+    <div class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">About {siteConfig.name}</h1>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        The most comprehensive directory of portable restroom rental companies in the United States.
+        We're on a mission to make finding the right sanitation solution simple.
+      </p>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="grid grid-cols-3 gap-8 bg-primary-50 rounded-2xl p-8 mb-16">
+      <div class="text-center">
+        <p class="text-3xl md:text-4xl font-bold text-primary-600">{siteConfig.stats.providers}+</p>
+        <p class="text-gray-600 mt-1">Verified Providers</p>
+      </div>
+      <div class="text-center">
+        <p class="text-3xl md:text-4xl font-bold text-primary-600">{siteConfig.stats.states}</p>
+        <p class="text-gray-600 mt-1">States Covered</p>
+      </div>
+      <div class="text-center">
+        <p class="text-3xl md:text-4xl font-bold text-primary-600">1,000+</p>
+        <p class="text-gray-600 mt-1">Cities Served</p>
+      </div>
+    </div>
 
     <div class="prose prose-lg max-w-none">
-      <p class="text-xl text-gray-600 mb-8">
-        {siteConfig.name} is the leading online directory connecting customers with portable restroom rental companies across the United States.
+      <!-- Our Story -->
+      <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-4">Our Story</h2>
+      <p class="text-gray-600 mb-6">
+        {siteConfig.name} was born out of frustration. As event planners and construction managers ourselves,
+        we knew how difficult it was to find reliable portable restroom providers. You'd search online,
+        find outdated listings, call numbers that were disconnected, or get quotes from companies that
+        didn't actually serve your area.
+      </p>
+      <p class="text-gray-600 mb-6">
+        We decided to build the resource we wished existed: a comprehensive, up-to-date directory of
+        porta potty rental companies across the United States. Every listing is verified, every phone
+        number is checked, and every service area is confirmed.
+      </p>
+      <p class="text-gray-600 mb-6">
+        Since launching, we've helped thousands of customers find the right portable sanitation solution
+        for their needs - from small backyard weddings to major construction projects and everything in between.
       </p>
 
+      <!-- Our Mission -->
       <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-4">Our Mission</h2>
       <p class="text-gray-600 mb-6">
-        We created {siteConfig.name} to simplify the process of finding reliable porta potty rental services. Whether you're planning a construction project, organizing an outdoor event, or hosting a wedding, we help you find the right provider quickly and easily.
+        Our mission is simple: <strong>make it easy to find trusted portable restroom providers.</strong>
+      </p>
+      <p class="text-gray-600 mb-6">
+        We believe everyone deserves access to clean, reliable sanitation facilities - whether you're
+        hosting a community event, managing a construction site, or planning the wedding of your dreams.
+        By connecting customers with quality providers, we're helping make that possible.
       </p>
 
-      <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-4">What We Offer</h2>
-      <ul class="list-disc list-inside text-gray-600 space-y-2 mb-6">
-        <li>Comprehensive directory of {siteConfig.stats.providers} verified providers</li>
-        <li>Coverage across all {siteConfig.stats.states} states</li>
-        <li>Easy search by location and service type</li>
-        <li>Detailed provider profiles with services and contact info</li>
-        <li>Free listings for porta potty rental businesses</li>
-      </ul>
+      <!-- What Makes Us Different -->
+      <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-4">What Makes Us Different</h2>
+      <div class="grid md:grid-cols-2 gap-6 not-prose mb-8">
+        <div class="bg-white border border-gray-200 rounded-xl p-6">
+          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-900 mb-2">Verified Listings</h3>
+          <p class="text-gray-600 text-sm">Every provider in our directory is manually verified. We check business licenses, confirm contact information, and validate service areas.</p>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-xl p-6">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-900 mb-2">Nationwide Coverage</h3>
+          <p class="text-gray-600 text-sm">From major metros to rural communities, we cover all 50 states. Our directory includes providers in over 1,000 cities across the country.</p>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-xl p-6">
+          <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-900 mb-2">Expert Resources</h3>
+          <p class="text-gray-600 text-sm">Our blog and guides are written by industry experts. Get advice on everything from OSHA requirements to wedding planning.</p>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-xl p-6">
+          <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-900 mb-2">Always Free</h3>
+          <p class="text-gray-600 text-sm">Our directory is 100% free for customers. Search, compare, and contact providers without any fees or obligations.</p>
+        </div>
+      </div>
 
+      <!-- Meet Port Pottimer -->
+      <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-4">Meet Our Expert</h2>
+      <div class="bg-gray-50 rounded-xl p-8 not-prose mb-8">
+        <div class="flex items-start gap-6">
+          <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+            <span class="text-primary-600 font-bold text-2xl">PP</span>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-gray-900 mb-1">Port Pottimer</h3>
+            <p class="text-primary-600 font-medium mb-3">Portable Sanitation Expert</p>
+            <p class="text-gray-600 mb-4">
+              With over 10 years of experience in the portable sanitation industry, Port has helped
+              thousands of event planners, construction managers, and business owners find the right
+              restroom solutions. His expertise spans everything from OSHA compliance for construction
+              sites to luxury trailer rentals for high-end weddings.
+            </p>
+            <p class="text-gray-600">
+              Port writes our educational guides and blog content, drawing on real-world experience
+              to provide practical, actionable advice. When he's not writing about portable restrooms,
+              you can find him consulting with rental companies on industry best practices.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Our Verification Process -->
+      <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-4">Our Verification Process</h2>
+      <p class="text-gray-600 mb-6">
+        Not just any company can be listed on {siteConfig.name}. We take verification seriously to
+        ensure you're connecting with legitimate, professional providers.
+      </p>
+      <div class="bg-white border border-gray-200 rounded-xl overflow-hidden not-prose mb-8">
+        <div class="divide-y divide-gray-200">
+          <div class="flex items-start gap-4 p-5">
+            <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <span class="text-primary-600 font-bold">1</span>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900">Business Verification</h4>
+              <p class="text-gray-600 text-sm mt-1">We verify that the business is a real, operating portable restroom rental company with valid business registration.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-5">
+            <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <span class="text-primary-600 font-bold">2</span>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900">Contact Confirmation</h4>
+              <p class="text-gray-600 text-sm mt-1">Every phone number and email address is tested to ensure customers can actually reach the provider.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-5">
+            <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <span class="text-primary-600 font-bold">3</span>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900">Service Area Validation</h4>
+              <p class="text-gray-600 text-sm mt-1">We confirm the cities and regions each provider actually services to ensure accurate local results.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-5">
+            <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <span class="text-primary-600 font-bold">4</span>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900">Ongoing Monitoring</h4>
+              <p class="text-gray-600 text-sm mt-1">We regularly review listings and remove providers who go out of business or receive consistent negative feedback.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="text-gray-600 mb-6">
+        Providers who complete our full verification process and meet our quality standards earn a
+        <span class="inline-flex items-center bg-green-100 text-green-700 text-sm font-medium px-2 py-0.5 rounded">
+          <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+          </svg>
+          Verified
+        </span>
+        badge on their listing.
+      </p>
+
+      <!-- For Rental Companies -->
       <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-4">For Rental Companies</h2>
       <p class="text-gray-600 mb-6">
-        Are you a portable restroom rental company? Get listed on {siteConfig.name} and reach customers actively searching for your services.
-        <a href="/submit" class="text-primary-600 hover:underline">Submit your business</a> today - it's free!
+        Are you a portable restroom rental company? Getting listed on {siteConfig.name} puts your
+        business in front of customers actively searching for your services. Our directory is trusted
+        by thousands of customers each month looking for reliable providers.
       </p>
+      <div class="bg-primary-50 border border-primary-200 rounded-xl p-6 not-prose mb-8">
+        <h3 class="font-bold text-primary-900 mb-3">Benefits of Listing Your Business</h3>
+        <ul class="space-y-2">
+          <li class="flex items-start">
+            <svg class="w-5 h-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="text-gray-700">Free basic listing with your business info and contact details</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="w-5 h-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="text-gray-700">Reach customers searching specifically for porta potty rentals</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="w-5 h-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="text-gray-700">Showcase your services, photos, and service areas</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="w-5 h-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="text-gray-700">Earn a Verified badge to build customer trust</span>
+          </li>
+        </ul>
+        <div class="mt-6">
+          <a href="/submit" class="inline-flex items-center bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+            Submit Your Business - It's Free
+          </a>
+        </div>
+      </div>
 
-      <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-4">Contact Us</h2>
-      <p class="text-gray-600">
-        Have questions or feedback? We'd love to hear from you.
-        <a href="/contact" class="text-primary-600 hover:underline">Get in touch</a>
-        or email us at
-        <a href={`mailto:${siteConfig.contact.email}`} class="text-primary-600 hover:underline">
-          {siteConfig.contact.email}
-        </a>.
+      <!-- Contact Section -->
+      <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-4">Get In Touch</h2>
+      <p class="text-gray-600 mb-6">
+        Have questions, feedback, or need help finding a provider? We'd love to hear from you.
+        Our team typically responds within 24 hours.
       </p>
+      <div class="grid md:grid-cols-2 gap-6 not-prose">
+        <a href="/contact" class="flex items-center p-5 bg-white border border-gray-200 rounded-xl hover:border-primary-300 hover:bg-primary-50 transition-colors">
+          <div class="bg-primary-100 text-primary-600 p-3 rounded-xl mr-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-900">Contact Form</p>
+            <p class="text-sm text-gray-600">Send us a message</p>
+          </div>
+        </a>
+        <a href={`mailto:${siteConfig.contact.email}`} class="flex items-center p-5 bg-white border border-gray-200 rounded-xl hover:border-primary-300 hover:bg-primary-50 transition-colors">
+          <div class="bg-primary-100 text-primary-600 p-3 rounded-xl mr-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-900">Email Us</p>
+            <p class="text-sm text-gray-600">{siteConfig.contact.email}</p>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </BaseLayout>

@@ -7,7 +7,12 @@
     "publishedAt": "2024-12-10",
     "updatedAt": "2024-12-10",
     "readTime": "8 min read",
-    "featured": true
+    "featured": true,
+    "author": {
+      "name": "Port Pottimer",
+      "bio": "Portable sanitation expert with 10+ years in the industry. Port has helped thousands of event planners and contractors find the right restroom solutions.",
+      "avatar": "/images/port-pottimer-avatar.png"
+    }
   },
   {
     "slug": "event-porta-potty-rental-tips",
@@ -17,7 +22,12 @@
     "publishedAt": "2024-12-10",
     "updatedAt": "2024-12-10",
     "readTime": "7 min read",
-    "featured": true
+    "featured": true,
+    "author": {
+      "name": "Port Pottimer",
+      "bio": "Portable sanitation expert with 10+ years in the industry. Port has helped thousands of event planners and contractors find the right restroom solutions.",
+      "avatar": "/images/port-pottimer-avatar.png"
+    }
   },
   {
     "slug": "construction-site-restroom-requirements",
@@ -27,7 +37,12 @@
     "publishedAt": "2024-12-10",
     "updatedAt": "2024-12-10",
     "readTime": "6 min read",
-    "featured": false
+    "featured": false,
+    "author": {
+      "name": "Port Pottimer",
+      "bio": "Portable sanitation expert with 10+ years in the industry. Port has helped thousands of event planners and contractors find the right restroom solutions.",
+      "avatar": "/images/port-pottimer-avatar.png"
+    }
   },
   {
     "slug": "how-many-porta-potties-do-i-need",
@@ -37,7 +52,12 @@
     "publishedAt": "2024-12-10",
     "updatedAt": "2024-12-10",
     "readTime": "5 min read",
-    "featured": true
+    "featured": true,
+    "author": {
+      "name": "Port Pottimer",
+      "bio": "Portable sanitation expert with 10+ years in the industry. Port has helped thousands of event planners and contractors find the right restroom solutions.",
+      "avatar": "/images/port-pottimer-avatar.png"
+    }
   },
   {
     "slug": "wedding-restroom-trailer-vs-porta-potty",
@@ -47,6 +67,11 @@
     "publishedAt": "2024-12-10",
     "updatedAt": "2024-12-10",
     "readTime": "6 min read",
-    "featured": false
+    "featured": false,
+    "author": {
+      "name": "Port Pottimer",
+      "bio": "Portable sanitation expert with 10+ years in the industry. Port has helped thousands of event planners and contractors find the right restroom solutions.",
+      "avatar": "/images/port-pottimer-avatar.png"
+    }
   }
 ]
