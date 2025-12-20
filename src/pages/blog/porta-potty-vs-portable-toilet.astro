@@ -1,0 +1,283 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import siteConfig from '../../data/site-config.json';
+import blogPosts from '../../data/blog-posts.json';
+
+const post = blogPosts.find(p => p.slug === 'porta-potty-vs-portable-toilet')!;
+const siteUrl = `https://${siteConfig.domain}`;
+
+const articleData = {
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+};
+
+const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+---
+
+<BaseLayout title={post.title} description={post.description}>
+  <StructuredData type="Article" data={articleData} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-primary-600">Home</a></li>
+        <li>/</li>
+        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li>/</li>
+        <li class="text-gray-900">Terminology</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="inline-block bg-gray-200 text-gray-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Guide</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <p>
+        Porta potty. Portable toilet. Porta john. Honey bucket. Port-a-loo. Blue room. Are these all the same thing? Mostly yes, but there are some subtle differences worth knowing - especially when you're trying to rent one and want to make sure you get what you're expecting.
+      </p>
+
+      <p>
+        Let's untangle the terminology.
+      </p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="same-thing">Are They All the Same Thing?</h2>
+
+      <p>
+        For practical purposes, <strong>porta potty and portable toilet mean the same thing</strong>. Both refer to the familiar standalone outdoor restroom units used at construction sites, events, and anywhere else without permanent facilities.
+      </p>
+
+      <p>
+        The difference is mostly regional and brand-related, not functional.
+      </p>
+
+      <h2 id="common-terms">Common Terms and Where They Come From</h2>
+
+      <h3>Porta Potty (or Porta-Potty)</h3>
+      <p>
+        The most common casual term in American English. It's derived from "portable potty" - a colloquial, slightly humorous name. This is what most people say in everyday conversation.
+      </p>
+
+      <h3>Portable Toilet</h3>
+      <p>
+        The more formal, industry-standard term. You'll see this in contracts, regulations, and business names. It sounds more professional, which is why rental companies often use it.
+      </p>
+
+      <h3>Porta John</h3>
+      <p>
+        Originally a brand name (PortaJohn) that became genericized, similar to how "Kleenex" means tissue. PortaJohn was one of the early portable toilet manufacturers, and the name stuck around.
+      </p>
+
+      <h3>Honey Bucket</h3>
+      <p>
+        Another brand name that became common usage. Honey Bucket is a major portable toilet company in the Pacific Northwest, and locals often use the name generically for any porta potty. The "honey" refers to (you guessed it) the waste inside - industry slang for sewage.
+      </p>
+
+      <h3>Port-a-Loo</h3>
+      <p>
+        More common in the UK and Australia. In Britain, "loo" is slang for toilet, so port-a-loo is their version of porta potty.
+      </p>
+
+      <h3>Blue Room</h3>
+      <p>
+        A humorous euphemism, referencing the classic blue color of most units. Construction workers sometimes use this term.
+      </p>
+
+      <h3>Johnny-on-the-Spot</h3>
+      <p>
+        Yet another brand name (Johnny On The Spot is a major rental company) that's used generically in some areas.
+      </p>
+
+      <h2 id="differences">Do Any of These Terms Mean Something Different?</h2>
+
+      <p>
+        In casual usage, no. But if you want to get technical:
+      </p>
+
+      <div class="overflow-x-auto my-8">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Term</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Strictly Speaking</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Portable Toilet</td>
+              <td class="px-6 py-4 text-sm text-gray-600">The broadest term - includes anything from a small camping toilet to a full restroom trailer</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Porta Potty</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Usually refers specifically to the standard standalone unit</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Restroom Trailer</td>
+              <td class="px-6 py-4 text-sm text-gray-600">A specific type: mobile unit with multiple stalls, running water, flushing toilets</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Composting Toilet</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Uses natural decomposition instead of chemicals - different technology</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Chemical Toilet</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Any toilet that uses chemicals to break down waste - includes most porta potties</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="types">Actual Types of Portable Restrooms</h2>
+
+      <p>
+        Regardless of what you call them, there are distinct <em>types</em> of portable restrooms you can rent. This is where the real differences matter:
+      </p>
+
+      <h3>Standard Unit</h3>
+      <p>
+        The basic blue (or gray, or green) standalone box. Includes a toilet seat over a holding tank, toilet paper holder, and hand sanitizer. What most people picture when they hear "porta potty."
+      </p>
+      <p><strong>Cost:</strong> $125-200/month or $100-150/weekend</p>
+
+      <h3>Deluxe/Enhanced Unit</h3>
+      <p>
+        Standard unit with upgrades like a hand wash sink, mirror, coat hook, or better ventilation. A step up in comfort.
+      </p>
+      <p><strong>Cost:</strong> $175-275/month</p>
+
+      <h3>High-Rise Unit</h3>
+      <p>
+        Designed for construction sites, these can be lifted by crane to upper floors of buildings under construction. Same functionality as standard units but with lifting hardware.
+      </p>
+      <p><strong>Cost:</strong> $200-350/month</p>
+
+      <h3>ADA-Compliant Unit</h3>
+      <p>
+        Larger unit with wheelchair accessibility features: wide door, grab bars, more floor space, lower threshold. Required for public events.
+      </p>
+      <p><strong>Cost:</strong> $175-300/month</p>
+
+      <h3>Flushable Unit</h3>
+      <p>
+        Has a foot-pump or electric flush mechanism for a more bathroom-like experience. Requires more frequent servicing.
+      </p>
+      <p><strong>Cost:</strong> $250-400/month</p>
+
+      <h3>Restroom Trailer</h3>
+      <p>
+        A completely different category. These are trailers with multiple stalls, running water, flushing toilets, climate control, and real bathroom fixtures. Used for weddings and upscale events.
+      </p>
+      <p><strong>Cost:</strong> $500-3,000+/weekend</p>
+
+      <h2 id="what-to-ask">What to Say When You Call to Rent</h2>
+
+      <p>
+        When contacting a rental company, you don't need to use perfect terminology. They'll understand any of these terms. But to get the right unit, specify:
+      </p>
+
+      <ul>
+        <li><strong>Number of units needed</strong></li>
+        <li><strong>Duration</strong> (weekend, week, month)</li>
+        <li><strong>Purpose</strong> (construction, event, home renovation)</li>
+        <li><strong>Any special features</strong> (hand wash, ADA, flushable)</li>
+        <li><strong>Delivery location</strong></li>
+      </ul>
+
+      <p>
+        Whether you ask for a "porta potty," "portable toilet," or "honey bucket," they'll know what you mean.
+      </p>
+
+      <h2 id="regional-variations">Regional Variations</h2>
+
+      <p>
+        Curious what people call them in different parts of the country and world?
+      </p>
+
+      <ul>
+        <li><strong>Northeast US:</strong> Portable toilet, porta potty, porta john</li>
+        <li><strong>Pacific Northwest:</strong> Honey bucket (brand influence)</li>
+        <li><strong>South:</strong> Porta potty, portable restroom</li>
+        <li><strong>Midwest:</strong> Johnny-on-the-spot, porta john</li>
+        <li><strong>UK:</strong> Portaloo, portable loo</li>
+        <li><strong>Australia:</strong> Portable toilet, dunny</li>
+        <li><strong>Canada:</strong> Portable toilet, porta potty</li>
+      </ul>
+
+      <h2 id="bottom-line">The Bottom Line</h2>
+
+      <p>
+        Porta potty, portable toilet, porta john, honey bucket - they all mean the same thing in everyday conversation: that blue (or green, or gray) box where you go when there's no indoor plumbing around.
+      </p>
+
+      <p>
+        The important distinctions are between <em>types</em> of units (standard vs. deluxe vs. restroom trailer), not what you call them. Use whatever term feels natural - rental companies hear them all.
+      </p>
+
+      <div class="bg-primary-50 border border-primary-200 rounded-xl p-6 my-8">
+        <p class="font-semibold text-primary-800 mb-2">Ready to Rent?</p>
+        <p class="text-primary-700">
+          Whatever you call it, we can help you find portable toilet providers in your area.
+          <a href="/states" class="font-semibold underline">Search providers by state →</a>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Related Posts -->
+    <div class="mt-16 pt-8 border-t border-gray-200">
+      <h3 class="text-xl font-bold text-gray-900 mb-6">Related Articles</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        {relatedPosts.map((related) => (
+          <a href={`/blog/${related.slug}`} class="group">
+            <div class="bg-gray-50 rounded-lg p-5 h-full hover:bg-gray-100 transition-colors">
+              <span class="text-xs font-semibold text-primary-600 uppercase tracking-wide">{related.category}</span>
+              <h4 class="font-semibold text-gray-900 mt-2 group-hover:text-primary-600 transition-colors">{related.title}</h4>
+              <p class="text-sm text-gray-500 mt-2">{related.readTime}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom Ad -->
+    <div class="mt-8">
+      <AdSlot slot="footer" />
+    </div>
+  </article>
+</BaseLayout>

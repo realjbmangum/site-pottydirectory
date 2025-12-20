@@ -1,0 +1,319 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import siteConfig from '../../data/site-config.json';
+import blogPosts from '../../data/blog-posts.json';
+
+const post = blogPosts.find(p => p.slug === 'reduce-porta-potty-smell')!;
+const siteUrl = `https://${siteConfig.domain}`;
+
+const articleData = {
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+};
+
+const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+---
+
+<BaseLayout title={post.title} description={post.description}>
+  <StructuredData type="Article" data={articleData} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-primary-600">Home</a></li>
+        <li>/</li>
+        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li>/</li>
+        <li class="text-gray-900">Odor Control</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="inline-block bg-green-100 text-green-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Tips</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <p>
+        Let's address the elephant in the room - or should I say, the smell in the porta potty. It's the number one concern people have about renting portable restrooms, and honestly, it's a valid one. Nobody wants their event or job site to smell like... well, you know.
+      </p>
+
+      <p>
+        The good news? Modern porta potties don't have to stink. With the right approach, you can keep odors under control and your guests comfortable. Here are 10 proven strategies that actually work.
+      </p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="why-smell">Why Do Porta Potties Smell?</h2>
+
+      <p>
+        Before we fix the problem, let's understand it. Porta potty odor comes from:
+      </p>
+
+      <ul>
+        <li><strong>Bacteria breaking down waste</strong> - This releases ammonia and other gases</li>
+        <li><strong>Heat</strong> - Warmer temperatures accelerate bacterial activity</li>
+        <li><strong>Poor ventilation</strong> - Gases build up with nowhere to go</li>
+        <li><strong>Overfull tanks</strong> - More waste = more smell</li>
+        <li><strong>Depleted chemicals</strong> - The blue liquid stops working over time</li>
+      </ul>
+
+      <p>
+        Now that we know the causes, here's how to fight back:
+      </p>
+
+      <h2 id="tip-1">1. Choose the Right Placement</h2>
+
+      <p>
+        Where you put the porta potty matters more than you might think. For odor control:
+      </p>
+
+      <ul>
+        <li><strong>Avoid direct sunlight</strong> - Heat makes everything worse. Place units in shaded areas when possible.</li>
+        <li><strong>Consider wind direction</strong> - Put units downwind from gathering areas so any odor blows away from guests.</li>
+        <li><strong>Distance from food</strong> - Keep at least 50-100 feet from eating areas.</li>
+      </ul>
+
+      <p>
+        A porta potty in full afternoon sun can get over 100°F inside. That's basically an incubator for smell-producing bacteria.
+      </p>
+
+      <h2 id="tip-2">2. Schedule More Frequent Servicing</h2>
+
+      <p>
+        This is the most effective solution, full stop. Standard weekly service is fine for light use, but if you're hosting an event or have a busy construction site, more frequent pumping keeps odors at bay.
+      </p>
+
+      <div class="bg-gray-50 rounded-xl p-6 my-6">
+        <h4 class="font-semibold text-gray-900 mb-4">Recommended Service Frequency</h4>
+        <ul class="space-y-2 text-gray-700">
+          <li><strong>Light use (1-2 people):</strong> Weekly</li>
+          <li><strong>Moderate use (3-5 people):</strong> Twice weekly</li>
+          <li><strong>Events (50+ guests):</strong> Before and after, or during if multi-day</li>
+          <li><strong>Construction (10+ workers):</strong> Twice weekly minimum</li>
+        </ul>
+      </div>
+
+      <p>
+        Yes, more servicing costs more. But it's worth it for the smell reduction alone.
+      </p>
+
+      <h2 id="tip-3">3. Keep the Door Closed</h2>
+
+      <p>
+        Simple but often overlooked. Leaving the door open might seem like it would air things out, but it actually makes odors worse by:
+      </p>
+
+      <ul>
+        <li>Letting in heat and sunlight</li>
+        <li>Attracting flies and insects</li>
+        <li>Spreading odor to the surrounding area</li>
+      </ul>
+
+      <p>
+        Most porta potties have a vent pipe on the roof that creates airflow when the door is closed. Open door = broken airflow = more smell.
+      </p>
+
+      <h2 id="tip-4">4. Request Extra Deodorizer</h2>
+
+      <p>
+        The blue liquid in porta potties is a deodorizer and sanitizer. It contains chemicals that break down waste and mask odors. You can ask your rental company for:
+      </p>
+
+      <ul>
+        <li><strong>Higher concentration</strong> - More product in the tank</li>
+        <li><strong>Premium formulas</strong> - Some work better than the standard stuff</li>
+        <li><strong>Top-off service</strong> - Adding more between full cleanings</li>
+      </ul>
+
+      <p>
+        Some companies offer "enhanced deodorizer packages" for events - it's usually worth the extra $20-30.
+      </p>
+
+      <h2 id="tip-5">5. Add Urinal Pucks or Deodorizer Blocks</h2>
+
+      <p>
+        These are small, hockey-puck-sized deodorizers that sit in the urinal or tank. They continuously release fragrance and odor-fighting chemicals. You can:
+      </p>
+
+      <ul>
+        <li>Ask your rental company to include them</li>
+        <li>Buy them separately from janitorial suppliers</li>
+        <li>Replace them as needed during long rentals</li>
+      </ul>
+
+      <p>
+        They're inexpensive (a few dollars each) and make a noticeable difference.
+      </p>
+
+      <h2 id="tip-6">6. Upgrade to a Unit with Hand Wash Station</h2>
+
+      <p>
+        Units with built-in hand wash sinks tend to smell better for a few reasons:
+      </p>
+
+      <ul>
+        <li>They're generally higher-end and better maintained</li>
+        <li>Fresh water adds humidity that can help contain odors</li>
+        <li>Users wash hands inside, bringing soapy fresh scent</li>
+      </ul>
+
+      <p>
+        Plus, your guests will appreciate the ability to wash their hands with actual soap and water.
+      </p>
+
+      <h2 id="tip-7">7. Use Air Fresheners</h2>
+
+      <p>
+        It's low-tech, but it works. Options include:
+      </p>
+
+      <ul>
+        <li><strong>Hanging air fresheners</strong> - Like car fresheners, but larger</li>
+        <li><strong>Clip-on vent fresheners</strong> - Attach to the ventilation system</li>
+        <li><strong>Spray bottles</strong> - Leave inside for users to spray as needed</li>
+      </ul>
+
+      <p>
+        Avoid anything with an open flame (obviously). Battery-powered automatic sprayers work well for events.
+      </p>
+
+      <h2 id="tip-8">8. Don't Let It Overfill</h2>
+
+      <p>
+        An overfull porta potty is a smelly porta potty. The tank has a limited capacity, and once the waste level gets too high, odors intensify dramatically.
+      </p>
+
+      <p>
+        For events, use this rule of thumb: <strong>one standard unit can handle about 100 uses before needing service.</strong> If you're expecting 200 guests at a 4-hour party, you probably need at least 2 units - or plan for mid-event servicing.
+      </p>
+
+      <h2 id="tip-9">9. Consider Luxury Units for Special Events</h2>
+
+      <p>
+        Restroom trailers and luxury portable restrooms have significant advantages for odor control:
+      </p>
+
+      <ul>
+        <li><strong>Flushing toilets</strong> - Waste goes into a sealed tank immediately</li>
+        <li><strong>Air conditioning</strong> - Keeps interior cool, reducing bacterial growth</li>
+        <li><strong>Better ventilation</strong> - Fans actively circulate air</li>
+        <li><strong>Premium deodorizers</strong> - Higher-end products are typically used</li>
+      </ul>
+
+      <p>
+        For weddings or upscale events, the extra cost is usually worth it just for the smell difference alone.
+      </p>
+
+      <h2 id="tip-10">10. Monitor and Maintain During Events</h2>
+
+      <p>
+        For larger events, consider having someone check on the units periodically:
+      </p>
+
+      <ul>
+        <li>Refill toilet paper and hand sanitizer</li>
+        <li>Quick wipe-down of surfaces</li>
+        <li>Add air freshener spray if needed</li>
+        <li>Report any issues to the rental company</li>
+      </ul>
+
+      <p>
+        Some rental companies offer attendant service for events - someone on-site to keep the restrooms clean and fresh throughout.
+      </p>
+
+      <h2 id="quick-fixes">Quick Fixes for Events</h2>
+
+      <p>
+        If you're mid-event and noticing odor issues, here are some emergency measures:
+      </p>
+
+      <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 my-6">
+        <h4 class="font-semibold text-blue-800 mb-2">Emergency Odor Fixes</h4>
+        <ul class="text-blue-700 space-y-2">
+          <li>Prop the vent pipe cover open (if accessible from outside)</li>
+          <li>Spray air freshener inside every 30 minutes</li>
+          <li>Call your rental company for emergency service</li>
+          <li>Set up a fan nearby to push odor away from gathering areas</li>
+          <li>If possible, move the unit to a shadier spot</li>
+        </ul>
+      </div>
+
+      <h2 id="what-to-avoid">What NOT to Do</h2>
+
+      <p>
+        A few things that seem like good ideas but aren't:
+      </p>
+
+      <ul>
+        <li><strong>Don't add bleach or household cleaners</strong> - They can react with the deodorizer chemicals and make things worse</li>
+        <li><strong>Don't remove the vent pipe cover entirely</strong> - It'll let in rain and debris</li>
+        <li><strong>Don't overload with air fresheners</strong> - Too much fragrance plus waste smell = worse smell</li>
+        <li><strong>Don't ignore the problem</strong> - Odors only get worse over time</li>
+      </ul>
+
+      <div class="bg-primary-50 border border-primary-200 rounded-xl p-6 my-8">
+        <p class="font-semibold text-primary-800 mb-2">Need Fresh-Smelling Porta Potties?</p>
+        <p class="text-primary-700">
+          Quality providers maintain their units well and use effective deodorizers.
+          <a href="/states" class="font-semibold underline">Find reputable providers near you →</a>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Related Posts -->
+    <div class="mt-16 pt-8 border-t border-gray-200">
+      <h3 class="text-xl font-bold text-gray-900 mb-6">Related Articles</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        {relatedPosts.map((related) => (
+          <a href={`/blog/${related.slug}`} class="group">
+            <div class="bg-gray-50 rounded-lg p-5 h-full hover:bg-gray-100 transition-colors">
+              <span class="text-xs font-semibold text-primary-600 uppercase tracking-wide">{related.category}</span>
+              <h4 class="font-semibold text-gray-900 mt-2 group-hover:text-primary-600 transition-colors">{related.title}</h4>
+              <p class="text-sm text-gray-500 mt-2">{related.readTime}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom Ad -->
+    <div class="mt-8">
+      <AdSlot slot="footer" />
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,286 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import siteConfig from '../../data/site-config.json';
+import blogPosts from '../../data/blog-posts.json';
+
+const post = blogPosts.find(p => p.slug === 'festival-porta-potty-survival-guide')!;
+const siteUrl = `https://${siteConfig.domain}`;
+
+const articleData = {
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+};
+
+const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+---
+
+<BaseLayout title={post.title} description={post.description}>
+  <StructuredData type="Article" data={articleData} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-primary-600">Home</a></li>
+        <li>/</li>
+        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li>/</li>
+        <li class="text-gray-900">Festival Tips</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="inline-block bg-violet-100 text-violet-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Lifestyle</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <p>
+        Music festivals, outdoor concerts, fairs, food festivals - they're amazing. The porta potties at these events? Often not so much. But with a little strategy, you can make the experience a lot more bearable.
+      </p>
+
+      <p>
+        Here's everything I've learned about navigating festival porta potties like a pro.
+      </p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="timing">Timing Is Everything</h2>
+
+      <p>
+        The single biggest factor in your porta potty experience is <strong>when</strong> you go. Here's the pattern:
+      </p>
+
+      <div class="bg-gray-50 rounded-xl p-6 my-6">
+        <h4 class="font-semibold text-gray-900 mb-4">Best and Worst Times</h4>
+        <ul class="space-y-2 text-gray-700">
+          <li><strong>Best:</strong> Early morning (right when gates open)</li>
+          <li><strong>Good:</strong> During headliner performances (everyone's at the stage)</li>
+          <li><strong>Okay:</strong> Mid-afternoon lull between acts</li>
+          <li><strong>Worst:</strong> Right after a major set ends</li>
+          <li><strong>Absolute worst:</strong> Late night after bars close</li>
+        </ul>
+      </div>
+
+      <p>
+        If you can, plan your bathroom breaks around the performance schedule. When everyone rushes to the bathrooms between sets, stay at your spot. Go when the music's playing and the lines are short.
+      </p>
+
+      <h2 id="location">Scout the Locations</h2>
+
+      <p>
+        Not all porta potty banks are equal. When you arrive at the festival:
+      </p>
+
+      <ul>
+        <li><strong>Check multiple locations</strong> - There's usually more than one area with bathrooms</li>
+        <li><strong>Look for hidden spots</strong> - The ones furthest from main stages often have shorter lines</li>
+        <li><strong>Note the freshly serviced units</strong> - Service trucks do rounds during the festival</li>
+        <li><strong>Remember the layout</strong> - You'll be finding these in the dark later</li>
+      </ul>
+
+      <p>
+        Pro tip: The units closest to the entrance are often the most heavily used. Walk past the first row and check the back.
+      </p>
+
+      <h2 id="what-to-bring">What to Bring</h2>
+
+      <p>
+        A little preparation goes a long way. Pack these in a small bag:
+      </p>
+
+      <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 my-6">
+        <h4 class="font-semibold text-blue-800 mb-2">Festival Bathroom Kit</h4>
+        <ul class="text-blue-700 space-y-1">
+          <li>✓ Travel pack of tissues (porta potties run out)</li>
+          <li>✓ Hand sanitizer (the dispensers are often empty)</li>
+          <li>✓ Wet wipes (game changer)</li>
+          <li>✓ Small flashlight or use your phone</li>
+          <li>✓ Breath mints or gum (for after)</li>
+          <li>✓ A bandana or face mask (optional odor protection)</li>
+        </ul>
+      </div>
+
+      <h2 id="technique">Porta Potty Technique</h2>
+
+      <p>
+        Once you're in there, here's how to make it quick and sanitary:
+      </p>
+
+      <h3>The Hover vs. Sit Debate</h3>
+      <p>
+        Hovering seems cleaner, but it often leads to more mess for the next person. If the seat looks clean, wiping it down and sitting is actually more hygienic than a shaky hover. If it's visibly dirty, hover or move on to another unit.
+      </p>
+
+      <h3>Keep Your Stuff Safe</h3>
+      <p>
+        Before you do anything:
+      </p>
+      <ul>
+        <li>Put your phone in a secure pocket (not in your hand)</li>
+        <li>Check that nothing will fall out of pockets</li>
+        <li>Hook bags on the door hook if there is one</li>
+        <li>Don't set anything on the floor</li>
+      </ul>
+
+      <h3>The Quick Exit</h3>
+      <p>
+        Have everything ready before you touch the door handle:
+      </p>
+      <ul>
+        <li>Sanitizer in one hand</li>
+        <li>Use elbow or tissue to unlatch the door</li>
+        <li>Sanitize immediately after exiting</li>
+      </ul>
+
+      <h2 id="avoiding-worst">Avoiding the Worst Units</h2>
+
+      <p>
+        Quick checks before you commit:
+      </p>
+
+      <ul>
+        <li><strong>Check the door indicator</strong> - Green means vacant and freshly cleaned (sometimes)</li>
+        <li><strong>Look at the ground outside</strong> - Wet or muddy ground = likely messy inside</li>
+        <li><strong>Trust your nose</strong> - If the smell hits you from outside, move on</li>
+        <li><strong>Peek before locking</strong> - Take a quick look before committing</li>
+      </ul>
+
+      <p>
+        It's okay to nope out and try the next one. People do it all the time.
+      </p>
+
+      <h2 id="vip-option">The VIP Option</h2>
+
+      <p>
+        Many festivals offer VIP tickets or upgrades that include access to nicer restroom facilities. Is it worth it? Consider:
+      </p>
+
+      <ul>
+        <li><strong>VIP restroom trailers</strong> - Often air-conditioned with flushing toilets and running water</li>
+        <li><strong>Shorter lines</strong> - Way fewer people have access</li>
+        <li><strong>Better maintenance</strong> - Cleaned more frequently</li>
+        <li><strong>Actual mirrors and lighting</strong> - You can see what you're doing</li>
+      </ul>
+
+      <p>
+        If bathroom quality is important to your festival enjoyment (no shame in that), the VIP upgrade might be worth exploring.
+      </p>
+
+      <h2 id="late-night">Late Night Strategy</h2>
+
+      <p>
+        The later it gets, the worse the conditions. After midnight:
+      </p>
+
+      <ul>
+        <li><strong>Use the buddy system</strong> - Have someone hold the door or wait nearby</li>
+        <li><strong>Bring a light</strong> - Many units don't have interior lighting</li>
+        <li><strong>Lower your expectations</strong> - Units have had a full day of heavy use</li>
+        <li><strong>Consider the walk</strong> - The units farthest from the party are often in better shape</li>
+      </ul>
+
+      <h2 id="hydration">Balancing Hydration and Bathroom Trips</h2>
+
+      <p>
+        Here's the festival dilemma: you need to stay hydrated (especially in summer heat), but every drink means another bathroom trip. Some tips:
+      </p>
+
+      <ul>
+        <li><strong>Hydrate early</strong> - Drink plenty before the fest and early in the day</li>
+        <li><strong>Sip, don't chug</strong> - Steady intake is easier to manage than downing a bottle</li>
+        <li><strong>Time your drinks</strong> - Drink right after a bathroom break for maximum time before the next one</li>
+        <li><strong>Don't skip water to avoid bathrooms</strong> - Dehydration is way worse than porta potty lines</li>
+      </ul>
+
+      <h2 id="for-organizers">Note for Festival Organizers</h2>
+
+      <p>
+        If you're <em>running</em> a festival and want happy attendees, here's what matters for porta potty satisfaction:
+      </p>
+
+      <ul>
+        <li><strong>Quantity</strong> - More units = shorter lines = happier people</li>
+        <li><strong>Service frequency</strong> - Daily minimum, twice daily for large events</li>
+        <li><strong>Placement</strong> - Spread units throughout the venue, not just one area</li>
+        <li><strong>Lighting</strong> - Put lights near the porta potties for nighttime</li>
+        <li><strong>Hand wash stations</strong> - People want to wash their hands properly</li>
+      </ul>
+
+      <p>
+        Your restroom setup directly impacts how people remember your event. It's worth investing in.
+      </p>
+
+      <h2 id="final-tips">Final Tips</h2>
+
+      <ul>
+        <li><strong>Go before you desperately need to</strong> - Lines are unpredictable</li>
+        <li><strong>Stay positive</strong> - It's part of the festival experience</li>
+        <li><strong>Leave it better than you found it</strong> - Close the lid, don't leave trash</li>
+        <li><strong>Tip the attendant</strong> - If there's someone cleaning, a buck or two goes a long way</li>
+      </ul>
+
+      <div class="bg-primary-50 border border-primary-200 rounded-xl p-6 my-8">
+        <p class="font-semibold text-primary-800 mb-2">Planning an Event?</p>
+        <p class="text-primary-700">
+          If you're organizing a festival or large event, find experienced providers who can handle high-volume restroom needs.
+          <a href="/services/fairs-festivals" class="font-semibold underline">Browse festival porta potty providers →</a>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Related Posts -->
+    <div class="mt-16 pt-8 border-t border-gray-200">
+      <h3 class="text-xl font-bold text-gray-900 mb-6">Related Articles</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        {relatedPosts.map((related) => (
+          <a href={`/blog/${related.slug}`} class="group">
+            <div class="bg-gray-50 rounded-lg p-5 h-full hover:bg-gray-100 transition-colors">
+              <span class="text-xs font-semibold text-primary-600 uppercase tracking-wide">{related.category}</span>
+              <h4 class="font-semibold text-gray-900 mt-2 group-hover:text-primary-600 transition-colors">{related.title}</h4>
+              <p class="text-sm text-gray-500 mt-2">{related.readTime}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom Ad -->
+    <div class="mt-8">
+      <AdSlot slot="footer" />
+    </div>
+  </article>
+</BaseLayout>

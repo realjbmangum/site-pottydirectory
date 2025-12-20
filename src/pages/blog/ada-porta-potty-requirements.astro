@@ -1,0 +1,306 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import siteConfig from '../../data/site-config.json';
+import blogPosts from '../../data/blog-posts.json';
+
+const post = blogPosts.find(p => p.slug === 'ada-porta-potty-requirements')!;
+const siteUrl = `https://${siteConfig.domain}`;
+
+const articleData = {
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+};
+
+const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+---
+
+<BaseLayout title={post.title} description={post.description}>
+  <StructuredData type="Article" data={articleData} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-primary-600">Home</a></li>
+        <li>/</li>
+        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li>/</li>
+        <li class="text-gray-900">ADA Compliance</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="inline-block bg-indigo-100 text-indigo-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Regulations</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <p>
+        If you're hosting a public event or running a construction site, you may be wondering: <strong>do I need an ADA-compliant porta potty?</strong> The short answer is often yes - and even when it's not strictly required, providing accessible restrooms is the right thing to do.
+      </p>
+
+      <p>
+        Let's break down the requirements, when they apply, and what makes a porta potty ADA-compliant.
+      </p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="what-is-ada">What is ADA Compliance?</h2>
+
+      <p>
+        The Americans with Disabilities Act (ADA) is a federal law that requires public accommodations to be accessible to people with disabilities. This includes temporary facilities like porta potties at:
+      </p>
+
+      <ul>
+        <li>Public events and festivals</li>
+        <li>Construction sites (under OSHA, which incorporates ADA)</li>
+        <li>Commercial venues and businesses</li>
+        <li>Any place open to the public</li>
+      </ul>
+
+      <p>
+        The goal is simple: everyone should be able to use restroom facilities with dignity, regardless of mobility limitations.
+      </p>
+
+      <h2 id="when-required">When Are ADA Units Required?</h2>
+
+      <h3>Public Events</h3>
+      <p>
+        Any event open to the public generally requires accessible restroom facilities. This includes:
+      </p>
+      <ul>
+        <li>Concerts and festivals</li>
+        <li>Fairs and carnivals</li>
+        <li>Sporting events</li>
+        <li>Community gatherings</li>
+        <li>Farmers markets</li>
+      </ul>
+      <p>
+        The general rule: <strong>at least 5% of your porta potties should be ADA-compliant, with a minimum of one unit.</strong>
+      </p>
+
+      <h3>Construction Sites</h3>
+      <p>
+        OSHA requires that sanitation facilities be accessible to workers with disabilities. If you have (or could have) workers with mobility impairments, you need at least one ADA unit on site.
+      </p>
+
+      <h3>Private Events</h3>
+      <p>
+        Private events on private property (like a backyard wedding) technically aren't covered by ADA. However, if you're inviting elderly guests or anyone with mobility issues, providing an accessible unit is strongly recommended.
+      </p>
+
+      <h2 id="features">What Makes a Porta Potty ADA-Compliant?</h2>
+
+      <p>
+        ADA porta potties are larger and include specific accessibility features:
+      </p>
+
+      <div class="bg-gray-50 rounded-xl p-6 my-6">
+        <h4 class="font-semibold text-gray-900 mb-4">Required Features</h4>
+        <ul class="space-y-3 text-gray-700">
+          <li>
+            <strong>Larger interior:</strong> Minimum 60" x 60" floor space (compared to ~44" x 44" for standard units). This allows wheelchair turning radius.
+          </li>
+          <li>
+            <strong>Wide door:</strong> At least 32" clear opening (most are 34"+). Door swings outward.
+          </li>
+          <li>
+            <strong>Grab bars:</strong> Sturdy handrails on both sides of the toilet for support.
+          </li>
+          <li>
+            <strong>Lower threshold:</strong> Ground-level or ramped entry. Many have fold-down ramps.
+          </li>
+          <li>
+            <strong>Appropriate toilet height:</strong> Seat 17-19 inches from floor (vs. 15" on standard units).
+          </li>
+          <li>
+            <strong>Interior clearance:</strong> No obstructions in the turning area.
+          </li>
+        </ul>
+      </div>
+
+      <h2 id="how-many">How Many ADA Units Do You Need?</h2>
+
+      <div class="overflow-x-auto my-8">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Total Porta Potties</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">ADA Units Required</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">1-20 units</td>
+              <td class="px-6 py-4 text-sm text-gray-600">At least 1 ADA unit</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">21-40 units</td>
+              <td class="px-6 py-4 text-sm text-gray-600">At least 2 ADA units</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">41-60 units</td>
+              <td class="px-6 py-4 text-sm text-gray-600">At least 3 ADA units</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">61+ units</td>
+              <td class="px-6 py-4 text-sm text-gray-600">5% of total, rounded up</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Most events and construction sites need 1-2 ADA units. A small backyard party with one porta potty should consider an ADA unit if any guests might need it.
+      </p>
+
+      <h2 id="placement">Placement Requirements</h2>
+
+      <p>
+        An ADA porta potty is only accessible if people can actually get to it. Placement matters:
+      </p>
+
+      <ul>
+        <li><strong>Accessible path:</strong> A firm, level surface leading to the unit (no grass, gravel, or mud if possible)</li>
+        <li><strong>No steps or curbs:</strong> The path should have no barriers</li>
+        <li><strong>Level placement:</strong> The unit itself must be on level ground</li>
+        <li><strong>Clear approach:</strong> Enough room in front for a wheelchair to approach the door</li>
+        <li><strong>Ramp deployed:</strong> If the unit has a ramp, make sure it's set up and secured</li>
+      </ul>
+
+      <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 my-6">
+        <h4 class="font-semibold text-yellow-800 mb-2">Common Mistakes to Avoid</h4>
+        <ul class="text-yellow-700 space-y-1">
+          <li>Placing ADA unit on grass that gets muddy</li>
+          <li>Blocking the path with equipment or vehicles</li>
+          <li>Not deploying the ramp</li>
+          <li>Placing unit far from the event in a hard-to-reach spot</li>
+          <li>Using the ADA unit for storage</li>
+        </ul>
+      </div>
+
+      <h2 id="cost">What Do ADA Units Cost?</h2>
+
+      <p>
+        ADA porta potties typically cost 25-50% more than standard units due to their larger size:
+      </p>
+
+      <ul>
+        <li><strong>Standard unit:</strong> $125-200/month</li>
+        <li><strong>ADA unit:</strong> $175-300/month</li>
+        <li><strong>Weekend event (standard):</strong> $100-175</li>
+        <li><strong>Weekend event (ADA):</strong> $150-250</li>
+      </ul>
+
+      <p>
+        The cost difference is modest compared to potential ADA violation penalties (which can be thousands of dollars) or the embarrassment of turning away a guest who can't use your facilities.
+      </p>
+
+      <h2 id="companion-restrooms">ADA Companion Restrooms</h2>
+
+      <p>
+        Some situations benefit from "companion care" restrooms - units large enough for a caregiver to assist someone inside. These are larger than standard ADA units and include:
+      </p>
+
+      <ul>
+        <li>Extra floor space for two people</li>
+        <li>Additional grab bars</li>
+        <li>Adult changing table (in some models)</li>
+      </ul>
+
+      <p>
+        These are typically only available from specialty providers and are most common at large public events or venues serving individuals with significant disabilities.
+      </p>
+
+      <h2 id="penalties">What Happens If You Don't Comply?</h2>
+
+      <p>
+        ADA violations can result in:
+      </p>
+
+      <ul>
+        <li><strong>Complaints to the Department of Justice</strong> - Which can investigate and require corrective action</li>
+        <li><strong>Lawsuits</strong> - Individuals can sue for discrimination</li>
+        <li><strong>Fines</strong> - Up to $75,000 for first offense, $150,000 for subsequent violations</li>
+        <li><strong>Event shutdown</strong> - In extreme cases, authorities can shut down non-compliant events</li>
+      </ul>
+
+      <p>
+        Beyond legal consequences, failing to provide accessible facilities is simply bad practice and can harm your organization's reputation.
+      </p>
+
+      <h2 id="best-practices">Best Practices</h2>
+
+      <ul>
+        <li><strong>Always include at least one ADA unit</strong> - Even for small events, the cost difference is minimal</li>
+        <li><strong>Place ADA units in prime locations</strong> - Not hidden in a corner</li>
+        <li><strong>Ensure path accessibility</strong> - Use mats or temporary flooring over grass if needed</li>
+        <li><strong>Mark units clearly</strong> - The international accessibility symbol should be visible</li>
+        <li><strong>Keep the ramp deployed</strong> - Don't rely on users to unfold it themselves</li>
+        <li><strong>Monitor during events</strong> - Make sure the accessible unit stays accessible (no blocked paths)</li>
+      </ul>
+
+      <div class="bg-primary-50 border border-primary-200 rounded-xl p-6 my-8">
+        <p class="font-semibold text-primary-800 mb-2">Need ADA-Compliant Porta Potties?</p>
+        <p class="text-primary-700">
+          Find providers offering accessible units for your event or job site.
+          <a href="/states" class="font-semibold underline">Search providers near you →</a>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Related Posts -->
+    <div class="mt-16 pt-8 border-t border-gray-200">
+      <h3 class="text-xl font-bold text-gray-900 mb-6">Related Articles</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        {relatedPosts.map((related) => (
+          <a href={`/blog/${related.slug}`} class="group">
+            <div class="bg-gray-50 rounded-lg p-5 h-full hover:bg-gray-100 transition-colors">
+              <span class="text-xs font-semibold text-primary-600 uppercase tracking-wide">{related.category}</span>
+              <h4 class="font-semibold text-gray-900 mt-2 group-hover:text-primary-600 transition-colors">{related.title}</h4>
+              <p class="text-sm text-gray-500 mt-2">{related.readTime}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom Ad -->
+    <div class="mt-8">
+      <AdSlot slot="footer" />
+    </div>
+  </article>
+</BaseLayout>

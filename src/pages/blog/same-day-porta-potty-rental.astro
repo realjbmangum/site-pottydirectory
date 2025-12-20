@@ -1,0 +1,313 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import siteConfig from '../../data/site-config.json';
+import blogPosts from '../../data/blog-posts.json';
+
+const post = blogPosts.find(p => p.slug === 'same-day-porta-potty-rental')!;
+const siteUrl = `https://${siteConfig.domain}`;
+
+const articleData = {
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+};
+
+const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+---
+
+<BaseLayout title={post.title} description={post.description}>
+  <StructuredData type="Article" data={articleData} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-primary-600">Home</a></li>
+        <li>/</li>
+        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li>/</li>
+        <li class="text-gray-900">Same-Day Rental</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="inline-block bg-amber-100 text-amber-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Urgent</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <p>
+        Sometimes you need a porta potty and you need it <em>today</em>. Maybe a pipe burst. Maybe you forgot to order one for tomorrow's event. Maybe a construction job started earlier than planned. Whatever the reason, you're wondering: <strong>can I actually get same-day delivery?</strong>
+      </p>
+
+      <p>
+        The short answer is yes, often you can. But there are some things you need to know to make it happen.
+      </p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="is-it-possible">Is Same-Day Delivery Actually Possible?</h2>
+
+      <p>
+        In most metropolitan areas, yes. Many porta potty companies offer same-day or next-day delivery, especially for:
+      </p>
+
+      <ul>
+        <li>Standard portable toilets</li>
+        <li>Emergency situations</li>
+        <li>Construction site needs</li>
+        <li>Residential rentals</li>
+      </ul>
+
+      <p>
+        However, it depends on several factors:
+      </p>
+
+      <div class="bg-gray-50 rounded-xl p-6 my-6">
+        <h4 class="font-semibold text-gray-900 mb-4">Factors That Affect Same-Day Availability</h4>
+        <ul class="space-y-2 text-gray-700">
+          <li><strong>Time of day:</strong> Call before noon for best chances</li>
+          <li><strong>Day of week:</strong> Weekdays are easier than weekends</li>
+          <li><strong>Season:</strong> Summer and wedding season are busiest</li>
+          <li><strong>Your location:</strong> Urban areas have more options</li>
+          <li><strong>Type of unit:</strong> Standard units are more available than specialty</li>
+        </ul>
+      </div>
+
+      <h2 id="what-to-expect">What to Expect with Rush Delivery</h2>
+
+      <h3>Extra Fees</h3>
+      <p>
+        Same-day delivery typically costs more. Expect to pay an additional:
+      </p>
+      <ul>
+        <li><strong>Rush fee:</strong> $50 - $150 depending on the company</li>
+        <li><strong>After-hours fee:</strong> Additional $50-100 if delivery is evening or weekend</li>
+      </ul>
+      <p>
+        Some companies don't charge extra if they happen to have a truck in your area - it never hurts to ask.
+      </p>
+
+      <h3>Limited Selection</h3>
+      <p>
+        You'll get what's available, which might mean:
+      </p>
+      <ul>
+        <li>Standard units only (not deluxe or ADA accessible)</li>
+        <li>Limited color options</li>
+        <li>Fewer units if you need multiple</li>
+      </ul>
+      <p>
+        Luxury restroom trailers almost never have same-day availability - they're booked weeks or months in advance.
+      </p>
+
+      <h3>Delivery Window</h3>
+      <p>
+        Same-day doesn't mean "in the next hour." Typical scenarios:
+      </p>
+      <ul>
+        <li><strong>Morning order:</strong> Delivery by end of business day</li>
+        <li><strong>Afternoon order:</strong> Delivery by evening or next morning</li>
+        <li><strong>True emergency:</strong> Some companies offer 2-4 hour rush for premium price</li>
+      </ul>
+
+      <h2 id="how-to-get">How to Get Same-Day Delivery</h2>
+
+      <p>
+        Follow these steps to maximize your chances:
+      </p>
+
+      <h3>1. Call, Don't Email</h3>
+      <p>
+        For urgent needs, pick up the phone. Email inquiries might not be seen for hours. When you call, say immediately that you need same-day or emergency delivery.
+      </p>
+
+      <h3>2. Call Multiple Companies</h3>
+      <p>
+        Don't just try one. Call 3-5 providers in your area. Someone will have availability - and you might get better pricing by comparing.
+      </p>
+
+      <h3>3. Be Flexible on Details</h3>
+      <p>
+        If you're willing to accept whatever unit is available, you'll have better luck. Don't hold out for a specific color or upgraded features.
+      </p>
+
+      <h3>4. Have Your Info Ready</h3>
+      <p>
+        Speed up the process by having ready:
+      </p>
+      <ul>
+        <li>Delivery address</li>
+        <li>Placement location (driveway, backyard, etc.)</li>
+        <li>Rental duration</li>
+        <li>Credit card for payment</li>
+        <li>Contact phone number</li>
+      </ul>
+
+      <h3>5. Be Available</h3>
+      <p>
+        You or someone else needs to be on-site to direct placement. Give your cell phone and make sure you can answer.
+      </p>
+
+      <h2 id="alternatives">Alternatives If Same-Day Isn't Available</h2>
+
+      <p>
+        If no one can deliver today, here are backup options:
+      </p>
+
+      <ul>
+        <li><strong>Early morning delivery tomorrow:</strong> Many companies can deliver by 7-8 AM</li>
+        <li><strong>Expand your search radius:</strong> Companies 30-40 miles away might have availability</li>
+        <li><strong>Camping/portable toilet:</strong> Hardware stores sell basic portable toilets for $100-300 if you're truly desperate</li>
+        <li><strong>Rental centers:</strong> Some equipment rental places carry porta potties</li>
+      </ul>
+
+      <h2 id="emergency-situations">True Emergency Situations</h2>
+
+      <p>
+        Some scenarios genuinely can't wait:
+      </p>
+
+      <div class="bg-red-50 border border-red-200 rounded-xl p-6 my-6">
+        <h4 class="font-semibold text-red-800 mb-2">When to Request Emergency Delivery</h4>
+        <ul class="text-red-700 space-y-1">
+          <li>Septic system failure with no functioning toilets</li>
+          <li>Natural disaster response</li>
+          <li>Construction site without sanitation (OSHA violation)</li>
+          <li>Large event starting in hours with no restrooms</li>
+        </ul>
+      </div>
+
+      <p>
+        For true emergencies, be upfront about the situation. Many companies will prioritize genuine emergencies over routine requests.
+      </p>
+
+      <h2 id="prevent-next-time">How to Prevent This Next Time</h2>
+
+      <p>
+        A few tips so you're not scrambling again:
+      </p>
+
+      <ul>
+        <li><strong>Book events 2-4 weeks ahead:</strong> Especially during busy season (May-October)</li>
+        <li><strong>Construction projects:</strong> Order the porta potty when you pull the permit</li>
+        <li><strong>Home renovation:</strong> Schedule delivery for day before demo starts</li>
+        <li><strong>Add to your event checklist:</strong> Right alongside tent rental and catering</li>
+      </ul>
+
+      <p>
+        Advance booking isn't just about availability - it also saves money. Rush fees add up, and you'll have your pick of units.
+      </p>
+
+      <h2 id="typical-timeline">Typical Delivery Timelines</h2>
+
+      <div class="overflow-x-auto my-8">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">When You Order</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Typical Delivery</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Before 10 AM weekday</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Same day afternoon</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">After 10 AM weekday</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Next morning</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Saturday morning</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Saturday afternoon (if available)</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Saturday afternoon/Sunday</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Monday morning</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">1-2 weeks in advance</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Your choice of date and time</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="questions-to-ask">Questions to Ask</h2>
+
+      <p>
+        When calling for same-day delivery, ask:
+      </p>
+
+      <ul>
+        <li>"Do you have units available for delivery today?"</li>
+        <li>"Is there a rush fee, and how much?"</li>
+        <li>"What's the earliest/latest you can deliver?"</li>
+        <li>"What type of units are available?"</li>
+        <li>"What forms of payment do you accept?"</li>
+      </ul>
+
+      <div class="bg-primary-50 border border-primary-200 rounded-xl p-6 my-8">
+        <p class="font-semibold text-primary-800 mb-2">Need a Porta Potty Today?</p>
+        <p class="text-primary-700">
+          Find providers in your area who offer same-day and emergency delivery.
+          <a href="/states" class="font-semibold underline">Search local providers now →</a>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Related Posts -->
+    <div class="mt-16 pt-8 border-t border-gray-200">
+      <h3 class="text-xl font-bold text-gray-900 mb-6">Related Articles</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        {relatedPosts.map((related) => (
+          <a href={`/blog/${related.slug}`} class="group">
+            <div class="bg-gray-50 rounded-lg p-5 h-full hover:bg-gray-100 transition-colors">
+              <span class="text-xs font-semibold text-primary-600 uppercase tracking-wide">{related.category}</span>
+              <h4 class="font-semibold text-gray-900 mt-2 group-hover:text-primary-600 transition-colors">{related.title}</h4>
+              <p class="text-sm text-gray-500 mt-2">{related.readTime}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom Ad -->
+    <div class="mt-8">
+      <AdSlot slot="footer" />
+    </div>
+  </article>
+</BaseLayout>

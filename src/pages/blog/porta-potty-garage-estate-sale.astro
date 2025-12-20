@@ -1,0 +1,303 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import siteConfig from '../../data/site-config.json';
+import blogPosts from '../../data/blog-posts.json';
+
+const post = blogPosts.find(p => p.slug === 'porta-potty-garage-estate-sale')!;
+const siteUrl = `https://${siteConfig.domain}`;
+
+const articleData = {
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+};
+
+const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+---
+
+<BaseLayout title={post.title} description={post.description}>
+  <StructuredData type="Article" data={articleData} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-primary-600">Home</a></li>
+        <li>/</li>
+        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li>/</li>
+        <li class="text-gray-900">Garage Sales</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="inline-block bg-yellow-100 text-yellow-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Residential</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <p>
+        You're having a garage sale or estate sale, and the question pops into your head: <strong>should I rent a porta potty?</strong> It's not something most people think about until they're in the middle of running a sale and a customer asks to use the bathroom.
+      </p>
+
+      <p>
+        Let me help you figure out whether it makes sense for your situation.
+      </p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="quick-answer">The Quick Answer</h2>
+
+      <p>
+        For most <strong>single-day garage sales</strong>: probably not necessary.
+      </p>
+
+      <p>
+        For <strong>multi-day estate sales</strong> or <strong>large community sales</strong>: it's worth considering.
+      </p>
+
+      <p>
+        Here's the reasoning behind each:
+      </p>
+
+      <h2 id="garage-sales">Typical Garage Sales</h2>
+
+      <p>
+        Your average garage sale runs 4-8 hours on a weekend. Customers are stopping by briefly - maybe 10-30 minutes each. In most cases:
+      </p>
+
+      <ul>
+        <li>Traffic is spread throughout the day</li>
+        <li>Visitors aren't staying long</li>
+        <li>There's usually a nearby gas station or coffee shop</li>
+        <li>Your home bathroom works fine for you and helpers</li>
+      </ul>
+
+      <div class="bg-green-50 border border-green-200 rounded-xl p-6 my-6">
+        <h4 class="font-semibold text-green-800 mb-2">You DON'T Need a Porta Potty If:</h4>
+        <ul class="text-green-700 space-y-1">
+          <li>It's a single-day, small-scale sale</li>
+          <li>You're comfortable letting occasional customers use your home bathroom</li>
+          <li>You have working indoor plumbing</li>
+          <li>You don't expect huge crowds</li>
+        </ul>
+      </div>
+
+      <h2 id="estate-sales">Estate Sales Are Different</h2>
+
+      <p>
+        Estate sales are a different situation:
+      </p>
+
+      <ul>
+        <li><strong>Multiple days</strong> - Often Friday through Sunday</li>
+        <li><strong>Higher traffic</strong> - Advertised widely, attracting serious shoppers</li>
+        <li><strong>Longer visits</strong> - People browse for 30-60+ minutes</li>
+        <li><strong>Security concerns</strong> - You might not want strangers inside</li>
+        <li><strong>Home may be empty</strong> - Bathrooms might be off or unstaged</li>
+      </ul>
+
+      <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 my-6">
+        <h4 class="font-semibold text-yellow-800 mb-2">Consider a Porta Potty If:</h4>
+        <ul class="text-yellow-700 space-y-1">
+          <li>The sale runs multiple days</li>
+          <li>You expect 100+ visitors total</li>
+          <li>The home's bathrooms are inaccessible</li>
+          <li>You don't want strangers in the house</li>
+          <li>It's in a rural area with no nearby facilities</li>
+        </ul>
+      </div>
+
+      <h2 id="community-sales">Community and Neighborhood Sales</h2>
+
+      <p>
+        If your neighborhood is organizing a community-wide garage sale, having a central porta potty makes sense:
+      </p>
+
+      <ul>
+        <li>Shoppers are walking house to house for hours</li>
+        <li>Individual homes don't want constant bathroom requests</li>
+        <li>One shared unit serves everyone</li>
+        <li>Cost can be split among participants</li>
+      </ul>
+
+      <p>
+        For a neighborhood sale with 10+ participating homes, one standard unit placed centrally often does the trick. At $100-150 for a weekend, split 10 ways, that's $10-15 per household.
+      </p>
+
+      <h2 id="cost-benefit">Cost-Benefit Analysis</h2>
+
+      <p>
+        Let's run the numbers:
+      </p>
+
+      <div class="overflow-x-auto my-8">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Scenario</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Cost</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Verdict</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Small garage sale (1 day)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$100-150</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Usually skip it</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Large garage sale (1-2 days)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$100-150</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Consider if 100+ visitors</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Estate sale (2-3 days)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$100-175</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Recommended</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Neighborhood sale (1-2 days)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$100-150 (split)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Worth it for convenience</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        If your sale is expected to gross several thousand dollars (as many estate sales do), a $100-150 porta potty is a tiny expense for the convenience and professionalism it adds.
+      </p>
+
+      <h2 id="alternatives">Alternatives to a Porta Potty</h2>
+
+      <p>
+        Before you rent, consider these options:
+      </p>
+
+      <h3>Let Customers Use Your Bathroom</h3>
+      <p>
+        Pros: Free, convenient. Cons: Strangers in your home, security concerns, wear and tear. For a small, one-day sale with familiar neighbors, this works fine.
+      </p>
+
+      <h3>Direct to Nearby Businesses</h3>
+      <p>
+        Pros: Free. Cons: Not convenient, may turn off serious shoppers who don't want to leave and come back.
+      </p>
+
+      <h3>Politely Decline</h3>
+      <p>
+        "Sorry, we don't have facilities available" is an acceptable response for a brief garage sale. Most people will understand.
+      </p>
+
+      <h2 id="if-you-rent">If You Decide to Rent</h2>
+
+      <p>
+        Here's what to know:
+      </p>
+
+      <ul>
+        <li><strong>Standard unit is fine</strong> - No need for deluxe or specialty</li>
+        <li><strong>One unit handles most sales</strong> - Even with 200+ visitors over a weekend</li>
+        <li><strong>Delivery Friday, pickup Monday</strong> - Perfect for weekend sales</li>
+        <li><strong>Place in driveway or side yard</strong> - Visible but not blocking merchandise</li>
+        <li><strong>Add signage</strong> - A simple "Restroom →" sign helps</li>
+      </ul>
+
+      <h3>Placement Tips</h3>
+      <ul>
+        <li>Not right next to the sale items (odor, even if minimal)</li>
+        <li>Accessible but not front-and-center</li>
+        <li>On level ground, ideally pavement</li>
+        <li>Away from where people are eating or drinking</li>
+      </ul>
+
+      <h2 id="professional-estate">Professional Estate Sale Companies</h2>
+
+      <p>
+        If you're hiring an estate sale company, ask if they typically provide or arrange for porta potties. Many professional estate sale companies:
+      </p>
+
+      <ul>
+        <li>Include porta potty rental in their services</li>
+        <li>Have relationships with local providers for better rates</li>
+        <li>Handle placement and coordination</li>
+      </ul>
+
+      <p>
+        It's one less thing for you to manage during an already stressful time.
+      </p>
+
+      <h2 id="final-thoughts">Final Thoughts</h2>
+
+      <p>
+        For a quick Saturday garage sale, you can probably skip the porta potty. But for larger, multi-day events like estate sales - especially when you want to keep strangers out of the home - a porta potty is a small investment that makes life easier for everyone.
+      </p>
+
+      <p>
+        At $100-150 for a weekend, it's peace of mind that lets you focus on what matters: running a successful sale.
+      </p>
+
+      <div class="bg-primary-50 border border-primary-200 rounded-xl p-6 my-8">
+        <p class="font-semibold text-primary-800 mb-2">Planning a Sale?</p>
+        <p class="text-primary-700">
+          Find weekend porta potty rentals from local providers.
+          <a href="/states" class="font-semibold underline">Search by state →</a>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Related Posts -->
+    <div class="mt-16 pt-8 border-t border-gray-200">
+      <h3 class="text-xl font-bold text-gray-900 mb-6">Related Articles</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        {relatedPosts.map((related) => (
+          <a href={`/blog/${related.slug}`} class="group">
+            <div class="bg-gray-50 rounded-lg p-5 h-full hover:bg-gray-100 transition-colors">
+              <span class="text-xs font-semibold text-primary-600 uppercase tracking-wide">{related.category}</span>
+              <h4 class="font-semibold text-gray-900 mt-2 group-hover:text-primary-600 transition-colors">{related.title}</h4>
+              <p class="text-sm text-gray-500 mt-2">{related.readTime}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom Ad -->
+    <div class="mt-8">
+      <AdSlot slot="footer" />
+    </div>
+  </article>
+</BaseLayout>

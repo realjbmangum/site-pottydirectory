@@ -1,0 +1,299 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import siteConfig from '../../data/site-config.json';
+import blogPosts from '../../data/blog-posts.json';
+
+const post = blogPosts.find(p => p.slug === 'porta-potty-winter-cold-weather')!;
+const siteUrl = `https://${siteConfig.domain}`;
+
+const articleData = {
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+};
+
+const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+---
+
+<BaseLayout title={post.title} description={post.description}>
+  <StructuredData type="Article" data={articleData} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-primary-600">Home</a></li>
+        <li>/</li>
+        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li>/</li>
+        <li class="text-gray-900">Winter Use</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="inline-block bg-cyan-100 text-cyan-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Seasonal</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <p>
+        Construction doesn't stop for winter. Neither do outdoor events, home renovations, or any of the other situations where you need a porta potty. But cold weather does create some unique challenges - mainly, the risk of everything freezing solid.
+      </p>
+
+      <p>
+        Here's what you need to know about using porta potties in winter and how to keep them functional when temperatures drop.
+      </p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="can-they-freeze">Can Porta Potties Freeze?</h2>
+
+      <p>
+        Yes, they can. When temperatures stay below 32°F (0°C) for extended periods, several things can freeze:
+      </p>
+
+      <ul>
+        <li><strong>The waste tank</strong> - If it freezes solid, it can't be pumped out</li>
+        <li><strong>Hand sanitizer</strong> - Most alcohol-based sanitizers freeze around 0°F</li>
+        <li><strong>Hand wash stations</strong> - Fresh water lines and pumps are vulnerable</li>
+        <li><strong>Door hinges and locks</strong> - Can stick or freeze shut</li>
+      </ul>
+
+      <p>
+        The good news: the deodorizer chemicals in the waste tank act as a mild antifreeze. A standard porta potty with fresh deodorizer can typically handle temperatures down to about 20°F before problems start.
+      </p>
+
+      <h2 id="prevention">How to Prevent Freezing</h2>
+
+      <h3>Request Winter-Formula Deodorizer</h3>
+      <p>
+        Rental companies in cold climates use special antifreeze deodorizer during winter months. This formula can prevent freezing down to -20°F or colder. <strong>Ask your provider about their winter treatment</strong> - it's usually included in cold-weather markets but may be an add-on elsewhere.
+      </p>
+
+      <h3>More Frequent Service</h3>
+      <p>
+        The fuller the tank, the more likely it is to freeze (less room for the antifreeze chemicals to work). Consider switching to twice-weekly service in winter to keep waste levels manageable.
+      </p>
+
+      <h3>Strategic Placement</h3>
+      <p>
+        Where you put the unit matters:
+      </p>
+      <ul>
+        <li><strong>South-facing if possible</strong> - Catches more sun during short winter days</li>
+        <li><strong>Against a building</strong> - Gets reflected heat and wind protection</li>
+        <li><strong>Out of wind tunnels</strong> - Wind chill accelerates freezing</li>
+        <li><strong>Not in deep shade</strong> - Avoid spots that never see sun</li>
+      </ul>
+
+      <h3>Keep the Door Closed</h3>
+      <p>
+        An open door lets cold air circulate freely and accelerates heat loss. The closed unit acts as a mini greenhouse when the sun hits it.
+      </p>
+
+      <h2 id="heated-units">Heated Porta Potties</h2>
+
+      <p>
+        For extremely cold conditions, heated units are available. These have:
+      </p>
+
+      <ul>
+        <li><strong>Electric heaters</strong> - Require power hookup (typically 15-20 amp outlet)</li>
+        <li><strong>Propane heaters</strong> - Self-contained but need fuel refilling</li>
+        <li><strong>Insulated walls</strong> - Better heat retention</li>
+      </ul>
+
+      <p>
+        Heated units typically maintain interior temperatures around 50-60°F even in sub-zero conditions.
+      </p>
+
+      <div class="bg-gray-50 rounded-xl p-6 my-6">
+        <h4 class="font-semibold text-gray-900 mb-4">Heated Unit Costs</h4>
+        <ul class="space-y-2 text-gray-700">
+          <li><strong>Electric heated:</strong> $75-150 extra per month + electricity</li>
+          <li><strong>Propane heated:</strong> $100-200 extra per month + fuel</li>
+          <li><strong>Heated restroom trailer:</strong> Included in most trailer rentals</li>
+        </ul>
+      </div>
+
+      <p>
+        For construction sites running through winter, heated units are often worth it for worker comfort and morale alone - nobody wants to spend time in a freezing cold bathroom.
+      </p>
+
+      <h2 id="hand-wash">Hand Wash Stations in Winter</h2>
+
+      <p>
+        Standard hand wash stations are problematic in freezing weather:
+      </p>
+
+      <ul>
+        <li>Fresh water tanks can freeze and crack</li>
+        <li>Foot pumps can freeze and break</li>
+        <li>Water lines can burst</li>
+      </ul>
+
+      <p>
+        Options for cold weather:
+      </p>
+
+      <ul>
+        <li><strong>Insulated hand wash stations</strong> - Available from some providers</li>
+        <li><strong>Heated hand wash stations</strong> - Electric heating keeps water above freezing</li>
+        <li><strong>Skip the water</strong> - Use alcohol-based hand sanitizer only (ensure it's rated for cold temps)</li>
+        <li><strong>Indoor hand washing</strong> - If near a building, direct workers inside to wash up</li>
+      </ul>
+
+      <h2 id="what-if-frozen">What to Do If It Freezes</h2>
+
+      <p>
+        If your porta potty is already frozen, here's the situation:
+      </p>
+
+      <h3>Frozen Waste Tank</h3>
+      <p>
+        A frozen tank can't be serviced. The pump truck's suction won't work on solid ice. Options:
+      </p>
+      <ul>
+        <li>Wait for warmer weather (often a thaw within days)</li>
+        <li>Request a heater to thaw the tank (some providers offer this)</li>
+        <li>In extreme cases, the unit may need to be swapped out</li>
+      </ul>
+
+      <h3>Frozen Door/Lock</h3>
+      <p>
+        Try de-icing spray or warm (not boiling) water. Most frozen locks can be freed with patience.
+      </p>
+
+      <h3>Cracked Hand Wash Tank</h3>
+      <p>
+        If the fresh water tank cracked, it will need repair or replacement. This is covered by most rental agreements as long as you informed them it was a winter rental.
+      </p>
+
+      <h2 id="restroom-trailers">Restroom Trailers for Winter</h2>
+
+      <p>
+        For winter events or long-term cold weather needs, restroom trailers have significant advantages:
+      </p>
+
+      <ul>
+        <li><strong>Built-in climate control</strong> - Heat and sometimes AC</li>
+        <li><strong>Insulated construction</strong> - Designed for year-round use</li>
+        <li><strong>Indoor plumbing</strong> - Protected from direct cold</li>
+        <li><strong>Better user experience</strong> - Warm and comfortable</li>
+      </ul>
+
+      <p>
+        The extra cost of a restroom trailer is often justified for winter events like outdoor holiday markets, ice skating rinks, or ski area events.
+      </p>
+
+      <h2 id="regional-tips">Regional Considerations</h2>
+
+      <div class="overflow-x-auto my-8">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Region</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Winter Concerns</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Upper Midwest, New England</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Extended sub-zero temps. Winter deodorizer essential. Heated units recommended for jobs lasting more than a few days.</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Pacific Northwest</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Less extreme cold but high moisture. Freezing rain can ice over doors and vents.</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Mountain states</td>
+              <td class="px-6 py-4 text-sm text-gray-600">High altitude means colder nights even in fall/spring. Don't underestimate overnight lows.</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Mid-Atlantic, Ohio Valley</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Freeze-thaw cycles are common. Watch for brief cold snaps that catch people off guard.</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">South and Southwest</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Rare freezing events. Standard units usually fine, but rental companies may not stock winter formula.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="checklist">Winter Porta Potty Checklist</h2>
+
+      <p>Before renting a porta potty for cold-weather use:</p>
+
+      <ul>
+        <li>☐ Ask about winter-formula deodorizer</li>
+        <li>☐ Consider heated units if temps will be below 20°F</li>
+        <li>☐ Choose strategic placement (sun, wind protection)</li>
+        <li>☐ Confirm hand wash station is winterized or skip it</li>
+        <li>☐ Schedule more frequent service to prevent tank overfill</li>
+        <li>☐ Have a backup plan (indoor facilities nearby if unit freezes)</li>
+      </ul>
+
+      <div class="bg-primary-50 border border-primary-200 rounded-xl p-6 my-8">
+        <p class="font-semibold text-primary-800 mb-2">Need Winter Porta Potty Service?</p>
+        <p class="text-primary-700">
+          Find local providers experienced with cold-weather rentals in your area.
+          <a href="/states" class="font-semibold underline">Search providers by state →</a>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Related Posts -->
+    <div class="mt-16 pt-8 border-t border-gray-200">
+      <h3 class="text-xl font-bold text-gray-900 mb-6">Related Articles</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        {relatedPosts.map((related) => (
+          <a href={`/blog/${related.slug}`} class="group">
+            <div class="bg-gray-50 rounded-lg p-5 h-full hover:bg-gray-100 transition-colors">
+              <span class="text-xs font-semibold text-primary-600 uppercase tracking-wide">{related.category}</span>
+              <h4 class="font-semibold text-gray-900 mt-2 group-hover:text-primary-600 transition-colors">{related.title}</h4>
+              <p class="text-sm text-gray-500 mt-2">{related.readTime}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom Ad -->
+    <div class="mt-8">
+      <AdSlot slot="footer" />
+    </div>
+  </article>
+</BaseLayout>
