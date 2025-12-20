@@ -1,0 +1,231 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import siteConfig from '../../data/site-config.json';
+import blogPosts from '../../data/blog-posts.json';
+
+const post = blogPosts.find(p => p.slug === 'porta-potty-placement-tips')!;
+const siteUrl = `https://${siteConfig.domain}`;
+
+const articleData = {
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+};
+
+const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+---
+
+<BaseLayout title={post.title} description={post.description}>
+  <StructuredData type="Article" data={articleData} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-primary-600">Home</a></li>
+        <li>/</li>
+        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li>/</li>
+        <li class="text-gray-900">Placement Tips</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="inline-block bg-teal-100 text-teal-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Tips</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <p>
+        You've ordered your porta potty - great! But here's something many people overlook: <strong>where you put it matters just as much as the unit itself.</strong> Good placement keeps odors away from your guests, makes the unit easy to find, and ensures the rental company can service it without any hiccups.
+      </p>
+
+      <p>
+        I've seen porta potties placed in some truly unfortunate spots over the years. Right next to the food table at a BBQ. Blocking the only pathway to a backyard. Sitting in a low spot that flooded after a light rain. Let's make sure that doesn't happen to you.
+      </p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="golden-rules">The Golden Rules of Porta Potty Placement</h2>
+
+      <p>Before we get into specifics, here are the basics that apply to pretty much every situation:</p>
+
+      <ul>
+        <li><strong>Keep it accessible</strong> - People should be able to find it easily, especially at night</li>
+        <li><strong>Keep it level</strong> - Uneven ground can cause tipping hazards and door problems</li>
+        <li><strong>Keep it away from food</strong> - At least 50-100 feet from eating areas</li>
+        <li><strong>Keep it reachable for service</strong> - The pump truck needs to get within about 100 feet</li>
+      </ul>
+
+      <h2 id="events">Placement for Events and Parties</h2>
+
+      <p>
+        Hosting a backyard wedding, graduation party, or family reunion? Here's how to position your porta potties so guests can find them without the units becoming the centerpiece of your event:
+      </p>
+
+      <h3>Distance from the Action</h3>
+      <p>
+        You want a sweet spot - close enough that guests don't have to trek across your property, but far enough that there's no odor near the party. <strong>50 to 75 feet from the main gathering area</strong> usually works well. If you're upwind, add another 25 feet.
+      </p>
+
+      <h3>Visibility Without Being an Eyesore</h3>
+      <p>
+        Place units where guests can see them (or see signage pointing to them), but consider using natural barriers like hedges, fencing, or decorative screens to make them less prominent. Some rental companies offer units in neutral colors that blend in better than the classic bright blue.
+      </p>
+
+      <h3>Lighting Matters</h3>
+      <p>
+        If your event goes into the evening, make sure the path to the porta potties is lit. Solar pathway lights are an easy, inexpensive solution. Nobody wants to stumble around in the dark looking for a restroom.
+      </p>
+
+      <h2 id="construction">Placement for Construction Sites</h2>
+
+      <p>
+        Construction site placement is more about practicality and OSHA compliance than aesthetics. Here's what matters:
+      </p>
+
+      <h3>Central Location</h3>
+      <p>
+        Workers shouldn't have to walk more than a few minutes to reach the restroom. If your site is large, consider multiple units placed strategically rather than one unit in a corner.
+      </p>
+
+      <h3>Away from Heavy Equipment</h3>
+      <p>
+        Place porta potties away from active work zones where heavy machinery operates. This protects both the unit and the workers using it.
+      </p>
+
+      <h3>Service Access</h3>
+      <p>
+        The service truck needs clear access - typically within 100 feet and on ground that can support a heavy vehicle. Don't place units behind fencing that gets locked after hours if the service is scheduled early morning.
+      </p>
+
+      <h2 id="home-renovation">Placement for Home Renovations</h2>
+
+      <p>
+        When your bathroom is out of commission, convenience is key. Most homeowners place the unit:
+      </p>
+
+      <ul>
+        <li><strong>Driveway</strong> - Easy access, level surface, simple for servicing</li>
+        <li><strong>Side yard</strong> - Out of sight but still accessible</li>
+        <li><strong>Near the back door</strong> - Shortest walk from the house</li>
+      </ul>
+
+      <p>
+        Just check with your HOA if you have one - some have rules about temporary structures in driveways or front yards.
+      </p>
+
+      <h2 id="surfaces">Best Surfaces for Porta Potties</h2>
+
+      <p>Not all ground is created equal. Here's what works best:</p>
+
+      <div class="bg-green-50 border border-green-200 rounded-xl p-6 my-6">
+        <h4 class="font-semibold text-green-800 mb-2">Good Surfaces</h4>
+        <ul class="text-green-700 space-y-1">
+          <li>Concrete or asphalt (ideal)</li>
+          <li>Compacted gravel</li>
+          <li>Level grass (if it's been dry)</li>
+          <li>Wooden platforms or pallets</li>
+        </ul>
+      </div>
+
+      <div class="bg-red-50 border border-red-200 rounded-xl p-6 my-6">
+        <h4 class="font-semibold text-red-800 mb-2">Surfaces to Avoid</h4>
+        <ul class="text-red-700 space-y-1">
+          <li>Mud or soft soil</li>
+          <li>Steep slopes</li>
+          <li>Low spots that collect water</li>
+          <li>Loose sand or gravel</li>
+        </ul>
+      </div>
+
+      <h2 id="common-mistakes">Common Placement Mistakes</h2>
+
+      <p>Learn from others' mishaps:</p>
+
+      <ul>
+        <li><strong>Too close to neighbors</strong> - They probably won't appreciate a porta potty 10 feet from their patio</li>
+        <li><strong>Blocking pathways</strong> - Make sure people can get around it easily</li>
+        <li><strong>Ignoring wind direction</strong> - If possible, place downwind from gathering areas</li>
+        <li><strong>Forgetting about service access</strong> - That pump truck needs to reach it</li>
+        <li><strong>Under trees with sap or birds</strong> - Your unit will get messy fast</li>
+      </ul>
+
+      <h2 id="checklist">Quick Placement Checklist</h2>
+
+      <p>Before the delivery truck arrives, run through this list:</p>
+
+      <ul>
+        <li>☐ Level ground identified</li>
+        <li>☐ At least 50 feet from food/eating areas</li>
+        <li>☐ Clear path for delivery truck</li>
+        <li>☐ Service truck can reach within 100 feet</li>
+        <li>☐ Away from low spots that might flood</li>
+        <li>☐ Visible or well-signed for users</li>
+        <li>☐ Lighting available if needed at night</li>
+        <li>☐ Not blocking any pathways or gates</li>
+      </ul>
+
+      <div class="bg-primary-50 border border-primary-200 rounded-xl p-6 my-8">
+        <p class="font-semibold text-primary-800 mb-2">Need Help Finding Providers?</p>
+        <p class="text-primary-700">
+          Most rental companies are happy to advise on placement when they deliver.
+          <a href="/states" class="font-semibold underline">Find porta potty providers near you</a> and ask about their placement recommendations for your specific situation.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Related Posts -->
+    <div class="mt-16 pt-8 border-t border-gray-200">
+      <h3 class="text-xl font-bold text-gray-900 mb-6">Related Articles</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        {relatedPosts.map((related) => (
+          <a href={`/blog/${related.slug}`} class="group">
+            <div class="bg-gray-50 rounded-lg p-5 h-full hover:bg-gray-100 transition-colors">
+              <span class="text-xs font-semibold text-primary-600 uppercase tracking-wide">{related.category}</span>
+              <h4 class="font-semibold text-gray-900 mt-2 group-hover:text-primary-600 transition-colors">{related.title}</h4>
+              <p class="text-sm text-gray-500 mt-2">{related.readTime}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom Ad -->
+    <div class="mt-8">
+      <AdSlot slot="footer" />
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,275 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import siteConfig from '../../data/site-config.json';
+import blogPosts from '../../data/blog-posts.json';
+
+const post = blogPosts.find(p => p.slug === 'porta-potty-home-renovation')!;
+const siteUrl = `https://${siteConfig.domain}`;
+
+const articleData = {
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+};
+
+const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+---
+
+<BaseLayout title={post.title} description={post.description}>
+  <StructuredData type="Article" data={articleData} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-primary-600">Home</a></li>
+        <li>/</li>
+        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li>/</li>
+        <li class="text-gray-900">Home Renovation</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="inline-block bg-orange-100 text-orange-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Residential</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <p>
+        So you're finally tackling that bathroom renovation you've been putting off. Exciting! But here's a question that might not have crossed your mind yet: <strong>what happens when your only bathroom is torn apart for two weeks?</strong>
+      </p>
+
+      <p>
+        This is where renting a porta potty saves the day. It might feel a little strange to have one in your driveway, but trust me - it beats the alternatives. Let's talk about why it makes sense, what it costs, and how to make it work smoothly.
+      </p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="why-rent">Why Rent a Porta Potty for a Home Renovation?</h2>
+
+      <p>
+        When your bathroom is out of commission, you have a few options:
+      </p>
+
+      <ul>
+        <li><strong>Use a neighbor's bathroom</strong> - Awkward, and gets old fast</li>
+        <li><strong>Go to a nearby store or gym</strong> - Fine during the day, terrible at 3 AM</li>
+        <li><strong>Stay in a hotel</strong> - Expensive and disruptive</li>
+        <li><strong>Rent a porta potty</strong> - Available 24/7, right outside your door</li>
+      </ul>
+
+      <p>
+        For renovations lasting more than a few days, a porta potty is usually the most practical choice. It's there whenever you need it, and you don't have to impose on anyone else.
+      </p>
+
+      <h2 id="cost">What Does It Cost?</h2>
+
+      <p>
+        Here's the good news: renting a porta potty for home use is surprisingly affordable.
+      </p>
+
+      <div class="bg-gray-50 rounded-xl p-6 my-6">
+        <h4 class="font-semibold text-gray-900 mb-4">Typical Home Renovation Rental Costs</h4>
+        <ul class="space-y-2 text-gray-700">
+          <li><strong>Standard unit:</strong> $150 - $250 per month</li>
+          <li><strong>Deluxe unit (with sink):</strong> $200 - $350 per month</li>
+          <li><strong>Weekly rental:</strong> $100 - $175 per week</li>
+          <li><strong>Delivery + pickup:</strong> Usually included, or $50-100 extra</li>
+        </ul>
+      </div>
+
+      <p>
+        Compare that to a hotel room at $100+ per night, and renting a porta potty starts looking like a bargain. Plus, you get to stay in your own home and keep an eye on your renovation.
+      </p>
+
+      <h2 id="what-type">What Type Should You Get?</h2>
+
+      <p>
+        For a home renovation, you have a couple of good options:
+      </p>
+
+      <h3>Standard Unit</h3>
+      <p>
+        Your basic porta potty with hand sanitizer. It gets the job done, and it's the most affordable option. Perfectly fine for a short renovation where you still have running water inside for hand washing.
+      </p>
+
+      <h3>Deluxe Unit with Hand Wash Sink</h3>
+      <p>
+        If your renovation affects your kitchen sink too, or you just want the convenience, go for a unit with a built-in hand wash station. It has a foot pump or hands-free faucet with fresh water and soap. Worth the extra $50-75 per month for most people.
+      </p>
+
+      <h3>Flushable Unit</h3>
+      <p>
+        Some companies offer units with flushing capability and a more "indoor bathroom" feel. They cost more and require water hookup, but if you're doing a long renovation (6+ weeks), the comfort upgrade might be worth it.
+      </p>
+
+      <h2 id="where-to-put">Where to Put It</h2>
+
+      <p>
+        Placement matters for convenience and your neighbors' sanity:
+      </p>
+
+      <ul>
+        <li><strong>Driveway</strong> - The most common spot. Easy to access, level surface, and simple for the service truck to reach.</li>
+        <li><strong>Side yard</strong> - Good if you want it less visible from the street. Just make sure there's a clear path from your house.</li>
+        <li><strong>Backyard</strong> - Works if you have access, but service trucks need to reach it too.</li>
+      </ul>
+
+      <p>
+        A few things to keep in mind:
+      </p>
+      <ul>
+        <li>Keep it within a reasonable walk from your back door (you'll be using it at night)</li>
+        <li>Make sure it's on level ground</li>
+        <li>Check if your HOA has rules about temporary structures</li>
+        <li>Be considerate of neighbors - don't place it right against their fence</li>
+      </ul>
+
+      <h2 id="how-long">How Long Will You Need It?</h2>
+
+      <p>
+        This depends on your project, but here are some typical timelines:
+      </p>
+
+      <div class="overflow-x-auto my-8">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Project Type</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Typical Duration</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Bathroom refresh (fixtures, paint)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">3-5 days</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Full bathroom remodel</td>
+              <td class="px-6 py-4 text-sm text-gray-600">2-4 weeks</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Bathroom addition</td>
+              <td class="px-6 py-4 text-sm text-gray-600">4-8 weeks</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Whole house renovation</td>
+              <td class="px-6 py-4 text-sm text-gray-600">2-6 months</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Add a buffer - renovations almost always take longer than planned. Most rental companies are flexible about extending if needed.
+      </p>
+
+      <h2 id="service">What About Servicing?</h2>
+
+      <p>
+        Your rental includes regular servicing - typically once a week for residential use. The service tech will:
+      </p>
+
+      <ul>
+        <li>Pump out the waste tank</li>
+        <li>Clean and sanitize the interior</li>
+        <li>Restock toilet paper and hand sanitizer</li>
+        <li>Check for any issues</li>
+      </ul>
+
+      <p>
+        For a typical family, weekly service is plenty. If you have a large household or guests staying over, you might want to ask about twice-weekly service.
+      </p>
+
+      <h2 id="tips">Tips for a Smooth Experience</h2>
+
+      <p>A few things that'll make life easier:</p>
+
+      <ul>
+        <li><strong>Add lighting</strong> - A motion-sensor light near the unit is a game-changer for nighttime trips</li>
+        <li><strong>Create a path</strong> - If it's on grass, lay down some stepping stones or a mat</li>
+        <li><strong>Stock extras</strong> - Keep extra toilet paper inside (in a waterproof container)</li>
+        <li><strong>Communicate with your contractor</strong> - Make sure workers know it's available for them too</li>
+        <li><strong>Give neighbors a heads up</strong> - A quick "hey, we're renovating and need this temporarily" goes a long way</li>
+      </ul>
+
+      <h2 id="alternatives">Alternatives to Consider</h2>
+
+      <p>
+        If a porta potty really doesn't work for your situation, here are some other options:
+      </p>
+
+      <ul>
+        <li><strong>Portable camping toilet</strong> - Cheaper but requires you to empty it yourself (not fun)</li>
+        <li><strong>Staying with family</strong> - If they're nearby and don't mind house guests</li>
+        <li><strong>Phased renovation</strong> - Some contractors can keep your bathroom partially functional during the project</li>
+      </ul>
+
+      <p>
+        For most people, renting a porta potty is still the simplest solution.
+      </p>
+
+      <div class="bg-primary-50 border border-primary-200 rounded-xl p-6 my-8">
+        <p class="font-semibold text-primary-800 mb-2">Ready to Rent?</p>
+        <p class="text-primary-700">
+          Find local porta potty providers who offer residential rentals.
+          <a href="/states" class="font-semibold underline">Browse providers in your area →</a>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Related Posts -->
+    <div class="mt-16 pt-8 border-t border-gray-200">
+      <h3 class="text-xl font-bold text-gray-900 mb-6">Related Articles</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        {relatedPosts.map((related) => (
+          <a href={`/blog/${related.slug}`} class="group">
+            <div class="bg-gray-50 rounded-lg p-5 h-full hover:bg-gray-100 transition-colors">
+              <span class="text-xs font-semibold text-primary-600 uppercase tracking-wide">{related.category}</span>
+              <h4 class="font-semibold text-gray-900 mt-2 group-hover:text-primary-600 transition-colors">{related.title}</h4>
+              <p class="text-sm text-gray-500 mt-2">{related.readTime}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom Ad -->
+    <div class="mt-8">
+      <AdSlot slot="footer" />
+    </div>
+  </article>
+</BaseLayout>

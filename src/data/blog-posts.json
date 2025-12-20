@@ -73,5 +73,50 @@
       "bio": "Portable sanitation expert with 10+ years in the industry. Port has helped thousands of event planners and contractors find the right restroom solutions.",
       "avatar": "/images/port-pottimer-avatar.png"
     }
+  },
+  {
+    "slug": "porta-potty-placement-tips",
+    "title": "Porta Potty Placement Tips: Where to Put Units on Your Property",
+    "description": "Smart placement makes all the difference. Learn where to position portable restrooms for easy access, minimal odor, and happy guests or workers.",
+    "category": "Tips",
+    "publishedAt": "2024-12-19",
+    "updatedAt": "2024-12-19",
+    "readTime": "5 min read",
+    "featured": false,
+    "author": {
+      "name": "Port Pottimer",
+      "bio": "Portable sanitation expert with 10+ years in the industry. Port has helped thousands of event planners and contractors find the right restroom solutions.",
+      "avatar": "/images/port-pottimer-avatar.png"
+    }
+  },
+  {
+    "slug": "luxury-restroom-trailer-guide",
+    "title": "Luxury Restroom Trailers: The Complete Guide for Upscale Events",
+    "description": "Everything you need to know about luxury restroom trailers - features, costs, sizing, and when they're worth the investment over standard porta potties.",
+    "category": "Luxury",
+    "publishedAt": "2024-12-19",
+    "updatedAt": "2024-12-19",
+    "readTime": "7 min read",
+    "featured": false,
+    "author": {
+      "name": "Port Pottimer",
+      "bio": "Portable sanitation expert with 10+ years in the industry. Port has helped thousands of event planners and contractors find the right restroom solutions.",
+      "avatar": "/images/port-pottimer-avatar.png"
+    }
+  },
+  {
+    "slug": "porta-potty-home-renovation",
+    "title": "Porta Potty Rental for Home Renovation: What You Need to Know",
+    "description": "Renovating your bathroom? Here's why renting a porta potty makes life easier, what it costs, and how to choose the right unit for your home project.",
+    "category": "Residential",
+    "publishedAt": "2024-12-19",
+    "updatedAt": "2024-12-19",
+    "readTime": "5 min read",
+    "featured": false,
+    "author": {
+      "name": "Port Pottimer",
+      "bio": "Portable sanitation expert with 10+ years in the industry. Port has helped thousands of event planners and contractors find the right restroom solutions.",
+      "avatar": "/images/port-pottimer-avatar.png"
+    }
   }
 ]

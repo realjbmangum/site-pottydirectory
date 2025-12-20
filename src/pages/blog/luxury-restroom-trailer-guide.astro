@@ -1,0 +1,264 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import siteConfig from '../../data/site-config.json';
+import blogPosts from '../../data/blog-posts.json';
+
+const post = blogPosts.find(p => p.slug === 'luxury-restroom-trailer-guide')!;
+const siteUrl = `https://${siteConfig.domain}`;
+
+const articleData = {
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+};
+
+const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+---
+
+<BaseLayout title={post.title} description={post.description}>
+  <StructuredData type="Article" data={articleData} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-primary-600">Home</a></li>
+        <li>/</li>
+        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li>/</li>
+        <li class="text-gray-900">Luxury Trailers</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="inline-block bg-purple-100 text-purple-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Luxury</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <p>
+        Let's be honest - when most people hear "porta potty," they picture a basic blue box that's... functional at best. But luxury restroom trailers? They're a completely different experience. We're talking climate control, running water, flushing toilets, mirrors, and actual interior design.
+      </p>
+
+      <p>
+        If you're hosting a wedding, corporate gala, or any event where you want your guests to be comfortable (and maybe even impressed), a luxury restroom trailer might be exactly what you need. Let me walk you through everything you should know.
+      </p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="what-are-they">What Exactly is a Luxury Restroom Trailer?</h2>
+
+      <p>
+        A luxury restroom trailer is a mobile bathroom unit that's built into a trailer. Unlike a standard porta potty, these units are connected to power and water (or have their own tanks and generators) to provide an experience much closer to an indoor restroom.
+      </p>
+
+      <p>Think:</p>
+      <ul>
+        <li>Flushing porcelain toilets</li>
+        <li>Running water sinks with mirrors</li>
+        <li>Air conditioning and heating</li>
+        <li>Interior lighting (often with nice fixtures)</li>
+        <li>Sound systems in some high-end models</li>
+        <li>Hardwood or tile-look flooring</li>
+        <li>Separate men's and women's sides</li>
+      </ul>
+
+      <p>
+        Some even have attendant stations, fresh flowers, and premium toiletries. Basically, your guests might not even realize they're using a temporary restroom.
+      </p>
+
+      <h2 id="types">Types of Luxury Restroom Trailers</h2>
+
+      <p>Trailers come in different sizes and configurations. Here's what you'll typically find:</p>
+
+      <h3>2-Station Trailers</h3>
+      <p>
+        The most compact option, perfect for smaller events (up to 100 guests for a few hours). Usually has one toilet on each side - one for women, one for men, or both unisex.
+      </p>
+      <p><strong>Cost:</strong> $500 - $800 for a weekend</p>
+
+      <h3>4-6 Station Trailers</h3>
+      <p>
+        The most popular choice for weddings and mid-sized events. Typically includes 2-3 stalls on the women's side (because, let's face it, they need more) and 1-2 stalls plus urinals on the men's side.
+      </p>
+      <p><strong>Cost:</strong> $800 - $1,500 for a weekend</p>
+
+      <h3>8+ Station Trailers</h3>
+      <p>
+        For large events - think 300+ guests, festivals, or corporate functions. These are impressive units that can handle high traffic while still feeling upscale.
+      </p>
+      <p><strong>Cost:</strong> $1,500 - $3,000+ for a weekend</p>
+
+      <h2 id="features">Features to Look For</h2>
+
+      <p>Not all luxury trailers are created equal. When you're comparing options, ask about:</p>
+
+      <div class="bg-gray-50 rounded-xl p-6 my-6">
+        <h4 class="font-semibold text-gray-900 mb-4">Must-Have Features</h4>
+        <ul class="space-y-2 text-gray-700">
+          <li><strong>Climate control</strong> - Essential for summer or winter events</li>
+          <li><strong>Flushing toilets</strong> - The whole point of going luxury</li>
+          <li><strong>Running water</strong> - For the sinks, obviously</li>
+          <li><strong>Good lighting</strong> - Guests need to see what they're doing</li>
+          <li><strong>Fresh water capacity</strong> - Make sure it's enough for your guest count</li>
+        </ul>
+      </div>
+
+      <div class="bg-purple-50 rounded-xl p-6 my-6">
+        <h4 class="font-semibold text-purple-900 mb-4">Nice-to-Have Upgrades</h4>
+        <ul class="space-y-2 text-purple-800">
+          <li>Sound system with background music</li>
+          <li>Attendant on-site to keep things tidy</li>
+          <li>Premium toiletries (lotions, mints, etc.)</li>
+          <li>Fresh flowers or decor</li>
+          <li>Exterior lighting and landscaping</li>
+        </ul>
+      </div>
+
+      <h2 id="requirements">What You'll Need to Provide</h2>
+
+      <p>Luxury trailers need a few things to operate. Make sure your venue can accommodate:</p>
+
+      <ul>
+        <li><strong>Power</strong> - Usually a 20-amp outlet within 100 feet, or the trailer brings a generator (which adds cost and noise)</li>
+        <li><strong>Water hookup</strong> - Some trailers have onboard tanks; others need a hose connection</li>
+        <li><strong>Level ground</strong> - The trailer needs to sit level for the plumbing to work properly</li>
+        <li><strong>Access</strong> - A truck needs to deliver and pick up the trailer, so plan your venue layout accordingly</li>
+      </ul>
+
+      <h2 id="cost-breakdown">Full Cost Breakdown</h2>
+
+      <p>Here's what affects pricing:</p>
+
+      <div class="overflow-x-auto my-8">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Factor</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Impact on Price</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Trailer size</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Bigger = more expensive</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Rental duration</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Multi-day rentals often get discounts</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Delivery distance</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$2-5 per mile beyond service area</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Generator rental</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Add $150-300 if no power available</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Attendant service</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Add $150-250 for on-site staff</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Season</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Peak wedding season (May-Oct) costs more</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="when-worth-it">When Is a Luxury Trailer Worth It?</h2>
+
+      <p>Honestly, it depends on your event and your budget. A luxury trailer makes sense when:</p>
+
+      <ul>
+        <li><strong>It's a formal event</strong> - Weddings, galas, upscale corporate functions</li>
+        <li><strong>Guests expect comfort</strong> - You know your crowd</li>
+        <li><strong>The venue has no restrooms</strong> - Barns, farms, private properties</li>
+        <li><strong>You're hosting older guests or VIPs</strong> - Accessibility and comfort matter more</li>
+        <li><strong>It's a long event</strong> - 4+ hours means more restroom visits</li>
+      </ul>
+
+      <p>On the other hand, a standard porta potty might be fine for:</p>
+      <ul>
+        <li>Casual backyard parties</li>
+        <li>Construction projects</li>
+        <li>Large festivals where volume matters more than luxury</li>
+        <li>Events with existing indoor restrooms nearby</li>
+      </ul>
+
+      <h2 id="booking-tips">Booking Tips</h2>
+
+      <p>A few things I've learned over the years:</p>
+
+      <ul>
+        <li><strong>Book early</strong> - Popular trailers get reserved 3-6 months ahead for wedding season</li>
+        <li><strong>Ask for photos</strong> - Units vary a lot; see what you're actually getting</li>
+        <li><strong>Confirm what's included</strong> - Delivery, setup, supplies, pickup?</li>
+        <li><strong>Check reviews</strong> - A clean, well-maintained trailer makes all the difference</li>
+        <li><strong>Have a backup plan</strong> - What happens if the power goes out?</li>
+      </ul>
+
+      <div class="bg-primary-50 border border-primary-200 rounded-xl p-6 my-8">
+        <p class="font-semibold text-primary-800 mb-2">Ready to Find a Luxury Restroom Trailer?</p>
+        <p class="text-primary-700">
+          Browse our directory of verified providers who offer luxury restroom trailers in your area.
+          <a href="/services/weddings-parties" class="font-semibold underline">Find luxury trailer rentals →</a>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Related Posts -->
+    <div class="mt-16 pt-8 border-t border-gray-200">
+      <h3 class="text-xl font-bold text-gray-900 mb-6">Related Articles</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        {relatedPosts.map((related) => (
+          <a href={`/blog/${related.slug}`} class="group">
+            <div class="bg-gray-50 rounded-lg p-5 h-full hover:bg-gray-100 transition-colors">
+              <span class="text-xs font-semibold text-primary-600 uppercase tracking-wide">{related.category}</span>
+              <h4 class="font-semibold text-gray-900 mt-2 group-hover:text-primary-600 transition-colors">{related.title}</h4>
+              <p class="text-sm text-gray-500 mt-2">{related.readTime}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom Ad -->
+    <div class="mt-8">
+      <AdSlot slot="footer" />
+    </div>
+  </article>
+</BaseLayout>
