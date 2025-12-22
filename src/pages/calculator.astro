@@ -12,220 +12,431 @@ const breadcrumbs = [
   title="Porta Potty Calculator | How Many Portable Toilets Do I Need?"
   description="Free porta potty calculator for events and construction sites. Calculate exactly how many portable toilets you need based on guests, duration, and event type."
 >
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <Breadcrumb items={breadcrumbs} />
+  <!-- Hero Section - Dark with gradient -->
+  <section class="relative py-16 md:py-20 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-primary-900 to-slate-900"></div>
+    <div class="absolute inset-0 bg-[url('/images/herotile.jpeg')] opacity-10 bg-cover bg-center"></div>
 
-    <div class="text-center mb-10">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-        Porta Potty Calculator
-      </h1>
-      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-        Calculate how many portable toilets you need for your event or job site. Get accurate estimates based on industry standards.
-      </p>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Breadcrumb items={breadcrumbs} class="mb-6 text-slate-400" />
+
+      <div class="text-center">
+        <div class="inline-flex items-center bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 mb-6">
+          <svg class="w-5 h-5 text-blue-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          </svg>
+          <span class="text-sm font-medium text-white/90">Free Calculator Tool</span>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+          Porta Potty Calculator
+        </h1>
+        <p class="text-xl text-slate-300 max-w-2xl mx-auto">
+          Calculate how many portable toilets you need for your event or job site. Get accurate estimates based on industry standards.
+        </p>
+      </div>
     </div>
+  </section>
 
-    <!-- Calculator Card -->
-    <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
-      <form id="calculator-form" class="space-y-6">
-        <!-- Event Type -->
-        <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-2">
-            What type of event or site?
-          </label>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <label class="relative">
-              <input type="radio" name="event_type" value="event" class="peer sr-only" checked />
-              <div class="p-4 border-2 border-gray-200 rounded-xl text-center cursor-pointer peer-checked:border-primary-500 peer-checked:bg-primary-50 hover:border-gray-300 transition-colors">
-                <div class="text-2xl mb-1">🎉</div>
-                <div class="text-sm font-medium">Event/Party</div>
-              </div>
+  <!-- Calculator Section -->
+  <section class="py-12 md:py-16 bg-gradient-to-b from-slate-50 to-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Calculator Card -->
+      <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-8 mb-8 -mt-20 relative z-10">
+        <form id="calculator-form" class="space-y-6">
+          <!-- Event Type -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-3">
+              What type of event or site?
             </label>
-            <label class="relative">
-              <input type="radio" name="event_type" value="wedding" class="peer sr-only" />
-              <div class="p-4 border-2 border-gray-200 rounded-xl text-center cursor-pointer peer-checked:border-primary-500 peer-checked:bg-primary-50 hover:border-gray-300 transition-colors">
-                <div class="text-2xl mb-1">💒</div>
-                <div class="text-sm font-medium">Wedding</div>
-              </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <label class="relative">
+                <input type="radio" name="event_type" value="event" class="peer sr-only" checked />
+                <div class="p-4 border-2 border-gray-200 rounded-xl text-center cursor-pointer peer-checked:border-purple-500 peer-checked:bg-purple-50 hover:border-gray-300 transition-colors">
+                  <div class="text-2xl mb-1">🎉</div>
+                  <div class="text-sm font-medium">Event/Party</div>
+                </div>
+              </label>
+              <label class="relative">
+                <input type="radio" name="event_type" value="wedding" class="peer sr-only" />
+                <div class="p-4 border-2 border-gray-200 rounded-xl text-center cursor-pointer peer-checked:border-pink-500 peer-checked:bg-pink-50 hover:border-gray-300 transition-colors">
+                  <div class="text-2xl mb-1">💒</div>
+                  <div class="text-sm font-medium">Wedding</div>
+                </div>
+              </label>
+              <label class="relative">
+                <input type="radio" name="event_type" value="construction" class="peer sr-only" />
+                <div class="p-4 border-2 border-gray-200 rounded-xl text-center cursor-pointer peer-checked:border-orange-500 peer-checked:bg-orange-50 hover:border-gray-300 transition-colors">
+                  <div class="text-2xl mb-1">🏗️</div>
+                  <div class="text-sm font-medium">Construction</div>
+                </div>
+              </label>
+              <label class="relative">
+                <input type="radio" name="event_type" value="festival" class="peer sr-only" />
+                <div class="p-4 border-2 border-gray-200 rounded-xl text-center cursor-pointer peer-checked:border-purple-500 peer-checked:bg-purple-50 hover:border-gray-300 transition-colors">
+                  <div class="text-2xl mb-1">🎪</div>
+                  <div class="text-sm font-medium">Festival</div>
+                </div>
+              </label>
+              <label class="relative">
+                <input type="radio" name="event_type" value="disaster" class="peer sr-only" />
+                <div class="p-4 border-2 border-gray-200 rounded-xl text-center cursor-pointer peer-checked:border-red-500 peer-checked:bg-red-50 hover:border-gray-300 transition-colors">
+                  <div class="text-2xl mb-1">🚨</div>
+                  <div class="text-sm font-medium">Disaster Relief</div>
+                </div>
+              </label>
+              <label class="relative">
+                <input type="radio" name="event_type" value="longterm" class="peer sr-only" />
+                <div class="p-4 border-2 border-gray-200 rounded-xl text-center cursor-pointer peer-checked:border-green-500 peer-checked:bg-green-50 hover:border-gray-300 transition-colors">
+                  <div class="text-2xl mb-1">📅</div>
+                  <div class="text-sm font-medium">Long-term Rental</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Number of People -->
+          <div>
+            <label for="guests" class="block text-sm font-semibold text-gray-700 mb-2">
+              How many people?
             </label>
-            <label class="relative">
-              <input type="radio" name="event_type" value="construction" class="peer sr-only" />
-              <div class="p-4 border-2 border-gray-200 rounded-xl text-center cursor-pointer peer-checked:border-primary-500 peer-checked:bg-primary-50 hover:border-gray-300 transition-colors">
-                <div class="text-2xl mb-1">🏗️</div>
-                <div class="text-sm font-medium">Construction</div>
-              </div>
+            <input
+              type="number"
+              id="guests"
+              name="guests"
+              min="1"
+              max="100000"
+              value="100"
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-lg"
+            />
+          </div>
+
+          <!-- Rental Duration -->
+          <div>
+            <label for="rental_duration" class="block text-sm font-semibold text-gray-700 mb-2">
+              Rental Duration
             </label>
-            <label class="relative">
-              <input type="radio" name="event_type" value="festival" class="peer sr-only" />
-              <div class="p-4 border-2 border-gray-200 rounded-xl text-center cursor-pointer peer-checked:border-primary-500 peer-checked:bg-primary-50 hover:border-gray-300 transition-colors">
-                <div class="text-2xl mb-1">🎪</div>
-                <div class="text-sm font-medium">Festival</div>
-              </div>
+            <select
+              id="rental_duration"
+              name="rental_duration"
+              class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-lg"
+            >
+              <option value="daily" selected>Daily/Weekly (1-7 days)</option>
+              <option value="month">1 month</option>
+              <option value="multimonth">Multiple months</option>
+            </select>
+            <p class="text-sm text-gray-500 mt-1">Most providers charge the same rate for 1 day or 7 days</p>
+          </div>
+
+          <!-- Options -->
+          <div class="space-y-3">
+            <label class="flex items-center">
+              <input type="checkbox" id="alcohol" name="alcohol" class="w-5 h-5 rounded border-gray-300 text-primary-600 focus:ring-primary-500" />
+              <span class="ml-3 text-gray-700">Alcohol will be served</span>
+              <span class="ml-2 text-xs text-gray-500">(consider additional units)</span>
+            </label>
+            <label class="flex items-center">
+              <input type="checkbox" id="ada" name="ada" class="w-5 h-5 rounded border-gray-300 text-primary-600 focus:ring-primary-500" checked />
+              <span class="ml-3 text-gray-700">Include ADA accessible unit</span>
+            </label>
+            <label class="flex items-center">
+              <input type="checkbox" id="handwash" name="handwash" class="w-5 h-5 rounded border-gray-300 text-primary-600 focus:ring-primary-500" checked />
+              <span class="ml-3 text-gray-700">Include hand wash stations</span>
+            </label>
+            <label class="flex items-center" id="luxury-option">
+              <input type="checkbox" id="luxury" name="luxury" class="w-5 h-5 rounded border-gray-300 text-primary-600 focus:ring-primary-500" />
+              <span class="ml-3 text-gray-700">Upgrade to luxury restroom trailer</span>
+              <span class="ml-2 text-xs text-gray-500">(climate-controlled, running water)</span>
+            </label>
+            <label class="flex items-center hidden" id="shower-option">
+              <input type="checkbox" id="shower" name="shower" class="w-5 h-5 rounded border-gray-300 text-primary-600 focus:ring-primary-500" />
+              <span class="ml-3 text-gray-700">Include shower trailer</span>
             </label>
           </div>
-        </div>
 
-        <!-- Number of People -->
-        <div>
-          <label for="guests" class="block text-sm font-semibold text-gray-700 mb-2">
-            How many people?
-          </label>
-          <input
-            type="number"
-            id="guests"
-            name="guests"
-            min="1"
-            max="100000"
-            value="100"
-            required
-            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-lg"
-          />
-        </div>
-
-        <!-- Duration -->
-        <div>
-          <label for="duration" class="block text-sm font-semibold text-gray-700 mb-2">
-            Duration (hours)
-          </label>
-          <select
-            id="duration"
-            name="duration"
-            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-lg"
+          <button
+            type="submit"
+            class="w-full bg-primary-600 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:bg-primary-700 transition-colors shadow-lg shadow-primary-600/25"
           >
-            <option value="2">2 hours</option>
-            <option value="4" selected>4 hours</option>
-            <option value="6">6 hours</option>
-            <option value="8">8 hours (full day)</option>
-            <option value="12">12+ hours</option>
-          </select>
-        </div>
-
-        <!-- Options -->
-        <div class="space-y-3">
-          <label class="flex items-center">
-            <input type="checkbox" id="alcohol" name="alcohol" class="w-5 h-5 rounded border-gray-300 text-primary-600 focus:ring-primary-500" />
-            <span class="ml-3 text-gray-700">Alcohol will be served</span>
-            <span class="ml-2 text-xs text-gray-500">(+20% more units)</span>
-          </label>
-          <label class="flex items-center">
-            <input type="checkbox" id="ada" name="ada" class="w-5 h-5 rounded border-gray-300 text-primary-600 focus:ring-primary-500" checked />
-            <span class="ml-3 text-gray-700">Include ADA accessible unit</span>
-          </label>
-          <label class="flex items-center">
-            <input type="checkbox" id="handwash" name="handwash" class="w-5 h-5 rounded border-gray-300 text-primary-600 focus:ring-primary-500" checked />
-            <span class="ml-3 text-gray-700">Include hand wash stations</span>
-          </label>
-        </div>
-
-        <button
-          type="submit"
-          class="w-full bg-primary-600 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:bg-primary-700 transition-colors"
-        >
-          Calculate My Needs
-        </button>
-      </form>
-    </div>
-
-    <!-- Results (hidden by default) -->
-    <div id="results" class="hidden">
-      <div class="bg-gradient-to-br from-primary-600 to-blue-700 rounded-2xl shadow-xl p-6 md:p-8 text-white mb-8">
-        <h2 class="text-2xl font-bold mb-6 text-center">Your Recommendation</h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div class="bg-white/10 backdrop-blur rounded-xl p-5 text-center">
-            <div id="result-standard" class="text-4xl font-bold mb-1">0</div>
-            <div class="text-blue-100">Standard Units</div>
-          </div>
-          <div class="bg-white/10 backdrop-blur rounded-xl p-5 text-center">
-            <div id="result-ada" class="text-4xl font-bold mb-1">0</div>
-            <div class="text-blue-100">ADA Accessible</div>
-          </div>
-          <div class="bg-white/10 backdrop-blur rounded-xl p-5 text-center">
-            <div id="result-handwash" class="text-4xl font-bold mb-1">0</div>
-            <div class="text-blue-100">Hand Wash Stations</div>
-          </div>
-        </div>
-
-        <div id="result-notes" class="bg-white/10 backdrop-blur rounded-xl p-4 text-sm text-blue-100">
-        </div>
+            Calculate My Needs
+          </button>
+        </form>
       </div>
 
-      <!-- Estimated Cost -->
-      <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">Estimated Cost Range</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="border border-gray-200 rounded-xl p-5">
-            <div class="text-sm text-gray-500 mb-1">Daily Rental</div>
-            <div id="cost-daily" class="text-2xl font-bold text-gray-900">$0 - $0</div>
+      <!-- Results (hidden by default) -->
+      <div id="results" class="hidden">
+        <!-- Main Results Card -->
+        <div class="bg-gradient-to-br from-slate-900 via-primary-900 to-slate-900 rounded-2xl shadow-xl p-6 md:p-8 text-white mb-8">
+          <h2 class="text-2xl font-bold mb-6 text-center">Your Recommendation</h2>
+
+          <div id="results-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white/10 backdrop-blur rounded-xl p-5 text-center border border-white/10">
+              <div id="result-standard" class="text-4xl font-bold mb-1">0</div>
+              <div id="result-standard-label" class="text-blue-200">Standard Units</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur rounded-xl p-5 text-center border border-white/10">
+              <div id="result-ada" class="text-4xl font-bold mb-1">0</div>
+              <div class="text-blue-200">ADA Accessible</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur rounded-xl p-5 text-center border border-white/10">
+              <div id="result-handwash" class="text-4xl font-bold mb-1">0</div>
+              <div class="text-blue-200">Hand Wash Stations</div>
+            </div>
           </div>
-          <div class="border border-gray-200 rounded-xl p-5">
-            <div class="text-sm text-gray-500 mb-1">Weekly Rental</div>
-            <div id="cost-weekly" class="text-2xl font-bold text-gray-900">$0 - $0</div>
+
+          <!-- Extra results for luxury/shower -->
+          <div id="extra-results" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 hidden">
+            <div id="luxury-result" class="bg-yellow-500/20 backdrop-blur rounded-xl p-5 text-center border border-yellow-500/30 hidden">
+              <div id="result-luxury" class="text-4xl font-bold mb-1">0</div>
+              <div class="text-yellow-200">Luxury Restroom Trailer</div>
+            </div>
+            <div id="shower-result" class="bg-blue-500/20 backdrop-blur rounded-xl p-5 text-center border border-blue-500/30 hidden">
+              <div id="result-shower" class="text-4xl font-bold mb-1">0</div>
+              <div class="text-blue-200">Shower Trailer</div>
+            </div>
+          </div>
+
+          <div id="result-notes" class="bg-white/10 backdrop-blur rounded-xl p-4 text-sm text-blue-100 border border-white/10">
           </div>
         </div>
-        <p class="text-sm text-gray-500 mt-4">
-          * Prices vary by location, provider, and season. Contact local providers for exact quotes.
+
+        <!-- Estimated Cost -->
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-8 mb-8">
+          <h3 class="text-xl font-bold text-gray-900 mb-6">Estimated Cost Range</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl p-6 text-white">
+              <div class="text-sm text-primary-100 mb-1">Daily/Weekly Rate</div>
+              <div id="cost-daily-weekly" class="text-2xl md:text-3xl font-bold">$0 - $0</div>
+              <div class="text-xs text-primary-200 mt-2">Same price for 1-7 days</div>
+            </div>
+            <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-6 text-white">
+              <div class="text-sm text-green-100 mb-1">Monthly Rate</div>
+              <div id="cost-monthly" class="text-2xl md:text-3xl font-bold">$0 - $0</div>
+              <div class="text-xs text-green-200 mt-2">Best value for long-term</div>
+            </div>
+          </div>
+          <p class="text-sm text-gray-500 mt-4">
+            * Prices vary by location, provider, and season. Contact local providers for exact quotes.
+          </p>
+        </div>
+
+        <!-- Cost Breakdown -->
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-8 mb-8">
+          <h3 class="text-xl font-bold text-gray-900 mb-4">Price Breakdown</h3>
+          <div id="cost-breakdown" class="space-y-3">
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 md:p-8 text-center">
+          <h3 class="text-xl font-bold text-white mb-2">Ready to Rent?</h3>
+          <p class="text-slate-300 mb-6">Find porta potty providers in your area and get quotes.</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/states" class="inline-flex items-center justify-center bg-primary-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-primary-700 transition-colors shadow-lg">
+              Browse Providers
+            </a>
+            <a href="/pricing" class="inline-flex items-center justify-center border border-white/20 bg-white/10 text-white px-6 py-3 rounded-xl font-medium hover:bg-white/20 transition-colors">
+              View Full Pricing Guide
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info Section - Dark Background -->
+  <section class="py-16 md:py-20 bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">
+          How Many Porta Potties Do I Need?
+        </h2>
+        <p class="text-slate-400 text-lg">
+          Industry guidelines to help you plan
         </p>
       </div>
 
-      <!-- CTA -->
-      <div class="bg-gray-50 rounded-2xl p-6 md:p-8 text-center">
-        <h3 class="text-xl font-bold text-gray-900 mb-2">Ready to Rent?</h3>
-        <p class="text-gray-600 mb-6">Find porta potty providers in your area and get quotes.</p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/states" class="inline-flex items-center justify-center bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors">
-            Browse Providers
-          </a>
-          <a href="/search" class="inline-flex items-center justify-center border border-gray-300 bg-white text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors">
-            Search by Location
-          </a>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <!-- General Rule -->
+        <div class="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50">
+          <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-3">General Rule of Thumb</h3>
+          <ul class="space-y-2 text-slate-300 text-sm">
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+              <span><strong class="text-white">1 restroom per 100-125 people</strong> for most events</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+              <span>Add extra units if alcohol is served</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+              <span>At least 1 ADA unit for public events</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+              <span>1 hand wash station per 2-4 units</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- OSHA Requirements -->
+        <div class="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50">
+          <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-3">Construction Sites (OSHA)</h3>
+          <ul class="space-y-1 text-slate-300 text-sm">
+            <li>1-20 workers: 1 toilet</li>
+            <li>20-35 workers: 2 toilets</li>
+            <li>35-55 workers: 3 toilets</li>
+            <li>55-80 workers: 4 toilets</li>
+            <li>80-110 workers: 5 toilets</li>
+            <li>110-150 workers: 6 toilets</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Pro Tips -->
+      <div class="bg-gradient-to-r from-green-500/10 to-blue-500/10 rounded-2xl p-6 border border-green-500/20">
+        <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+          </svg>
+          Pro Tips
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-300">
+          <div class="flex items-start gap-2">
+            <span class="text-green-400">•</span>
+            <span>Book 2-3 weeks in advance, especially for peak season</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="text-green-400">•</span>
+            <span>Consider luxury trailers for weddings and upscale events</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="text-green-400">•</span>
+            <span>Place units on flat, accessible ground for delivery</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="text-green-400">•</span>
+            <span>Weekly servicing is included with most rentals</span>
+          </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Info Section -->
-    <div class="mt-12 prose prose-lg max-w-none">
-      <h2>How Many Porta Potties Do I Need?</h2>
-      <p>
-        The number of portable toilets you need depends on several factors: the number of guests,
-        event duration, and whether alcohol is being served. Here are the industry-standard guidelines:
-      </p>
+  <!-- Pricing Quick Reference -->
+  <section class="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+          Quick Pricing Reference
+        </h2>
+        <p class="text-gray-600 text-lg">
+          Typical rental rates across the industry
+        </p>
+      </div>
 
-      <h3>General Rules</h3>
-      <ul>
-        <li><strong>1 unit per 50 guests</strong> for events up to 4 hours</li>
-        <li><strong>1 unit per 35 guests</strong> for events 4-8 hours</li>
-        <li><strong>Add 20% more units</strong> if alcohol is served</li>
-        <li><strong>1 ADA unit</strong> for every 20 standard units (minimum 1 for public events)</li>
-        <li><strong>1 hand wash station</strong> for every 4 porta potties</li>
-      </ul>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="bg-white rounded-xl p-5 border border-gray-200 hover:shadow-lg transition-shadow">
+          <div class="text-2xl mb-2">🚽</div>
+          <div class="font-semibold text-gray-900">Standard Unit</div>
+          <div class="text-primary-600 font-bold">$125-195/week</div>
+          <div class="text-xs text-gray-500 mt-1">Construction use</div>
+        </div>
+        <div class="bg-white rounded-xl p-5 border border-gray-200 hover:shadow-lg transition-shadow">
+          <div class="text-2xl mb-2">✨</div>
+          <div class="font-semibold text-gray-900">Deluxe Unit</div>
+          <div class="text-primary-600 font-bold">$150-225/week</div>
+          <div class="text-xs text-gray-500 mt-1">Events & parties</div>
+        </div>
+        <div class="bg-white rounded-xl p-5 border border-gray-200 hover:shadow-lg transition-shadow">
+          <div class="text-2xl mb-2">♿</div>
+          <div class="font-semibold text-gray-900">ADA Accessible</div>
+          <div class="text-primary-600 font-bold">$150-250/week</div>
+          <div class="text-xs text-gray-500 mt-1">Wheelchair accessible</div>
+        </div>
+        <div class="bg-white rounded-xl p-5 border border-gray-200 hover:shadow-lg transition-shadow">
+          <div class="text-2xl mb-2">🧼</div>
+          <div class="font-semibold text-gray-900">Hand Wash Station</div>
+          <div class="text-primary-600 font-bold">$125-200/week</div>
+          <div class="text-xs text-gray-500 mt-1">Dual-sided sink</div>
+        </div>
+        <div class="bg-white rounded-xl p-5 border border-gray-200 hover:shadow-lg transition-shadow">
+          <div class="text-2xl mb-2">👑</div>
+          <div class="font-semibold text-gray-900">Luxury Trailer</div>
+          <div class="text-primary-600 font-bold">$1,200-2,000/week</div>
+          <div class="text-xs text-gray-500 mt-1">Climate controlled</div>
+        </div>
+        <div class="bg-white rounded-xl p-5 border border-gray-200 hover:shadow-lg transition-shadow">
+          <div class="text-2xl mb-2">🚿</div>
+          <div class="font-semibold text-gray-900">Shower Trailer</div>
+          <div class="text-primary-600 font-bold">$1,900-2,400/week</div>
+          <div class="text-xs text-gray-500 mt-1">Disaster relief</div>
+        </div>
+      </div>
 
-      <h3>Construction Sites (OSHA Requirements)</h3>
-      <p>
-        OSHA requires employers to provide toilet facilities for employees. The general requirement is:
-      </p>
-      <ul>
-        <li>1-20 workers: 1 toilet</li>
-        <li>20-35 workers: 2 toilets</li>
-        <li>35-55 workers: 3 toilets</li>
-        <li>55-80 workers: 4 toilets</li>
-        <li>80-110 workers: 5 toilets</li>
-        <li>110-150 workers: 6 toilets</li>
-      </ul>
-
-      <h3>Pro Tips</h3>
-      <ul>
-        <li>Book 2-3 weeks in advance, especially for peak season (spring/summer)</li>
-        <li>Consider luxury trailers for weddings and upscale events</li>
-        <li>Place units on flat, accessible ground for delivery trucks</li>
-        <li>Weekly servicing is standard; request more frequent service for multi-day events</li>
-      </ul>
+      <div class="text-center mt-8">
+        <a href="/pricing" class="inline-flex items-center gap-2 text-primary-600 font-semibold hover:text-primary-700 transition-colors">
+          View Complete Pricing Guide
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
     </div>
-  </div>
+  </section>
 </BaseLayout>
 
 <script>
   const form = document.getElementById('calculator-form') as HTMLFormElement;
   const resultsDiv = document.getElementById('results') as HTMLDivElement;
+
+  // Pricing data - Daily/Weekly is same rate (1-7 days), Monthly is different
+  const pricing = {
+    standard: { dailyWeekly: { low: 125, high: 195 }, monthly: { low: 175, high: 400 } },
+    deluxe: { dailyWeekly: { low: 150, high: 225 }, monthly: { low: 600, high: 900 } },
+    ada: { dailyWeekly: { low: 150, high: 250 }, monthly: { low: 600, high: 1000 } },
+    handwash: { dailyWeekly: { low: 125, high: 200 }, monthly: { low: 500, high: 1000 } },
+    luxury: { dailyWeekly: { low: 1200, high: 2000 }, monthly: { low: 4800, high: 10000 } },
+    shower: { dailyWeekly: { low: 1900, high: 2400 }, monthly: { low: 6000, high: 8000 } }
+  };
+
+  // Show/hide options based on event type
+  const eventTypeInputs = document.querySelectorAll('input[name="event_type"]');
+  const luxuryOption = document.getElementById('luxury-option');
+  const showerOption = document.getElementById('shower-option');
+  const luxuryCheckbox = document.getElementById('luxury') as HTMLInputElement;
+  const showerCheckbox = document.getElementById('shower') as HTMLInputElement;
+
+  eventTypeInputs.forEach(input => {
+    input.addEventListener('change', (e) => {
+      const eventType = (e.target as HTMLInputElement).value;
+
+      // Show shower option for construction/disaster
+      if (eventType === 'construction' || eventType === 'disaster') {
+        showerOption?.classList.remove('hidden');
+      } else {
+        showerOption?.classList.add('hidden');
+        showerCheckbox.checked = false;
+      }
+
+      // Auto-suggest luxury for weddings
+      if (eventType === 'wedding') {
+        luxuryCheckbox.checked = true;
+      }
+    });
+  });
 
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -233,87 +444,194 @@ const breadcrumbs = [
     const formData = new FormData(form);
     const eventType = formData.get('event_type') as string;
     const guests = parseInt(formData.get('guests') as string) || 100;
-    const duration = parseInt(formData.get('duration') as string) || 4;
+    const rentalDuration = formData.get('rental_duration') as string;
     const hasAlcohol = formData.get('alcohol') === 'on';
     const needsAda = formData.get('ada') === 'on';
     const needsHandwash = formData.get('handwash') === 'on';
+    const wantsLuxury = formData.get('luxury') === 'on';
+    const wantsShower = formData.get('shower') === 'on';
 
-    let unitsPerGuest: number;
+    let standardUnits: number;
     let notes: string[] = [];
+    let unitType = 'deluxe'; // Default for events
 
-    // Calculate base units based on event type and duration
-    if (eventType === 'construction') {
-      // OSHA guidelines for construction
-      if (guests <= 20) unitsPerGuest = 1 / guests;
-      else if (guests <= 35) unitsPerGuest = 2 / guests;
-      else if (guests <= 55) unitsPerGuest = 3 / guests;
-      else if (guests <= 80) unitsPerGuest = 4 / guests;
-      else if (guests <= 110) unitsPerGuest = 5 / guests;
-      else unitsPerGuest = 6 / guests + (guests - 150) / 40 / guests;
+    // Calculate base units based on event type
+    if (eventType === 'construction' || eventType === 'longterm') {
+      // OSHA guidelines for construction sites
+      unitType = 'standard';
+      if (guests <= 20) standardUnits = 1;
+      else if (guests <= 35) standardUnits = 2;
+      else if (guests <= 55) standardUnits = 3;
+      else if (guests <= 80) standardUnits = 4;
+      else if (guests <= 110) standardUnits = 5;
+      else if (guests <= 150) standardUnits = 6;
+      else standardUnits = 6 + Math.ceil((guests - 150) / 40);
 
       notes.push('Based on OSHA construction site requirements');
     } else {
-      // Event-based calculation
-      if (duration <= 4) {
-        unitsPerGuest = 1 / 50;
-      } else if (duration <= 8) {
-        unitsPerGuest = 1 / 35;
-      } else {
-        unitsPerGuest = 1 / 25;
-      }
+      // Events: 1 restroom per 100-125 people (using 100 as base)
+      standardUnits = Math.ceil(guests / 100);
 
       if (eventType === 'festival') {
-        unitsPerGuest *= 1.25; // Festivals need more
-        notes.push('Festival events typically need 25% more units due to higher usage');
+        // Festivals may need slightly more due to all-day usage
+        standardUnits = Math.ceil(guests / 75);
+        notes.push('Festival calculation accounts for extended usage periods');
+      }
+
+      if (eventType === 'disaster') {
+        unitType = 'standard';
+        standardUnits = Math.ceil(guests / 75);
+        notes.push('Disaster relief may require more frequent servicing');
       }
 
       if (eventType === 'wedding') {
-        notes.push('Consider luxury restroom trailers for a more upscale experience');
+        notes.push('Luxury restroom trailers recommended for upscale experience');
       }
-    }
 
-    let standardUnits = Math.ceil(guests * unitsPerGuest);
-
-    // Alcohol adjustment
-    if (hasAlcohol && eventType !== 'construction') {
-      standardUnits = Math.ceil(standardUnits * 1.2);
-      notes.push('Added 20% for alcohol service');
+      // Alcohol adjustment - add 1 extra unit for every 200 guests
+      if (hasAlcohol) {
+        const extraUnits = Math.ceil(guests / 200);
+        standardUnits += extraUnits;
+        notes.push(`Added ${extraUnits} extra unit${extraUnits > 1 ? 's' : ''} for alcohol service`);
+      }
     }
 
     // Minimum 1 unit
     standardUnits = Math.max(1, standardUnits);
 
-    // ADA units (1 per 20 standard, minimum 1)
+    // ADA units (minimum 1 for public events)
     let adaUnits = 0;
     if (needsAda) {
-      adaUnits = Math.max(1, Math.ceil(standardUnits / 20));
+      adaUnits = Math.max(1, Math.ceil(standardUnits / 15));
     }
 
-    // Hand wash stations (1 per 4 units)
+    // Hand wash stations (1 per 2-3 units)
     let handwashUnits = 0;
     if (needsHandwash) {
-      handwashUnits = Math.max(1, Math.ceil(standardUnits / 4));
+      handwashUnits = Math.max(1, Math.ceil(standardUnits / 3));
     }
 
-    // Cost estimates (rough ranges)
-    const standardDailyCost = { low: 75, high: 150 };
-    const adaDailyCost = { low: 150, high: 250 };
-    const handwashDailyCost = { low: 50, high: 100 };
+    // Luxury trailers (typically 1 for smaller events, 1 per 150 for larger)
+    let luxuryUnits = 0;
+    if (wantsLuxury) {
+      luxuryUnits = Math.max(1, Math.ceil(guests / 150));
+      // Reduce standard units since luxury trailers have multiple stalls
+      standardUnits = Math.max(0, standardUnits - (luxuryUnits * 2));
+    }
 
-    const dailyLow = (standardUnits * standardDailyCost.low) + (adaUnits * adaDailyCost.low) + (handwashUnits * handwashDailyCost.low);
-    const dailyHigh = (standardUnits * standardDailyCost.high) + (adaUnits * adaDailyCost.high) + (handwashUnits * handwashDailyCost.high);
-    const weeklyLow = Math.round(dailyLow * 5);
-    const weeklyHigh = Math.round(dailyHigh * 5);
+    // Shower trailers
+    let showerUnits = 0;
+    if (wantsShower) {
+      showerUnits = Math.max(1, Math.ceil(guests / 100));
+    }
+
+    // Calculate costs
+    const unitPricing = unitType === 'standard' ? pricing.standard : pricing.deluxe;
+
+    let dailyWeeklyLow = (standardUnits * unitPricing.dailyWeekly.low) +
+                    (adaUnits * pricing.ada.dailyWeekly.low) +
+                    (handwashUnits * pricing.handwash.dailyWeekly.low) +
+                    (luxuryUnits * pricing.luxury.dailyWeekly.low) +
+                    (showerUnits * pricing.shower.dailyWeekly.low);
+
+    let dailyWeeklyHigh = (standardUnits * unitPricing.dailyWeekly.high) +
+                     (adaUnits * pricing.ada.dailyWeekly.high) +
+                     (handwashUnits * pricing.handwash.dailyWeekly.high) +
+                     (luxuryUnits * pricing.luxury.dailyWeekly.high) +
+                     (showerUnits * pricing.shower.dailyWeekly.high);
+
+    let monthlyLow = (standardUnits * unitPricing.monthly.low) +
+                     (adaUnits * pricing.ada.monthly.low) +
+                     (handwashUnits * pricing.handwash.monthly.low) +
+                     (luxuryUnits * pricing.luxury.monthly.low) +
+                     (showerUnits * pricing.shower.monthly.low);
+
+    let monthlyHigh = (standardUnits * unitPricing.monthly.high) +
+                      (adaUnits * pricing.ada.monthly.high) +
+                      (handwashUnits * pricing.handwash.monthly.high) +
+                      (luxuryUnits * pricing.luxury.monthly.high) +
+                      (showerUnits * pricing.shower.monthly.high);
 
     // Update results
     document.getElementById('result-standard')!.textContent = standardUnits.toString();
+    document.getElementById('result-standard-label')!.textContent =
+      unitType === 'standard' ? 'Standard Units' : 'Deluxe Units';
     document.getElementById('result-ada')!.textContent = adaUnits.toString();
     document.getElementById('result-handwash')!.textContent = handwashUnits.toString();
+
+    // Show luxury/shower results if applicable
+    const extraResults = document.getElementById('extra-results');
+    const luxuryResult = document.getElementById('luxury-result');
+    const showerResult = document.getElementById('shower-result');
+
+    if (luxuryUnits > 0 || showerUnits > 0) {
+      extraResults?.classList.remove('hidden');
+
+      if (luxuryUnits > 0) {
+        luxuryResult?.classList.remove('hidden');
+        document.getElementById('result-luxury')!.textContent = luxuryUnits.toString();
+      } else {
+        luxuryResult?.classList.add('hidden');
+      }
+
+      if (showerUnits > 0) {
+        showerResult?.classList.remove('hidden');
+        document.getElementById('result-shower')!.textContent = showerUnits.toString();
+      } else {
+        showerResult?.classList.add('hidden');
+      }
+    } else {
+      extraResults?.classList.add('hidden');
+    }
+
+    // Notes
     document.getElementById('result-notes')!.innerHTML = notes.length > 0
       ? '<strong>Notes:</strong> ' + notes.join(' • ')
-      : 'Based on industry standard calculations.';
-    document.getElementById('cost-daily')!.textContent = `$${dailyLow.toLocaleString()} - $${dailyHigh.toLocaleString()}`;
-    document.getElementById('cost-weekly')!.textContent = `$${weeklyLow.toLocaleString()} - $${weeklyHigh.toLocaleString()}`;
+      : 'Based on industry standard of 1 restroom per 100-125 people.';
+
+    // Costs
+    document.getElementById('cost-daily-weekly')!.textContent = `$${dailyWeeklyLow.toLocaleString()} - $${dailyWeeklyHigh.toLocaleString()}`;
+    document.getElementById('cost-monthly')!.textContent = `$${monthlyLow.toLocaleString()} - $${monthlyHigh.toLocaleString()}`;
+
+    // Build cost breakdown
+    const breakdown: string[] = [];
+    if (standardUnits > 0) {
+      const label = unitType === 'standard' ? 'Standard Porta Potty' : 'Deluxe Porta Potty';
+      breakdown.push(`<div class="flex justify-between py-3 border-b border-gray-100">
+        <span class="text-gray-600">${standardUnits}x ${label}</span>
+        <span class="font-medium text-gray-900">$${(standardUnits * unitPricing.dailyWeekly.low).toLocaleString()} - $${(standardUnits * unitPricing.dailyWeekly.high).toLocaleString()}</span>
+      </div>`);
+    }
+    if (adaUnits > 0) {
+      breakdown.push(`<div class="flex justify-between py-3 border-b border-gray-100">
+        <span class="text-gray-600">${adaUnits}x ADA Accessible</span>
+        <span class="font-medium text-gray-900">$${(adaUnits * pricing.ada.dailyWeekly.low).toLocaleString()} - $${(adaUnits * pricing.ada.dailyWeekly.high).toLocaleString()}</span>
+      </div>`);
+    }
+    if (handwashUnits > 0) {
+      breakdown.push(`<div class="flex justify-between py-3 border-b border-gray-100">
+        <span class="text-gray-600">${handwashUnits}x Hand Wash Station</span>
+        <span class="font-medium text-gray-900">$${(handwashUnits * pricing.handwash.dailyWeekly.low).toLocaleString()} - $${(handwashUnits * pricing.handwash.dailyWeekly.high).toLocaleString()}</span>
+      </div>`);
+    }
+    if (luxuryUnits > 0) {
+      breakdown.push(`<div class="flex justify-between py-3 border-b border-gray-100">
+        <span class="text-gray-600">${luxuryUnits}x Luxury Restroom Trailer</span>
+        <span class="font-medium text-gray-900">$${(luxuryUnits * pricing.luxury.dailyWeekly.low).toLocaleString()} - $${(luxuryUnits * pricing.luxury.dailyWeekly.high).toLocaleString()}</span>
+      </div>`);
+    }
+    if (showerUnits > 0) {
+      breakdown.push(`<div class="flex justify-between py-3 border-b border-gray-100">
+        <span class="text-gray-600">${showerUnits}x Shower Trailer</span>
+        <span class="font-medium text-gray-900">$${(showerUnits * pricing.shower.dailyWeekly.low).toLocaleString()} - $${(showerUnits * pricing.shower.dailyWeekly.high).toLocaleString()}</span>
+      </div>`);
+    }
+
+    document.getElementById('cost-breakdown')!.innerHTML = breakdown.join('') +
+      `<div class="flex justify-between py-3 font-semibold text-lg">
+        <span class="text-gray-900">Total (Daily/Weekly)</span>
+        <span class="text-primary-600">$${dailyWeeklyLow.toLocaleString()} - $${dailyWeeklyHigh.toLocaleString()}</span>
+      </div>`;
 
     // Show results
     resultsDiv.classList.remove('hidden');
