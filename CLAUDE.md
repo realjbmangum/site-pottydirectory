@@ -58,3 +58,4 @@ Table: `potty` in Supabase
 - `SESSION-SUMMARY-2024-12-10.md` - Blog section, email outreach skill
 - `SESSION-SUMMARY-2024-12-18.md` - Pagination fix, featured/verified flags
 - `SESSION-SUMMARY-2024-12-21.md` - Homepage redesign
+- `SESSION-SUMMARY-2024-12-22.md` - Calculator/pricing fix with correct rates and redesign
