@@ -23,13 +23,21 @@ export interface Vendor {
   rating?: number;
   review_count?: number;
   photo_url?: string;
-  hours?: Record<string, string>;
+  hours?: Record<string, string> | string;
   linkedin?: string;
   instagram?: string;
   facebook?: string;
   description?: string;
   featured?: boolean;
   verified?: boolean;
+  // Feature flags
+  has_luxury?: boolean;
+  has_ada?: boolean;
+  has_handwash?: boolean;
+  has_shower?: boolean;
+  has_trailer?: boolean;
+  has_construction?: boolean;
+  has_events?: boolean;
   created_at: string;
 }
 
