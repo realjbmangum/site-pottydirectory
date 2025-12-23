@@ -64,11 +64,13 @@ const breadcrumbs = [
   description={`Find portable restroom rental companies in ${state.name}. Browse ${totalVendors} verified providers across ${allCities.length} cities for construction, events, weddings, and more.`}
 >
   <!-- Hero -->
-  <section class="relative bg-gradient-to-br from-slate-900 via-primary-900 to-slate-900 text-white py-16 overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-      <img src="/images/hero-pattern.png" alt="" class="w-full h-full object-cover" />
+  <section class="relative min-h-[350px] flex items-center overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="/images/herotile.jpeg" alt="" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-primary-900/90 to-slate-900/80"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-slate-900/50"></div>
     </div>
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
       <Breadcrumb items={breadcrumbs} />
       <div class="mt-6">
         <div class="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-4">
