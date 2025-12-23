@@ -34,6 +34,20 @@ const rating = vendor.rating || 0;
 const reviewCount = vendor.review_count || 0;
 const hasAddress = vendor.street_address || vendor.postal_code;
 
+// Parse hours if it's a JSON string
+let parsedHours = null;
+if (vendor.hours) {
+  if (typeof vendor.hours === 'string') {
+    try {
+      parsedHours = JSON.parse(vendor.hours);
+    } catch (e) {
+      console.error('Failed to parse hours:', e);
+    }
+  } else if (typeof vendor.hours === 'object') {
+    parsedHours = vendor.hours;
+  }
+}
+
 const breadcrumbs = [
   { label: 'Home', href: '/' },
   { label: vendor.state, href: `/${stateSlug}` },
@@ -285,13 +299,13 @@ const breadcrumbs = [
         )}
 
         <!-- Business Hours -->
-        {vendor.hours && Object.keys(vendor.hours).length > 0 && (
+        {parsedHours && Object.keys(parsedHours).length > 0 && (
           <div class="mb-10">
             <h2 class="text-xl font-bold text-gray-900 mb-4">Business Hours</h2>
             <div class="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden">
               <div class="divide-y divide-gray-200">
                 {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => {
-                  const hours = vendor.hours?.[day] || vendor.hours?.[day.toLowerCase()];
+                  const hours = parsedHours?.[day] || parsedHours?.[day.toLowerCase()];
                   const isToday = new Date().toLocaleDateString('en-US', { weekday: 'long' }) === day;
                   return (
                     <div class={`flex justify-between px-4 py-3 ${isToday ? 'bg-primary-50' : ''}`}>
