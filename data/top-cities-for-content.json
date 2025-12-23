@@ -1,0 +1,402 @@
+[
+  {
+    "city": "New York",
+    "state": "New York",
+    "state_abbr": "NY",
+    "city_slug": "new-york",
+    "state_slug": "new-york",
+    "vendor_count": 32
+  },
+  {
+    "city": "Charlotte",
+    "state": "North Carolina",
+    "state_abbr": "NC",
+    "city_slug": "charlotte",
+    "state_slug": "north-carolina",
+    "vendor_count": 29
+  },
+  {
+    "city": "Brooklyn",
+    "state": "New York",
+    "state_abbr": "NY",
+    "city_slug": "brooklyn",
+    "state_slug": "new-york",
+    "vendor_count": 16
+  },
+  {
+    "city": "Greensboro",
+    "state": "North Carolina",
+    "state_abbr": "NC",
+    "city_slug": "greensboro",
+    "state_slug": "north-carolina",
+    "vendor_count": 13
+  },
+  {
+    "city": "Unknown",
+    "state": "North Carolina",
+    "state_abbr": "NC",
+    "city_slug": "unknown",
+    "state_slug": "north-carolina",
+    "vendor_count": 13
+  },
+  {
+    "city": "Fayetteville",
+    "state": "North Carolina",
+    "state_abbr": "NC",
+    "city_slug": "fayetteville",
+    "state_slug": "north-carolina",
+    "vendor_count": 12
+  },
+  {
+    "city": "Midland",
+    "state": "Texas",
+    "state_abbr": "TX",
+    "city_slug": "midland",
+    "state_slug": "texas",
+    "vendor_count": 10
+  },
+  {
+    "city": "Phoenix",
+    "state": "Arizona",
+    "state_abbr": "AZ",
+    "city_slug": "phoenix",
+    "state_slug": "arizona",
+    "vendor_count": 10
+  },
+  {
+    "city": "Colorado Springs",
+    "state": "Colorado",
+    "state_abbr": "CO",
+    "city_slug": "colorado-springs",
+    "state_slug": "colorado",
+    "vendor_count": 8
+  },
+  {
+    "city": "Greenville",
+    "state": "North Carolina",
+    "state_abbr": "NC",
+    "city_slug": "greenville",
+    "state_slug": "north-carolina",
+    "vendor_count": 8
+  },
+  {
+    "city": "Jersey City",
+    "state": "New Jersey",
+    "state_abbr": "NJ",
+    "city_slug": "jersey-city",
+    "state_slug": "new-jersey",
+    "vendor_count": 8
+  },
+  {
+    "city": "Raleigh",
+    "state": "North Carolina",
+    "state_abbr": "NC",
+    "city_slug": "raleigh",
+    "state_slug": "north-carolina",
+    "vendor_count": 8
+  },
+  {
+    "city": "Fresno",
+    "state": "California",
+    "state_abbr": "CA",
+    "city_slug": "fresno",
+    "state_slug": "california",
+    "vendor_count": 7
+  },
+  {
+    "city": "Houston",
+    "state": "Texas",
+    "state_abbr": "TX",
+    "city_slug": "houston",
+    "state_slug": "texas",
+    "vendor_count": 7
+  },
+  {
+    "city": "Nashville",
+    "state": "Tennessee",
+    "state_abbr": "TN",
+    "city_slug": "nashville",
+    "state_slug": "tennessee",
+    "vendor_count": 7
+  },
+  {
+    "city": "Bakersfield",
+    "state": "California",
+    "state_abbr": "CA",
+    "city_slug": "bakersfield",
+    "state_slug": "california",
+    "vendor_count": 6
+  },
+  {
+    "city": "Indianapolis",
+    "state": "Indiana",
+    "state_abbr": "IN",
+    "city_slug": "indianapolis",
+    "state_slug": "indiana",
+    "vendor_count": 6
+  },
+  {
+    "city": "Kansas City",
+    "state": "Missouri",
+    "state_abbr": "MO",
+    "city_slug": "kansas-city",
+    "state_slug": "missouri",
+    "vendor_count": 6
+  },
+  {
+    "city": "Louisville",
+    "state": "Kentucky",
+    "state_abbr": "KY",
+    "city_slug": "louisville",
+    "state_slug": "kentucky",
+    "vendor_count": 6
+  },
+  {
+    "city": "New Orleans",
+    "state": "Louisiana",
+    "state_abbr": "LA",
+    "city_slug": "new-orleans",
+    "state_slug": "louisiana",
+    "vendor_count": 6
+  },
+  {
+    "city": "Orlando",
+    "state": "Florida",
+    "state_abbr": "FL",
+    "city_slug": "orlando",
+    "state_slug": "florida",
+    "vendor_count": 6
+  },
+  {
+    "city": "Winston-Salem",
+    "state": "North Carolina",
+    "state_abbr": "NC",
+    "city_slug": "winston-salem",
+    "state_slug": "north-carolina",
+    "vendor_count": 6
+  },
+  {
+    "city": "Bronx",
+    "state": "New York",
+    "state_abbr": "NY",
+    "city_slug": "bronx",
+    "state_slug": "new-york",
+    "vendor_count": 5
+  },
+  {
+    "city": "Clifton",
+    "state": "New Jersey",
+    "state_abbr": "NJ",
+    "city_slug": "clifton",
+    "state_slug": "new-jersey",
+    "vendor_count": 5
+  },
+  {
+    "city": "Des Moines",
+    "state": "Iowa",
+    "state_abbr": "IA",
+    "city_slug": "des-moines",
+    "state_slug": "iowa",
+    "vendor_count": 5
+  },
+  {
+    "city": "Jackson",
+    "state": "Mississippi",
+    "state_abbr": "MS",
+    "city_slug": "jackson",
+    "state_slug": "mississippi",
+    "vendor_count": 5
+  },
+  {
+    "city": "Lexington",
+    "state": "Kentucky",
+    "state_abbr": "KY",
+    "city_slug": "lexington",
+    "state_slug": "kentucky",
+    "vendor_count": 5
+  },
+  {
+    "city": "Memphis",
+    "state": "Tennessee",
+    "state_abbr": "TN",
+    "city_slug": "memphis",
+    "state_slug": "tennessee",
+    "vendor_count": 5
+  },
+  {
+    "city": "Savannah",
+    "state": "Georgia",
+    "state_abbr": "GA",
+    "city_slug": "savannah",
+    "state_slug": "georgia",
+    "vendor_count": 5
+  },
+  {
+    "city": "Tampa",
+    "state": "Florida",
+    "state_abbr": "FL",
+    "city_slug": "tampa",
+    "state_slug": "florida",
+    "vendor_count": 5
+  },
+  {
+    "city": "Traverse City",
+    "state": "Michigan",
+    "state_abbr": "MI",
+    "city_slug": "traverse-city",
+    "state_slug": "michigan",
+    "vendor_count": 5
+  },
+  {
+    "city": "Wichita",
+    "state": "Kansas",
+    "state_abbr": "KS",
+    "city_slug": "wichita",
+    "state_slug": "kansas",
+    "vendor_count": 5
+  },
+  {
+    "city": "Asheville",
+    "state": "North Carolina",
+    "state_abbr": "NC",
+    "city_slug": "asheville",
+    "state_slug": "north-carolina",
+    "vendor_count": 4
+  },
+  {
+    "city": "Austin",
+    "state": "Texas",
+    "state_abbr": "TX",
+    "city_slug": "austin",
+    "state_slug": "texas",
+    "vendor_count": 4
+  },
+  {
+    "city": "Baton Rouge",
+    "state": "Louisiana",
+    "state_abbr": "LA",
+    "city_slug": "baton-rouge",
+    "state_slug": "louisiana",
+    "vendor_count": 4
+  },
+  {
+    "city": "Boston",
+    "state": "Massachusetts",
+    "state_abbr": "MA",
+    "city_slug": "boston",
+    "state_slug": "massachusetts",
+    "vendor_count": 4
+  },
+  {
+    "city": "Denver",
+    "state": "North Carolina",
+    "state_abbr": "NC",
+    "city_slug": "denver",
+    "state_slug": "north-carolina",
+    "vendor_count": 4
+  },
+  {
+    "city": "Durham",
+    "state": "North Carolina",
+    "state_abbr": "NC",
+    "city_slug": "durham",
+    "state_slug": "north-carolina",
+    "vendor_count": 4
+  },
+  {
+    "city": "Myrtle Beach",
+    "state": "South Carolina",
+    "state_abbr": "SC",
+    "city_slug": "myrtle-beach",
+    "state_slug": "south-carolina",
+    "vendor_count": 4
+  },
+  {
+    "city": "North Bergen",
+    "state": "New Jersey",
+    "state_abbr": "NJ",
+    "city_slug": "north-bergen",
+    "state_slug": "new-jersey",
+    "vendor_count": 4
+  },
+  {
+    "city": "Odessa",
+    "state": "Texas",
+    "state_abbr": "TX",
+    "city_slug": "odessa",
+    "state_slug": "texas",
+    "vendor_count": 4
+  },
+  {
+    "city": "Salinas",
+    "state": "California",
+    "state_abbr": "CA",
+    "city_slug": "salinas",
+    "state_slug": "california",
+    "vendor_count": 4
+  },
+  {
+    "city": "Secaucus",
+    "state": "New Jersey",
+    "state_abbr": "NJ",
+    "city_slug": "secaucus",
+    "state_slug": "new-jersey",
+    "vendor_count": 4
+  },
+  {
+    "city": "Springfield",
+    "state": "Missouri",
+    "state_abbr": "MO",
+    "city_slug": "springfield",
+    "state_slug": "missouri",
+    "vendor_count": 4
+  },
+  {
+    "city": "Union City",
+    "state": "New Jersey",
+    "state_abbr": "NJ",
+    "city_slug": "union-city",
+    "state_slug": "new-jersey",
+    "vendor_count": 4
+  },
+  {
+    "city": "Auburn",
+    "state": "Alabama",
+    "state_abbr": "AL",
+    "city_slug": "auburn",
+    "state_slug": "alabama",
+    "vendor_count": 3
+  },
+  {
+    "city": "Cary",
+    "state": "North Carolina",
+    "state_abbr": "NC",
+    "city_slug": "cary",
+    "state_slug": "north-carolina",
+    "vendor_count": 3
+  },
+  {
+    "city": "Commerce City",
+    "state": "Colorado",
+    "state_abbr": "CO",
+    "city_slug": "commerce-city",
+    "state_slug": "colorado",
+    "vendor_count": 3
+  },
+  {
+    "city": "Cumming",
+    "state": "Georgia",
+    "state_abbr": "GA",
+    "city_slug": "cumming",
+    "state_slug": "georgia",
+    "vendor_count": 3
+  },
+  {
+    "city": "Fort Wayne",
+    "state": "Indiana",
+    "state_abbr": "IN",
+    "city_slug": "fort-wayne",
+    "state_slug": "indiana",
+    "vendor_count": 3
+  }
+]
