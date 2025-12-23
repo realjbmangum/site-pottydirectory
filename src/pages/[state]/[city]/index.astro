@@ -116,21 +116,54 @@ const servicesOffered = vendors.length > 0
   description={`Find ${vendors.length} portable restroom rental companies in ${cityName}, ${stateName}. Compare local porta potty providers for construction, events, weddings, and more.`}
   noindex={vendors.length === 0}
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <Breadcrumb items={breadcrumbs} />
-
-    <!-- Header -->
-    <div class="mb-10">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-        Porta Potty Rentals in {cityName}, {stateAbbr}
-      </h1>
-      <p class="text-xl text-gray-600">
-        {vendors.length > 0
-          ? `Compare ${vendors.length} portable restroom ${vendors.length === 1 ? 'provider' : 'providers'} in ${cityName}`
-          : `No providers listed in ${cityName} yet.`}
-      </p>
+  <!-- Hero -->
+  <section class="relative bg-gradient-to-br from-slate-900 via-primary-900 to-slate-900 text-white py-16 overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <img src="/images/hero-pattern.png" alt="" class="w-full h-full object-cover" />
     </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Breadcrumb items={breadcrumbs} />
+      <div class="mt-6">
+        <div class="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-4">
+          <svg class="w-5 h-5 text-primary-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <span class="text-sm font-medium">{cityName}, {stateAbbr}</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+          Porta Potty Rentals in {cityName}, {stateAbbr}
+        </h1>
+        <p class="text-xl text-blue-100 max-w-2xl mb-6">
+          {vendors.length > 0
+            ? `Compare ${vendors.length} portable restroom ${vendors.length === 1 ? 'provider' : 'providers'} in ${cityName}`
+            : `Find porta potty rental companies in ${cityName}`}
+        </p>
+        {vendors.length > 0 && (
+          <div class="flex flex-wrap gap-4 text-sm">
+            <div class="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+              <span class="text-2xl font-bold text-white mr-2">{vendors.length}</span>
+              <span class="text-blue-200">Local Providers</span>
+            </div>
+            <div class="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+              <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-blue-200">Verified Listings</span>
+            </div>
+            <div class="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+              <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-blue-200">Free Quotes</span>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
 
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Ad -->
     <div class="mb-8">
       <AdSlot slot="header" />

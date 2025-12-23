@@ -63,21 +63,48 @@ const breadcrumbs = [
   title={`Porta Potty Rentals in ${state.name} | Find Local Providers`}
   description={`Find portable restroom rental companies in ${state.name}. Browse ${totalVendors} verified providers across ${allCities.length} cities for construction, events, weddings, and more.`}
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <Breadcrumb items={breadcrumbs} />
-
-    <!-- Header -->
-    <div class="mb-10">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-        Porta Potty Rentals in {state.name}
-      </h1>
-      <p class="text-xl text-gray-600">
-        {totalVendors > 0
-          ? `Browse ${totalVendors} portable restroom ${totalVendors === 1 ? 'provider' : 'providers'} across ${citiesWithProviders} ${citiesWithProviders === 1 ? 'city' : 'cities'} in ${state.name}`
-          : `Find porta potty rental companies in ${allCities.length} cities across ${state.name}`}
-      </p>
+  <!-- Hero -->
+  <section class="relative bg-gradient-to-br from-slate-900 via-primary-900 to-slate-900 text-white py-16 overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <img src="/images/hero-pattern.png" alt="" class="w-full h-full object-cover" />
     </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Breadcrumb items={breadcrumbs} />
+      <div class="mt-6">
+        <div class="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-4">
+          <svg class="w-5 h-5 text-primary-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <span class="text-sm font-medium">{state.abbr} Directory</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+          Porta Potty Rentals in {state.name}
+        </h1>
+        <p class="text-xl text-blue-100 max-w-2xl mb-6">
+          {totalVendors > 0
+            ? `Browse ${totalVendors} portable restroom ${totalVendors === 1 ? 'provider' : 'providers'} across ${citiesWithProviders} ${citiesWithProviders === 1 ? 'city' : 'cities'} in ${state.name}`
+            : `Find porta potty rental companies in ${allCities.length} cities across ${state.name}`}
+        </p>
+        <div class="flex flex-wrap gap-6 text-sm">
+          <div class="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+            <span class="text-2xl font-bold text-white mr-2">{totalVendors}</span>
+            <span class="text-blue-200">Providers</span>
+          </div>
+          <div class="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+            <span class="text-2xl font-bold text-white mr-2">{citiesWithProviders}</span>
+            <span class="text-blue-200">Cities</span>
+          </div>
+          <div class="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+            <span class="text-2xl font-bold text-white mr-2">{allCities.length}</span>
+            <span class="text-blue-200">Total Areas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Ad -->
     <div class="mb-8">
       <AdSlot slot="header" />
