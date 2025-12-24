@@ -6,7 +6,7 @@ import VendorFilter from '../../../components/VendorFilter.astro';
 import AdSlot from '../../../components/AdSlot.astro';
 import states from '../../../data/states.json';
 import topCities from '../../../data/top-cities.json';
-import { getAllCitiesWithState, getVendorsByCity } from '../../../lib/supabase';
+import { getAllCitiesWithState, getVendorsByCity, getCityContent, type CityContent } from '../../../lib/supabase';
 import { citySlug, cityFromSlug } from '../../../lib/utils';
 
 export async function getStaticPaths() {
@@ -85,6 +85,14 @@ try {
   console.error('Error fetching vendors:', error);
 }
 
+// Fetch SEO city content
+let cityContent: CityContent | null = null;
+try {
+  cityContent = await getCityContent(cityName, stateName);
+} catch (error) {
+  console.error('Error fetching city content:', error);
+}
+
 const breadcrumbs = [
   { label: 'Home', href: '/' },
   { label: stateName, href: `/${stateSlug}` },
@@ -131,9 +139,9 @@ const servicesOffered = vendors.length > 0
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
-          <span class="text-sm font-medium">{cityName}, {stateAbbr}</span>
+          <span class="text-sm font-medium text-white">{cityName}, {stateAbbr}</span>
         </div>
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">
           Porta Potty Rentals in {cityName}, {stateAbbr}
         </h1>
         <p class="text-xl text-blue-100 max-w-2xl mb-6">
@@ -428,16 +436,61 @@ const servicesOffered = vendors.length > 0
       <h2 class="text-2xl font-bold text-gray-900 mb-4">
         About Porta Potty Rentals in {cityName}, {stateName}
       </h2>
-      <p class="text-gray-600 mb-4">
-        Finding reliable portable restroom rentals in {cityName} doesn't have to be difficult. Our directory connects you with
-        {vendors.length > 0 ? `${vendors.length} verified local providers` : 'trusted providers'} offering everything from basic
-        construction site units to luxury restroom trailers for upscale events.
-      </p>
-      <p class="text-gray-600 mb-4">
-        {cityName} residents and businesses commonly rent porta potties for construction projects, outdoor weddings,
-        community festivals, sporting events, and home renovations. With {stateName}'s {isHighCost ? 'higher cost of living' : isLowCost ? 'competitive pricing' : 'moderate pricing'},
-        you can expect rental rates {isHighCost ? 'on the higher end of the national average' : isLowCost ? 'below the national average' : 'close to the national average'}.
-      </p>
+
+      {cityContent?.intro_paragraph ? (
+        <>
+          <p class="text-gray-600 mb-4">{cityContent.intro_paragraph}</p>
+
+          {cityContent.local_tips && (
+            <div class="bg-white rounded-lg border border-gray-200 p-4 mb-4">
+              <h3 class="font-semibold text-gray-900 mb-2 flex items-center">
+                <svg class="w-5 h-5 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Local Tips
+              </h3>
+              <p class="text-gray-600 text-sm">{cityContent.local_tips}</p>
+            </div>
+          )}
+
+          {cityContent.peak_season && (
+            <div class="bg-amber-50 rounded-lg border border-amber-200 p-4 mb-4">
+              <h3 class="font-semibold text-amber-800 mb-2 flex items-center">
+                <svg class="w-5 h-5 text-amber-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Peak Season
+              </h3>
+              <p class="text-amber-700 text-sm">{cityContent.peak_season}</p>
+            </div>
+          )}
+
+          {cityContent.popular_for && cityContent.popular_for.length > 0 && (
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-sm text-gray-500">Popular for:</span>
+              {cityContent.popular_for.map((use: string) => (
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
+                  {use}
+                </span>
+              ))}
+            </div>
+          )}
+        </>
+      ) : (
+        <>
+          <p class="text-gray-600 mb-4">
+            Finding reliable portable restroom rentals in {cityName} doesn't have to be difficult. Our directory connects you with
+            {vendors.length > 0 ? ` ${vendors.length} verified local providers` : ' trusted providers'} offering everything from basic
+            construction site units to luxury restroom trailers for upscale events.
+          </p>
+          <p class="text-gray-600 mb-4">
+            {cityName} residents and businesses commonly rent porta potties for construction projects, outdoor weddings,
+            community festivals, sporting events, and home renovations. With {stateName}'s {isHighCost ? 'higher cost of living' : isLowCost ? 'competitive pricing' : 'moderate pricing'},
+            you can expect rental rates {isHighCost ? 'on the higher end of the national average' : isLowCost ? 'below the national average' : 'close to the national average'}.
+          </p>
+        </>
+      )}
+
       <p class="text-gray-600">
         All providers in our {cityName} directory are verified for legitimacy and service quality. We confirm contact information,
         check service areas, and monitor customer feedback to ensure you're connecting with reputable companies.

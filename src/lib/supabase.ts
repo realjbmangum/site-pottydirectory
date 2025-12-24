@@ -331,6 +331,39 @@ export async function getBlogById(id: string, siteId: string = 'potty') {
   return data as ContentQuestion;
 }
 
+// City content interface
+export interface CityContent {
+  id: string;
+  city: string;
+  state: string;
+  intro_paragraph: string | null;
+  local_tips: string | null;
+  peak_season: string | null;
+  popular_for: string[] | null;
+  status: 'draft' | 'review' | 'published';
+  created_at: string;
+  updated_at: string;
+}
+
+// Get city content for SEO
+export async function getCityContent(city: string, state: string): Promise<CityContent | null> {
+  const { data, error } = await supabase
+    .from('city_content')
+    .select('*')
+    .eq('city', city)
+    .eq('state', state)
+    .eq('status', 'published')
+    .single();
+
+  if (error) {
+    // Not found is okay, return null
+    if (error.code === 'PGRST116') return null;
+    console.error('Error fetching city content:', error);
+    return null;
+  }
+  return data as CityContent;
+}
+
 export async function getSiteStats() {
   // Paginate to get all vendors for accurate stats
   const allData: { state: string; rating: number | null }[] = [];
