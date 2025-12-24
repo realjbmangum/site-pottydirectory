@@ -155,6 +155,40 @@ export async function getVendorsByStateWithCoords(state: string): Promise<Vendor
   return allVendors;
 }
 
+export async function getAllVendorsWithCoords(): Promise<Vendor[]> {
+  // Fetch all vendors with coordinates for national map
+  const pageSize = 1000;
+  let offset = 0;
+  let hasMore = true;
+  const allVendors: Vendor[] = [];
+
+  while (hasMore) {
+    const { data, error } = await supabase
+      .from('potty')
+      .select(`
+        id, business_name, slug, city, state, phone,
+        latitude, longitude, rating, review_count,
+        has_luxury, has_ada, has_trailer, serves_construction, serves_events,
+        website, verified
+      `)
+      .not('latitude', 'is', null)
+      .not('longitude', 'is', null)
+      .range(offset, offset + pageSize - 1);
+
+    if (error) throw error;
+
+    if (data && data.length > 0) {
+      allVendors.push(...(data as Vendor[]));
+      offset += pageSize;
+      hasMore = data.length === pageSize;
+    } else {
+      hasMore = false;
+    }
+  }
+
+  return allVendors;
+}
+
 export async function getVendorCountByState() {
   // Paginate to get all vendors (Supabase default limit is 1000)
   const allData: { state: string }[] = [];

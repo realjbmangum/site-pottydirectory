@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StateCard from '../components/StateCard.astro';
+import NationalMap from '../components/NationalMap.astro';
 import states from '../data/states.json';
-import { getVendorCountByState } from '../lib/supabase';
+import { getVendorCountByState, getAllVendorsWithCoords } from '../lib/supabase';
+import { citySlug } from '../lib/utils';
 
 let stateCounts: Record<string, number> = {};
 
@@ -16,6 +18,54 @@ const statesWithCounts = states.map(state => ({
   ...state,
   count: stateCounts[state.name] || 0
 }));
+
+// Get vendors with coordinates for national map
+let vendorsWithCoords: any[] = [];
+try {
+  vendorsWithCoords = await getAllVendorsWithCoords();
+} catch (error) {
+  console.error('Error fetching vendors for map:', error);
+}
+
+// Create state name to slug mapping
+const stateSlugMap: Record<string, string> = {};
+states.forEach((s: { name: string; slug: string }) => {
+  stateSlugMap[s.name] = s.slug;
+});
+
+// Convert to GeoJSON for Mapbox
+const vendorGeoJSON = {
+  type: 'FeatureCollection' as const,
+  features: vendorsWithCoords.map(v => ({
+    type: 'Feature' as const,
+    geometry: {
+      type: 'Point' as const,
+      coordinates: [v.longitude, v.latitude] as [number, number]
+    },
+    properties: {
+      id: v.id,
+      name: v.business_name,
+      slug: v.slug,
+      city: v.city,
+      state: v.state,
+      stateSlug: stateSlugMap[v.state] || v.state.toLowerCase(),
+      phone: v.phone || '',
+      rating: v.rating || 0,
+      reviewCount: v.review_count || 0,
+      hasLuxury: v.has_luxury || false,
+      hasAda: v.has_ada || false,
+      hasTrailer: v.has_trailer || false,
+      servesConstruction: v.serves_construction || false,
+      servesEvents: v.serves_events || false,
+      website: v.website,
+      verified: v.verified || false,
+      vendorUrl: `/${stateSlugMap[v.state] || v.state.toLowerCase()}/${citySlug(v.city)}/${v.slug}`
+    }
+  }))
+};
+
+const mapboxToken = import.meta.env.PUBLIC_MAPBOX_TOKEN || '';
+const totalVendors = vendorsWithCoords.length;
 ---
 
 <BaseLayout
@@ -26,10 +76,52 @@ const statesWithCounts = states.map(state => ({
     <div class="text-center mb-8">
       <h1 class="text-4xl font-bold text-gray-900 mb-4">Browse by State</h1>
       <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-        Find porta potty rental companies in your state. Select a state below to view available providers.
+        Find porta potty rental companies in your state. {totalVendors.toLocaleString()} providers across all 50 states.
       </p>
     </div>
 
+    <!-- Tab Navigation -->
+    <div class="flex gap-2 mb-6">
+      <button
+        id="tab-map"
+        class="tab-btn flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all bg-primary-600 text-white shadow-lg"
+        data-tab="map"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+        </svg>
+        Map View
+      </button>
+      <button
+        id="tab-grid"
+        class="tab-btn flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all bg-white text-gray-700 border-2 border-gray-200 hover:border-primary-300"
+        data-tab="grid"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+        </svg>
+        Browse States
+      </button>
+    </div>
+
+    <!-- Map View Tab -->
+    <div id="panel-map" class="tab-panel">
+      {mapboxToken ? (
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+          <NationalMap
+            vendorGeoJSON={vendorGeoJSON}
+            mapboxToken={mapboxToken}
+          />
+        </div>
+      ) : (
+        <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-8 text-center">
+          <p class="text-yellow-800">Map view requires a Mapbox API token. Please configure PUBLIC_MAPBOX_TOKEN.</p>
+        </div>
+      )}
+    </div>
+
+    <!-- Grid/List View Tab -->
+    <div id="panel-grid" class="tab-panel hidden">
     <!-- Filter/View Bar -->
     <div class="bg-gradient-to-r from-brand-50 to-emerald-50 rounded-xl border border-brand-200 p-4 mb-8 flex flex-wrap items-center justify-between gap-4 shadow-sm">
       <!-- Search Filter -->
@@ -124,10 +216,42 @@ const statesWithCounts = states.map(state => ({
         </a>
       ))}
     </div>
+    </div><!-- End grid panel -->
   </div>
 </BaseLayout>
 
 <script>
+  // Tab switching
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tabId = (btn as HTMLElement).dataset.tab;
+
+      // Update button styles
+      tabButtons.forEach(b => {
+        if ((b as HTMLElement).dataset.tab === tabId) {
+          b.classList.remove('bg-white', 'text-gray-700', 'border-2', 'border-gray-200', 'hover:border-primary-300');
+          b.classList.add('bg-primary-600', 'text-white', 'shadow-lg');
+        } else {
+          b.classList.remove('bg-primary-600', 'text-white', 'shadow-lg');
+          b.classList.add('bg-white', 'text-gray-700', 'border-2', 'border-gray-200', 'hover:border-primary-300');
+        }
+      });
+
+      // Show/hide panels
+      tabPanels.forEach(panel => {
+        if (panel.id === `panel-${tabId}`) {
+          panel.classList.remove('hidden');
+        } else {
+          panel.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  // State grid/list functionality
   const searchInput = document.getElementById('state-search') as HTMLInputElement;
   const sortSelect = document.getElementById('sort-select') as HTMLSelectElement;
   const viewGridBtn = document.getElementById('view-grid') as HTMLButtonElement;
