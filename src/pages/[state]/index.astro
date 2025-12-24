@@ -2,9 +2,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import AdSlot from '../../components/AdSlot.astro';
+import StateMap from '../../components/StateMap.astro';
 import states from '../../data/states.json';
 import topCities from '../../data/top-cities.json';
-import { getCitiesByState } from '../../lib/supabase';
+import { getCitiesByState, getVendorsByStateWithCoords } from '../../lib/supabase';
 import { citySlug } from '../../lib/utils';
 
 export function getStaticPaths() {
@@ -23,6 +24,45 @@ try {
 } catch (error) {
   console.error('Error fetching cities:', error);
 }
+
+// Get vendors with coordinates for map
+let vendorsWithCoords: any[] = [];
+try {
+  vendorsWithCoords = await getVendorsByStateWithCoords(state.name);
+} catch (error) {
+  console.error('Error fetching vendors for map:', error);
+}
+
+// Convert to GeoJSON for Mapbox
+const vendorGeoJSON = {
+  type: 'FeatureCollection' as const,
+  features: vendorsWithCoords.map(v => ({
+    type: 'Feature' as const,
+    geometry: {
+      type: 'Point' as const,
+      coordinates: [v.longitude, v.latitude] as [number, number]
+    },
+    properties: {
+      id: v.id,
+      name: v.business_name,
+      slug: v.slug,
+      city: v.city,
+      phone: v.phone || '',
+      rating: v.rating || 0,
+      reviewCount: v.review_count || 0,
+      hasLuxury: v.has_luxury || false,
+      hasAda: v.has_ada || false,
+      hasTrailer: v.has_trailer || false,
+      servesConstruction: v.serves_construction || false,
+      servesEvents: v.serves_events || false,
+      website: v.website,
+      verified: v.verified || false,
+      vendorUrl: `/${state.slug}/${citySlug(v.city)}/${v.slug}`
+    }
+  }))
+};
+
+const mapboxToken = import.meta.env.PUBLIC_MAPBOX_TOKEN || '';
 
 // Create a map of vendor counts by city
 const vendorCountMap = new Map(citiesWithVendors.map(c => [c.city, c.count]));
@@ -112,6 +152,50 @@ const breadcrumbs = [
       <AdSlot slot="header" />
     </div>
 
+    <!-- Tab Navigation -->
+    <div class="flex gap-2 mb-6">
+      <button
+        id="tab-map"
+        class="tab-btn flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all bg-primary-600 text-white shadow-lg"
+        data-tab="map"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+        </svg>
+        Map View
+      </button>
+      <button
+        id="tab-cities"
+        class="tab-btn flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all bg-white text-gray-700 border-2 border-gray-200 hover:border-primary-300"
+        data-tab="cities"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+        </svg>
+        Browse by City
+      </button>
+    </div>
+
+    <!-- Map View Tab -->
+    <div id="panel-map" class="tab-panel">
+      {mapboxToken ? (
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+          <StateMap
+            stateSlug={state.slug}
+            stateName={state.name}
+            vendorGeoJSON={vendorGeoJSON}
+            mapboxToken={mapboxToken}
+          />
+        </div>
+      ) : (
+        <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-8 text-center">
+          <p class="text-yellow-800">Map view requires a Mapbox API token. Please configure PUBLIC_MAPBOX_TOKEN.</p>
+        </div>
+      )}
+    </div>
+
+    <!-- Cities Tab -->
+    <div id="panel-cities" class="tab-panel hidden">
     <!-- Filter/View Bar -->
     <div class="bg-gradient-to-r from-brand-50 to-emerald-50 rounded-xl border border-brand-200 p-4 mb-6 shadow-sm">
       <div class="flex flex-wrap items-center justify-between gap-4">
@@ -218,10 +302,42 @@ const breadcrumbs = [
     <div class="mt-12">
       <AdSlot slot="footer" />
     </div>
+    </div><!-- End cities panel -->
   </div>
 </BaseLayout>
 
 <script define:vars={{ totalCities: allCities.length }}>
+  // Tab switching
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tabId = btn.dataset.tab;
+
+      // Update button styles
+      tabButtons.forEach(b => {
+        if (b.dataset.tab === tabId) {
+          b.classList.remove('bg-white', 'text-gray-700', 'border-2', 'border-gray-200', 'hover:border-primary-300');
+          b.classList.add('bg-primary-600', 'text-white', 'shadow-lg');
+        } else {
+          b.classList.remove('bg-primary-600', 'text-white', 'shadow-lg');
+          b.classList.add('bg-white', 'text-gray-700', 'border-2', 'border-gray-200', 'hover:border-primary-300');
+        }
+      });
+
+      // Show/hide panels
+      tabPanels.forEach(panel => {
+        if (panel.id === `panel-${tabId}`) {
+          panel.classList.remove('hidden');
+        } else {
+          panel.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  // City filter functionality
   const searchInput = document.getElementById('city-search');
   const sortSelect = document.getElementById('city-sort');
   const hasProvidersCheckbox = document.getElementById('has-providers');

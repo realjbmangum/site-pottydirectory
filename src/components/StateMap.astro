@@ -1,0 +1,510 @@
+---
+interface Props {
+  stateSlug: string;
+  stateName: string;
+  vendorGeoJSON: {
+    type: 'FeatureCollection';
+    features: Array<{
+      type: 'Feature';
+      geometry: { type: 'Point'; coordinates: [number, number] };
+      properties: {
+        id: string;
+        name: string;
+        slug: string;
+        city: string;
+        phone: string;
+        rating: number;
+        reviewCount: number;
+        hasLuxury: boolean;
+        hasAda: boolean;
+        hasTrailer: boolean;
+        servesConstruction: boolean;
+        servesEvents: boolean;
+        website: string | null;
+        verified: boolean;
+        vendorUrl: string;
+      };
+    }>;
+  };
+  mapboxToken: string;
+}
+
+const { stateSlug, stateName, vendorGeoJSON, mapboxToken } = Astro.props;
+const vendorCount = vendorGeoJSON.features.length;
+---
+
+<!-- Mapbox CSS & JS -->
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
+<script is:inline src="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js"></script>
+
+<div class="state-map-wrapper">
+  <!-- Filter Bar -->
+  <div class="bg-gradient-to-r from-slate-50 to-blue-50 border-b border-gray-200 p-4">
+    <div class="flex flex-wrap gap-3 items-center">
+      <!-- Filter Toggles -->
+      <div class="flex flex-wrap gap-2">
+        <label class="filter-toggle cursor-pointer inline-flex items-center gap-2 px-3 py-2 rounded-lg border-2 border-gray-200 bg-white hover:border-blue-300 transition-all has-[:checked]:bg-blue-50 has-[:checked]:border-blue-500">
+          <input type="checkbox" id="filter-luxury" class="sr-only peer">
+          <span class="text-lg">✨</span>
+          <span class="text-sm font-medium text-gray-700 peer-checked:text-blue-700">Luxury</span>
+        </label>
+
+        <label class="filter-toggle cursor-pointer inline-flex items-center gap-2 px-3 py-2 rounded-lg border-2 border-gray-200 bg-white hover:border-blue-300 transition-all has-[:checked]:bg-blue-50 has-[:checked]:border-blue-500">
+          <input type="checkbox" id="filter-ada" class="sr-only peer">
+          <span class="text-lg">♿</span>
+          <span class="text-sm font-medium text-gray-700 peer-checked:text-blue-700">ADA</span>
+        </label>
+
+        <label class="filter-toggle cursor-pointer inline-flex items-center gap-2 px-3 py-2 rounded-lg border-2 border-gray-200 bg-white hover:border-blue-300 transition-all has-[:checked]:bg-blue-50 has-[:checked]:border-blue-500">
+          <input type="checkbox" id="filter-trailer" class="sr-only peer">
+          <span class="text-lg">🚐</span>
+          <span class="text-sm font-medium text-gray-700 peer-checked:text-blue-700">Trailers</span>
+        </label>
+
+        <label class="filter-toggle cursor-pointer inline-flex items-center gap-2 px-3 py-2 rounded-lg border-2 border-gray-200 bg-white hover:border-blue-300 transition-all has-[:checked]:bg-blue-50 has-[:checked]:border-blue-500">
+          <input type="checkbox" id="filter-construction" class="sr-only peer">
+          <span class="text-lg">🏗️</span>
+          <span class="text-sm font-medium text-gray-700 peer-checked:text-blue-700">Construction</span>
+        </label>
+
+        <label class="filter-toggle cursor-pointer inline-flex items-center gap-2 px-3 py-2 rounded-lg border-2 border-gray-200 bg-white hover:border-blue-300 transition-all has-[:checked]:bg-blue-50 has-[:checked]:border-blue-500">
+          <input type="checkbox" id="filter-events" class="sr-only peer">
+          <span class="text-lg">🎉</span>
+          <span class="text-sm font-medium text-gray-700 peer-checked:text-blue-700">Events</span>
+        </label>
+      </div>
+
+      <!-- Rating Filter -->
+      <div class="flex items-center gap-2 px-3 py-2 bg-white rounded-lg border-2 border-gray-200">
+        <label for="filter-rating" class="text-sm text-gray-600">Min Rating:</label>
+        <input type="range" id="filter-rating" min="0" max="5" step="0.5" value="0" class="w-20 accent-blue-600">
+        <span id="rating-value" class="text-sm font-semibold text-blue-600 w-10">Any</span>
+      </div>
+
+      <!-- Results Count -->
+      <div class="ml-auto text-sm text-gray-600">
+        <span id="visible-vendor-count">{vendorCount}</span> of {vendorCount} providers
+      </div>
+    </div>
+  </div>
+
+  <!-- Map + List Container -->
+  <div class="flex flex-col lg:flex-row" style="height: 550px;">
+    <!-- Map -->
+    <div id="state-map" class="w-full lg:w-1/2 h-[300px] lg:h-full bg-gray-100"></div>
+
+    <!-- Vendor List -->
+    <div id="vendor-list" class="w-full lg:w-1/2 h-[250px] lg:h-full overflow-y-auto p-4 bg-gray-50 border-t lg:border-t-0 lg:border-l border-gray-200">
+      <div class="text-center text-gray-500 py-8">Loading vendors...</div>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ vendorGeoJSON, mapboxToken, stateSlug, stateName }}>
+  // Filter state
+  const filterState = {
+    luxury: false,
+    ada: false,
+    trailer: false,
+    construction: false,
+    events: false,
+    minRating: 0
+  };
+
+  // Elements
+  const filterElements = {
+    luxury: document.getElementById('filter-luxury'),
+    ada: document.getElementById('filter-ada'),
+    trailer: document.getElementById('filter-trailer'),
+    construction: document.getElementById('filter-construction'),
+    events: document.getElementById('filter-events'),
+    rating: document.getElementById('filter-rating'),
+    ratingValue: document.getElementById('rating-value'),
+    visibleCount: document.getElementById('visible-vendor-count')
+  };
+
+  let map;
+  let currentPopup = null;
+
+  // Calculate center from vendor coordinates
+  function calculateCenter() {
+    if (vendorGeoJSON.features.length === 0) {
+      return [-98.5795, 39.8283]; // US center fallback
+    }
+
+    const coords = vendorGeoJSON.features.map(f => f.geometry.coordinates);
+    const lng = coords.reduce((sum, c) => sum + c[0], 0) / coords.length;
+    const lat = coords.reduce((sum, c) => sum + c[1], 0) / coords.length;
+    return [lng, lat];
+  }
+
+  // Calculate appropriate zoom based on spread
+  function calculateZoom() {
+    if (vendorGeoJSON.features.length < 2) return 8;
+
+    const coords = vendorGeoJSON.features.map(f => f.geometry.coordinates);
+    const lngs = coords.map(c => c[0]);
+    const lats = coords.map(c => c[1]);
+
+    const lngSpread = Math.max(...lngs) - Math.min(...lngs);
+    const latSpread = Math.max(...lats) - Math.min(...lats);
+    const maxSpread = Math.max(lngSpread, latSpread);
+
+    if (maxSpread > 10) return 5;
+    if (maxSpread > 5) return 6;
+    if (maxSpread > 2) return 7;
+    return 8;
+  }
+
+  // Initialize map
+  function initMap() {
+    mapboxgl.accessToken = mapboxToken;
+
+    map = new mapboxgl.Map({
+      container: 'state-map',
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: calculateCenter(),
+      zoom: calculateZoom()
+    });
+
+    map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
+    map.on('load', () => {
+      // Add vendor source with clustering
+      map.addSource('vendors', {
+        type: 'geojson',
+        data: vendorGeoJSON,
+        cluster: true,
+        clusterMaxZoom: 12,
+        clusterRadius: 50
+      });
+
+      // Cluster circles - brand green
+      map.addLayer({
+        id: 'clusters',
+        type: 'circle',
+        source: 'vendors',
+        filter: ['has', 'point_count'],
+        paint: {
+          'circle-color': [
+            'step',
+            ['get', 'point_count'],
+            '#138d57',
+            10, '#0f7348',
+            50, '#0d5c3b'
+          ],
+          'circle-radius': [
+            'step',
+            ['get', 'point_count'],
+            18, 10, 24, 50, 32
+          ],
+          'circle-stroke-width': 2,
+          'circle-stroke-color': '#ffffff'
+        }
+      });
+
+      // Cluster count labels
+      map.addLayer({
+        id: 'cluster-count',
+        type: 'symbol',
+        source: 'vendors',
+        filter: ['has', 'point_count'],
+        layout: {
+          'text-field': ['get', 'point_count_abbreviated'],
+          'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+          'text-size': 12
+        },
+        paint: {
+          'text-color': '#ffffff'
+        }
+      });
+
+      // Individual vendor pins - primary blue
+      map.addLayer({
+        id: 'vendor-pins',
+        type: 'circle',
+        source: 'vendors',
+        filter: ['!', ['has', 'point_count']],
+        paint: {
+          'circle-color': '#2563eb',
+          'circle-radius': 8,
+          'circle-stroke-width': 2,
+          'circle-stroke-color': '#ffffff'
+        }
+      });
+
+      // Cluster click - zoom in
+      map.on('click', 'clusters', (e) => {
+        const features = map.queryRenderedFeatures(e.point, { layers: ['clusters'] });
+        const clusterId = features[0].properties.cluster_id;
+
+        map.getSource('vendors').getClusterExpansionZoom(clusterId, (err, zoom) => {
+          if (err) return;
+          map.easeTo({
+            center: features[0].geometry.coordinates,
+            zoom: zoom
+          });
+        });
+      });
+
+      // Pin click - show popup
+      map.on('click', 'vendor-pins', (e) => {
+        if (currentPopup) currentPopup.remove();
+
+        const feature = e.features[0];
+        const props = feature.properties;
+        const coords = feature.geometry.coordinates.slice();
+
+        // Parse properties (Mapbox stringifies nested objects)
+        const rating = typeof props.rating === 'string' ? parseFloat(props.rating) : props.rating;
+        const reviewCount = typeof props.reviewCount === 'string' ? parseInt(props.reviewCount) : props.reviewCount;
+
+        const popupHTML = `
+          <div class="p-3 min-w-[200px]">
+            <h3 class="font-semibold text-gray-900 mb-1">${props.name}</h3>
+            <p class="text-sm text-gray-500 mb-2">${props.city}</p>
+            ${rating > 0 ? `
+              <div class="flex items-center mb-2">
+                <span class="text-yellow-400">★</span>
+                <span class="text-sm ml-1">${rating.toFixed(1)}</span>
+                ${reviewCount > 0 ? `<span class="text-gray-400 text-xs ml-1">(${reviewCount})</span>` : ''}
+              </div>
+            ` : ''}
+            <div class="flex flex-wrap gap-1 mb-3">
+              ${props.hasLuxury === true || props.hasLuxury === 'true' ? '<span class="inline-block px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded-full">Luxury</span>' : ''}
+              ${props.hasAda === true || props.hasAda === 'true' ? '<span class="inline-block px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded-full">ADA</span>' : ''}
+              ${props.hasTrailer === true || props.hasTrailer === 'true' ? '<span class="inline-block px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded-full">Trailers</span>' : ''}
+            </div>
+            <a href="${props.vendorUrl}" class="block w-full text-center bg-blue-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
+              View Details
+            </a>
+          </div>
+        `;
+
+        currentPopup = new mapboxgl.Popup({ offset: 15, maxWidth: '280px' })
+          .setLngLat(coords)
+          .setHTML(popupHTML)
+          .addTo(map);
+      });
+
+      // Cursor changes
+      map.on('mouseenter', 'clusters', () => map.getCanvas().style.cursor = 'pointer');
+      map.on('mouseleave', 'clusters', () => map.getCanvas().style.cursor = '');
+      map.on('mouseenter', 'vendor-pins', () => map.getCanvas().style.cursor = 'pointer');
+      map.on('mouseleave', 'vendor-pins', () => map.getCanvas().style.cursor = '');
+
+      // Load filters from URL and apply
+      loadFiltersFromURL();
+      applyFilters();
+    });
+  }
+
+  // Filter vendors
+  function getFilteredFeatures() {
+    return vendorGeoJSON.features.filter(f => {
+      const p = f.properties;
+      if (filterState.luxury && !p.hasLuxury) return false;
+      if (filterState.ada && !p.hasAda) return false;
+      if (filterState.trailer && !p.hasTrailer) return false;
+      if (filterState.construction && !p.servesConstruction) return false;
+      if (filterState.events && !p.servesEvents) return false;
+      if (filterState.minRating > 0 && p.rating < filterState.minRating) return false;
+      return true;
+    });
+  }
+
+  // Apply filters to map and list
+  function applyFilters() {
+    const filtered = getFilteredFeatures();
+
+    // Update map source
+    if (map && map.getSource('vendors')) {
+      map.getSource('vendors').setData({
+        type: 'FeatureCollection',
+        features: filtered
+      });
+    }
+
+    // Update list
+    updateVendorList(filtered);
+
+    // Update count
+    if (filterElements.visibleCount) {
+      filterElements.visibleCount.textContent = filtered.length.toString();
+    }
+
+    // Sync URL
+    syncFiltersToURL();
+  }
+
+  // Update vendor list panel
+  function updateVendorList(features) {
+    const listContainer = document.getElementById('vendor-list');
+    if (!listContainer) return;
+
+    if (features.length === 0) {
+      listContainer.innerHTML = `
+        <div class="text-center py-12">
+          <div class="text-4xl mb-4">🔍</div>
+          <h3 class="text-lg font-semibold text-gray-700 mb-2">No providers match your filters</h3>
+          <p class="text-gray-500 text-sm">Try adjusting your filter settings</p>
+        </div>
+      `;
+      return;
+    }
+
+    // Sort by rating desc
+    const sorted = [...features].sort((a, b) =>
+      (b.properties.rating || 0) - (a.properties.rating || 0)
+    );
+
+    listContainer.innerHTML = sorted.map(f => {
+      const p = f.properties;
+      const rating = p.rating || 0;
+      const badges = [];
+      if (p.hasLuxury) badges.push('Luxury');
+      if (p.hasAda) badges.push('ADA');
+      if (p.hasTrailer) badges.push('Trailers');
+      if (p.servesConstruction) badges.push('Construction');
+      if (p.servesEvents) badges.push('Events');
+
+      return `
+        <a href="${p.vendorUrl}"
+           class="vendor-list-item block bg-white rounded-lg border border-gray-200 p-4 mb-3 hover:border-blue-300 hover:shadow-md transition-all"
+           data-vendor-id="${p.id}"
+           data-lng="${f.geometry.coordinates[0]}"
+           data-lat="${f.geometry.coordinates[1]}">
+          <div class="flex justify-between items-start">
+            <div class="flex-1 min-w-0">
+              <h4 class="font-semibold text-gray-900 truncate">${p.name}</h4>
+              <p class="text-sm text-gray-500">${p.city}</p>
+            </div>
+            ${rating > 0 ? `
+              <div class="flex items-center ml-2 flex-shrink-0">
+                <span class="text-yellow-400 text-sm">★</span>
+                <span class="text-sm ml-1 font-medium">${rating.toFixed(1)}</span>
+              </div>
+            ` : ''}
+          </div>
+          ${badges.length > 0 ? `
+            <div class="flex flex-wrap gap-1 mt-2">
+              ${badges.slice(0, 3).map(b => `<span class="inline-block px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded">${b}</span>`).join('')}
+              ${badges.length > 3 ? `<span class="inline-block px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded">+${badges.length - 3}</span>` : ''}
+            </div>
+          ` : ''}
+        </a>
+      `;
+    }).join('');
+
+    // Add hover interactions
+    setupListHoverSync();
+  }
+
+  // Highlight pin when hovering list item
+  function setupListHoverSync() {
+    document.querySelectorAll('.vendor-list-item').forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        const lng = parseFloat(item.dataset.lng);
+        const lat = parseFloat(item.dataset.lat);
+
+        // Fly to location
+        if (map) {
+          map.easeTo({
+            center: [lng, lat],
+            zoom: Math.max(map.getZoom(), 10),
+            duration: 500
+          });
+        }
+      });
+    });
+  }
+
+  // URL sync
+  function syncFiltersToURL() {
+    const params = new URLSearchParams();
+
+    if (filterState.luxury) params.set('luxury', '1');
+    if (filterState.ada) params.set('ada', '1');
+    if (filterState.trailer) params.set('trailer', '1');
+    if (filterState.construction) params.set('construction', '1');
+    if (filterState.events) params.set('events', '1');
+    if (filterState.minRating > 0) params.set('rating', String(filterState.minRating));
+
+    const newURL = params.toString()
+      ? `${window.location.pathname}?${params.toString()}`
+      : window.location.pathname;
+
+    window.history.replaceState({}, '', newURL);
+  }
+
+  function loadFiltersFromURL() {
+    const params = new URLSearchParams(window.location.search);
+
+    filterState.luxury = params.get('luxury') === '1';
+    filterState.ada = params.get('ada') === '1';
+    filterState.trailer = params.get('trailer') === '1';
+    filterState.construction = params.get('construction') === '1';
+    filterState.events = params.get('events') === '1';
+    filterState.minRating = parseFloat(params.get('rating') || '0');
+
+    // Update UI
+    if (filterElements.luxury) filterElements.luxury.checked = filterState.luxury;
+    if (filterElements.ada) filterElements.ada.checked = filterState.ada;
+    if (filterElements.trailer) filterElements.trailer.checked = filterState.trailer;
+    if (filterElements.construction) filterElements.construction.checked = filterState.construction;
+    if (filterElements.events) filterElements.events.checked = filterState.events;
+    if (filterElements.rating) filterElements.rating.value = String(filterState.minRating);
+    updateRatingDisplay();
+  }
+
+  function updateRatingDisplay() {
+    if (filterElements.ratingValue) {
+      filterElements.ratingValue.textContent = filterState.minRating > 0
+        ? `${filterState.minRating}+`
+        : 'Any';
+    }
+  }
+
+  // Setup filter listeners
+  function setupFilterListeners() {
+    const toggleFilters = ['luxury', 'ada', 'trailer', 'construction', 'events'];
+
+    toggleFilters.forEach(filter => {
+      filterElements[filter]?.addEventListener('change', (e) => {
+        filterState[filter] = e.target.checked;
+        applyFilters();
+      });
+    });
+
+    filterElements.rating?.addEventListener('input', (e) => {
+      filterState.minRating = parseFloat(e.target.value);
+      updateRatingDisplay();
+      applyFilters();
+    });
+  }
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', () => {
+    initMap();
+    setupFilterListeners();
+  });
+</script>
+
+<style>
+  .mapboxgl-popup-content {
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+  }
+
+  .mapboxgl-popup-close-button {
+    font-size: 18px;
+    padding: 4px 8px;
+    color: #6b7280;
+  }
+
+  .mapboxgl-popup-close-button:hover {
+    color: #1f2937;
+    background: transparent;
+  }
+</style>
