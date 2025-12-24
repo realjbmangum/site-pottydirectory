@@ -33,11 +33,10 @@ export interface Vendor {
   // Feature flags
   has_luxury?: boolean;
   has_ada?: boolean;
-  has_handwash?: boolean;
-  has_shower?: boolean;
   has_trailer?: boolean;
-  has_construction?: boolean;
-  has_events?: boolean;
+  serves_construction?: boolean;
+  serves_events?: boolean;
+  enriched_at?: string;
   created_at: string;
 }
 

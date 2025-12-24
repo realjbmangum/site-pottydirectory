@@ -241,7 +241,7 @@ const breadcrumbs = [
         </div>
 
         <!-- Features / Capabilities -->
-        {(vendor.has_luxury || vendor.has_ada || vendor.has_handwash || vendor.has_shower || vendor.has_trailer || vendor.has_construction || vendor.has_events) && (
+        {(vendor.has_luxury || vendor.has_ada || vendor.has_trailer || vendor.serves_construction || vendor.serves_events) && (
           <div class="mb-10">
             <h2 class="text-xl font-bold text-gray-900 mb-4">Available Services</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
@@ -257,31 +257,19 @@ const breadcrumbs = [
                   <span class="font-medium text-blue-800 text-sm">ADA Accessible</span>
                 </div>
               )}
-              {vendor.has_handwash && (
-                <div class="flex items-center p-3 rounded-xl border-2 border-cyan-200 bg-cyan-50">
-                  <span class="text-2xl mr-3">🧼</span>
-                  <span class="font-medium text-cyan-800 text-sm">Hand Wash Stations</span>
-                </div>
-              )}
-              {vendor.has_shower && (
-                <div class="flex items-center p-3 rounded-xl border-2 border-teal-200 bg-teal-50">
-                  <span class="text-2xl mr-3">🚿</span>
-                  <span class="font-medium text-teal-800 text-sm">Shower Trailers</span>
-                </div>
-              )}
               {vendor.has_trailer && (
                 <div class="flex items-center p-3 rounded-xl border-2 border-purple-200 bg-purple-50">
                   <span class="text-2xl mr-3">🚛</span>
                   <span class="font-medium text-purple-800 text-sm">Restroom Trailers</span>
                 </div>
               )}
-              {vendor.has_construction && (
+              {vendor.serves_construction && (
                 <div class="flex items-center p-3 rounded-xl border-2 border-orange-200 bg-orange-50">
                   <span class="text-2xl mr-3">🏗️</span>
                   <span class="font-medium text-orange-800 text-sm">Construction Sites</span>
                 </div>
               )}
-              {vendor.has_events && (
+              {vendor.serves_events && (
                 <div class="flex items-center p-3 rounded-xl border-2 border-pink-200 bg-pink-50">
                   <span class="text-2xl mr-3">🎉</span>
                   <span class="font-medium text-pink-800 text-sm">Events & Weddings</span>
