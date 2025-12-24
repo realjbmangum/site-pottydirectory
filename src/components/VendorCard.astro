@@ -13,6 +13,20 @@ const vendorUrl = `/${stateSlug}/${citySlug}/${vendor.slug}`;
 const rating = vendor.rating || 0;
 const reviewCount = vendor.review_count || 0;
 
+// Parse hours if stored as JSON string
+let parsedHours: Record<string, string> | null = null;
+if (vendor.hours) {
+  if (typeof vendor.hours === 'string') {
+    try {
+      parsedHours = JSON.parse(vendor.hours);
+    } catch (e) {
+      // Invalid JSON, ignore
+    }
+  } else if (typeof vendor.hours === 'object') {
+    parsedHours = vendor.hours as Record<string, string>;
+  }
+}
+
 // Check if open now based on hours
 function isOpenNow(hours: Record<string, string> | undefined): boolean {
   if (!hours) return false;
@@ -47,8 +61,8 @@ function isOpenNow(hours: Record<string, string> | undefined): boolean {
   return currentMins >= openMins && currentMins < closeMins;
 }
 
-const hasHours = vendor.hours && Object.keys(vendor.hours).length > 0;
-const openNow = isOpenNow(vendor.hours);
+const hasHours = parsedHours && Object.keys(parsedHours).length > 0;
+const openNow = isOpenNow(parsedHours || undefined);
 // Verified badge: manually verified OR high-quality (4.5+ rating with 10+ reviews)
 const isVerified = vendor.verified || (rating >= 4.5 && reviewCount >= 10);
 ---
