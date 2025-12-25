@@ -1,0 +1,331 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import siteConfig from '../../data/site-config.json';
+import blogPosts from '../../data/blog-posts.json';
+
+const post = blogPosts.find(p => p.slug === 'questions-ask-before-renting-porta-potty')!;
+const siteUrl = `https://${siteConfig.domain}`;
+
+const articleData = {
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+};
+
+const relatedPosts = blogPosts.filter(p => p.slug !== post.slug && ['Planning', 'Pricing'].includes(p.category)).slice(0, 3);
+---
+
+<BaseLayout title={post.title} description={post.description}>
+  <StructuredData type="Article" data={articleData} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-primary-600">Home</a></li>
+        <li>/</li>
+        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li>/</li>
+        <li class="text-gray-900">Questions to Ask</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="inline-block bg-indigo-100 text-indigo-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Planning</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <p>
+        Not all porta potty rentals are created equal. The difference between a great experience and a disaster often comes down to the questions you ask before signing the contract. <strong>The right questions can save you money, prevent surprises, and ensure your event or project runs smoothly.</strong>
+      </p>
+
+      <p>
+        Here are the essential questions every first-time renter should ask - plus the answers you should expect from a reputable provider.
+      </p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="pricing">Pricing Questions</h2>
+
+      <h3>1. "What is the total cost, including ALL fees?"</h3>
+      <p>
+        <strong>Why it matters:</strong> Many providers quote low base prices but add fees for delivery, pickup, fuel, environmental charges, and more. Get the complete number.
+      </p>
+      <p><strong>What to expect:</strong> A reputable provider will give you an itemized quote that includes:</p>
+      <ul>
+        <li>Unit rental (per day/week/month)</li>
+        <li>Delivery fee</li>
+        <li>Pickup fee</li>
+        <li>Servicing fees (if applicable)</li>
+        <li>Any environmental or disposal fees</li>
+        <li>Taxes</li>
+      </ul>
+
+      <h3>2. "Are there any potential additional charges I should know about?"</h3>
+      <p>Common extras to ask about:</p>
+      <ul>
+        <li><strong>Damage fees:</strong> What happens if the unit is damaged?</li>
+        <li><strong>Cleaning fees:</strong> Is there an extra charge if the unit is left extremely dirty?</li>
+        <li><strong>Extended rental:</strong> What's the cost if you need it longer?</li>
+        <li><strong>Weekend/holiday surcharges:</strong> Is delivery more expensive on weekends?</li>
+        <li><strong>Fuel surcharges:</strong> Do they add fuel costs separately?</li>
+        <li><strong>Minimum rental periods:</strong> Is there a minimum charge?</li>
+      </ul>
+
+      <h3>3. "Do you offer package discounts?"</h3>
+      <p>If you need multiple units or longer rental periods, ask about:</p>
+      <ul>
+        <li>Multi-unit discounts</li>
+        <li>Monthly vs. weekly rate savings</li>
+        <li>Returning customer discounts</li>
+        <li>Off-peak season rates</li>
+      </ul>
+
+      <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 my-8">
+        <p class="font-semibold text-indigo-900">Pro Tip</p>
+        <p class="text-indigo-800 mt-2">Get quotes from at least 3 providers. Prices can vary by 30-50% for identical services. But don't automatically choose the cheapest - quality and reliability matter.</p>
+      </div>
+
+      <h2 id="service">Service & Maintenance Questions</h2>
+
+      <h3>4. "What does servicing include, and how often?"</h3>
+      <p><strong>Standard servicing should include:</strong></p>
+      <ul>
+        <li>Pumping out waste</li>
+        <li>Cleaning interior surfaces</li>
+        <li>Restocking toilet paper</li>
+        <li>Refilling hand sanitizer</li>
+        <li>Adding fresh deodorizer</li>
+        <li>Checking for damage or issues</li>
+      </ul>
+      <p><strong>Ask:</strong> Is one weekly service included in my rental? What's the cost for additional services?</p>
+
+      <h3>5. "What day and time will servicing occur?"</h3>
+      <p>
+        For construction sites, you may need servicing early morning before workers arrive. For events, ensure service won't happen during your event hours.
+      </p>
+
+      <h3>6. "How do I request an extra service if needed?"</h3>
+      <p>Know the process before you need it:</p>
+      <ul>
+        <li>Is there a phone number for same-day requests?</li>
+        <li>How much advance notice is required?</li>
+        <li>What's the cost for emergency/rush services?</li>
+        <li>Is after-hours or weekend service available?</li>
+      </ul>
+
+      <AdSlot slot="content" />
+
+      <h2 id="delivery">Delivery & Pickup Questions</h2>
+
+      <h3>7. "What time will delivery and pickup happen?"</h3>
+      <p>
+        Providers often give wide windows ("between 7 AM and 5 PM"). If you need a specific time - like before an event starts or after it ends - negotiate this upfront. Some providers charge extra for guaranteed time windows.
+      </p>
+
+      <h3>8. "What are your access requirements?"</h3>
+      <p>Confirm the provider can actually get to your location:</p>
+      <ul>
+        <li><strong>Road width:</strong> Can a delivery truck navigate your streets?</li>
+        <li><strong>Gate access:</strong> Will you need to provide keys or codes?</li>
+        <li><strong>Ground conditions:</strong> Can the truck handle gravel, mud, or uneven terrain?</li>
+        <li><strong>Distance from truck:</strong> How far can they carry a unit from the truck?</li>
+      </ul>
+
+      <h3>9. "What if I need to change my delivery date?"</h3>
+      <p>Life happens. Know the policies:</p>
+      <ul>
+        <li>How much notice is required to reschedule?</li>
+        <li>Are there fees for date changes?</li>
+        <li>What's the cancellation policy?</li>
+      </ul>
+
+      <h2 id="units">Unit Questions</h2>
+
+      <h3>10. "What types of units do you offer?"</h3>
+      <p>Understand your options:</p>
+      <ul>
+        <li><strong>Standard:</strong> Basic construction-style units</li>
+        <li><strong>Deluxe:</strong> Upgraded with mirrors, hand sanitizer, better ventilation</li>
+        <li><strong>Flushable:</strong> Units with flushing toilets</li>
+        <li><strong>ADA-accessible:</strong> Wheelchair-accessible, larger units</li>
+        <li><strong>Restroom trailers:</strong> Multi-stall mobile bathrooms</li>
+        <li><strong>Handwashing stations:</strong> Standalone sinks</li>
+      </ul>
+
+      <h3>11. "Can I see a photo of the actual unit I'll receive?"</h3>
+      <p>
+        Stock photos on websites don't always match reality. Ask for photos of their actual fleet. For luxury trailers or weddings, request to see the specific unit in person.
+      </p>
+
+      <h3>12. "How old are your units?"</h3>
+      <p>
+        Newer units are generally cleaner-looking and better maintained. Many providers rotate out units after 5-7 years. If appearance matters (weddings, corporate events), ask about unit age and condition.
+      </p>
+
+      <h3>13. "What's included with the unit?"</h3>
+      <p>Confirm what comes standard:</p>
+      <ul>
+        <li>Toilet paper (how much?)</li>
+        <li>Hand sanitizer dispenser</li>
+        <li>Mirror</li>
+        <li>Coat hook</li>
+        <li>Ventilation type</li>
+        <li>Interior lighting</li>
+      </ul>
+
+      <h2 id="logistics">Logistics Questions</h2>
+
+      <h3>14. "How many units do I need for my situation?"</h3>
+      <p>
+        A good provider will help you calculate based on:
+      </p>
+      <ul>
+        <li>Number of people</li>
+        <li>Event duration</li>
+        <li>Alcohol service</li>
+        <li>Male/female ratio</li>
+        <li>Type of event (wedding vs. construction vs. festival)</li>
+      </ul>
+
+      <h3>15. "Where should I place the units?"</h3>
+      <p>Ask for placement recommendations:</p>
+      <ul>
+        <li>Distance from food service areas</li>
+        <li>Access for service trucks</li>
+        <li>Ground surface requirements</li>
+        <li>Wind direction considerations</li>
+        <li>ADA requirements for accessible units</li>
+      </ul>
+
+      <h3>16. "What happens if a unit tips over or gets damaged?"</h3>
+      <p>Understand liability:</p>
+      <ul>
+        <li>What's covered by their insurance?</li>
+        <li>What are you responsible for?</li>
+        <li>Are wind/weather events covered?</li>
+        <li>What's the process for reporting damage?</li>
+      </ul>
+
+      <h2 id="company">Company & Reliability Questions</h2>
+
+      <h3>17. "How long have you been in business?"</h3>
+      <p>
+        Experience matters. Established companies are more likely to have reliable equipment, trained staff, and backup capacity if issues arise.
+      </p>
+
+      <h3>18. "Are you licensed and insured?"</h3>
+      <p>Reputable providers should have:</p>
+      <ul>
+        <li>Business license</li>
+        <li>General liability insurance</li>
+        <li>Vehicle insurance for their delivery trucks</li>
+        <li>Environmental permits for waste disposal</li>
+      </ul>
+
+      <h3>19. "What's your backup plan if something goes wrong?"</h3>
+      <p>Things happen. Ask about:</p>
+      <ul>
+        <li>What if a unit is damaged before my event?</li>
+        <li>What if the truck breaks down on delivery day?</li>
+        <li>Do you have extra inventory?</li>
+        <li>What's your emergency contact number?</li>
+      </ul>
+
+      <h3>20. "Can you provide references?"</h3>
+      <p>
+        For large events or long-term construction projects, ask for references from similar customers. A confident provider will happily share them.
+      </p>
+
+      <h2 id="red-flags">Red Flags to Watch For</h2>
+
+      <p>Be cautious if a provider:</p>
+      <ul>
+        <li>Won't give you a written quote</li>
+        <li>Can't answer basic questions about their units</li>
+        <li>Has consistently negative online reviews</li>
+        <li>Requires full payment upfront with no refund policy</li>
+        <li>Won't provide proof of insurance</li>
+        <li>Gives vague answers about delivery times</li>
+        <li>Doesn't mention servicing as part of longer rentals</li>
+      </ul>
+
+      <h2 id="checklist">Quick Reference Checklist</h2>
+
+      <p><strong>Before you call:</strong></p>
+      <ul>
+        <li>Number of expected users</li>
+        <li>Event/project dates and duration</li>
+        <li>Delivery location and access information</li>
+        <li>Any special requirements (ADA, luxury, handwashing)</li>
+      </ul>
+
+      <p><strong>Questions to ask:</strong></p>
+      <ul>
+        <li>Total cost including all fees</li>
+        <li>What's included (delivery, pickup, servicing)</li>
+        <li>Delivery/pickup timing</li>
+        <li>Unit types available</li>
+        <li>Servicing schedule</li>
+        <li>Change/cancellation policy</li>
+        <li>Emergency contact process</li>
+        <li>Damage/liability policies</li>
+      </ul>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-12 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-8 text-center border border-indigo-100">
+      <h3 class="text-2xl font-bold text-gray-900 mb-3">Ready to Get Quotes?</h3>
+      <p class="text-gray-600 mb-6">Use this checklist and find reliable porta potty providers near you</p>
+      <a href="/" class="inline-flex items-center bg-primary-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-700 transition-colors">
+        Search Providers Near You
+      </a>
+    </div>
+
+    <!-- Related -->
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8">Related Articles</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {relatedPosts.map((related) => (
+          <a href={`/blog/${related.slug}`} class="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
+            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-700">{related.category}</span>
+            <h3 class="text-lg font-semibold text-gray-900 mt-3 line-clamp-2">{related.title}</h3>
+          </a>
+        ))}
+      </div>
+    </section>
+  </article>
+</BaseLayout>

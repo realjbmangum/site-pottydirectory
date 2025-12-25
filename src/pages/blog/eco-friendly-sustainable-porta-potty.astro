@@ -1,0 +1,322 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import siteConfig from '../../data/site-config.json';
+import blogPosts from '../../data/blog-posts.json';
+
+const post = blogPosts.find(p => p.slug === 'eco-friendly-sustainable-porta-potty')!;
+const siteUrl = `https://${siteConfig.domain}`;
+
+const articleData = {
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+};
+
+const relatedPosts = blogPosts.filter(p => p.slug !== post.slug && ['Industry', 'Planning'].includes(p.category)).slice(0, 3);
+---
+
+<BaseLayout title={post.title} description={post.description}>
+  <StructuredData type="Article" data={articleData} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-primary-600">Home</a></li>
+        <li>/</li>
+        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li>/</li>
+        <li class="text-gray-900">Eco-Friendly Options</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="inline-block bg-emerald-100 text-emerald-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Sustainability</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <p>
+        The portable sanitation industry is going green. Driven by consumer demand, corporate sustainability goals, and environmental regulations, <strong>64% of event-goers now prefer eco-friendly restroom options</strong> when available. For event planners and businesses seeking to reduce their environmental footprint, green porta potty options are expanding rapidly.
+      </p>
+
+      <p>
+        Here's everything you need to know about sustainable portable restroom choices in 2025 - from composting toilets to solar-powered units and beyond.
+      </p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="why-matters">Why Eco-Friendly Portable Sanitation Matters</h2>
+
+      <h3>Environmental Impact of Traditional Porta Potties</h3>
+      <ul>
+        <li><strong>Chemical use:</strong> Traditional deodorizers contain formaldehyde and other chemicals that can harm ecosystems when improperly disposed</li>
+        <li><strong>Water consumption:</strong> Flushing units use 1-3 gallons per flush</li>
+        <li><strong>Fuel for servicing:</strong> Pump trucks consume diesel for waste transport</li>
+        <li><strong>Plastic production:</strong> Units are made from petroleum-based plastics</li>
+        <li><strong>Landfill end-of-life:</strong> Old units often end up in landfills</li>
+      </ul>
+
+      <h3>The Green Movement in Events</h3>
+      <p>
+        Sustainability certifications for events now often include portable sanitation requirements. Major events like Bonnaroo, Burning Man, and corporate conferences are demanding eco-friendly options.
+      </p>
+
+      <div class="bg-emerald-50 border-l-4 border-emerald-500 p-6 my-8">
+        <p class="font-semibold text-emerald-900">Consumer Preference</p>
+        <p class="text-emerald-800 mt-2">Eventbrite research shows 78% of millennials consider sustainability when choosing which events to attend. Visible green initiatives - including eco-friendly restrooms - influence attendance decisions.</p>
+      </div>
+
+      <h2 id="options">Eco-Friendly Portable Restroom Options</h2>
+
+      <h3>1. Composting Toilets</h3>
+      <p>
+        Waterless systems that convert human waste into compost through natural decomposition.
+      </p>
+      <ul>
+        <li><strong>How they work:</strong> Waste mixes with carbon-rich materials (sawdust, peat moss) in a composting chamber</li>
+        <li><strong>Water use:</strong> Zero</li>
+        <li><strong>Chemicals:</strong> None required</li>
+        <li><strong>End product:</strong> Nutrient-rich compost (after 6-12 months of treatment)</li>
+        <li><strong>Best for:</strong> Eco-conscious festivals, outdoor venues, campgrounds, farm events</li>
+        <li><strong>Limitations:</strong> Requires more user education, not suitable for high-volume events</li>
+      </ul>
+
+      <h3>2. Solar-Powered Units</h3>
+      <p>
+        Traditional porta potties enhanced with solar panels for lighting, ventilation, and accessories.
+      </p>
+      <ul>
+        <li><strong>Features:</strong> LED interior lights, exhaust fans, sometimes phone chargers</li>
+        <li><strong>Power source:</strong> Rooftop solar panels with battery storage</li>
+        <li><strong>Benefits:</strong> No generator needed for lighting, improved ventilation reduces odors</li>
+        <li><strong>Availability:</strong> Increasingly common from major providers</li>
+        <li><strong>Premium cost:</strong> 10-20% more than standard units</li>
+      </ul>
+
+      <h3>3. Biodegradable Chemical Alternatives</h3>
+      <p>
+        Eco-friendly deodorizers and treatments that replace harsh chemicals.
+      </p>
+      <ul>
+        <li><strong>Enzyme-based treatments:</strong> Natural bacteria break down waste</li>
+        <li><strong>Plant-derived deodorizers:</strong> Essential oils and botanical extracts</li>
+        <li><strong>Formaldehyde-free:</strong> No toxic chemicals</li>
+        <li><strong>Biodegradable:</strong> Safe for wastewater treatment systems</li>
+        <li><strong>Ask your provider:</strong> Many offer green chemistry as a standard or upgrade option</li>
+      </ul>
+
+      <h3>4. Low-Flow and Waterless Units</h3>
+      <ul>
+        <li><strong>Waterless urinals:</strong> Use gravity and specially designed surfaces</li>
+        <li><strong>Low-flush toilets:</strong> 0.5-1 gallon per flush vs 1.6-3 gallons</li>
+        <li><strong>Foam-flush systems:</strong> Use minimal water with foam carrier</li>
+      </ul>
+
+      <h3>5. Recycled-Material Construction</h3>
+      <p>
+        Some manufacturers now produce units using recycled plastics:
+      </p>
+      <ul>
+        <li>Up to 50% recycled HDPE plastic</li>
+        <li>Same durability as virgin plastic</li>
+        <li>Units are recyclable at end of life</li>
+        <li>Reduces petroleum consumption</li>
+      </ul>
+
+      <AdSlot slot="content" />
+
+      <h2 id="comparison">Comparing Green Options</h2>
+
+      <div class="overflow-x-auto my-8">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Option</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Eco-Benefit</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Cost Premium</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Availability</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Composting toilets</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Highest (zero waste)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">50-100%+</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Limited</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900">Solar-powered</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Moderate</td>
+              <td class="px-6 py-4 text-sm text-gray-600">10-25%</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Growing</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Bio-based chemicals</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Good</td>
+              <td class="px-6 py-4 text-sm text-gray-600">0-10%</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Widely available</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900">Low-flow units</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Moderate</td>
+              <td class="px-6 py-4 text-sm text-gray-600">5-15%</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Common</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Recycled plastic units</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Moderate</td>
+              <td class="px-6 py-4 text-sm text-gray-600">0-5%</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Ask provider</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="providers">What to Ask Providers</h2>
+
+      <p>When inquiring about eco-friendly options, ask:</p>
+
+      <ol>
+        <li><strong>"What environmentally friendly options do you offer?"</strong> - Let them tell you what's available</li>
+        <li><strong>"What chemicals do you use for deodorizing?"</strong> - Ask about formaldehyde-free options</li>
+        <li><strong>"Do you have solar-powered units?"</strong> - Increasingly common</li>
+        <li><strong>"What happens to the waste?"</strong> - Responsible disposal and treatment</li>
+        <li><strong>"Are your units made from recycled materials?"</strong> - May require checking with manufacturers</li>
+        <li><strong>"Do you offer composting toilets?"</strong> - Limited but growing availability</li>
+        <li><strong>"Can you provide documentation for sustainability reporting?"</strong> - Important for certified events</li>
+      </ol>
+
+      <h2 id="fleet">Provider Fleet Sustainability</h2>
+
+      <p>Beyond the units themselves, consider the provider's overall environmental practices:</p>
+
+      <h3>Green Fleet Operations</h3>
+      <ul>
+        <li><strong>Route optimization:</strong> Efficient routing reduces fuel consumption</li>
+        <li><strong>Alternative fuel vehicles:</strong> Some providers use biodiesel or electric trucks</li>
+        <li><strong>Regular maintenance:</strong> Well-maintained trucks pollute less</li>
+        <li><strong>Local operations:</strong> Shorter distances mean less fuel</li>
+      </ul>
+
+      <h3>Waste Treatment</h3>
+      <ul>
+        <li><strong>Licensed treatment facilities:</strong> Proper disposal protects water systems</li>
+        <li><strong>Biogas capture:</strong> Some treatment plants capture methane for energy</li>
+        <li><strong>Water reclamation:</strong> Treated water can be reused for irrigation</li>
+      </ul>
+
+      <h2 id="events">Eco-Friendly Events: Complete Strategy</h2>
+
+      <p>For events pursuing sustainability certification or green branding:</p>
+
+      <h3>Communication</h3>
+      <ul>
+        <li>Signage explaining your green restroom choices</li>
+        <li>QR codes linking to sustainability information</li>
+        <li>Social media content about eco-initiatives</li>
+        <li>Include in event marketing materials</li>
+      </ul>
+
+      <h3>Beyond the Porta Potty</h3>
+      <ul>
+        <li><strong>Handwashing stations:</strong> Use biodegradable soaps</li>
+        <li><strong>Paper products:</strong> Request recycled-content toilet paper</li>
+        <li><strong>Hand sanitizer:</strong> Choose plant-based formulas</li>
+        <li><strong>Waste bins:</strong> Add recycling and composting near restrooms</li>
+      </ul>
+
+      <h3>Documentation</h3>
+      <ul>
+        <li>Request eco-specifications from your provider</li>
+        <li>Document choices for sustainability reports</li>
+        <li>Get certifications if provider has them (ISO 14001, etc.)</li>
+      </ul>
+
+      <h2 id="cost">Cost Considerations</h2>
+
+      <p>Green options often cost more, but consider:</p>
+
+      <ul>
+        <li><strong>Marketing value:</strong> Sustainability messaging attracts attendees and sponsors</li>
+        <li><strong>Certification requirements:</strong> May be necessary for certain event certifications</li>
+        <li><strong>Corporate mandates:</strong> Some companies require sustainable vendors</li>
+        <li><strong>Long-term trends:</strong> Green options are becoming standard, not premium</li>
+      </ul>
+
+      <h3>Budget-Friendly Green Choices</h3>
+      <ol>
+        <li>Request bio-based chemicals (often no extra cost)</li>
+        <li>Choose providers with efficient local operations</li>
+        <li>Right-size your order (fewer units = less environmental impact)</li>
+        <li>Opt for solar lighting when available at minimal premium</li>
+      </ol>
+
+      <h2 id="future">The Future of Green Portable Sanitation</h2>
+
+      <p>Expect to see more of these innovations in coming years:</p>
+
+      <ul>
+        <li><strong>Electric service vehicles:</strong> Replacing diesel pump trucks</li>
+        <li><strong>Smart waste sensors:</strong> Optimizing service trips (less fuel)</li>
+        <li><strong>Urine-diverting systems:</strong> Separating for fertilizer production</li>
+        <li><strong>Carbon-neutral operations:</strong> Providers offsetting emissions</li>
+        <li><strong>Circular economy models:</strong> 100% recyclable unit designs</li>
+      </ul>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-12 bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-8 text-center border border-emerald-100">
+      <h3 class="text-2xl font-bold text-gray-900 mb-3">Looking for Eco-Friendly Options?</h3>
+      <p class="text-gray-600 mb-6">Find providers who offer sustainable portable restroom solutions</p>
+      <a href="/" class="inline-flex items-center bg-primary-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-700 transition-colors">
+        Search Providers Near You
+      </a>
+    </div>
+
+    <!-- Related -->
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8">Related Articles</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {relatedPosts.map((related) => (
+          <a href={`/blog/${related.slug}`} class="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
+            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-700">{related.category}</span>
+            <h3 class="text-lg font-semibold text-gray-900 mt-3 line-clamp-2">{related.title}</h3>
+          </a>
+        ))}
+      </div>
+    </section>
+  </article>
+</BaseLayout>

@@ -1,0 +1,343 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import siteConfig from '../../data/site-config.json';
+import blogPosts from '../../data/blog-posts.json';
+
+const post = blogPosts.find(p => p.slug === 'porta-potty-movie-film-set')!;
+const siteUrl = `https://${siteConfig.domain}`;
+
+const articleData = {
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+};
+
+const relatedPosts = blogPosts.filter(p => p.slug !== post.slug && ['Construction', 'Planning'].includes(p.category)).slice(0, 3);
+---
+
+<BaseLayout title={post.title} description={post.description}>
+  <StructuredData type="Article" data={articleData} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-primary-600">Home</a></li>
+        <li>/</li>
+        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li>/</li>
+        <li class="text-gray-900">Film & Production Guide</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="inline-block bg-violet-100 text-violet-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Production</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <p>
+        Film and television productions are unique clients for portable sanitation. Long shooting days, remote locations, union requirements, and the need for tiered amenities create specific demands that differ from construction or events. Whether you're a location manager, line producer, or production coordinator, understanding these requirements is essential.
+      </p>
+
+      <p>
+        This guide covers everything from union regulations to talent trailer restrooms and the logistics of multi-location shoots.
+      </p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="requirements">Industry Requirements</h2>
+
+      <h3>Union Regulations</h3>
+      <p>
+        Film productions often work under union contracts (SAG-AFTRA, IATSE, Teamsters) that specify working conditions including restroom facilities:
+      </p>
+      <ul>
+        <li><strong>Ratio requirements:</strong> Typically 1 toilet per 15-20 crew members</li>
+        <li><strong>Proximity:</strong> Within reasonable walking distance of working areas</li>
+        <li><strong>Cleanliness standards:</strong> Regular servicing during long shoot days</li>
+        <li><strong>Talent provisions:</strong> Separate, upgraded facilities for cast</li>
+        <li><strong>Climate considerations:</strong> Heated/cooled facilities may be required</li>
+      </ul>
+
+      <h3>OSHA Requirements</h3>
+      <p>As a workplace, film sets must comply with OSHA sanitation standards:</p>
+      <ul>
+        <li>Minimum 1 toilet for every 20 workers</li>
+        <li>Toilets must be in sanitary condition</li>
+        <li>Handwashing facilities required</li>
+        <li>Adequate toilet paper and soap</li>
+      </ul>
+
+      <div class="bg-violet-50 border-l-4 border-violet-500 p-6 my-8">
+        <p class="font-semibold text-violet-900">Production Reality</p>
+        <p class="text-violet-800 mt-2">On a 100-person film set with a 14-hour shooting day, crew members will use restrooms approximately 400-500 times. Undersized or undersupplied facilities become a morale and productivity issue quickly.</p>
+      </div>
+
+      <h2 id="types">Production-Specific Equipment</h2>
+
+      <h3>Crew Facilities</h3>
+      <p>For the general crew (grips, electricians, PAs, etc.):</p>
+      <ul>
+        <li><strong>Deluxe units:</strong> Standard upgrade from basic porta potties</li>
+        <li><strong>Flushable units:</strong> Better for long shooting days</li>
+        <li><strong>Handwashing stations:</strong> Placed adjacent to restroom banks</li>
+        <li><strong>Quantity:</strong> Plan for 1 unit per 15-20 crew members</li>
+      </ul>
+
+      <h3>Talent Trailers</h3>
+      <p>Principal actors typically have private trailers with built-in restrooms, but supporting cast and background actors need facilities too:</p>
+      <ul>
+        <li><strong>Star trailers:</strong> Self-contained restrooms in personal trailers</li>
+        <li><strong>Day player/guest star:</strong> Shared luxury trailer or premium units</li>
+        <li><strong>Background/extras:</strong> Designated clean units, separate from crew</li>
+        <li><strong>Holding areas:</strong> Additional units for extras holding</li>
+      </ul>
+
+      <h3>Restroom Trailers</h3>
+      <p>Multi-stall mobile restrooms are popular on larger productions:</p>
+      <ul>
+        <li><strong>Climate controlled:</strong> Essential for extreme weather</li>
+        <li><strong>Multiple stalls:</strong> Faster turnover</li>
+        <li><strong>Running water:</strong> Real sinks for handwashing</li>
+        <li><strong>Professional appearance:</strong> Matches the production quality</li>
+        <li><strong>Cost:</strong> $500-1,500+ per day depending on size</li>
+      </ul>
+
+      <h3>Specialty Options</h3>
+      <ul>
+        <li><strong>Shower trailers:</strong> For muddy locations, special effects, or overnight shoots</li>
+        <li><strong>Hair & makeup adjacent:</strong> Clean facilities near HMUA trailers</li>
+        <li><strong>ADA units:</strong> Required for accessibility compliance</li>
+        <li><strong>High-rise/studio units:</strong> Compact options for space-constrained locations</li>
+      </ul>
+
+      <AdSlot slot="content" />
+
+      <h2 id="planning">Production Planning</h2>
+
+      <h3>Pre-Production Considerations</h3>
+      <ol>
+        <li><strong>Scout restroom needs:</strong> Note existing facilities, distances, access during location scouts</li>
+        <li><strong>Calculate crew size:</strong> Account for all departments plus background</li>
+        <li><strong>Review union contracts:</strong> Check specific requirements for your production</li>
+        <li><strong>Confirm location permissions:</strong> Some locations restrict where units can be placed</li>
+        <li><strong>Budget accurately:</strong> Include delivery, daily rental, servicing, and pickup</li>
+      </ol>
+
+      <h3>Location Logistics</h3>
+      <p>Film locations present unique challenges:</p>
+      <ul>
+        <li><strong>Remote locations:</strong> Ensure service trucks can reach the site</li>
+        <li><strong>Permit restrictions:</strong> Some film permits specify sanitation requirements</li>
+        <li><strong>Multiple units:</strong> Different zones for crew, talent, and background</li>
+        <li><strong>Moving shoots:</strong> Consider units on wheels or daily relocations</li>
+        <li><strong>Night shoots:</strong> Interior lighting essential</li>
+      </ul>
+
+      <h3>Multi-Location Productions</h3>
+      <p>For productions that move between locations:</p>
+      <ul>
+        <li><strong>Leapfrog delivery:</strong> Units at tomorrow's location delivered today</li>
+        <li><strong>Base camp units:</strong> Remain in one location throughout production</li>
+        <li><strong>Set units:</strong> Move with the shooting unit</li>
+        <li><strong>Coordinate timing:</strong> Ensure units arrive before call time</li>
+      </ul>
+
+      <h2 id="scheduling">Service Scheduling</h2>
+
+      <h3>Long Shoot Days</h3>
+      <p>12-14 hour shooting days (common in film) require:</p>
+      <ul>
+        <li><strong>Morning pre-call service:</strong> Clean units before crew arrival</li>
+        <li><strong>Mid-day service:</strong> Pump and restock during lunch break</li>
+        <li><strong>End-of-day service:</strong> Optional for overnight prep</li>
+      </ul>
+
+      <h3>Service Communication</h3>
+      <ul>
+        <li>Designate a single point of contact (usually locations department)</li>
+        <li>Provide call sheets with unit placements to service company</li>
+        <li>Have emergency contact for issues during shooting</li>
+        <li>Brief service drivers on set protocol (quiet on set, parking, access)</li>
+      </ul>
+
+      <h2 id="placement">Set Placement Strategy</h2>
+
+      <h3>Base Camp</h3>
+      <p>The production hub where trailers, catering, and crew facilities are located:</p>
+      <ul>
+        <li>Main restroom bank near catering</li>
+        <li>Separate units near talent trailers if trailers lack restrooms</li>
+        <li>Handwashing stations at multiple points</li>
+        <li>Clear signage for different designations (crew, background, etc.)</li>
+      </ul>
+
+      <h3>Set/On Location</h3>
+      <p>At the actual filming location:</p>
+      <ul>
+        <li>Units within reasonable walk but not visible in shots</li>
+        <li>Consider sound - pumping shouldn't happen during takes</li>
+        <li>Accessible path that doesn't interfere with equipment</li>
+        <li>Lighting for night work</li>
+      </ul>
+
+      <h3>Holding Areas</h3>
+      <p>For background actors waiting to be called:</p>
+      <ul>
+        <li>Calculate for large numbers (sometimes 100+ extras)</li>
+        <li>Located within holding, not a long walk</li>
+        <li>Higher ratio: 1 unit per 50-75 people for shorter wait times</li>
+      </ul>
+
+      <h2 id="budgeting">Budget Guidelines</h2>
+
+      <div class="overflow-x-auto my-8">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Production Size</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Typical Setup</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Daily Cost Range</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Small (20-40 crew)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">3-4 deluxe units + handwashing</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$200-400/day</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900">Medium (50-100 crew)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">6-8 units + restroom trailer</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$600-1,200/day</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Large (100+ crew + BG)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">12-20 units + multiple trailers</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$1,500-3,000+/day</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900">Major production</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Custom package</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$3,000-10,000+/day</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Additional costs to budget:</strong></p>
+      <ul>
+        <li>Extra servicing during 12-14 hour days: +$75-150/service</li>
+        <li>Relocation between locations: +$100-200/move</li>
+        <li>Rush delivery for schedule changes: +25-50%</li>
+        <li>Generator for trailer power: +$200-500/day</li>
+      </ul>
+
+      <h2 id="providers">Working with Providers</h2>
+
+      <h3>Finding Production-Experienced Providers</h3>
+      <ul>
+        <li>Ask for film/TV production references</li>
+        <li>Confirm they understand call times and set protocol</li>
+        <li>Verify flexible scheduling for production changes</li>
+        <li>Check availability for extended hours and weekends</li>
+        <li>Confirm insurance meets production requirements</li>
+      </ul>
+
+      <h3>What to Communicate</h3>
+      <ul>
+        <li>Shooting schedule (call times, wrap times)</li>
+        <li>Base camp and set locations</li>
+        <li>Crew size and any background/extras days</li>
+        <li>Any location access restrictions or timing windows</li>
+        <li>Key contact in locations department</li>
+        <li>Invoice and accounting requirements</li>
+      </ul>
+
+      <h2 id="checklist">Production Sanitation Checklist</h2>
+
+      <p><strong>Pre-Production:</strong></p>
+      <ul>
+        <li>Calculate crew + background numbers for each shoot day</li>
+        <li>Review union contracts for requirements</li>
+        <li>Include sanitation in location scouts</li>
+        <li>Get quotes from providers with production experience</li>
+        <li>Confirm permit requirements</li>
+        <li>Budget for delivery, daily rental, servicing, pickup</li>
+      </ul>
+
+      <p><strong>Production:</strong></p>
+      <ul>
+        <li>Confirm delivery before first call time</li>
+        <li>Verify unit placement doesn't interfere with shots or sound</li>
+        <li>Schedule mid-day service during meal breaks</li>
+        <li>Assign PA to check supply levels periodically</li>
+        <li>Have emergency provider contact on hand</li>
+        <li>Communicate any schedule changes to provider</li>
+      </ul>
+
+      <p><strong>Wrap:</strong></p>
+      <ul>
+        <li>Schedule pickup after final wrap</li>
+        <li>Return any borrowed keys or access codes to provider</li>
+        <li>Report any damage or issues</li>
+        <li>Process final invoice through accounting</li>
+      </ul>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-12 bg-gradient-to-br from-violet-50 to-purple-50 rounded-2xl p-8 text-center border border-violet-100">
+      <h3 class="text-2xl font-bold text-gray-900 mb-3">Planning a Production?</h3>
+      <p class="text-gray-600 mb-6">Find portable restroom providers experienced with film and TV sets</p>
+      <a href="/" class="inline-flex items-center bg-primary-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-700 transition-colors">
+        Search Providers Near You
+      </a>
+    </div>
+
+    <!-- Related -->
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8">Related Articles</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {relatedPosts.map((related) => (
+          <a href={`/blog/${related.slug}`} class="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
+            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-700">{related.category}</span>
+            <h3 class="text-lg font-semibold text-gray-900 mt-3 line-clamp-2">{related.title}</h3>
+          </a>
+        ))}
+      </div>
+    </section>
+  </article>
+</BaseLayout>

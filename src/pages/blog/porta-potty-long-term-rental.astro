@@ -1,0 +1,333 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import siteConfig from '../../data/site-config.json';
+import blogPosts from '../../data/blog-posts.json';
+
+const post = blogPosts.find(p => p.slug === 'porta-potty-long-term-rental')!;
+const siteUrl = `https://${siteConfig.domain}`;
+
+const articleData = {
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+};
+
+const relatedPosts = blogPosts.filter(p => p.slug !== post.slug && ['Construction', 'Planning', 'Pricing'].includes(p.category)).slice(0, 3);
+---
+
+<BaseLayout title={post.title} description={post.description}>
+  <StructuredData type="Article" data={articleData} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-primary-600">Home</a></li>
+        <li>/</li>
+        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li>/</li>
+        <li class="text-gray-900">Long-Term Rental Guide</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="inline-block bg-green-100 text-green-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Construction</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <p>
+        Long-term porta potty rentals are the backbone of construction sites, home renovation projects, and extended outdoor operations. While event rentals get most of the attention, <strong>construction and long-term rentals account for over 55% of the portable sanitation industry's revenue</strong>.
+      </p>
+
+      <p>
+        Whether you're a general contractor managing multiple job sites, a homeowner planning a major renovation, or an industrial facility manager, understanding long-term rental economics can save you thousands of dollars. Here's your complete guide.
+      </p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="when-needed">When Do You Need Long-Term Rentals?</h2>
+
+      <h3>Construction Sites</h3>
+      <p>OSHA requires toilet facilities for all workers on construction sites:</p>
+      <ul>
+        <li><strong>1-20 workers:</strong> 1 toilet required</li>
+        <li><strong>20-200 workers:</strong> 1 toilet per 40 workers</li>
+        <li><strong>200+ workers:</strong> 1 toilet per 50 workers</li>
+      </ul>
+
+      <h3>Home Renovations</h3>
+      <p>When your home's plumbing is being replaced or major bathroom work is underway:</p>
+      <ul>
+        <li>Bathroom remodels lasting more than a few days</li>
+        <li>Whole-house plumbing replacement</li>
+        <li>Septic system repairs or replacement</li>
+        <li>Home additions during construction phase</li>
+      </ul>
+
+      <h3>Other Long-Term Uses</h3>
+      <ul>
+        <li><strong>Agricultural:</strong> Seasonal farm workers, harvest operations</li>
+        <li><strong>Industrial:</strong> Remote work sites, manufacturing expansions</li>
+        <li><strong>Commercial:</strong> Parking lot operations, temporary offices</li>
+        <li><strong>Recreational:</strong> Campgrounds, boat docks, seasonal venues</li>
+      </ul>
+
+      <h2 id="pricing">Long-Term Rental Pricing</h2>
+
+      <p>
+        The good news: <strong>monthly rates are significantly cheaper than daily or weekly rentals</strong>. The longer your rental period, the lower your effective daily cost.
+      </p>
+
+      <div class="overflow-x-auto my-8">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Rental Period</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Standard Unit</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Effective Daily Rate</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Daily</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$75-150</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$75-150</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900">Weekly</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$150-250</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$21-36</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Monthly (28 days)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$150-250</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$5-9</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900">3+ Months</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$125-200/month</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$4-7</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-green-50 border-l-4 border-green-500 p-6 my-8">
+        <p class="font-semibold text-green-900">Money-Saving Tip</p>
+        <p class="text-green-800 mt-2">If your project might run 3-4 weeks, book for a full month upfront. The monthly rate is typically the same as or less than 2 weeks at the weekly rate. Many providers also offer discounts for 3, 6, or 12-month commitments.</p>
+      </div>
+
+      <h2 id="whats-included">What's Included in Long-Term Rentals</h2>
+
+      <h3>Standard Package</h3>
+      <ul>
+        <li><strong>The unit itself:</strong> Standard construction-grade porta potty</li>
+        <li><strong>Weekly servicing:</strong> Pumping, cleaning, restocking (1x per week is standard)</li>
+        <li><strong>Supplies:</strong> Toilet paper, hand sanitizer, deodorizer</li>
+        <li><strong>Delivery and pickup:</strong> Usually included in monthly rates</li>
+      </ul>
+
+      <h3>Upgrades Available</h3>
+      <ul>
+        <li><strong>Extra servicing:</strong> 2-3x weekly for high-use sites (+$50-100/week)</li>
+        <li><strong>Hand sanitizer station:</strong> +$25-50/month</li>
+        <li><strong>Handwashing sink:</strong> +$75-150/month</li>
+        <li><strong>Deluxe unit with sink:</strong> +$50-100/month vs standard</li>
+        <li><strong>ADA-accessible unit:</strong> +$50-75/month vs standard</li>
+      </ul>
+
+      <AdSlot slot="content" />
+
+      <h2 id="servicing">Servicing Frequency</h2>
+
+      <p>How often your unit needs service depends on usage:</p>
+
+      <div class="overflow-x-auto my-8">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Users Per Day</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Recommended Service</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">1-5 users</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Weekly (included in standard rate)</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900">6-10 users</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Twice weekly</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">10-20 users</td>
+              <td class="px-6 py-4 text-sm text-gray-600">3x weekly or multiple units</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900">20+ users</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Daily service or add units</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        <strong>Pro tip:</strong> It's often more cost-effective to add another unit than to pay for daily servicing. A second unit at $150/month is cheaper than adding 3 extra weekly services at $50-75 each.
+      </p>
+
+      <h2 id="placement">Placement Considerations</h2>
+
+      <h3>Access Requirements</h3>
+      <ul>
+        <li><strong>Delivery truck access:</strong> 10+ feet wide path, reasonably level</li>
+        <li><strong>Servicing access:</strong> Pump trucks need clear approach within 100 feet</li>
+        <li><strong>Ground surface:</strong> Level, solid surface preferred (gravel, concrete, compacted soil)</li>
+      </ul>
+
+      <h3>Location Best Practices</h3>
+      <ul>
+        <li><strong>Convenience:</strong> Within 200 feet of work areas (OSHA recommendation)</li>
+        <li><strong>Not too close:</strong> At least 20 feet from food areas or main building entrances</li>
+        <li><strong>Downwind:</strong> Consider prevailing wind direction</li>
+        <li><strong>Visible but discreet:</strong> Workers should find it easily</li>
+        <li><strong>Protected from traffic:</strong> Not in vehicle paths or swing areas for equipment</li>
+      </ul>
+
+      <h3>Special Situations</h3>
+      <ul>
+        <li><strong>Multi-story buildings:</strong> Consider units on each active floor level</li>
+        <li><strong>Large sites:</strong> Multiple units strategically placed vs. one central location</li>
+        <li><strong>Secured sites:</strong> Ensure service access during off-hours or provide key/code</li>
+      </ul>
+
+      <h2 id="contracts">Contract Considerations</h2>
+
+      <h3>What to Review</h3>
+      <ol>
+        <li><strong>Rate lock:</strong> Confirm monthly rate won't change during your rental period</li>
+        <li><strong>Minimum term:</strong> Some providers require 28-day minimum</li>
+        <li><strong>Cancellation policy:</strong> How much notice required? Any fees?</li>
+        <li><strong>Service guarantees:</strong> What happens if they miss a scheduled service?</li>
+        <li><strong>Damage policy:</strong> What's covered, what's your responsibility?</li>
+        <li><strong>Price for extensions:</strong> Same rate if your project runs long?</li>
+      </ol>
+
+      <h3>Red Flags</h3>
+      <ul>
+        <li>Fuel surcharges that aren't specified upfront</li>
+        <li>Vague language about "additional fees may apply"</li>
+        <li>No written service schedule</li>
+        <li>Requiring payment for full rental period upfront</li>
+      </ul>
+
+      <h2 id="multiple-units">Managing Multiple Units</h2>
+
+      <p>For larger construction projects with multiple porta potties:</p>
+
+      <ul>
+        <li><strong>Request a site survey:</strong> Provider can recommend optimal placement and quantities</li>
+        <li><strong>Stagger service days:</strong> Avoid all units being serviced the same day</li>
+        <li><strong>Designate a contact:</strong> One person to handle scheduling and issue reporting</li>
+        <li><strong>Consider variety:</strong> Mix of standard and deluxe units, include at least one ADA</li>
+        <li><strong>Track usage:</strong> Adjust quantities or service frequency based on actual needs</li>
+      </ul>
+
+      <h2 id="seasonal">Seasonal Considerations</h2>
+
+      <h3>Summer</h3>
+      <ul>
+        <li>More frequent servicing needed due to heat and odor</li>
+        <li>Keep units shaded if possible</li>
+        <li>Ensure adequate ventilation</li>
+      </ul>
+
+      <h3>Winter</h3>
+      <ul>
+        <li>Request antifreeze treatment in cold climates</li>
+        <li>Heated units available for extreme cold (+$100-200/month)</li>
+        <li>Keep entrances clear of snow and ice</li>
+      </ul>
+
+      <h2 id="homeowner-tips">Tips for Homeowners</h2>
+
+      <p>Renting a porta potty for your home renovation? Here's what to know:</p>
+
+      <ol>
+        <li><strong>HOA approval:</strong> Check if your homeowners association has rules about placement or duration</li>
+        <li><strong>Permit requirements:</strong> Some municipalities require permits for portable toilets</li>
+        <li><strong>Neighbor courtesy:</strong> Place away from property lines and neighbor views</li>
+        <li><strong>Contractor coordination:</strong> Confirm workers will use the unit (not your home)</li>
+        <li><strong>Timeline padding:</strong> Renovations often run long - book monthly rather than weekly</li>
+      </ol>
+
+      <h2 id="checklist">Long-Term Rental Checklist</h2>
+
+      <ul>
+        <li>Estimate project duration and add buffer time</li>
+        <li>Calculate number of users to determine unit quantity</li>
+        <li>Get quotes from 2-3 providers</li>
+        <li>Confirm what's included (delivery, servicing, supplies)</li>
+        <li>Review contract terms and cancellation policy</li>
+        <li>Plan placement with service truck access in mind</li>
+        <li>Establish a contact person for the provider</li>
+        <li>Set expectations with workers about unit use and care</li>
+        <li>Schedule end-date pickup (with flexibility for extensions)</li>
+      </ul>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-12 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 text-center border border-green-100">
+      <h3 class="text-2xl font-bold text-gray-900 mb-3">Need Long-Term Porta Potty Rentals?</h3>
+      <p class="text-gray-600 mb-6">Find providers who specialize in construction and extended rentals</p>
+      <a href="/" class="inline-flex items-center bg-primary-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-700 transition-colors">
+        Search Providers Near You
+      </a>
+    </div>
+
+    <!-- Related -->
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8">Related Articles</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {relatedPosts.map((related) => (
+          <a href={`/blog/${related.slug}`} class="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
+            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-700">{related.category}</span>
+            <h3 class="text-lg font-semibold text-gray-900 mt-3 line-clamp-2">{related.title}</h3>
+          </a>
+        ))}
+      </div>
+    </section>
+  </article>
+</BaseLayout>

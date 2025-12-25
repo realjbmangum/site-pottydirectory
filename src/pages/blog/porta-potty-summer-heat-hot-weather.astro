@@ -1,0 +1,291 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import siteConfig from '../../data/site-config.json';
+import blogPosts from '../../data/blog-posts.json';
+
+const post = blogPosts.find(p => p.slug === 'porta-potty-summer-heat-hot-weather')!;
+const siteUrl = `https://${siteConfig.domain}`;
+
+const articleData = {
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+};
+
+const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+---
+
+<BaseLayout title={post.title} description={post.description}>
+  <StructuredData type="Article" data={articleData} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-primary-600">Home</a></li>
+        <li>/</li>
+        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li>/</li>
+        <li class="text-gray-900">Summer Heat Tips</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="inline-block bg-yellow-100 text-yellow-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Tips</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <p>
+        Summer heat is the greatest enemy of porta potty comfort. When outdoor temperatures climb above 85°F (29°C), the interior of a standard porta potty can easily reach <strong>100-120°F (38-49°C)</strong>. Odors intensify, bacteria multiply faster, and user experience plummets.
+      </p>
+
+      <p>
+        But with the right strategies, you can keep your portable restrooms bearable - even during heat waves. Here's everything event planners, construction managers, and rental customers need to know about porta potties in hot weather.
+      </p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="why-heat-matters">Why Heat Makes Everything Worse</h2>
+
+      <h3>The Science of Summer Porta Potties</h3>
+
+      <ul>
+        <li><strong>Bacterial growth accelerates:</strong> Waste breaks down faster at higher temperatures, producing more ammonia and hydrogen sulfide (the "rotten egg" smell)</li>
+        <li><strong>Plastic absorbs heat:</strong> Standard units are essentially plastic greenhouses that trap solar radiation</li>
+        <li><strong>Deodorizers work less effectively:</strong> Chemical reactions happen faster, exhausting deodorizer capacity sooner</li>
+        <li><strong>Ventilation decreases:</strong> Hot, still air doesn't circulate through vents as well as cooler air</li>
+        <li><strong>User discomfort:</strong> People avoid using facilities, leading to sanitation issues or health risks</li>
+      </ul>
+
+      <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 my-8">
+        <p class="font-semibold text-yellow-900">Temperature Comparison</p>
+        <p class="text-yellow-800 mt-2">On a 90°F day, a standard porta potty in direct sun can reach 115-125°F inside. A shaded unit with proper ventilation stays 10-20 degrees cooler.</p>
+      </div>
+
+      <h2 id="placement">Strategic Placement</h2>
+
+      <p>Location is the most important factor for summer comfort. Plan placement before units arrive.</p>
+
+      <h3>Seek Shade</h3>
+      <ul>
+        <li><strong>Natural shade:</strong> Trees, building shadows, hillsides</li>
+        <li><strong>Created shade:</strong> Pop-up canopies, tarps, shade sails</li>
+        <li><strong>Track the sun:</strong> Morning shade might disappear by afternoon - plan for peak heat hours (2-5 PM)</li>
+        <li><strong>Avoid reflected heat:</strong> Don't place near reflective surfaces like white concrete or metal buildings</li>
+      </ul>
+
+      <h3>Maximize Airflow</h3>
+      <ul>
+        <li><strong>Orient doors away from sun:</strong> Door should face north or toward prevailing breeze</li>
+        <li><strong>Don't cluster tightly:</strong> Leave 3-4 feet between units for air circulation</li>
+        <li><strong>Avoid wind-blocking structures:</strong> Fences and walls can trap stagnant air</li>
+      </ul>
+
+      <h3>Surface Considerations</h3>
+      <ul>
+        <li><strong>Grass is cooler than asphalt:</strong> Dark pavement radiates stored heat upward</li>
+        <li><strong>Elevate slightly if possible:</strong> Air circulates better when units aren't sitting directly on hot ground</li>
+      </ul>
+
+      <h2 id="unit-selection">Choosing the Right Units</h2>
+
+      <h3>Standard Units - Hot Weather Upgrades</h3>
+      <ul>
+        <li><strong>Light-colored units:</strong> White or light gray reflects more heat than darker colors</li>
+        <li><strong>Solar-powered vents:</strong> Fans that activate automatically in sunlight</li>
+        <li><strong>Enlarged vents:</strong> Some models have additional roof or side venting</li>
+        <li><strong>Fresh Flush units:</strong> Flushing action helps control odors better than standard units</li>
+      </ul>
+
+      <h3>Premium Options for Extreme Heat</h3>
+      <ul>
+        <li><strong>Restroom trailers:</strong> Air-conditioned comfort for VIP events or long shifts</li>
+        <li><strong>Climate-controlled units:</strong> HVAC units designed for extreme conditions (+$200-400/day)</li>
+        <li><strong>Misting systems:</strong> Some premium units include misting near entrances</li>
+      </ul>
+
+      <AdSlot slot="content" />
+
+      <h2 id="servicing">Increased Servicing in Summer</h2>
+
+      <p>Standard weekly servicing isn't enough for hot weather. Plan for more frequent attention:</p>
+
+      <div class="overflow-x-auto my-8">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Scenario</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Normal Weather</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Hot Weather (85°F+)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Construction (5-10 users)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Weekly</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Twice weekly</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900">Construction (10-20 users)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Twice weekly</td>
+              <td class="px-6 py-4 text-sm text-gray-600">3x weekly or add unit</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Day-long event</td>
+              <td class="px-6 py-4 text-sm text-gray-600">No mid-event service</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Mid-day refresh recommended</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900">Multi-day festival</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Daily service</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Twice daily service</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>What "Hot Weather Service" Includes</h3>
+      <ul>
+        <li>Pumping waste (same as standard)</li>
+        <li><strong>Extra deodorizer:</strong> Higher concentration or more frequent application</li>
+        <li><strong>Interior cleaning:</strong> Wiping down surfaces that may feel grimy</li>
+        <li><strong>Restocking:</strong> Hand sanitizer and toilet paper check</li>
+        <li><strong>Odor treatment:</strong> Some providers use enzymes or biological treatments that work better in heat</li>
+      </ul>
+
+      <h2 id="event-tips">Hot Weather Event Tips</h2>
+
+      <h3>Add More Units</h3>
+      <p>
+        In hot weather, increase your unit count by <strong>20-30%</strong> above standard calculations. Shorter wait times mean people don't have to stand in the heat, and reduced usage per unit keeps each one fresher.
+      </p>
+
+      <h3>Create Waiting Areas</h3>
+      <ul>
+        <li>Shade structure for people waiting in line</li>
+        <li>Misting fans near porta potty banks</li>
+        <li>Signage showing locations of other facilities to distribute crowds</li>
+      </ul>
+
+      <h3>Schedule Mid-Event Refreshes</h3>
+      <p>
+        For events lasting more than 4 hours in heat, arrange for mid-event servicing. This might include:
+      </p>
+      <ul>
+        <li>Re-treating tanks with deodorizer</li>
+        <li>Restocking supplies</li>
+        <li>Quick interior wipe-down</li>
+        <li>Addressing any problem units</li>
+      </ul>
+
+      <h2 id="construction">Construction Site Strategies</h2>
+
+      <h3>Morning Placement</h3>
+      <p>
+        If units are being delivered, schedule for early morning before the day heats up. Units that bake in the sun during delivery will carry that heat for hours.
+      </p>
+
+      <h3>Worker Buy-In</h3>
+      <p>
+        Brief crews on keeping doors closed when not in use. An open door lets hot air and flies in while letting cool air escape.
+      </p>
+
+      <h3>Consider Adding Units</h3>
+      <p>
+        In extreme heat, workers use restrooms more frequently (increased hydration). A second unit may be more cost-effective than constant complaints and productivity loss.
+      </p>
+
+      <h2 id="diy-cooling">DIY Cooling Solutions</h2>
+
+      <p>If you're managing units yourself, here are some field-tested tricks:</p>
+
+      <ol>
+        <li><strong>Reflective tarps:</strong> Drape over the roof to reflect sunlight (leave vents uncovered)</li>
+        <li><strong>Wet towels on roof:</strong> Evaporative cooling effect as water evaporates</li>
+        <li><strong>Battery-powered fans:</strong> Clip-on fans inside the unit for air circulation</li>
+        <li><strong>Ice in holding tank:</strong> Adding ice to the tank can reduce odors temporarily (not a long-term solution)</li>
+        <li><strong>Extra deodorizer packets:</strong> Keep extras on hand to add between services</li>
+        <li><strong>Door propping at night:</strong> If secured, leave doors cracked overnight to ventilate</li>
+      </ol>
+
+      <h2 id="what-to-avoid">What NOT to Do</h2>
+
+      <ul>
+        <li><strong>Don't reduce servicing to save money:</strong> This always backfires in heat</li>
+        <li><strong>Don't place in direct sun when shade is available:</strong> Even partial shade helps</li>
+        <li><strong>Don't ignore complaints:</strong> User feedback is the first sign of a problem</li>
+        <li><strong>Don't wait until it's bad:</strong> Address odor issues immediately</li>
+        <li><strong>Don't block vents:</strong> Some people cover vents thinking it helps - it doesn't</li>
+      </ul>
+
+      <h2 id="checklist">Hot Weather Porta Potty Checklist</h2>
+
+      <ul>
+        <li>Scout placement for shade and airflow before delivery</li>
+        <li>Request light-colored units if available</li>
+        <li>Schedule increased servicing frequency</li>
+        <li>Add 20-30% more units than standard calculations</li>
+        <li>Plan shade for waiting areas at events</li>
+        <li>Keep extra deodorizer and supplies on hand</li>
+        <li>Brief staff/workers on door closure</li>
+        <li>Have provider contact ready for emergency service</li>
+        <li>Monitor throughout the day and address issues early</li>
+      </ul>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-12 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-8 text-center border border-yellow-100">
+      <h3 class="text-2xl font-bold text-gray-900 mb-3">Planning a Summer Event?</h3>
+      <p class="text-gray-600 mb-6">Find providers who understand hot weather porta potty needs</p>
+      <a href="/" class="inline-flex items-center bg-primary-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-700 transition-colors">
+        Search Providers Near You
+      </a>
+    </div>
+
+    <!-- Related -->
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8">Related Articles</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {relatedPosts.map((related) => (
+          <a href={`/blog/${related.slug}`} class="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
+            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-700">{related.category}</span>
+            <h3 class="text-lg font-semibold text-gray-900 mt-3 line-clamp-2">{related.title}</h3>
+          </a>
+        ))}
+      </div>
+    </section>
+  </article>
+</BaseLayout>

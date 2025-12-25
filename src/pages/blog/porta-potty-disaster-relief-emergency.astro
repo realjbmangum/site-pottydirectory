@@ -1,0 +1,262 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import siteConfig from '../../data/site-config.json';
+import blogPosts from '../../data/blog-posts.json';
+
+const post = blogPosts.find(p => p.slug === 'porta-potty-disaster-relief-emergency')!;
+const siteUrl = `https://${siteConfig.domain}`;
+
+const articleData = {
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+};
+
+const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+---
+
+<BaseLayout title={post.title} description={post.description}>
+  <StructuredData type="Article" data={articleData} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-primary-600">Home</a></li>
+        <li>/</li>
+        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li>/</li>
+        <li class="text-gray-900">Disaster Relief Porta Potties</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="inline-block bg-red-100 text-red-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Emergency</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <p>
+        When disasters strike - hurricanes, floods, tornadoes, wildfires, or earthquakes - one of the first critical needs is sanitation. Damaged sewage systems, displaced populations, and emergency shelters all require portable restroom solutions that can be deployed quickly and function in harsh conditions.
+      </p>
+
+      <p>
+        The portable sanitation industry plays a vital role in disaster response, with companies capable of <strong>deploying hundreds of units within 24-48 hours</strong> to affected areas. Here's what emergency managers, relief organizations, and affected communities need to know.
+      </p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="why-critical">Why Sanitation is Critical in Disasters</h2>
+
+      <p>Within the first 72 hours of a disaster, sanitation becomes a public health emergency:</p>
+
+      <ul>
+        <li><strong>Disease prevention:</strong> Contaminated water and improper waste disposal spread cholera, dysentery, and hepatitis</li>
+        <li><strong>Displaced populations:</strong> Emergency shelters house hundreds without adequate facilities</li>
+        <li><strong>Infrastructure damage:</strong> Municipal sewage systems may be offline for weeks or months</li>
+        <li><strong>First responders:</strong> Search and rescue teams need facilities during extended operations</li>
+        <li><strong>Debris cleanup:</strong> Cleanup crews work for months and need on-site sanitation</li>
+      </ul>
+
+      <div class="bg-red-50 border-l-4 border-red-500 p-6 my-8">
+        <p class="font-semibold text-red-900">Lessons from History</p>
+        <p class="text-red-800 mt-2">During Hurricane Katrina, inadequate sanitation at the Superdome shelter contributed to dangerous health conditions. This led to improved emergency sanitation protocols for FEMA and relief organizations nationwide.</p>
+      </div>
+
+      <h2 id="types">Types of Emergency Sanitation Equipment</h2>
+
+      <h3>Standard Porta Potties</h3>
+      <p>The backbone of disaster response. Rugged, quick to deploy, and functional without utilities.</p>
+      <ul>
+        <li>Self-contained - no water or power needed</li>
+        <li>Can be placed almost anywhere with vehicle access</li>
+        <li>Withstand extreme weather with proper anchoring</li>
+      </ul>
+
+      <h3>ADA-Accessible Units</h3>
+      <p>Essential for serving disabled community members and those with injuries.</p>
+      <ul>
+        <li>Larger interior for wheelchair access</li>
+        <li>Grab bars for support</li>
+        <li>Ground-level entry</li>
+      </ul>
+
+      <h3>Shower Trailers</h3>
+      <p>Critical for extended emergency operations and shelter populations.</p>
+      <ul>
+        <li>Multiple shower stalls (typically 4-8)</li>
+        <li>Hot water capability with propane or electric</li>
+        <li>Essential for health and morale in long-term shelters</li>
+      </ul>
+
+      <h3>Handwashing Stations</h3>
+      <p>Vital for disease prevention, especially during contagious outbreaks.</p>
+      <ul>
+        <li>Foot-pump or sensor operation</li>
+        <li>Soap and sanitizer dispensers</li>
+        <li>Often placed near food distribution areas</li>
+      </ul>
+
+      <h3>Restroom Trailers</h3>
+      <p>For command centers, medical tents, and longer-term operations.</p>
+      <ul>
+        <li>Multiple stalls with flushing toilets</li>
+        <li>Climate control for extreme temperatures</li>
+        <li>Running water for handwashing</li>
+      </ul>
+
+      <AdSlot slot="content" />
+
+      <h2 id="deployment">How Emergency Deployment Works</h2>
+
+      <h3>Pre-Positioning</h3>
+      <p>
+        Major portable sanitation companies monitor weather forecasts and pre-position equipment near predicted disaster zones. When hurricanes are forecast 5-7 days out, units are staged just outside the projected impact area.
+      </p>
+
+      <h3>Rapid Response</h3>
+      <ul>
+        <li><strong>24-48 hours:</strong> First units deployed to emergency shelters and first responder staging areas</li>
+        <li><strong>48-72 hours:</strong> Additional units placed at distribution centers, medical facilities, and affected neighborhoods</li>
+        <li><strong>1 week+:</strong> Scaled deployment based on ongoing needs assessment</li>
+      </ul>
+
+      <h3>Coordination</h3>
+      <p>Emergency sanitation involves multiple stakeholders:</p>
+      <ul>
+        <li>FEMA and state emergency management agencies</li>
+        <li>American Red Cross</li>
+        <li>Local emergency management offices</li>
+        <li>National Guard and military</li>
+        <li>Private contractors with government contracts</li>
+      </ul>
+
+      <h2 id="planning">Planning for Emergencies</h2>
+
+      <h3>For Emergency Managers</h3>
+      <ol>
+        <li><strong>Establish contracts in advance:</strong> Pre-negotiate rates and response times with regional providers</li>
+        <li><strong>Know your ratios:</strong> Plan for 1 unit per 50 people in shelters, with higher density near food service</li>
+        <li><strong>Include ADA units:</strong> Minimum 5% of units should be accessible</li>
+        <li><strong>Plan for servicing:</strong> Units need pumping every 3-5 days depending on usage</li>
+        <li><strong>Consider security:</strong> Lighting and placement affect user safety</li>
+      </ol>
+
+      <h3>For Businesses and Facilities</h3>
+      <p>If your business or facility might serve as an emergency shelter or staging area:</p>
+      <ul>
+        <li>Identify flat, accessible areas for porta potty placement</li>
+        <li>Know your utility hookups for trailer units</li>
+        <li>Have contact information for local portable sanitation providers</li>
+        <li>Consider keeping 1-2 units on-site during hurricane season</li>
+      </ul>
+
+      <h3>For Homeowners</h3>
+      <p>After a disaster damages your home's plumbing:</p>
+      <ul>
+        <li>Call portable sanitation providers early - demand spikes quickly</li>
+        <li>Standard unit costs $100-200/week during normal times, but expect 25-50% higher during emergencies</li>
+        <li>Placement needs vehicle access for delivery and servicing</li>
+      </ul>
+
+      <h2 id="weather-conditions">Operating in Extreme Conditions</h2>
+
+      <h3>Hurricane and Flood Conditions</h3>
+      <ul>
+        <li><strong>Anchoring:</strong> Units are secured with stakes, sandbags, or straps to prevent tipping</li>
+        <li><strong>Elevation:</strong> In flood-prone areas, units may be placed on platforms</li>
+        <li><strong>Waterproofing:</strong> Emergency units are designed to remain functional in heavy rain</li>
+      </ul>
+
+      <h3>Extreme Heat</h3>
+      <ul>
+        <li>Increased deodorizer application</li>
+        <li>More frequent servicing</li>
+        <li>Shade structures when possible</li>
+        <li>Ventilation upgrades</li>
+      </ul>
+
+      <h3>Freezing Conditions</h3>
+      <ul>
+        <li>Antifreeze additives prevent tank freezing</li>
+        <li>Heated units available for extended cold weather operations</li>
+        <li>More frequent checks to ensure functionality</li>
+      </ul>
+
+      <h2 id="finding-providers">Finding Emergency Sanitation Providers</h2>
+
+      <p>When disaster strikes, here's how to secure portable sanitation quickly:</p>
+
+      <ol>
+        <li><strong>Contact multiple providers:</strong> During emergencies, the closest company may already be at capacity</li>
+        <li><strong>Ask about emergency response experience:</strong> Companies with FEMA contracts have proven disaster response capabilities</li>
+        <li><strong>Confirm delivery timeline:</strong> Get specific commitments on when units will arrive</li>
+        <li><strong>Discuss servicing plans:</strong> Ensure they can maintain units for the duration of the emergency</li>
+        <li><strong>Get pricing in writing:</strong> Some areas have price gouging laws during declared emergencies</li>
+      </ol>
+
+      <h2 id="resources">Emergency Resources</h2>
+
+      <ul>
+        <li><strong>FEMA:</strong> Coordinates federal disaster response including sanitation</li>
+        <li><strong>American Red Cross:</strong> Operates emergency shelters with sanitation needs</li>
+        <li><strong>State Emergency Management Agencies:</strong> Coordinate state-level response</li>
+        <li><strong>Local Emergency Management:</strong> First point of contact for community needs</li>
+      </ul>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-12 bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-8 text-center border border-red-100">
+      <h3 class="text-2xl font-bold text-gray-900 mb-3">Need Emergency Sanitation?</h3>
+      <p class="text-gray-600 mb-6">Find portable restroom providers with emergency response capabilities</p>
+      <a href="/" class="inline-flex items-center bg-primary-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-700 transition-colors">
+        Search Providers Near You
+      </a>
+    </div>
+
+    <!-- Related -->
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8">Related Articles</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {relatedPosts.map((related) => (
+          <a href={`/blog/${related.slug}`} class="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
+            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-700">{related.category}</span>
+            <h3 class="text-lg font-semibold text-gray-900 mt-3 line-clamp-2">{related.title}</h3>
+          </a>
+        ))}
+      </div>
+    </section>
+  </article>
+</BaseLayout>

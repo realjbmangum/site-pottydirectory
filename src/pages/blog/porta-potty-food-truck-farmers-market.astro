@@ -1,0 +1,274 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import siteConfig from '../../data/site-config.json';
+import blogPosts from '../../data/blog-posts.json';
+
+const post = blogPosts.find(p => p.slug === 'porta-potty-food-truck-farmers-market')!;
+const siteUrl = `https://${siteConfig.domain}`;
+
+const articleData = {
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+};
+
+const relatedPosts = blogPosts.filter(p => p.slug !== post.slug && ['Events', 'Regulations'].includes(p.category)).slice(0, 3);
+---
+
+<BaseLayout title={post.title} description={post.description}>
+  <StructuredData type="Article" data={articleData} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-primary-600">Home</a></li>
+        <li>/</li>
+        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li>/</li>
+        <li class="text-gray-900">Food Truck & Farmers Market Guide</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="inline-block bg-orange-100 text-orange-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Regulations</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <p>
+        Whether you're a food truck owner, farmers market organizer, or festival vendor, understanding restroom requirements is essential for compliance and a positive customer experience. Health departments take sanitation seriously - and failing to meet requirements can result in <strong>permit denials, fines, or event shutdowns</strong>.
+      </p>
+
+      <p>
+        This guide covers the restroom and handwashing requirements for mobile food vendors, temporary food events, and outdoor markets across the United States.
+      </p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="food-truck-requirements">Food Truck Restroom Requirements</h2>
+
+      <p>
+        Contrary to popular belief, <strong>food trucks themselves don't need built-in restrooms</strong>. However, operators must have documented access to toilet facilities during all hours of operation.
+      </p>
+
+      <h3>What Health Departments Require</h3>
+
+      <ul>
+        <li><strong>Toilet Use Agreement:</strong> Written agreement with nearby business or facility allowing restroom access</li>
+        <li><strong>Reasonable Distance:</strong> Facilities typically must be within 200-500 feet (varies by jurisdiction)</li>
+        <li><strong>Available During All Operating Hours:</strong> If you're open late, facilities must be accessible late</li>
+        <li><strong>Documentation:</strong> Carry the agreement with your health permit at all times</li>
+      </ul>
+
+      <h3>Options for Food Truck Operators</h3>
+
+      <ol>
+        <li><strong>Partner with nearby businesses:</strong> Restaurants, gas stations, or retail stores may allow access in exchange for promotion or a small fee</li>
+        <li><strong>Rent portable restrooms:</strong> For regular locations without nearby facilities</li>
+        <li><strong>Food truck parks:</strong> Most established food truck parks include shared restroom facilities</li>
+        <li><strong>Private events:</strong> Event organizers typically provide facilities</li>
+      </ol>
+
+      <div class="bg-orange-50 border-l-4 border-orange-500 p-6 my-8">
+        <p class="font-semibold text-orange-900">State-Specific Example: Texas</p>
+        <p class="text-orange-800 mt-2">Texas requires food trucks to have "accessible toilet rooms" for employees during operation. This can be satisfied through a signed agreement with a fixed establishment within 200 feet, or by providing portable facilities.</p>
+      </div>
+
+      <h2 id="handwashing">Handwashing Requirements (Non-Negotiable)</h2>
+
+      <p>
+        Unlike restrooms, <strong>handwashing stations are typically required ON the food truck or booth</strong>. Health inspectors will shut down vendors without proper handwashing facilities.
+      </p>
+
+      <h3>Requirements</h3>
+
+      <ul>
+        <li><strong>Running water:</strong> Gravity-fed or pump-operated acceptable</li>
+        <li><strong>Warm water capability:</strong> Many jurisdictions require this</li>
+        <li><strong>Soap dispenser:</strong> Liquid soap preferred</li>
+        <li><strong>Paper towels or air dryer:</strong> Single-use towels most common</li>
+        <li><strong>Waste container:</strong> For used towels</li>
+        <li><strong>Separate from food prep:</strong> Cannot double as a food preparation sink</li>
+      </ul>
+
+      <h3>Portable Handwashing Stations</h3>
+
+      <p>For temporary events and booths, standalone handwashing stations are available for rent:</p>
+
+      <ul>
+        <li><strong>Cost:</strong> $50-100 per day or $75-150 per week</li>
+        <li><strong>Capacity:</strong> 5-10 gallon freshwater tanks</li>
+        <li><strong>Features:</strong> Foot pump operation, soap and towel dispensers included</li>
+      </ul>
+
+      <AdSlot slot="content" />
+
+      <h2 id="farmers-markets">Farmers Market Requirements</h2>
+
+      <h3>For Market Organizers</h3>
+
+      <p>As the market organizer, you're typically responsible for providing restroom access for vendors and customers:</p>
+
+      <ul>
+        <li><strong>Ratio:</strong> Generally 1 porta potty per 250-500 expected attendees</li>
+        <li><strong>Location:</strong> Within reasonable distance of all vendor booths</li>
+        <li><strong>Accessibility:</strong> At least one ADA-compliant unit required for public events</li>
+        <li><strong>Handwashing:</strong> Station near restrooms recommended</li>
+      </ul>
+
+      <h3>For Vendors</h3>
+
+      <p>Individual vendors at farmers markets typically need:</p>
+
+      <ul>
+        <li><strong>Personal handwashing:</strong> If handling food, you need a handwashing station at your booth</li>
+        <li><strong>Temporary food permit:</strong> Required for prepared foods, may include sanitation inspection</li>
+        <li><strong>Knowledge of facility location:</strong> Know where market restrooms are located</li>
+      </ul>
+
+      <h2 id="festivals">Food Festival & Fair Requirements</h2>
+
+      <h3>For Event Organizers</h3>
+
+      <div class="overflow-x-auto my-8">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Expected Attendance</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Recommended Units</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Handwashing Stations</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Up to 500</td>
+              <td class="px-6 py-4 text-sm text-gray-600">4-6 units</td>
+              <td class="px-6 py-4 text-sm text-gray-600">2 stations</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900">500-1,000</td>
+              <td class="px-6 py-4 text-sm text-gray-600">8-12 units</td>
+              <td class="px-6 py-4 text-sm text-gray-600">3-4 stations</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">1,000-2,500</td>
+              <td class="px-6 py-4 text-sm text-gray-600">15-25 units</td>
+              <td class="px-6 py-4 text-sm text-gray-600">5-6 stations</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900">2,500-5,000</td>
+              <td class="px-6 py-4 text-sm text-gray-600">30-50 units</td>
+              <td class="px-6 py-4 text-sm text-gray-600">8-10 stations</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Add 20-30% more units if:</strong></p>
+      <ul>
+        <li>Alcohol is served</li>
+        <li>Event runs longer than 4 hours</li>
+        <li>High percentage of female attendees expected</li>
+      </ul>
+
+      <h3>For Food Vendors at Festivals</h3>
+
+      <ul>
+        <li><strong>Confirm organizer provides facilities:</strong> Get it in writing</li>
+        <li><strong>Bring your own handwashing:</strong> Don't rely on shared facilities for your booth</li>
+        <li><strong>Health permit:</strong> Temporary food establishment permit usually required</li>
+        <li><strong>Inspection ready:</strong> Expect health department walk-throughs during the event</li>
+      </ul>
+
+      <h2 id="permit-checklist">Health Permit Checklist</h2>
+
+      <p>When applying for food vendor permits, be prepared to document:</p>
+
+      <ul>
+        <li>Toilet use agreement (if using nearby facility)</li>
+        <li>Handwashing station specifications</li>
+        <li>Water supply and wastewater disposal plan</li>
+        <li>Site map showing facility locations</li>
+        <li>Servicing schedule for portable units</li>
+        <li>Photos of your setup including handwashing station</li>
+      </ul>
+
+      <h2 id="costs">Budget Considerations</h2>
+
+      <p>For food vendors and small events:</p>
+
+      <ul>
+        <li><strong>Portable handwashing station:</strong> $50-100/day</li>
+        <li><strong>Single porta potty:</strong> $100-200/weekend</li>
+        <li><strong>Deluxe unit with sink:</strong> $175-300/weekend</li>
+        <li><strong>Multiple units for events:</strong> Bulk discounts typically available</li>
+      </ul>
+
+      <h2 id="best-practices">Best Practices for Compliance</h2>
+
+      <ol>
+        <li><strong>Check local requirements first:</strong> Rules vary significantly by city and county</li>
+        <li><strong>Document everything:</strong> Keep copies of agreements and permits on-site</li>
+        <li><strong>Inspect before opening:</strong> Ensure handwashing supplies are stocked</li>
+        <li><strong>Train staff:</strong> Everyone should know proper handwashing procedures</li>
+        <li><strong>Plan for busy times:</strong> Restock soap and towels throughout the day</li>
+        <li><strong>Build relationships:</strong> Friendly rapport with health inspectors helps</li>
+      </ol>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-12 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl p-8 text-center border border-orange-100">
+      <h3 class="text-2xl font-bold text-gray-900 mb-3">Need Portable Restrooms for Your Event?</h3>
+      <p class="text-gray-600 mb-6">Find vendors who understand food service sanitation requirements</p>
+      <a href="/" class="inline-flex items-center bg-primary-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-700 transition-colors">
+        Search Providers Near You
+      </a>
+    </div>
+
+    <!-- Related -->
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8">Related Articles</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {relatedPosts.map((related) => (
+          <a href={`/blog/${related.slug}`} class="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
+            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-700">{related.category}</span>
+            <h3 class="text-lg font-semibold text-gray-900 mt-3 line-clamp-2">{related.title}</h3>
+          </a>
+        ))}
+      </div>
+    </section>
+  </article>
+</BaseLayout>

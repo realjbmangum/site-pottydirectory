@@ -1,0 +1,346 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import siteConfig from '../../data/site-config.json';
+import blogPosts from '../../data/blog-posts.json';
+
+const post = blogPosts.find(p => p.slug === 'porta-potty-tailgating-game-day')!;
+const siteUrl = `https://${siteConfig.domain}`;
+
+const articleData = {
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+    description: post.author.bio
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+};
+
+const relatedPosts = blogPosts.filter(p => p.slug !== post.slug && ['Events', 'Planning'].includes(p.category)).slice(0, 3);
+---
+
+<BaseLayout title={post.title} description={post.description}>
+  <StructuredData type="Article" data={articleData} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-primary-600">Home</a></li>
+        <li>/</li>
+        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li>/</li>
+        <li class="text-gray-900">Tailgating & Game Day</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <span class="inline-block bg-orange-100 text-orange-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Events</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            <span class="text-primary-600 font-bold text-lg">PP</span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900">{post.author.name}</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <p>
+        Tailgating is an American tradition - grills sizzling, cold drinks flowing, and fans celebrating before the big game. But when you're hosting a tailgate party in a stadium parking lot, one question always comes up: <strong>where does everyone go to the bathroom?</strong>
+      </p>
+
+      <p>
+        Stadium facilities are far away and packed. Port-a-potties provided by the venue are often overused and under-maintained. That's why serious tailgaters increasingly bring their own portable restroom. Here's the complete guide to game day sanitation.
+      </p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="do-you-need">Do You Need Your Own Porta Potty?</h2>
+
+      <h3>Consider Renting If:</h3>
+      <ul>
+        <li><strong>Large group:</strong> 20+ people at your tailgate</li>
+        <li><strong>Premium location:</strong> You have a dedicated or season-ticket parking spot</li>
+        <li><strong>All-day event:</strong> Arriving early, staying late</li>
+        <li><strong>Heavy refreshments:</strong> Beer and food means more bathroom trips</li>
+        <li><strong>Comfort priority:</strong> You want guests to stay at your tailgate, not wander off</li>
+        <li><strong>Repeat events:</strong> You host tailgates multiple times per season</li>
+      </ul>
+
+      <h3>Probably Not Needed If:</h3>
+      <ul>
+        <li>Small group (under 10 people)</li>
+        <li>Short pre-game window (1-2 hours)</li>
+        <li>Located near stadium facilities</li>
+        <li>Budget is very tight</li>
+      </ul>
+
+      <div class="bg-orange-50 border-l-4 border-orange-500 p-6 my-8">
+        <p class="font-semibold text-orange-900">The Math</p>
+        <p class="text-orange-800 mt-2">For a group of 30 people tailgating for 4 hours with alcohol: expect 60-90 bathroom visits. That's 15-20 trips to and from distant stadium facilities - or everyone stays put with your own porta potty.</p>
+      </div>
+
+      <h2 id="types">Best Porta Potties for Tailgating</h2>
+
+      <h3>Standard Units</h3>
+      <p>The basic, cost-effective option.</p>
+      <ul>
+        <li><strong>Cost:</strong> $150-250 for game day delivery and pickup</li>
+        <li><strong>Pros:</strong> Affordable, gets the job done</li>
+        <li><strong>Cons:</strong> Not fancy, may not match the "premium tailgate" vibe</li>
+        <li><strong>Best for:</strong> Budget-conscious hosts, casual tailgates</li>
+      </ul>
+
+      <h3>Deluxe Units</h3>
+      <p>Enhanced features for better comfort.</p>
+      <ul>
+        <li><strong>Cost:</strong> $200-350</li>
+        <li><strong>Features:</strong> Hand sanitizer, mirror, better ventilation, coat hook</li>
+        <li><strong>Best for:</strong> Most tailgate parties</li>
+      </ul>
+
+      <h3>Flushable Units</h3>
+      <p>Step up with actual flushing toilets.</p>
+      <ul>
+        <li><strong>Cost:</strong> $300-500</li>
+        <li><strong>Features:</strong> Fresh-water flush, more sanitary feel</li>
+        <li><strong>Best for:</strong> Upscale tailgates, mixed crowd including families</li>
+      </ul>
+
+      <h3>Restroom Trailers</h3>
+      <p>The ultimate tailgate restroom experience.</p>
+      <ul>
+        <li><strong>Cost:</strong> $800-1,500+ for game day</li>
+        <li><strong>Features:</strong> Multiple stalls, running water, climate control, luxury finishes</li>
+        <li><strong>Requirements:</strong> Larger parking footprint, may need power hookup</li>
+        <li><strong>Best for:</strong> Corporate tailgates, RV lots, VIP hosting</li>
+      </ul>
+
+      <AdSlot slot="content" />
+
+      <h2 id="logistics">Game Day Logistics</h2>
+
+      <h3>Timing</h3>
+      <ul>
+        <li><strong>Delivery:</strong> Schedule for 2-3 hours before your arrival time</li>
+        <li><strong>Pickup:</strong> After the game ends (or next morning if allowed)</li>
+        <li><strong>Season packages:</strong> Some providers offer all-season deals for regular tailgaters</li>
+      </ul>
+
+      <h3>Stadium/Venue Policies</h3>
+      <p>Before booking, check:</p>
+      <ul>
+        <li><strong>Permitted?</strong> Some stadiums don't allow personal porta potties</li>
+        <li><strong>Lot restrictions:</strong> Some premium lots have rules</li>
+        <li><strong>Size limits:</strong> Trailers may be prohibited in general lots</li>
+        <li><strong>Delivery access:</strong> When can trucks access the lot for delivery/pickup?</li>
+      </ul>
+
+      <h3>Placement in Your Tailgate Zone</h3>
+      <ul>
+        <li><strong>Away from food:</strong> At least 15-20 feet from grills and tables</li>
+        <li><strong>Accessible:</strong> Clear path, not blocked by vehicles</li>
+        <li><strong>Visible:</strong> Guests should find it easily</li>
+        <li><strong>Downwind:</strong> Consider wind direction</li>
+        <li><strong>Not blocking traffic:</strong> Leave driving lanes clear</li>
+      </ul>
+
+      <h2 id="how-many">How Many Units Do You Need?</h2>
+
+      <div class="overflow-x-auto my-8">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Group Size</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Light Drinking</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Heavy Drinking</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">15-25 guests</td>
+              <td class="px-6 py-4 text-sm text-gray-600">1 unit</td>
+              <td class="px-6 py-4 text-sm text-gray-600">1 unit</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900">25-40 guests</td>
+              <td class="px-6 py-4 text-sm text-gray-600">1 unit</td>
+              <td class="px-6 py-4 text-sm text-gray-600">2 units</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">40-60 guests</td>
+              <td class="px-6 py-4 text-sm text-gray-600">2 units</td>
+              <td class="px-6 py-4 text-sm text-gray-600">2-3 units</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900">60-100 guests</td>
+              <td class="px-6 py-4 text-sm text-gray-600">2-3 units</td>
+              <td class="px-6 py-4 text-sm text-gray-600">3-4 units</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Pro tip:</strong> For mixed groups with alcohol, add 25% more capacity. Lines at tailgate bathrooms are never a good look.</p>
+
+      <h2 id="upgrades">Tailgate Upgrades</h2>
+
+      <h3>Handwashing Station</h3>
+      <ul>
+        <li><strong>Why:</strong> Essential for food safety at tailgates</li>
+        <li><strong>Cost:</strong> +$50-100</li>
+        <li><strong>Features:</strong> Foot-pump operation, soap, paper towels</li>
+      </ul>
+
+      <h3>Portable Urinal</h3>
+      <ul>
+        <li><strong>Why:</strong> Faster turnover for quick breaks</li>
+        <li><strong>Cost:</strong> +$75-125</li>
+        <li><strong>Best for:</strong> Male-heavy crowds</li>
+      </ul>
+
+      <h3>VIP Treatment</h3>
+      <ul>
+        <li><strong>Air freshener:</strong> Bring your own or request extra from provider</li>
+        <li><strong>Extra TP:</strong> Stock up beyond what's provided</li>
+        <li><strong>Hand sanitizer backup:</strong> Keep an extra bottle at your tailgate setup</li>
+        <li><strong>Night lighting:</strong> Battery lantern if event runs past dark</li>
+      </ul>
+
+      <h2 id="season-pass">Season Pass Options</h2>
+
+      <p>For serious tailgaters with season tickets:</p>
+
+      <h3>All-Season Package</h3>
+      <ul>
+        <li>One delivery at season start, one pickup after final home game</li>
+        <li>Weekly servicing throughout season</li>
+        <li>Cost: $800-1,500 for 8-10 game season (vs $150-250 per game)</li>
+        <li><strong>Savings:</strong> 40-60% compared to individual rentals</li>
+      </ul>
+
+      <h3>Per-Game Delivery</h3>
+      <ul>
+        <li>Fresh unit delivered before each game</li>
+        <li>Pickup after each game</li>
+        <li>More flexibility, higher per-game cost</li>
+        <li>Good for: Those who don't tailgate every game</li>
+      </ul>
+
+      <h2 id="corporate">Corporate Tailgates</h2>
+
+      <p>Hosting clients, employees, or sponsors? Consider:</p>
+
+      <ul>
+        <li><strong>Restroom trailers:</strong> Professional appearance, climate control</li>
+        <li><strong>Attendant service:</strong> Someone to keep facilities pristine</li>
+        <li><strong>Branding:</strong> Some companies offer branded units</li>
+        <li><strong>ADA unit:</strong> Required for inclusive hosting</li>
+        <li><strong>Premium supplies:</strong> Hand lotion, mouthwash, quality paper products</li>
+      </ul>
+
+      <h2 id="rv-lots">RV Lot Considerations</h2>
+
+      <p>Tailgating with an RV? You might think you're covered, but:</p>
+
+      <ul>
+        <li><strong>Black tank limits:</strong> RV toilets fill up fast with a crowd</li>
+        <li><strong>Dump station lines:</strong> Everyone leaves at the same time</li>
+        <li><strong>Guest convenience:</strong> Easier than explaining your RV toilet rules</li>
+        <li><strong>Preserve your tank:</strong> Keep RV capacity for overnight trips</li>
+      </ul>
+
+      <h2 id="tips">Pro Tips for Game Day</h2>
+
+      <ol>
+        <li><strong>Book early:</strong> Game day rentals fill up fast, especially for big matchups</li>
+        <li><strong>Coordinate with neighbors:</strong> Share a unit between adjacent tailgate groups</li>
+        <li><strong>Get the number:</strong> Have your provider's emergency line in case of issues</li>
+        <li><strong>Signage:</strong> Mark the unit with your tailgate name/logo so guests find it</li>
+        <li><strong>Assign a monitor:</strong> Someone to check supplies periodically</li>
+        <li><strong>Lock it:</strong> Some units have locks - keep the key on a trusted person</li>
+        <li><strong>Night games:</strong> Ensure interior lighting or bring a lantern</li>
+      </ol>
+
+      <h2 id="costs">Complete Cost Breakdown</h2>
+
+      <p>Typical costs for a 50-person tailgate:</p>
+
+      <div class="overflow-x-auto my-8">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Setup</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Cost</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Budget: 1 standard unit</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$150-200</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900">Standard: 2 deluxe units + handwashing</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$450-650</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Premium: Restroom trailer</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$800-1,500</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900">Season package (8 games, standard)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$800-1,200 total</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Per-person cost:</strong> Even the premium option is only $16-30 per guest - less than a stadium beer!</p>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-12 bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-8 text-center border border-orange-100">
+      <h3 class="text-2xl font-bold text-gray-900 mb-3">Ready for Game Day?</h3>
+      <p class="text-gray-600 mb-6">Find porta potty providers who serve your stadium area</p>
+      <a href="/" class="inline-flex items-center bg-primary-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-700 transition-colors">
+        Search Providers Near You
+      </a>
+    </div>
+
+    <!-- Related -->
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8">Related Articles</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {relatedPosts.map((related) => (
+          <a href={`/blog/${related.slug}`} class="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
+            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-700">{related.category}</span>
+            <h3 class="text-lg font-semibold text-gray-900 mt-3 line-clamp-2">{related.title}</h3>
+          </a>
+        ))}
+      </div>
+    </section>
+  </article>
+</BaseLayout>
