@@ -219,32 +219,30 @@ const breadcrumbs = [
             </a>
           )}
 
-          <!-- Services Offered -->
-          <div class="flex items-center p-5 bg-amber-50 rounded-xl border border-amber-200">
-            <div class="bg-amber-500 text-white p-3 rounded-xl mr-4 flex-shrink-0">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-              </svg>
-            </div>
-            <div class="min-w-0 flex-1">
-              <p class="text-sm text-gray-500 font-medium mb-1">Services</p>
-              <div class="flex flex-wrap gap-1">
-                {vendor.services_offered.slice(0, 3).map((service) => (
-                  <span class="text-xs font-medium text-amber-700 bg-amber-100 px-2 py-0.5 rounded">{service}</span>
-                ))}
-                {vendor.services_offered.length > 3 && (
-                  <span class="text-xs font-medium text-gray-500">+{vendor.services_offered.length - 3} more</span>
-                )}
-              </div>
-            </div>
           </div>
-        </div>
 
-        <!-- Features / Capabilities -->
+        <!-- Amenities -->
         {(vendor.has_luxury || vendor.has_ada || vendor.has_trailer || vendor.serves_construction || vendor.serves_events) && (
           <div class="mb-10">
-            <h2 class="text-xl font-bold text-gray-900 mb-4">Available Services</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-xl font-bold text-gray-900">Amenities</h2>
+              {vendor.verified ? (
+                <span class="inline-flex items-center text-xs font-medium text-green-700 bg-green-100 border border-green-200 px-2.5 py-1 rounded-full">
+                  <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  Verified
+                </span>
+              ) : (
+                <span class="inline-flex items-center text-xs font-medium text-gray-500 bg-gray-100 border border-gray-200 px-2.5 py-1 rounded-full">
+                  <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Unverified
+                </span>
+              )}
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
               {vendor.has_luxury && (
                 <div class="flex items-center p-3 rounded-xl border-2 border-amber-200 bg-amber-50">
                   <span class="text-2xl mr-3">✨</span>
@@ -266,7 +264,7 @@ const breadcrumbs = [
               {vendor.serves_construction && (
                 <div class="flex items-center p-3 rounded-xl border-2 border-orange-200 bg-orange-50">
                   <span class="text-2xl mr-3">🏗️</span>
-                  <span class="font-medium text-orange-800 text-sm">Construction Sites</span>
+                  <span class="font-medium text-orange-800 text-sm">Construction</span>
                 </div>
               )}
               {vendor.serves_events && (

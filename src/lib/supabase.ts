@@ -384,6 +384,30 @@ export function questionToSlug(question: string): string {
     .replace(/-$/, ''); // Remove trailing dash
 }
 
+// Get a single FAQ by slug
+export async function getFAQBySlug(slug: string, siteId: string = 'potty') {
+  // First get all FAQs, then find by matching slug
+  const faqs = await getPublishedFAQs(siteId);
+  return faqs.find(faq => questionToSlug(faq.question) === slug) || null;
+}
+
+// Get related FAQs (same category, excluding current)
+export async function getRelatedFAQs(currentId: string, category: string, siteId: string = 'potty', limit: number = 5) {
+  const { data, error } = await supabase
+    .from('content_questions')
+    .select('*')
+    .eq('site_id', siteId)
+    .eq('status', 'published')
+    .eq('content_type', 'faq')
+    .eq('category', category)
+    .neq('id', currentId)
+    .order('score', { ascending: false })
+    .limit(limit);
+
+  if (error) throw error;
+  return data as ContentQuestion[];
+}
+
 // Get a single blog post by ID
 export async function getBlogById(id: string, siteId: string = 'potty') {
   const { data, error } = await supabase

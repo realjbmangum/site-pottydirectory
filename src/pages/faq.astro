@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import StructuredData from '../components/StructuredData.astro';
-import { getPublishedFAQs, type ContentQuestion } from '../lib/supabase';
+import { getPublishedFAQs, questionToSlug, type ContentQuestion } from '../lib/supabase';
 
 const breadcrumbs = [
   { label: 'Home', href: '/' },
@@ -28,14 +28,16 @@ const faqsByCategory = faqData.reduce((acc, faq) => {
   }
   acc[category].push({
     q: faq.question,
-    a: faq.answer_short || ''
+    a: faq.answer_short || '',
+    slug: questionToSlug(faq.question)
   });
   return acc;
-}, {} as Record<string, { q: string; a: string }[]>);
+}, {} as Record<string, { q: string; a: string; slug: string }[]>);
 
 // Convert to array format for rendering
 const faqs = Object.entries(faqsByCategory).map(([category, questions]) => ({
   category: category.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+  categorySlug: category.toLowerCase().replace(/\s+/g, '-'),
   questions
 }));
 
@@ -152,7 +154,18 @@ const faqSchemaData = {
                       </svg>
                     </span>
                   </summary>
-                  <div class="px-5 pb-5 text-gray-600 border-t border-gray-100 pt-4 prose prose-sm max-w-none" set:html={faq.a} />
+                  <div class="px-5 pb-5 border-t border-gray-100 pt-4">
+                    <div class="text-gray-600 prose prose-sm max-w-none" set:html={faq.a} />
+                    <a
+                      href={`/faq/${faq.slug}`}
+                      class="inline-flex items-center text-primary-600 hover:text-primary-700 text-sm font-medium mt-4"
+                    >
+                      Read full answer
+                      <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  </div>
                 </details>
               ))}
             </div>

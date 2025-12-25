@@ -76,6 +76,11 @@ const isVerified = vendor.verified || (rating >= 4.5 && reviewCount >= 10);
   data-website={vendor.website ? 'true' : 'false'}
   data-has-hours={hasHours ? 'true' : 'false'}
   data-open-now={openNow ? 'true' : 'false'}
+  data-luxury={vendor.has_luxury ? 'true' : 'false'}
+  data-ada={vendor.has_ada ? 'true' : 'false'}
+  data-trailer={vendor.has_trailer ? 'true' : 'false'}
+  data-construction={vendor.serves_construction ? 'true' : 'false'}
+  data-events={vendor.serves_events ? 'true' : 'false'}
 >
   <div class="p-6">
     <!-- Header -->
@@ -132,16 +137,36 @@ const isVerified = vendor.verified || (rating >= 4.5 && reviewCount >= 10);
       </div>
     </div>
 
-    <!-- Services -->
+    <!-- Amenities -->
     <div class="mb-4">
-      <div class="flex flex-wrap gap-2">
-        {vendor.services_offered.slice(0, 3).map((service) => (
-          <span class="service-badge">{service}</span>
-        ))}
-        {vendor.services_offered.length > 3 && (
-          <span class="service-badge bg-gray-100 text-gray-600">
-            +{vendor.services_offered.length - 3} more
+      <div class="flex flex-wrap gap-1.5">
+        {vendor.has_luxury && (
+          <span class="inline-flex items-center text-xs font-medium text-amber-700 bg-amber-50 border border-amber-200 px-2 py-1 rounded-lg">
+            <span class="mr-1">✨</span> Luxury
           </span>
+        )}
+        {vendor.has_ada && (
+          <span class="inline-flex items-center text-xs font-medium text-blue-700 bg-blue-50 border border-blue-200 px-2 py-1 rounded-lg">
+            <span class="mr-1">♿</span> ADA
+          </span>
+        )}
+        {vendor.has_trailer && (
+          <span class="inline-flex items-center text-xs font-medium text-purple-700 bg-purple-50 border border-purple-200 px-2 py-1 rounded-lg">
+            <span class="mr-1">🚛</span> Trailers
+          </span>
+        )}
+        {vendor.serves_construction && (
+          <span class="inline-flex items-center text-xs font-medium text-orange-700 bg-orange-50 border border-orange-200 px-2 py-1 rounded-lg">
+            <span class="mr-1">🏗️</span> Construction
+          </span>
+        )}
+        {vendor.serves_events && (
+          <span class="inline-flex items-center text-xs font-medium text-pink-700 bg-pink-50 border border-pink-200 px-2 py-1 rounded-lg">
+            <span class="mr-1">🎉</span> Events
+          </span>
+        )}
+        {!vendor.has_luxury && !vendor.has_ada && !vendor.has_trailer && !vendor.serves_construction && !vendor.serves_events && (
+          <span class="text-xs text-gray-400 italic">No amenities listed</span>
         )}
       </div>
     </div>

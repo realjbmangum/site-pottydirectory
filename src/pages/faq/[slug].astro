@@ -1,0 +1,273 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import { getPublishedFAQs, getRelatedFAQs, questionToSlug, type ContentQuestion } from '../../lib/supabase';
+
+export async function getStaticPaths() {
+  const faqs = await getPublishedFAQs('potty');
+
+  return faqs.map((faq) => ({
+    params: { slug: questionToSlug(faq.question) },
+    props: { faq }
+  }));
+}
+
+interface Props {
+  faq: ContentQuestion;
+}
+
+const { faq } = Astro.props;
+const slug = questionToSlug(faq.question);
+
+// Get related FAQs from same category
+let relatedFAQs: ContentQuestion[] = [];
+try {
+  relatedFAQs = await getRelatedFAQs(faq.id, faq.category, 'potty', 5);
+} catch (e) {
+  console.error('Error fetching related FAQs:', e);
+}
+
+// Get a few FAQs from other categories for variety
+let otherFAQs: ContentQuestion[] = [];
+try {
+  const allFAQs = await getPublishedFAQs('potty');
+  otherFAQs = allFAQs
+    .filter(f => f.category !== faq.category && f.id !== faq.id)
+    .slice(0, 3);
+} catch (e) {
+  console.error('Error fetching other FAQs:', e);
+}
+
+const categoryDisplay = faq.category?.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'General';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'FAQ', href: '/faq' },
+  { label: categoryDisplay }
+];
+
+// FAQ Schema for this single question
+const faqSchemaData = {
+  mainEntity: [{
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer_short?.replace(/<[^>]*>/g, '') || ''
+    }
+  }]
+};
+
+// Calculate read time
+const wordCount = (faq.answer_short?.split(/\s+/).length || 0) + (faq.answer_long?.split(/\s+/).length || 0);
+const readTime = Math.max(1, Math.ceil(wordCount / 200));
+
+// Category colors for styling
+const categoryColors: Record<string, { bg: string; text: string; border: string }> = {
+  pricing: { bg: 'bg-green-50', text: 'text-green-700', border: 'border-green-200' },
+  planning: { bg: 'bg-purple-50', text: 'text-purple-700', border: 'border-purple-200' },
+  delivery: { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' },
+  servicing: { bg: 'bg-orange-50', text: 'text-orange-700', border: 'border-orange-200' },
+  types: { bg: 'bg-pink-50', text: 'text-pink-700', border: 'border-pink-200' },
+  regulations: { bg: 'bg-red-50', text: 'text-red-700', border: 'border-red-200' },
+  hygiene: { bg: 'bg-teal-50', text: 'text-teal-700', border: 'border-teal-200' },
+  general: { bg: 'bg-gray-50', text: 'text-gray-700', border: 'border-gray-200' },
+};
+
+const colors = categoryColors[faq.category?.toLowerCase() || 'general'] || categoryColors.general;
+---
+
+<BaseLayout
+  title={`${faq.question} | Porta Potty FAQ`}
+  description={faq.answer_short?.replace(/<[^>]*>/g, '').slice(0, 155) || `Get the answer to: ${faq.question}`}
+>
+  <StructuredData type="FAQPage" data={faqSchemaData} />
+
+  <!-- Hero -->
+  <section class="relative min-h-[300px] flex items-center overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="/images/herotile.jpeg" alt="" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-primary-900/90 to-slate-900/80"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-slate-900/50"></div>
+    </div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+      <Breadcrumb items={breadcrumbs} />
+      <div class="mt-6">
+        <div class="flex items-center gap-3 mb-4">
+          <span class={`inline-flex items-center text-xs font-semibold px-3 py-1 rounded-full ${colors.bg} ${colors.text} border ${colors.border}`}>
+            {categoryDisplay}
+          </span>
+          <span class="text-sm text-blue-200">{readTime} min read</span>
+        </div>
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+          {faq.question}
+        </h1>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <!-- Main Content -->
+      <div class="lg:col-span-2">
+        <!-- Answer Card -->
+        <article class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+          <div class="p-8 md:p-10">
+            <!-- Quick Answer -->
+            <div class="prose prose-lg max-w-none">
+              <div class="text-gray-700 leading-relaxed" set:html={faq.answer_short} />
+            </div>
+
+            <!-- Extended Answer (if available) -->
+            {faq.answer_long && (
+              <div class="mt-8 pt-8 border-t border-gray-200">
+                <h2 class="text-xl font-bold text-gray-900 mb-4">More Details</h2>
+                <div class="prose prose-lg max-w-none text-gray-700" set:html={faq.answer_long} />
+              </div>
+            )}
+          </div>
+
+          <!-- CTA Footer -->
+          <div class="bg-gradient-to-r from-primary-50 to-blue-50 p-6 border-t border-primary-100">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <h3 class="font-semibold text-gray-900">Ready to rent a porta potty?</h3>
+                <p class="text-sm text-gray-600">Find trusted providers in your area</p>
+              </div>
+              <a
+                href="/"
+                class="inline-flex items-center bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors whitespace-nowrap"
+              >
+                Find Providers Near You
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Back to FAQ -->
+        <div class="mt-8">
+          <a href="/faq" class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to all FAQs
+          </a>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="lg:col-span-1">
+        <!-- Related Questions (Same Category) -->
+        {relatedFAQs.length > 0 && (
+          <div class="bg-white rounded-xl shadow-md border border-gray-100 p-6 mb-6">
+            <h3 class="font-bold text-gray-900 mb-4 flex items-center">
+              <span class={`w-2 h-6 ${colors.bg.replace('50', '500')} rounded-full mr-3`}></span>
+              More {categoryDisplay} Questions
+            </h3>
+            <ul class="space-y-3">
+              {relatedFAQs.map((related) => (
+                <li>
+                  <a
+                    href={`/faq/${questionToSlug(related.question)}`}
+                    class="block text-gray-700 hover:text-primary-600 transition-colors text-sm leading-relaxed"
+                  >
+                    {related.question}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <!-- Other Topics -->
+        {otherFAQs.length > 0 && (
+          <div class="bg-gradient-to-br from-slate-50 to-gray-50 rounded-xl border border-gray-200 p-6 mb-6">
+            <h3 class="font-bold text-gray-900 mb-4">Other Topics</h3>
+            <ul class="space-y-3">
+              {otherFAQs.map((other) => (
+                <li>
+                  <a
+                    href={`/faq/${questionToSlug(other.question)}`}
+                    class="block text-gray-700 hover:text-primary-600 transition-colors text-sm leading-relaxed"
+                  >
+                    {other.question}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <a href="/faq" class="inline-flex items-center text-primary-600 hover:text-primary-700 text-sm font-medium mt-4">
+              View all FAQs
+              <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        )}
+
+        <!-- Quick Tools -->
+        <div class="bg-gradient-to-br from-primary-600 to-blue-700 rounded-xl p-6 text-white">
+          <h3 class="font-bold mb-4">Helpful Tools</h3>
+          <ul class="space-y-3">
+            <li>
+              <a href="/calculator" class="flex items-center text-white/90 hover:text-white transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                Porta Potty Calculator
+              </a>
+            </li>
+            <li>
+              <a href="/pricing" class="flex items-center text-white/90 hover:text-white transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Pricing Guide
+              </a>
+            </li>
+            <li>
+              <a href="/blog" class="flex items-center text-white/90 hover:text-white transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                </svg>
+                Read Our Blog
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .prose ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+  }
+
+  .prose ol {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+  }
+
+  .prose li {
+    margin-bottom: 0.5rem;
+  }
+
+  .prose strong {
+    color: #1f2937;
+  }
+
+  .prose a {
+    color: #2563eb;
+    text-decoration: underline;
+  }
+
+  .prose a:hover {
+    color: #1d4ed8;
+  }
+</style>

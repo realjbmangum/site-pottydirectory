@@ -84,6 +84,30 @@ const { totalCount } = Astro.props;
     </div>
   </div>
 
+  <!-- Amenity Filters -->
+  <div class="mt-4 pt-4 border-t border-brand-200">
+    <div class="flex items-center gap-2 mb-2">
+      <span class="text-sm font-medium text-gray-600">Filter by Amenities:</span>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <button type="button" id="filter-luxury" class="amenity-filter inline-flex items-center text-sm font-medium px-3 py-1.5 rounded-lg border-2 border-amber-200 bg-white text-amber-700 hover:bg-amber-50 transition-colors" data-amenity="luxury">
+        <span class="mr-1.5">✨</span> Luxury
+      </button>
+      <button type="button" id="filter-ada" class="amenity-filter inline-flex items-center text-sm font-medium px-3 py-1.5 rounded-lg border-2 border-blue-200 bg-white text-blue-700 hover:bg-blue-50 transition-colors" data-amenity="ada">
+        <span class="mr-1.5">♿</span> ADA
+      </button>
+      <button type="button" id="filter-trailer" class="amenity-filter inline-flex items-center text-sm font-medium px-3 py-1.5 rounded-lg border-2 border-purple-200 bg-white text-purple-700 hover:bg-purple-50 transition-colors" data-amenity="trailer">
+        <span class="mr-1.5">🚛</span> Trailers
+      </button>
+      <button type="button" id="filter-construction" class="amenity-filter inline-flex items-center text-sm font-medium px-3 py-1.5 rounded-lg border-2 border-orange-200 bg-white text-orange-700 hover:bg-orange-50 transition-colors" data-amenity="construction">
+        <span class="mr-1.5">🏗️</span> Construction
+      </button>
+      <button type="button" id="filter-events" class="amenity-filter inline-flex items-center text-sm font-medium px-3 py-1.5 rounded-lg border-2 border-pink-200 bg-white text-pink-700 hover:bg-pink-50 transition-colors" data-amenity="events">
+        <span class="mr-1.5">🎉</span> Events
+      </button>
+    </div>
+  </div>
+
   <!-- Active filters display -->
   <div id="active-filters" class="hidden mt-4 pt-4 border-t border-gray-200">
     <div class="flex items-center gap-2 flex-wrap">
@@ -110,6 +134,10 @@ const { totalCount } = Astro.props;
   const vendorGrid = document.querySelector('[data-vendor-grid]');
   const vendorCards = vendorGrid?.querySelectorAll('[data-vendor-card]');
 
+  // Amenity filter buttons
+  const amenityFilters = document.querySelectorAll('.amenity-filter');
+  const activeAmenities: Set<string> = new Set();
+
   if (!vendorCards) {
     console.error('No vendor cards found');
   }
@@ -120,7 +148,12 @@ const { totalCount } = Astro.props;
       rating: parseFloat(card.getAttribute('data-rating') || '0'),
       reviews: parseInt(card.getAttribute('data-reviews') || '0', 10),
       hasWebsite: card.getAttribute('data-website') === 'true',
-      openNow: card.getAttribute('data-open-now') === 'true'
+      openNow: card.getAttribute('data-open-now') === 'true',
+      luxury: card.getAttribute('data-luxury') === 'true',
+      ada: card.getAttribute('data-ada') === 'true',
+      trailer: card.getAttribute('data-trailer') === 'true',
+      construction: card.getAttribute('data-construction') === 'true',
+      events: card.getAttribute('data-events') === 'true'
     };
   }
 
@@ -144,7 +177,16 @@ const { totalCount } = Astro.props;
       const passesRating = data.rating >= minRating || (minRating > 0 && data.rating === 0);
       const passesWebsite = !requireWebsite || data.hasWebsite;
       const passesOpenNow = !requireOpenNow || data.openNow;
-      const isVisible = passesSearch && passesRating && passesWebsite && passesOpenNow;
+
+      // Amenity filters (must have ALL selected amenities)
+      let passesAmenities = true;
+      if (activeAmenities.has('luxury') && !data.luxury) passesAmenities = false;
+      if (activeAmenities.has('ada') && !data.ada) passesAmenities = false;
+      if (activeAmenities.has('trailer') && !data.trailer) passesAmenities = false;
+      if (activeAmenities.has('construction') && !data.construction) passesAmenities = false;
+      if (activeAmenities.has('events') && !data.events) passesAmenities = false;
+
+      const isVisible = passesSearch && passesRating && passesWebsite && passesOpenNow && passesAmenities;
 
       (card as HTMLElement).style.display = isVisible ? '' : 'none';
       (card as HTMLElement).style.order = '0';
@@ -185,13 +227,13 @@ const { totalCount } = Astro.props;
     }
 
     // Update active filters display
-    updateActiveFilters(minRating, requireWebsite, requireOpenNow, sortValue);
+    updateActiveFilters(minRating, requireWebsite, requireOpenNow);
   }
 
-  function updateActiveFilters(minRating: number, requireWebsite: boolean, requireOpenNow: boolean, sortValue: string) {
+  function updateActiveFilters(minRating: number, requireWebsite: boolean, requireOpenNow: boolean) {
     if (!activeFiltersDiv || !filterTagsDiv) return;
 
-    const hasFilters = minRating > 0 || requireWebsite || requireOpenNow;
+    const hasFilters = minRating > 0 || requireWebsite || requireOpenNow || activeAmenities.size > 0;
     activeFiltersDiv.classList.toggle('hidden', !hasFilters);
 
     filterTagsDiv.innerHTML = '';
@@ -219,6 +261,22 @@ const { totalCount } = Astro.props;
       });
       filterTagsDiv.appendChild(tag);
     }
+
+    // Amenity filter tags
+    const amenityLabels: Record<string, string> = {
+      luxury: '✨ Luxury',
+      ada: '♿ ADA',
+      trailer: '🚛 Trailers',
+      construction: '🏗️ Construction',
+      events: '🎉 Events'
+    };
+
+    activeAmenities.forEach(amenity => {
+      const tag = createFilterTag(amenityLabels[amenity] || amenity, () => {
+        toggleAmenityFilter(amenity);
+      });
+      filterTagsDiv.appendChild(tag);
+    });
   }
 
   function createFilterTag(label: string, onRemove: () => void): HTMLElement {
@@ -236,12 +294,55 @@ const { totalCount } = Astro.props;
     return tag;
   }
 
+  function toggleAmenityFilter(amenity: string) {
+    const button = document.querySelector(`[data-amenity="${amenity}"]`);
+    if (!button) return;
+
+    if (activeAmenities.has(amenity)) {
+      activeAmenities.delete(amenity);
+      button.classList.remove('ring-2', 'ring-offset-1');
+      button.classList.add('bg-white');
+
+      // Reset to original background
+      const bgColors: Record<string, string> = {
+        luxury: 'bg-white',
+        ada: 'bg-white',
+        trailer: 'bg-white',
+        construction: 'bg-white',
+        events: 'bg-white'
+      };
+      button.classList.remove('bg-amber-100', 'bg-blue-100', 'bg-purple-100', 'bg-orange-100', 'bg-pink-100');
+    } else {
+      activeAmenities.add(amenity);
+      button.classList.add('ring-2', 'ring-offset-1');
+      button.classList.remove('bg-white');
+
+      // Add active background
+      const bgColors: Record<string, string> = {
+        luxury: 'bg-amber-100',
+        ada: 'bg-blue-100',
+        trailer: 'bg-purple-100',
+        construction: 'bg-orange-100',
+        events: 'bg-pink-100'
+      };
+      button.classList.add(bgColors[amenity] || 'bg-gray-100');
+    }
+
+    updateFilters();
+  }
+
   function clearAllFilters() {
     if (vendorSearch) vendorSearch.value = '';
     if (sortSelect) sortSelect.value = 'name-asc';
     if (ratingFilter) ratingFilter.value = '0';
     if (websiteFilter) websiteFilter.checked = false;
     if (openNowFilter) openNowFilter.checked = false;
+
+    // Clear amenity filters
+    activeAmenities.forEach(amenity => {
+      toggleAmenityFilter(amenity);
+    });
+
     updateFilters();
   }
 
@@ -252,6 +353,14 @@ const { totalCount } = Astro.props;
   websiteFilter?.addEventListener('change', updateFilters);
   openNowFilter?.addEventListener('change', updateFilters);
   clearFiltersBtn?.addEventListener('click', clearAllFilters);
+
+  // Amenity filter click handlers
+  amenityFilters.forEach(button => {
+    button.addEventListener('click', () => {
+      const amenity = button.getAttribute('data-amenity');
+      if (amenity) toggleAmenityFilter(amenity);
+    });
+  });
 
   // Initial update
   updateFilters();

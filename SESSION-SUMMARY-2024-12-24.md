@@ -1,28 +1,57 @@
 # Session Summary - December 24, 2024
 
-## Vendor Feature Enrichment Complete
+## Mapbox Map Views Added to Potty Directory
 
-Ran the AI-powered vendor enrichment script to analyze vendor websites and extract service capabilities.
+Added interactive Mapbox GL maps to both state pages and the national Browse by State page, allowing users to visually explore vendor locations with powerful filtering.
 
-### Results
-- **Processed:** 795 vendors with websites
-- **Successfully enriched:** 618 vendors
-- **Failed:** 5 (database network issues)
-- **Skipped:** 172 (website unreachable, rate limits, or insufficient content)
+### Features Implemented
 
-### Features Detected
-The script analyzed each vendor's website and set these flags:
-- `has_luxury` - Luxury/VIP restroom trailers
-- `has_ada` - ADA/handicap accessible units
-- `has_trailer` - Restroom trailers (not just porta potties)
-- `serves_construction` - Construction site rentals
-- `serves_events` - Events/weddings/parties
+**State Pages (`/[state]/index.astro`)**
+- Tabbed view: "Map View" | "Browse by City"
+- Interactive map with clustered pins (green clusters, blue individual pins)
+- Filter toggles: Luxury, ADA, Trailers, Construction, Events
+- Rating slider filter
+- Side-by-side layout: map + scrollable vendor list
+- Click pin for popup with vendor details and link
+- Hover on list item pans map to location
+- URL-synced filters for shareable links (e.g., `/texas?luxury=1&ada=1`)
 
-### Technical Notes
-- Used Claude claude-sonnet-4-20250514 for website content analysis
-- Rate limited to 2 seconds between API calls
-- Some vendors hit the 30,000 input tokens/minute rate limit
-- All vendors now have `enriched_at` timestamp set
+**Browse by State Page (`/states`)**
+- Tabbed view: "Map View" | "Browse States"
+- US-centered national map showing all ~1,400 vendors
+- Same filter capabilities as state pages
+- Vendor list shows top 100 providers (sorted by rating)
+- Performance note when more vendors available
 
-### Database
-All feature flags are now populated in the `potty` table on Supabase. The Astro site pulls this data at build time, so this commit triggers a rebuild to display the new feature badges on vendor detail pages.
+### Files Created
+- `src/components/StateMap.astro` - State-level map component
+- `src/components/NationalMap.astro` - National map component
+
+### Files Modified
+- `src/lib/supabase.ts` - Added `getVendorsByStateWithCoords()` and `getAllVendorsWithCoords()`
+- `src/pages/[state]/index.astro` - Added tabs, GeoJSON conversion, StateMap integration
+- `src/pages/states.astro` - Added tabs and NationalMap integration
+- `src/styles/global.css` - Mapbox popup and filter toggle styles
+
+### Technical Details
+- Uses Mapbox GL JS v3.0.1
+- Clustering enabled (clusterMaxZoom: 10-12, clusterRadius: 50-60)
+- Pin colors match site theme:
+  - Clusters: Brand green (#138d57)
+  - Individual pins: Primary blue (#2563eb)
+- GeoJSON format for vendor data
+- Pagination handles 1,400+ vendors from Supabase
+
+### Environment Variable Required
+```
+PUBLIC_MAPBOX_TOKEN=your_mapbox_token_here
+```
+Must be set in Cloudflare Pages environment variables for maps to work.
+
+### Commits
+1. `e4dfd4e` - Add interactive Mapbox map to state pages
+2. `8fcc5f7` - Add national map view to Browse by State page
+
+### Build Stats
+- 2,987 pages built successfully
+- Build time: ~250 seconds
