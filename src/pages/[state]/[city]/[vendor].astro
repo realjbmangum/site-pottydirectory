@@ -58,7 +58,7 @@ const breadcrumbs = [
 
 <BaseLayout
   title={`${vendor.business_name} | Porta Potty Rentals in ${vendor.city}, ${stateInfo?.abbr || vendor.state}`}
-  description={vendor.description || `${vendor.business_name} provides portable restroom rentals in ${vendor.city}, ${vendor.state}. Services: ${vendor.services_offered.join(', ')}. Call ${formatPhone(vendor.phone)} for a quote.`}
+  description={vendor.description || `${vendor.business_name} provides portable restroom rentals in ${vendor.city}, ${vendor.state}.${vendor.services_offered?.length ? ` Services: ${vendor.services_offered.join(', ')}.` : ''} Call ${formatPhone(vendor.phone)} for a quote.`}
 >
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <Breadcrumb items={breadcrumbs} />
@@ -452,7 +452,7 @@ const breadcrumbs = [
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": vendor.business_name,
-      "description": vendor.description || `Portable restroom rentals in ${vendor.city}, ${vendor.state}. Services: ${vendor.services_offered.join(', ')}.`,
+      "description": vendor.description || `Portable restroom rentals in ${vendor.city}, ${vendor.state}.${vendor.services_offered?.length ? ` Services: ${vendor.services_offered.join(', ')}.` : ''}`,
       "image": vendor.photo_url || undefined,
       "address": {
         "@type": "PostalAddress",
