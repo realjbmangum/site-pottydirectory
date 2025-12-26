@@ -84,8 +84,8 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
 
       <h3>For Events</h3>
       <ul>
-        <li><strong>1 unit per 50-100 guests</strong> for a 4-hour event</li>
-        <li><strong>Add 25%</strong> if serving alcohol</li>
+        <li><strong>1 unit per 100-125 guests</strong> for a 4-hour event</li>
+        <li><strong>Add 1 extra unit per 200 guests</strong> if serving alcohol</li>
         <li><strong>Add 25%</strong> if majority female guests</li>
         <li><strong>Double the count</strong> for all-day events (8+ hours)</li>
       </ul>
@@ -265,7 +265,7 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
 
       <div class="bg-gray-100 border border-gray-300 rounded-xl p-6 my-6 text-center">
         <p class="text-xl font-mono text-gray-800">
-          (Guests ÷ 50) × (Hours ÷ 4) × Alcohol Factor (1.25 if yes) = Units Needed
+          (Guests ÷ 100) × (Hours ÷ 4) + Extra for Alcohol = Units Needed
         </p>
       </div>
 
