@@ -24,9 +24,10 @@ export interface Vendor {
   review_count?: number;
   photo_url?: string;
   hours?: Record<string, string> | string;
-  linkedin?: string;
-  instagram?: string;
-  facebook?: string;
+  facebook_url?: string;
+  instagram_url?: string;
+  linkedin_url?: string;
+  twitter_url?: string;
   description?: string;
   featured?: boolean;
   verified?: boolean;
