@@ -282,15 +282,32 @@ export async function getCitiesByState(state: string) {
 }
 
 export async function getAllCitiesWithState() {
-  const { data, error } = await supabase
-    .from('potty')
-    .select('city, state');
+  // Paginate to get ALL vendors (Supabase defaults to 1000 rows)
+  const pageSize = 1000;
+  let offset = 0;
+  let hasMore = true;
+  const allData: { city: string; state: string }[] = [];
 
-  if (error) throw error;
+  while (hasMore) {
+    const { data, error } = await supabase
+      .from('potty')
+      .select('city, state')
+      .range(offset, offset + pageSize - 1);
+
+    if (error) throw error;
+
+    if (data && data.length > 0) {
+      allData.push(...data);
+      offset += pageSize;
+      hasMore = data.length === pageSize;
+    } else {
+      hasMore = false;
+    }
+  }
 
   // Get unique city-state combinations
   const cityStateMap = new Map<string, { city: string; state: string; count: number }>();
-  data?.forEach((vendor) => {
+  allData.forEach((vendor) => {
     const key = `${vendor.city}-${vendor.state}`;
     if (cityStateMap.has(key)) {
       cityStateMap.get(key)!.count++;
