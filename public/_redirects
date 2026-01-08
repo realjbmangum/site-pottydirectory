@@ -1,0 +1,5 @@
+# Redirect old Next.js URL structure to new Astro structure
+/porta-potty-rental/:state/:city  /:state/:city/  301
+
+# Handle any other old porta-potty-rental paths
+/porta-potty-rental/*  /states/  301
