@@ -476,7 +476,7 @@ export async function getCityContent(city: string, state: string): Promise<CityC
 
 export async function getSiteStats() {
   // Paginate to get all vendors for accurate stats
-  const allData: { state: string; rating: number | null }[] = [];
+  const allData: { state: string; city: string; rating: number | null }[] = [];
   const pageSize = 1000;
   let offset = 0;
   let hasMore = true;
@@ -484,7 +484,7 @@ export async function getSiteStats() {
   while (hasMore) {
     const { data, error } = await supabase
       .from('potty')
-      .select('state, rating')
+      .select('state, city, rating')
       .range(offset, offset + pageSize - 1);
 
     if (error) throw error;
@@ -501,6 +501,9 @@ export async function getSiteStats() {
   // Count unique states
   const uniqueStates = new Set(allData.map(v => v.state));
 
+  // Count unique cities
+  const uniqueCities = new Set(allData.map(v => `${v.city}, ${v.state}`));
+
   // Calculate average rating (only vendors with ratings)
   const ratingsData = allData.filter(v => v.rating && v.rating > 0);
   const avgRating = ratingsData.length > 0
@@ -509,7 +512,8 @@ export async function getSiteStats() {
 
   return {
     providers: allData.length,
-    states: uniqueStates.size,
+    states: Math.min(uniqueStates.size, 50),
+    cities: uniqueCities.size,
     avgRating: avgRating.toFixed(1)
   };
 }

@@ -13,7 +13,7 @@ import { citySlug } from '../lib/utils';
 // Get data
 let featuredVendors = [];
 let stateCounts: Record<string, number> = {};
-let siteStats = { providers: 0, states: 0, avgRating: '0' };
+let siteStats = { providers: 0, states: 0, cities: 0, avgRating: '0' };
 
 try {
   featuredVendors = await getFeaturedVendors(6);
