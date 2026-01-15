@@ -8,11 +8,59 @@ import blogPosts from '../../data/blog-posts.json';
 const post = blogPosts.find(p => p.slug === 'construction-site-restroom-requirements')!;
 const siteUrl = `https://${siteConfig.domain}`;
 
+// FAQ data for this post
+const oshaFAQs = [
+  {
+    q: "How many porta potties are required on a construction site?",
+    a: "OSHA requires a minimum of 1 toilet per 20 workers on construction sites. For example: 1-20 workers need 1 toilet, 21-40 workers need 2 toilets, 41-60 workers need 3 toilets. The ANSI voluntary standard recommends 1 toilet per 10 workers for better productivity and reduced wait times."
+  },
+  {
+    q: "What is the OSHA fine for not having porta potties on a construction site?",
+    a: "OSHA can fine contractors up to $15,625 per serious violation for inadequate restroom facilities. Willful or repeated violations can result in fines up to $156,259 per violation. Failure to correct violations can add $15,625 per day until resolved."
+  },
+  {
+    q: "How close must porta potties be to workers on a construction site?",
+    a: "OSHA requires toilets to be 'readily available,' which is generally interpreted as within a 10-minute walk or approximately 1/4 mile. For multi-story buildings, toilets should be within 200 feet horizontally or one floor vertically of work areas."
+  },
+  {
+    q: "Are hand washing stations required on construction sites?",
+    a: "OSHA requires hand washing facilities when workers handle paints, coatings, herbicides, insecticides, or harmful substances. Best practice is to provide hand washing at all construction sites—typically 1 station per 4 porta potties or per 10-15 workers."
+  },
+  {
+    q: "How often must porta potties be serviced on construction sites?",
+    a: "OSHA requires toilets to be maintained in sanitary condition but doesn't specify frequency. The ANSI standard recommends weekly servicing for units used by up to 10 workers. High-traffic sites (15+ users per unit) should have twice-weekly servicing."
+  },
+  {
+    q: "Do I need separate porta potties for men and women?",
+    a: "OSHA requires either separate toilet facilities for each sex, or single-occupancy toilets with locks that can be used by anyone. Most construction sites use single-occupancy porta potties that satisfy this requirement. Separate facilities are only required for multi-stall restrooms."
+  },
+  {
+    q: "Are ADA porta potties required on construction sites?",
+    a: "ADA-accessible units are required if you have employees with disabilities. While not specifically mandated for all sites, it's best practice to include at least one ADA unit on larger projects. The standard is 1 ADA unit per 20 standard units, minimum 1."
+  },
+  {
+    q: "Can workers use a neighboring business's restroom instead of porta potties?",
+    a: "No. OSHA specifically states that employers cannot require workers to use facilities at neighboring businesses to meet the toilet requirement. You must provide your own facilities on-site or have a formal written agreement with nearby facilities that guarantees access."
+  }
+];
+
+// Build FAQ schema
+const faqSchemaData = {
+  mainEntity: oshaFAQs.map(faq => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a
+    }
+  }))
+};
+
 const articleData = {
   headline: post.title,
   description: post.description,
   datePublished: post.publishedAt,
-  dateModified: post.updatedAt,
+  dateModified: new Date().toISOString().split('T')[0],
   author: {
     '@type': 'Person',
     name: post.author.name,
@@ -23,14 +71,47 @@ const articleData = {
     name: siteConfig.name,
     logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
   },
-  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}/` }
 };
 
 const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+
+// OSHA requirements table
+const oshaTable = [
+  { workers: '1-20', toilets: '1', urinals: '-' },
+  { workers: '21-40', toilets: '2', urinals: '1' },
+  { workers: '41-60', toilets: '3', urinals: '1' },
+  { workers: '61-80', toilets: '4', urinals: '2' },
+  { workers: '81-100', toilets: '5', urinals: '2' },
+  { workers: '101-120', toilets: '6', urinals: '3' },
+  { workers: '121-150', toilets: '7', urinals: '3' },
+  { workers: '150+', toilets: '1 per 20 + extra', urinals: '1 per 40' },
+];
+
+// ANSI recommended (stricter)
+const ansiTable = [
+  { workers: '1-10', toilets: '1', servicing: 'Weekly' },
+  { workers: '11-20', toilets: '2', servicing: 'Weekly' },
+  { workers: '21-30', toilets: '3', servicing: 'Weekly' },
+  { workers: '31-40', toilets: '4', servicing: 'Weekly' },
+  { workers: '41-50', toilets: '5', servicing: '2x/week' },
+  { workers: '51-75', toilets: '6-7', servicing: '2x/week' },
+  { workers: '76-100', toilets: '8-10', servicing: '2x/week' },
+];
+
+// Cost comparison table
+const costTable = [
+  { item: 'Standard porta potty', weekly: '$125-195', monthly: '$175-400', notes: 'Most common choice' },
+  { item: 'High-rise/crane unit', weekly: '$200-350', monthly: '$400-700', notes: 'Multi-story buildings' },
+  { item: 'ADA-accessible unit', weekly: '$150-300', monthly: '$250-600', notes: '1 per 20 standard units' },
+  { item: 'Hand wash station', weekly: '$50-100', monthly: '$100-200', notes: '1 per 4 toilets' },
+  { item: 'Extra servicing (per visit)', weekly: '$50-75', monthly: 'Varies', notes: 'Beyond weekly standard' },
+];
 ---
 
 <BaseLayout title={post.title} description={post.description}>
   <StructuredData type="Article" data={articleData} />
+  <StructuredData type="FAQPage" data={faqSchemaData} />
 
   <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Breadcrumb -->
@@ -48,9 +129,11 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
     <header class="mb-10">
       <span class="inline-block bg-red-100 text-red-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Regulations</span>
       <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-        {post.title}
+        Construction Site Restroom Requirements: OSHA Rules Explained (2025 Guide)
       </h1>
-      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <p class="text-xl text-gray-600 leading-relaxed">
+        The complete guide to OSHA portable toilet requirements for construction sites. Includes federal regulations, ANSI standards, penalty information, and compliance checklists to avoid costly fines.
+      </p>
       <div class="mt-6 flex items-center gap-4">
         <div class="flex items-center">
           <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
@@ -58,214 +141,459 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
           </div>
           <div>
             <p class="font-medium text-gray-900">{post.author.name}</p>
-            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated January 2025</p>
           </div>
         </div>
       </div>
     </header>
 
+    <!-- Quick Answer Box -->
+    <div class="bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 rounded-xl p-6 mb-10">
+      <h2 class="text-lg font-bold text-gray-900 mb-3">Quick Answer: OSHA Requirements</h2>
+      <p class="text-gray-700 mb-4">
+        <strong>Minimum:</strong> 1 toilet per 20 workers (29 CFR 1926.51)<br>
+        <strong>Better practice:</strong> 1 toilet per 10 workers (ANSI Z4.3 standard)<br>
+        <strong>Location:</strong> Within 10-minute walk (approximately 1/4 mile)<br>
+        <strong>Penalty for non-compliance:</strong> Up to $15,625 per violation
+      </p>
+      <p class="text-gray-600 text-sm">Plus hand washing facilities, regular servicing, and accessible units for workers with disabilities.</p>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="bg-gray-50 rounded-xl p-6 mb-10 not-prose">
+      <h3 class="text-lg font-bold text-gray-900 mb-4">In This Guide</h3>
+      <ul class="space-y-2 text-gray-700">
+        <li><a href="#osha-requirements" class="text-primary-600 hover:underline">OSHA Requirements (29 CFR 1926.51)</a></li>
+        <li><a href="#ansi-standards" class="text-primary-600 hover:underline">ANSI Recommended Standards</a></li>
+        <li><a href="#location" class="text-primary-600 hover:underline">Placement & Accessibility Rules</a></li>
+        <li><a href="#sanitation" class="text-primary-600 hover:underline">Sanitation & Servicing Requirements</a></li>
+        <li><a href="#handwashing" class="text-primary-600 hover:underline">Hand Washing Requirements</a></li>
+        <li><a href="#special-situations" class="text-primary-600 hover:underline">Special Situations (High-Rise, Multi-Site)</a></li>
+        <li><a href="#state-requirements" class="text-primary-600 hover:underline">State-Specific Requirements</a></li>
+        <li><a href="#violations" class="text-primary-600 hover:underline">Violations & Penalties</a></li>
+        <li><a href="#cost" class="text-primary-600 hover:underline">What It Costs</a></li>
+        <li><a href="#checklist" class="text-primary-600 hover:underline">Compliance Checklist</a></li>
+        <li><a href="#faqs" class="text-primary-600 hover:underline">Frequently Asked Questions</a></li>
+      </ul>
+    </div>
+
     <!-- Content -->
     <div class="prose prose-lg max-w-none">
 
       <p>
-        If you're managing a construction site, providing adequate restroom facilities isn't just good practice—it's <strong>the law</strong>. OSHA requires employers to provide toilet facilities for all employees, and violations can result in significant fines.
+        If you're managing a construction site, providing adequate restroom facilities isn't optional—it's <strong>federal law</strong>. OSHA's sanitation standards under 29 CFR 1926.51 require employers to provide toilet facilities for all employees. Violations can result in fines up to <strong>$15,625 per occurrence</strong>, and willful violations can exceed $156,000.
       </p>
 
-      <div class="bg-red-50 border border-red-200 rounded-xl p-6 my-6">
-        <p class="text-lg font-semibold text-red-800 mb-2">OSHA Requirement</p>
-        <p class="text-red-700">
-          Under <strong>29 CFR 1926.51(c)</strong>, construction employers must provide a minimum of <strong>1 toilet for every 20 workers</strong>. Failure to comply can result in fines of $15,625 per violation.
-        </p>
-      </div>
+      <p>
+        This guide covers everything you need to know about construction site restroom requirements, from federal OSHA minimums to industry best practices that keep your workers productive and your business compliant.
+      </p>
 
       <AdSlot slot="content" />
 
-      <h2 id="osha-requirements">OSHA Portable Toilet Requirements</h2>
+      <h2 id="osha-requirements">OSHA Requirements: The Federal Standard</h2>
 
-      <p>Here's what the regulations require:</p>
+      <p>The Occupational Safety and Health Administration (OSHA) sets the legal minimum for construction site sanitation under <strong>29 CFR 1926.51(c)</strong>.</p>
 
-      <div class="overflow-x-auto my-8">
-        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
-          <thead class="bg-gray-50">
-            <tr>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Number of Workers</th>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Minimum Toilets Required</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-200">
-            <tr>
-              <td class="px-6 py-4 text-sm text-gray-900">1-20</td>
-              <td class="px-6 py-4 text-sm text-gray-600">1</td>
-            </tr>
-            <tr class="bg-gray-50">
-              <td class="px-6 py-4 text-sm text-gray-900">21-40</td>
-              <td class="px-6 py-4 text-sm text-gray-600">2</td>
-            </tr>
-            <tr>
-              <td class="px-6 py-4 text-sm text-gray-900">41-60</td>
-              <td class="px-6 py-4 text-sm text-gray-600">3</td>
-            </tr>
-            <tr class="bg-gray-50">
-              <td class="px-6 py-4 text-sm text-gray-900">61-80</td>
-              <td class="px-6 py-4 text-sm text-gray-600">4</td>
-            </tr>
-            <tr>
-              <td class="px-6 py-4 text-sm text-gray-900">81-100</td>
-              <td class="px-6 py-4 text-sm text-gray-600">5</td>
-            </tr>
-            <tr class="bg-gray-50">
-              <td class="px-6 py-4 text-sm text-gray-900">100+</td>
-              <td class="px-6 py-4 text-sm text-gray-600">1 per 20 workers + 1 additional</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h2 id="additional-requirements">Additional OSHA Requirements</h2>
-
-      <h3>Toilet Accessibility</h3>
-      <ul>
-        <li>Must be within <strong>reasonable walking distance</strong> (generally interpreted as within 1/4 mile or 10 minutes)</li>
-        <li>Workers must have <strong>unrestricted access</strong> during work hours</li>
-        <li>Cannot require workers to use facilities at neighboring businesses</li>
-      </ul>
-
-      <h3>Sanitation Standards</h3>
-      <ul>
-        <li>Units must be <strong>clean and sanitary</strong></li>
-        <li>Regular servicing required (typically weekly minimum)</li>
-        <li>Must have <strong>toilet paper</strong> at all times</li>
-        <li>Must be properly ventilated</li>
-        <li>Must have <strong>adequate lighting</strong> for use</li>
-      </ul>
-
-      <h3>Privacy Requirements</h3>
-      <ul>
-        <li>Doors must have <strong>functioning locks</strong></li>
-        <li>Units must provide <strong>privacy</strong> from observation</li>
-        <li>If male and female workers are on site, provide <strong>separate facilities</strong> or single-occupancy units</li>
-      </ul>
-
-      <h2 id="handwashing">Hand Washing Requirements</h2>
-
-      <p>OSHA also requires hand washing facilities at construction sites:</p>
-
-      <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 my-6">
-        <p class="text-lg font-semibold text-blue-800 mb-2">Hand Washing Requirement</p>
-        <p class="text-blue-700">
-          <strong>29 CFR 1926.51(f)</strong>: Employers must provide adequate hand washing facilities for employees engaged in the application of paints, coatings, herbicides, insecticides, or operations involving harmful substances.
+      <div class="bg-red-50 border border-red-200 rounded-xl p-6 my-6 not-prose">
+        <p class="text-lg font-semibold text-red-800 mb-2">29 CFR 1926.51(c) - Toilets at Construction Jobsites</p>
+        <p class="text-red-700">
+          "Toilets shall be provided for employees according to the following table... [minimum 1 per 20 workers]. Under temporary field conditions, provisions shall be made to assure not less than one toilet facility is available."
         </p>
       </div>
 
-      <p>Best practice: Provide hand washing or sanitizing stations alongside every porta potty cluster, regardless of the work being performed.</p>
+      <h3>OSHA Minimum Toilet Requirements</h3>
 
-      <h2 id="violations">OSHA Violation Penalties (2025)</h2>
-
-      <div class="overflow-x-auto my-8">
+      <div class="overflow-x-auto my-8 not-prose">
         <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
           <thead class="bg-gray-50">
             <tr>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Violation Type</th>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Maximum Penalty</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Workers on Site</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Minimum Toilets</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Urinals (if separate)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {oshaTable.map((row, i) => (
+              <tr class={i % 2 === 1 ? 'bg-gray-50' : ''}>
+                <td class="px-6 py-4 text-sm font-medium text-gray-900">{row.workers}</td>
+                <td class="px-6 py-4 text-sm text-gray-600">{row.toilets}</td>
+                <td class="px-6 py-4 text-sm text-gray-600">{row.urinals}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-sm text-gray-600 italic">Note: Urinal counts apply when you have separate urinal facilities. Standard porta potties count as toilets only.</p>
+
+      <h3>Key Points from the Regulation</h3>
+
+      <ul>
+        <li><strong>No exceptions for temporary sites:</strong> Even short-term projects require toilet facilities</li>
+        <li><strong>Cannot use neighboring facilities:</strong> OSHA specifically prohibits relying on nearby businesses for worker restroom access</li>
+        <li><strong>Mobile crews exception:</strong> Only applies to crews that move between sites hourly (not typical construction work)</li>
+        <li><strong>Sanitary condition required:</strong> An unsanitary toilet is considered "not provided" under the regulation</li>
+      </ul>
+
+      <h2 id="ansi-standards">ANSI Standards: Industry Best Practice</h2>
+
+      <p>While OSHA sets the legal minimum, the American National Standards Institute (ANSI) recommends stricter guidelines that most successful contractors follow. The <strong>ANSI Z4.3 standard</strong> calls for <strong>1 toilet per 10 workers</strong>—double the OSHA minimum.</p>
+
+      <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 my-6 not-prose">
+        <p class="text-lg font-semibold text-blue-800 mb-2">Why Follow ANSI Standards?</p>
+        <p class="text-blue-700">
+          Workers waiting in line aren't working. ANSI's 1-per-10 recommendation reduces wait times, improves productivity, and keeps workers happier. The cost difference is minimal compared to lost labor time.
+        </p>
+      </div>
+
+      <h3>ANSI Recommended Standards</h3>
+
+      <div class="overflow-x-auto my-8 not-prose">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Workers</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Recommended Toilets</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Servicing Frequency</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {ansiTable.map((row, i) => (
+              <tr class={i % 2 === 1 ? 'bg-gray-50' : ''}>
+                <td class="px-6 py-4 text-sm font-medium text-gray-900">{row.workers}</td>
+                <td class="px-6 py-4 text-sm text-gray-600">{row.toilets}</td>
+                <td class="px-6 py-4 text-sm text-gray-600">{row.servicing}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p>The ANSI standard also allows for reduced toilet counts with more frequent servicing. If you service units twice weekly instead of weekly, 1 toilet can serve 15 workers instead of 10.</p>
+
+      <h2 id="location">Placement & Accessibility Rules</h2>
+
+      <p>Having the right number of toilets isn't enough—they must be accessible. OSHA requires facilities to be "readily available," which has been interpreted through enforcement actions:</p>
+
+      <h3>Distance Requirements</h3>
+      <ul>
+        <li><strong>10-minute rule:</strong> Toilets should be reachable within 10 minutes of walking</li>
+        <li><strong>1/4 mile guideline:</strong> Approximately 1,320 feet maximum distance</li>
+        <li><strong>Multi-story buildings:</strong> Toilets within 200 feet horizontally OR one floor vertically</li>
+        <li><strong>Large sites:</strong> Multiple toilet clusters positioned throughout the work area</li>
+      </ul>
+
+      <h3>Access Requirements</h3>
+      <ul>
+        <li>Workers must have <strong>unrestricted access</strong> during work hours</li>
+        <li>Cannot require supervisor permission to use facilities</li>
+        <li>Cannot lock toilets during work hours</li>
+        <li>Must provide clear paths to toilet locations</li>
+      </ul>
+
+      <h2 id="sanitation">Sanitation & Servicing Requirements</h2>
+
+      <p>A critical point many contractors miss: <strong>an unsanitary toilet is considered "not provided"</strong> under OSHA regulations. This means you can have the right number of units and still be in violation if they're not properly maintained.</p>
+
+      <h3>Sanitation Standards</h3>
+      <ul>
+        <li>Units must be <strong>clean and sanitary</strong> at all times</li>
+        <li><strong>Toilet paper</strong> must always be available</li>
+        <li>Proper <strong>ventilation</strong> required</li>
+        <li><strong>Functioning locks</strong> on all doors</li>
+        <li>Adequate <strong>lighting</strong> (natural or artificial)</li>
+      </ul>
+
+      <h3>Recommended Servicing Schedule</h3>
+      <ul>
+        <li><strong>1-10 workers per unit:</strong> Weekly servicing minimum</li>
+        <li><strong>11-15 workers per unit:</strong> Twice-weekly servicing</li>
+        <li><strong>15+ workers per unit:</strong> Consider additional units or daily servicing</li>
+        <li><strong>Hot weather:</strong> Increase servicing frequency</li>
+      </ul>
+
+      <p>Each servicing should include: pumping the holding tank, cleaning interior surfaces, restocking toilet paper and sanitizer, checking ventilation, and inspecting for damage.</p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="handwashing">Hand Washing Requirements</h2>
+
+      <p>OSHA requires hand washing facilities under 29 CFR 1926.51(f) when workers handle specific materials:</p>
+
+      <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 my-6 not-prose">
+        <p class="text-lg font-semibold text-yellow-800 mb-2">When Hand Washing Is Required</p>
+        <ul class="text-yellow-700 space-y-1">
+          <li>• Paints and coatings</li>
+          <li>• Herbicides and pesticides</li>
+          <li>• Lead, asbestos, or other hazardous materials</li>
+          <li>• Any operations involving harmful substances</li>
+        </ul>
+      </div>
+
+      <h3>Best Practice Recommendation</h3>
+      <p>Regardless of materials handled, provide hand washing facilities at every construction site:</p>
+      <ul>
+        <li><strong>Ratio:</strong> 1 hand wash station per 4 porta potties</li>
+        <li><strong>Or:</strong> 1 station per 10-15 workers</li>
+        <li><strong>Options:</strong> Standalone stations, trailer-mounted sinks, or portable sinks with fresh water tanks</li>
+        <li><strong>Cost:</strong> $50-100/week—minimal compared to toilet rental</li>
+      </ul>
+
+      <h2 id="special-situations">Special Situations</h2>
+
+      <h3>High-Rise & Multi-Story Construction</h3>
+      <p>Buildings under construction present unique challenges:</p>
+      <ul>
+        <li><strong>Ground-level isn't enough:</strong> Workers on upper floors need accessible facilities</li>
+        <li><strong>200-foot rule:</strong> Toilets should be within 200 feet or 1 floor of work areas</li>
+        <li><strong>Crane-liftable units:</strong> Special porta potties designed to be lifted to upper floors</li>
+        <li><strong>High-rise specific models:</strong> Units with internal waste containment for elevator transport</li>
+        <li><strong>Cost:</strong> High-rise units cost $200-350/week vs $125-195 for standard</li>
+      </ul>
+
+      <h3>Remote & Rural Sites</h3>
+      <ul>
+        <li>Sites far from service routes may need larger holding tanks</li>
+        <li>Consider units with 100+ gallon tanks instead of standard 60-gallon</li>
+        <li>May require more frequent servicing trips (at additional cost)</li>
+        <li>Solar-powered lighting options for sites without electricity</li>
+      </ul>
+
+      <h3>Multi-Contractor Sites</h3>
+      <p>When multiple contractors share a site:</p>
+      <ul>
+        <li>The <strong>general contractor</strong> typically provides common facilities</li>
+        <li>Subcontractors may be required to provide additional units for their crews</li>
+        <li>Total worker count across all contractors determines requirements</li>
+        <li>Clear agreements should specify responsibility for servicing</li>
+      </ul>
+
+      <h2 id="state-requirements">State-Specific Requirements</h2>
+
+      <p>Some states have stricter requirements than federal OSHA:</p>
+
+      <h3>California (Cal/OSHA)</h3>
+      <ul>
+        <li>All OSHA requirements apply, plus additional Cal/OSHA regulations</li>
+        <li>More aggressive enforcement and higher penalties</li>
+        <li>Specific heat illness prevention requirements may affect toilet placement</li>
+        <li><a href="/california/">Find California construction porta potty providers</a></li>
+      </ul>
+
+      <h3>Other State Plans</h3>
+      <p>These states operate their own OSHA-approved plans that may have additional requirements: Alaska, Arizona, Hawaii, Indiana, Iowa, Kentucky, Maryland, Michigan, Minnesota, Nevada, New Mexico, North Carolina, Oregon, South Carolina, Tennessee, Utah, Vermont, Virginia, Washington, and Wyoming.</p>
+
+      <p>Looking for providers in your state? <a href="/texas/">Texas</a>, <a href="/florida/">Florida</a>, <a href="/new-york/">New York</a>, or <a href="/states/">browse all states</a>.</p>
+
+      <h2 id="violations">Violations & Penalties (2025)</h2>
+
+      <p>OSHA penalties are adjusted annually. Here are the current maximum penalties:</p>
+
+      <div class="overflow-x-auto my-8 not-prose">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-red-50">
+            <tr>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Violation Type</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Maximum Penalty</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Notes</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
             <tr>
-              <td class="px-6 py-4 text-sm text-gray-900">Serious violation</td>
-              <td class="px-6 py-4 text-sm text-gray-600">$15,625 per violation</td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-900">Serious Violation</td>
+              <td class="px-6 py-4 text-sm text-red-600 font-semibold">$15,625</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Per violation</td>
             </tr>
             <tr class="bg-gray-50">
-              <td class="px-6 py-4 text-sm text-gray-900">Willful or repeated violation</td>
-              <td class="px-6 py-4 text-sm text-gray-600">$156,259 per violation</td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-900">Willful Violation</td>
+              <td class="px-6 py-4 text-sm text-red-600 font-semibold">$156,259</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Per violation</td>
             </tr>
             <tr>
-              <td class="px-6 py-4 text-sm text-gray-900">Failure to abate</td>
-              <td class="px-6 py-4 text-sm text-gray-600">$15,625 per day</td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-900">Repeated Violation</td>
+              <td class="px-6 py-4 text-sm text-red-600 font-semibold">$156,259</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Per violation</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm font-medium text-gray-900">Failure to Abate</td>
+              <td class="px-6 py-4 text-sm text-red-600 font-semibold">$15,625/day</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Until corrected</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <h2 id="best-practices">Best Practices Beyond OSHA Minimums</h2>
-
-      <p>Smart contractors often exceed minimum requirements:</p>
-
+      <h3>Common Violations</h3>
       <ol>
-        <li>
-          <strong>Plan for peak workforce</strong><br>
-          Base your count on the maximum number of workers expected, not the average.
-        </li>
-        <li>
-          <strong>Consider placement carefully</strong><br>
-          Position units at multiple locations on large sites to minimize walking time.
-        </li>
-        <li>
-          <strong>Schedule twice-weekly servicing</strong><br>
-          High-use construction sites benefit from servicing more than once per week.
-        </li>
-        <li>
-          <strong>Add ADA-accessible units</strong><br>
-          Required if you have workers with disabilities; good practice regardless.
-        </li>
-        <li>
-          <strong>Provide climate considerations</strong><br>
-          Heated units in winter, shaded placement in summer.
-        </li>
+        <li><strong>Insufficient number of toilets</strong> for workforce size</li>
+        <li><strong>Unsanitary conditions</strong> (considered "not provided")</li>
+        <li><strong>No toilet paper</strong> or supplies</li>
+        <li><strong>Toilets too far</strong> from work areas</li>
+        <li><strong>Restricted access</strong> (locked during work hours)</li>
+        <li><strong>Missing hand washing</strong> for required operations</li>
       </ol>
 
       <h2 id="cost">What It Costs</h2>
 
-      <p>Budget estimates for construction site porta potties:</p>
+      <p>The cost of compliance is far less than a single OSHA fine. Here's what to budget:</p>
 
+      <div class="overflow-x-auto my-8 not-prose">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-4 py-4 text-left text-sm font-semibold text-gray-900">Item</th>
+              <th class="px-4 py-4 text-left text-sm font-semibold text-gray-900">Weekly</th>
+              <th class="px-4 py-4 text-left text-sm font-semibold text-gray-900">Monthly</th>
+              <th class="px-4 py-4 text-left text-sm font-semibold text-gray-900">Notes</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {costTable.map((row, i) => (
+              <tr class={i % 2 === 1 ? 'bg-gray-50' : ''}>
+                <td class="px-4 py-4 text-sm font-medium text-gray-900">{row.item}</td>
+                <td class="px-4 py-4 text-sm text-gray-600">{row.weekly}</td>
+                <td class="px-4 py-4 text-sm text-gray-600">{row.monthly}</td>
+                <td class="px-4 py-4 text-sm text-gray-600">{row.notes}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Example Budgets</h3>
+
+      <p><strong>Small residential project (10 workers, 3 months):</strong></p>
       <ul>
-        <li><strong>Standard unit:</strong> $175-300/month with weekly servicing</li>
-        <li><strong>Twice-weekly servicing:</strong> Add $100-150/month</li>
-        <li><strong>Hand wash station:</strong> $75-150/month</li>
-        <li><strong>ADA unit:</strong> $250-400/month</li>
+        <li>1 standard unit + 1 hand wash: ~$275-500/month</li>
+        <li>Total: <strong>$825-1,500</strong> for entire project</li>
       </ul>
 
-      <p>
-        For a 20-worker site, expect to pay <strong>$250-400/month</strong> for a compliant setup including hand washing.
-      </p>
+      <p><strong>Commercial project (50 workers, 6 months):</strong></p>
+      <ul>
+        <li>5 standard units + 1 ADA + 2 hand wash: ~$1,200-1,800/month</li>
+        <li>Total: <strong>$7,200-10,800</strong> for entire project</li>
+      </ul>
+
+      <p><strong>Large construction site (100 workers, 12 months):</strong></p>
+      <ul>
+        <li>10 standard units + 1 ADA + 3 hand wash + 2x/week service: ~$2,500-3,500/month</li>
+        <li>Total: <strong>$30,000-42,000</strong> for entire project</li>
+      </ul>
+
+      <p>Compare that to a single willful violation fine of $156,259.</p>
+
+      <p>Get accurate quotes for your project: <a href="/blog/porta-potty-rental-cost/">See our complete pricing guide</a> or <a href="/">find providers in your area</a>.</p>
 
       <h2 id="checklist">Compliance Checklist</h2>
 
-      <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 my-6">
-        <p class="font-semibold text-gray-900 mb-4">OSHA Compliance Checklist:</p>
-        <ul class="space-y-2">
-          <li>☐ Minimum 1 toilet per 20 workers</li>
-          <li>☐ Units within reasonable walking distance</li>
-          <li>☐ Workers have unrestricted access</li>
-          <li>☐ Units are clean and sanitary</li>
+      <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 my-6 not-prose">
+        <p class="font-bold text-gray-900 mb-4">OSHA Construction Site Sanitation Compliance Checklist</p>
+
+        <p class="font-semibold text-gray-700 mt-4 mb-2">Quantity & Placement</p>
+        <ul class="space-y-1 text-gray-600">
+          <li>☐ Minimum 1 toilet per 20 workers (OSHA) or 1 per 10 (ANSI best practice)</li>
+          <li>☐ Toilets within 10-minute walk / 1/4 mile of all work areas</li>
+          <li>☐ Multi-story: facilities within 200 feet or 1 floor of workers</li>
+          <li>☐ Clear paths to toilet locations</li>
+        </ul>
+
+        <p class="font-semibold text-gray-700 mt-4 mb-2">Access & Privacy</p>
+        <ul class="space-y-1 text-gray-600">
+          <li>☐ Unrestricted access during work hours</li>
+          <li>☐ Doors with functioning locks</li>
+          <li>☐ Adequate privacy from observation</li>
+          <li>☐ Single-occupancy OR separate facilities for men/women</li>
+        </ul>
+
+        <p class="font-semibold text-gray-700 mt-4 mb-2">Sanitation & Supplies</p>
+        <ul class="space-y-1 text-gray-600">
+          <li>☐ Units clean and sanitary</li>
           <li>☐ Toilet paper always stocked</li>
-          <li>☐ Doors lock properly</li>
-          <li>☐ Adequate ventilation</li>
-          <li>☐ Proper lighting available</li>
-          <li>☐ Hand washing facilities if required</li>
-          <li>☐ Separate/single facilities for mixed gender sites</li>
-          <li>☐ Regular servicing schedule documented</li>
+          <li>☐ Proper ventilation</li>
+          <li>☐ Adequate lighting</li>
+          <li>☐ Regular servicing schedule (weekly minimum)</li>
+        </ul>
+
+        <p class="font-semibold text-gray-700 mt-4 mb-2">Hand Washing</p>
+        <ul class="space-y-1 text-gray-600">
+          <li>☐ Hand washing if handling hazardous materials (required)</li>
+          <li>☐ Hand washing at all sites (best practice)</li>
+          <li>☐ 1 station per 4 toilets or per 10-15 workers</li>
+        </ul>
+
+        <p class="font-semibold text-gray-700 mt-4 mb-2">Accessibility</p>
+        <ul class="space-y-1 text-gray-600">
+          <li>☐ ADA-accessible unit if workers with disabilities present</li>
+          <li>☐ 1 ADA unit per 20 standard units (best practice)</li>
+        </ul>
+
+        <p class="font-semibold text-gray-700 mt-4 mb-2">Documentation</p>
+        <ul class="space-y-1 text-gray-600">
+          <li>☐ Servicing records maintained</li>
+          <li>☐ Worker count documented</li>
+          <li>☐ Rental agreements on file</li>
         </ul>
       </div>
 
-      <h2 id="bottom-line">The Bottom Line</h2>
+      <h2 id="faqs">Frequently Asked Questions</h2>
+    </div>
 
+    <!-- FAQ Section -->
+    <div class="my-12 space-y-4 not-prose">
+      {oshaFAQs.map((faq) => (
+        <details class="group bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+          <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 transition-colors">
+            <h3 class="font-semibold text-gray-900 pr-4 text-left">{faq.q}</h3>
+            <span class="flex-shrink-0 ml-4 text-gray-400 group-open:rotate-180 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-5 pb-5 border-t border-gray-100 pt-4">
+            <p class="text-gray-600">{faq.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <div class="prose prose-lg max-w-none">
       <p>
-        Don't risk OSHA fines—or worse, unhappy workers—by cutting corners on restroom facilities. The cost of compliance (<strong>$175-400/month</strong>) is far less than a single violation fine (<strong>$15,625+</strong>).
+        Have more questions? Check out our <a href="/faq/">complete FAQ section</a> or <a href="/contact/">contact us</a> for guidance.
       </p>
 
+      <h2>The Bottom Line</h2>
+
       <p>
-        <a href="/">Find porta potty rental companies</a> that specialize in construction site services and understand OSHA requirements.
+        OSHA compliance isn't complicated or expensive—but the penalties for non-compliance are severe. Follow these guidelines:
       </p>
 
+      <ul>
+        <li><strong>OSHA minimum:</strong> 1 toilet per 20 workers</li>
+        <li><strong>Best practice:</strong> 1 toilet per 10 workers (ANSI standard)</li>
+        <li><strong>Location:</strong> Within 10-minute walk of all work areas</li>
+        <li><strong>Sanitation:</strong> Weekly servicing minimum, more for heavy use</li>
+        <li><strong>Hand washing:</strong> Always provide, especially for hazardous materials</li>
+        <li><strong>Budget:</strong> $175-400/month per unit is far cheaper than $15,625+ fines</li>
+      </ul>
+
+      <p>
+        Ready to get compliant? <a href="/services/construction/">Find construction porta potty providers</a> who understand OSHA requirements, or use our <a href="/calculator/">free calculator</a> to determine exactly what you need.
+      </p>
     </div>
 
     <!-- CTA -->
-    <div class="mt-12 bg-gradient-to-br from-primary-50 to-blue-50 rounded-2xl p-8 text-center border border-primary-100">
-      <h3 class="text-2xl font-bold text-gray-900 mb-3">Need Construction Site Porta Potties?</h3>
-      <p class="text-gray-600 mb-6">Find providers who understand OSHA requirements</p>
-      <a href="/services/construction" class="inline-flex items-center bg-primary-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-700 transition-colors">
-        View Construction Services
-      </a>
+    <div class="mt-12 bg-gradient-to-br from-primary-600 to-blue-700 rounded-2xl p-8 text-center text-white">
+      <h3 class="text-2xl font-bold mb-3">Need Construction Site Porta Potties?</h3>
+      <p class="text-blue-100 mb-6">Find providers who understand OSHA requirements and keep you compliant</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/services/construction/" class="inline-flex items-center justify-center bg-white text-primary-600 px-8 py-4 rounded-xl font-semibold hover:bg-blue-50 transition-colors">
+          Construction Services
+        </a>
+        <a href="/" class="inline-flex items-center justify-center border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/10 transition-colors">
+          Find Local Providers
+        </a>
+      </div>
     </div>
 
     <!-- Related -->
@@ -273,7 +601,7 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
       <h2 class="text-2xl font-bold text-gray-900 mb-8">Related Articles</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {relatedPosts.map((related) => (
-          <a href={`/blog/${related.slug}`} class="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
+          <a href={`/blog/${related.slug}/`} class="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
             <span class="text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-700">{related.category}</span>
             <h3 class="text-lg font-semibold text-gray-900 mt-3 line-clamp-2">{related.title}</h3>
           </a>
@@ -282,3 +610,9 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
     </section>
   </article>
 </BaseLayout>
+
+<style>
+  details[open] summary {
+    background-color: #f9fafb;
+  }
+</style>
