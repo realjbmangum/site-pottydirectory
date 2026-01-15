@@ -8,11 +8,59 @@ import blogPosts from '../../data/blog-posts.json';
 const post = blogPosts.find(p => p.slug === 'how-many-porta-potties-do-i-need')!;
 const siteUrl = `https://${siteConfig.domain}`;
 
+// FAQ data for this post
+const howManyFAQs = [
+  {
+    q: "How many porta potties do I need for 100 guests?",
+    a: "For 100 guests at a 4-hour event, you need 2 porta potties. If serving alcohol, add 1 more (3 total). For an 8-hour event, plan for 4 units. Always include at least 1 ADA-accessible unit for public events."
+  },
+  {
+    q: "What is the OSHA requirement for porta potties on construction sites?",
+    a: "OSHA requires a minimum of 1 toilet for every 20 workers on a construction site. For crews working 40-hour weeks with heavy labor, the practical recommendation is 1 unit per 10 workers to reduce wait times and maintain productivity."
+  },
+  {
+    q: "How many porta potties do I need for a wedding?",
+    a: "For weddings, plan for 1 porta potty per 25-35 guests, or consider a luxury restroom trailer. A 150-guest wedding needs 4-5 standard units OR one 2-3 stall luxury trailer. Add 1 extra unit for the wedding party and always include hand washing stations."
+  },
+  {
+    q: "Do I need an ADA-accessible porta potty?",
+    a: "Yes, for any public event. The standard is 1 ADA-accessible unit per 20 standard units, with a minimum of 1. ADA units are larger, wheelchair-accessible, and include handrails. Some jurisdictions require them for any event over 50 people."
+  },
+  {
+    q: "How does alcohol affect porta potty needs?",
+    a: "Alcohol increases restroom usage by 30-40%. Add 20-25% more units when serving beer, wine, or cocktails. A 200-person event with an open bar that would normally need 4 units should plan for 5-6 instead."
+  },
+  {
+    q: "How many porta potties for a festival or large outdoor event?",
+    a: "For festivals, use 1 porta potty per 50-75 attendees for events lasting 4+ hours. A 1,000-person all-day festival needs 20-25 units minimum, plus 2-3 ADA units. Distribute them in clusters throughout the venue and plan for mid-day servicing."
+  },
+  {
+    q: "Should I get hand washing stations with my porta potties?",
+    a: "Yes, absolutely. The industry standard is 1 hand washing station per 4 porta potties. For food service events, health departments often require them. Standalone stations cost $50-100/week; many luxury units include built-in sinks."
+  },
+  {
+    q: "What happens if I don't rent enough porta potties?",
+    a: "Insufficient units lead to long lines (frustrating guests), overuse causing units to reach capacity faster, increased odor and cleanliness issues, and potential health code violations for permitted events. It's always better to have one extra unit than one too few."
+  }
+];
+
+// Build FAQ schema
+const faqSchemaData = {
+  mainEntity: howManyFAQs.map(faq => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a
+    }
+  }))
+};
+
 const articleData = {
   headline: post.title,
   description: post.description,
   datePublished: post.publishedAt,
-  dateModified: post.updatedAt,
+  dateModified: new Date().toISOString().split('T')[0],
   author: {
     '@type': 'Person',
     name: post.author.name,
@@ -23,14 +71,35 @@ const articleData = {
     name: siteConfig.name,
     logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
   },
-  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}/` }
 };
 
 const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+
+// Construction site calculations
+const constructionTable = [
+  { workers: '1-10', units: '1', handwash: '1' },
+  { workers: '11-20', units: '2', handwash: '1' },
+  { workers: '21-30', units: '3', handwash: '1' },
+  { workers: '31-40', units: '4', handwash: '1' },
+  { workers: '41-50', units: '5', handwash: '2' },
+  { workers: '51-75', units: '6-7', handwash: '2' },
+  { workers: '76-100', units: '8-10', handwash: '3' },
+];
+
+// Wedding calculations
+const weddingTable = [
+  { guests: '50', standard: '2', luxury: '1 (2-stall)', notes: 'Intimate wedding' },
+  { guests: '100', standard: '3-4', luxury: '1 (3-stall)', notes: 'Average wedding' },
+  { guests: '150', standard: '4-5', luxury: '1-2 trailers', notes: 'Large wedding' },
+  { guests: '200', standard: '5-6', luxury: '2 trailers', notes: 'Very large wedding' },
+  { guests: '250+', standard: '7+', luxury: '2-3 trailers', notes: 'Estate wedding' },
+];
 ---
 
 <BaseLayout title={post.title} description={post.description}>
   <StructuredData type="Article" data={articleData} />
+  <StructuredData type="FAQPage" data={faqSchemaData} />
 
   <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Breadcrumb -->
@@ -48,9 +117,11 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
     <header class="mb-10">
       <span class="inline-block bg-purple-100 text-purple-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Planning</span>
       <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-        {post.title}
+        How Many Porta Potties Do I Need? (2025 Calculator & Guide)
       </h1>
-      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <p class="text-xl text-gray-600 leading-relaxed">
+        The complete guide to calculating portable restroom needs for events, construction sites, weddings, and festivals. Includes formulas, charts, and our free calculator tool.
+      </p>
       <div class="mt-6 flex items-center gap-4">
         <div class="flex items-center">
           <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
@@ -58,54 +129,92 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
           </div>
           <div>
             <p class="font-medium text-gray-900">{post.author.name}</p>
-            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated January 2025</p>
           </div>
         </div>
       </div>
     </header>
 
+    <!-- Quick Answer Box -->
+    <div class="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-xl p-6 mb-10">
+      <h2 class="text-lg font-bold text-gray-900 mb-3">Quick Answer</h2>
+      <p class="text-gray-700 mb-4">
+        <strong>Events:</strong> 1 porta potty per 50-100 guests for a 4-hour event<br>
+        <strong>Construction:</strong> 1 porta potty per 10-20 workers (OSHA requirement)<br>
+        <strong>Weddings:</strong> 1 porta potty per 25-35 guests, or 1 luxury trailer per 75-100 guests<br>
+        <strong>Festivals:</strong> 1 porta potty per 50-75 attendees for all-day events
+      </p>
+      <p class="text-gray-600 text-sm">Add 20-25% more if serving alcohol. Always include at least 1 ADA-accessible unit.</p>
+    </div>
+
+    <!-- Calculator CTA -->
+    <div class="bg-primary-600 rounded-xl p-6 mb-10 text-white text-center">
+      <h3 class="text-xl font-bold mb-2">Get Your Exact Number Instantly</h3>
+      <p class="text-primary-100 mb-4">Our free calculator considers guest count, duration, alcohol, and more</p>
+      <a href="/calculator/" class="inline-flex items-center bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+        </svg>
+        Use Free Calculator
+      </a>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="bg-gray-50 rounded-xl p-6 mb-10 not-prose">
+      <h3 class="text-lg font-bold text-gray-900 mb-4">In This Guide</h3>
+      <ul class="space-y-2 text-gray-700">
+        <li><a href="#quick-formula" class="text-primary-600 hover:underline">The Quick Formula</a></li>
+        <li><a href="#events" class="text-primary-600 hover:underline">Event Planning (Parties, Corporate, Festivals)</a></li>
+        <li><a href="#construction" class="text-primary-600 hover:underline">Construction Sites (OSHA Requirements)</a></li>
+        <li><a href="#weddings" class="text-primary-600 hover:underline">Weddings & Formal Events</a></li>
+        <li><a href="#factors" class="text-primary-600 hover:underline">Factors That Change Your Count</a></li>
+        <li><a href="#ada" class="text-primary-600 hover:underline">ADA Accessibility Requirements</a></li>
+        <li><a href="#hand-washing" class="text-primary-600 hover:underline">Hand Washing Stations</a></li>
+        <li><a href="#mistakes" class="text-primary-600 hover:underline">Common Mistakes to Avoid</a></li>
+        <li><a href="#faqs" class="text-primary-600 hover:underline">Frequently Asked Questions</a></li>
+      </ul>
+    </div>
+
     <!-- Content -->
     <div class="prose prose-lg max-w-none">
 
       <p>
-        One of the most common questions we get: <strong>"How many porta potties do I need?"</strong> The answer depends on your guest count, event duration, and a few other factors. Let's break it down.
+        <strong>"How many porta potties do I need?"</strong> is the most common question in portable sanitation. Get it wrong, and you'll have frustrated guests waiting in long lines—or worse, overflowing units. Get it right, and no one even thinks about the restrooms (which is exactly what you want).
       </p>
 
-      <div class="bg-primary-50 border border-primary-200 rounded-xl p-6 my-6">
-        <p class="text-lg font-semibold text-primary-800 mb-2">Quick Calculator</p>
-        <p class="text-primary-700">
-          Use our <a href="/calculator/" class="font-semibold underline">free porta potty calculator</a> to get an instant recommendation based on your specific situation.
-        </p>
-      </div>
+      <p>
+        This guide gives you the exact formulas and charts used by event planners, construction managers, and wedding coordinators across the country. Whether you're planning a backyard party for 50 or a festival for 5,000, you'll know exactly what to rent.
+      </p>
 
       <AdSlot slot="content" />
 
-      <h2 id="quick-rules">Quick Rules of Thumb</h2>
+      <h2 id="quick-formula">The Quick Formula</h2>
 
-      <h3>For Events</h3>
+      <p>Here's the industry-standard formula that works for most situations:</p>
+
+      <div class="bg-gray-100 border border-gray-300 rounded-xl p-6 my-6 text-center not-prose">
+        <p class="text-xl font-mono text-gray-800 mb-2">
+          (Guests ÷ 50) × (Hours ÷ 4) = Base Units
+        </p>
+        <p class="text-sm text-gray-600">Then add 20% if serving alcohol, round up, and add 1 for safety</p>
+      </div>
+
+      <p><strong>Example:</strong> 200 guests at a 6-hour event with alcohol</p>
       <ul>
-        <li><strong>1 unit per 100-125 guests</strong> for a 4-hour event</li>
-        <li><strong>Add 1 extra unit per 200 guests</strong> if serving alcohol</li>
-        <li><strong>Add 25%</strong> if majority female guests</li>
-        <li><strong>Double the count</strong> for all-day events (8+ hours)</li>
+        <li>(200 ÷ 50) × (6 ÷ 4) = 4 × 1.5 = 6 base units</li>
+        <li>Add 20% for alcohol: 6 × 1.2 = 7.2</li>
+        <li>Round up + 1 for safety = <strong>8-9 units</strong></li>
       </ul>
 
-      <h3>For Construction Sites</h3>
-      <ul>
-        <li><strong>1 unit per 10 workers</strong> (OSHA requirement)</li>
-        <li>Minimum of <strong>1 unit</strong> regardless of worker count</li>
-      </ul>
+      <p>Or skip the math and <a href="/calculator/">use our free calculator</a> for an instant answer.</p>
 
-      <h3>For Weddings</h3>
-      <ul>
-        <li><strong>1 unit per 25-35 guests</strong></li>
-        <li><strong>+1 unit</strong> for wedding party/VIPs</li>
-        <li>Consider <strong>luxury restroom trailers</strong> for upscale feel</li>
-      </ul>
+      <h2 id="events">Event Planning: Parties, Corporate Events & Festivals</h2>
 
-      <h2 id="detailed-chart">Detailed Quantity Chart</h2>
+      <p>The number of porta potties you need depends on three main factors: guest count, event duration, and whether you're serving alcohol.</p>
 
-      <div class="overflow-x-auto my-8">
+      <h3>Standard Event Chart</h3>
+
+      <div class="overflow-x-auto my-8 not-prose">
         <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
           <thead class="bg-gray-50">
             <tr>
@@ -118,170 +227,346 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
           </thead>
           <tbody class="divide-y divide-gray-200">
             <tr>
-              <td class="px-4 py-4 text-sm font-medium text-gray-900">25</td>
-              <td class="px-4 py-4 text-sm text-gray-600">1</td>
-              <td class="px-4 py-4 text-sm text-gray-600">1</td>
-              <td class="px-4 py-4 text-sm text-gray-600">2</td>
-              <td class="px-4 py-4 text-sm text-gray-600">2</td>
-            </tr>
-            <tr class="bg-gray-50">
               <td class="px-4 py-4 text-sm font-medium text-gray-900">50</td>
               <td class="px-4 py-4 text-sm text-gray-600">1</td>
               <td class="px-4 py-4 text-sm text-gray-600">2</td>
               <td class="px-4 py-4 text-sm text-gray-600">3</td>
               <td class="px-4 py-4 text-sm text-gray-600">2</td>
             </tr>
-            <tr>
+            <tr class="bg-gray-50">
               <td class="px-4 py-4 text-sm font-medium text-gray-900">100</td>
               <td class="px-4 py-4 text-sm text-gray-600">2</td>
               <td class="px-4 py-4 text-sm text-gray-600">3</td>
               <td class="px-4 py-4 text-sm text-gray-600">4</td>
               <td class="px-4 py-4 text-sm text-gray-600">3-4</td>
             </tr>
-            <tr class="bg-gray-50">
+            <tr>
               <td class="px-4 py-4 text-sm font-medium text-gray-900">150</td>
               <td class="px-4 py-4 text-sm text-gray-600">3</td>
               <td class="px-4 py-4 text-sm text-gray-600">4</td>
               <td class="px-4 py-4 text-sm text-gray-600">5</td>
               <td class="px-4 py-4 text-sm text-gray-600">4-5</td>
             </tr>
-            <tr>
+            <tr class="bg-gray-50">
               <td class="px-4 py-4 text-sm font-medium text-gray-900">200</td>
               <td class="px-4 py-4 text-sm text-gray-600">4</td>
               <td class="px-4 py-4 text-sm text-gray-600">5</td>
               <td class="px-4 py-4 text-sm text-gray-600">6</td>
               <td class="px-4 py-4 text-sm text-gray-600">5-6</td>
             </tr>
-            <tr class="bg-gray-50">
+            <tr>
               <td class="px-4 py-4 text-sm font-medium text-gray-900">300</td>
               <td class="px-4 py-4 text-sm text-gray-600">5</td>
               <td class="px-4 py-4 text-sm text-gray-600">7</td>
               <td class="px-4 py-4 text-sm text-gray-600">9</td>
               <td class="px-4 py-4 text-sm text-gray-600">7-8</td>
             </tr>
-            <tr>
+            <tr class="bg-gray-50">
               <td class="px-4 py-4 text-sm font-medium text-gray-900">500</td>
-              <td class="px-4 py-4 text-sm text-gray-600">7</td>
-              <td class="px-4 py-4 text-sm text-gray-600">10</td>
-              <td class="px-4 py-4 text-sm text-gray-600">14</td>
+              <td class="px-4 py-4 text-sm text-gray-600">8</td>
+              <td class="px-4 py-4 text-sm text-gray-600">12</td>
+              <td class="px-4 py-4 text-sm text-gray-600">15</td>
               <td class="px-4 py-4 text-sm text-gray-600">12-14</td>
             </tr>
-            <tr class="bg-gray-50">
+            <tr>
               <td class="px-4 py-4 text-sm font-medium text-gray-900">1,000</td>
-              <td class="px-4 py-4 text-sm text-gray-600">14</td>
-              <td class="px-4 py-4 text-sm text-gray-600">18</td>
-              <td class="px-4 py-4 text-sm text-gray-600">25</td>
+              <td class="px-4 py-4 text-sm text-gray-600">15</td>
+              <td class="px-4 py-4 text-sm text-gray-600">20</td>
+              <td class="px-4 py-4 text-sm text-gray-600">28</td>
               <td class="px-4 py-4 text-sm text-gray-600">22-25</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-4 py-4 text-sm font-medium text-gray-900">2,500</td>
+              <td class="px-4 py-4 text-sm text-gray-600">35</td>
+              <td class="px-4 py-4 text-sm text-gray-600">50</td>
+              <td class="px-4 py-4 text-sm text-gray-600">65</td>
+              <td class="px-4 py-4 text-sm text-gray-600">55-60</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-4 text-sm font-medium text-gray-900">5,000</td>
+              <td class="px-4 py-4 text-sm text-gray-600">65</td>
+              <td class="px-4 py-4 text-sm text-gray-600">95</td>
+              <td class="px-4 py-4 text-sm text-gray-600">125</td>
+              <td class="px-4 py-4 text-sm text-gray-600">110-120</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <h2 id="factors">Factors That Affect Your Count</h2>
+      <h3>Real-World Event Examples</h3>
 
-      <h3>1. Event Duration</h3>
-      <p>
-        Longer events = more bathroom trips. An 8-hour festival needs roughly double the units of a 4-hour party.
-      </p>
-
-      <h3>2. Alcohol Service</h3>
-      <p>
-        Alcohol increases bathroom usage by 25-40%. If you're serving beer, wine, or cocktails, add extra units.
-      </p>
-
-      <h3>3. Guest Demographics</h3>
-      <p>
-        Women typically take 2-3x longer in the restroom than men. Events with majority female attendance need more units.
-      </p>
-
-      <h3>4. Food & Beverages</h3>
-      <p>
-        Serving lots of drinks (even non-alcoholic)? Expect higher usage. Coffee service especially increases demand.
-      </p>
-
-      <h3>5. Peak Times</h3>
-      <p>
-        Consider when everyone will need to go at once—like after a ceremony or during intermission. Plan for peaks, not averages.
-      </p>
-
-      <h2 id="by-event-type">Recommendations by Event Type</h2>
-
-      <h3>Outdoor Wedding (150 guests, 5 hours)</h3>
+      <p><strong>Backyard graduation party (75 guests, 4 hours, light refreshments):</strong></p>
       <ul>
-        <li>4-5 standard units OR</li>
-        <li>1 luxury restroom trailer (2-3 stalls)</li>
-        <li>+1 unit for wedding party</li>
-        <li>Include hand washing stations</li>
+        <li>2 standard porta potties</li>
+        <li>1 hand washing station</li>
+        <li>Cost estimate: $250-400</li>
       </ul>
 
-      <h3>Company Picnic (200 guests, 6 hours)</h3>
+      <p><strong>Company picnic (200 guests, 6 hours, beer/wine served):</strong></p>
       <ul>
         <li>5-6 standard units</li>
-        <li>2 hand wash stations</li>
         <li>1 ADA-accessible unit</li>
+        <li>2 hand washing stations</li>
+        <li>Cost estimate: $800-1,200</li>
       </ul>
 
-      <h3>Music Festival (1,000 guests, all day)</h3>
+      <p><strong>Music festival (1,500 attendees, all day, alcohol):</strong></p>
       <ul>
-        <li>25-30 standard units</li>
-        <li>2-3 ADA units</li>
-        <li>Hand wash stations at each cluster</li>
-        <li>Mid-day servicing recommended</li>
+        <li>35-40 standard units</li>
+        <li>3-4 ADA units</li>
+        <li>10 hand washing stations</li>
+        <li>Mid-day servicing required</li>
+        <li>Cost estimate: $4,500-7,000</li>
       </ul>
 
-      <h3>Construction Site (25 workers)</h3>
+      <p>Looking for providers in your area? <a href="/texas/">Find porta potty rentals in Texas</a>, <a href="/california/">California</a>, <a href="/florida/">Florida</a>, or <a href="/states/">browse all states</a>.</p>
+
+      <h2 id="construction">Construction Sites: OSHA Requirements</h2>
+
+      <p>Construction site portable toilet requirements are governed by OSHA (Occupational Safety and Health Administration) under regulation 29 CFR 1926.51. Non-compliance can result in fines up to <strong>$15,625 per violation</strong>.</p>
+
+      <h3>OSHA Minimum Requirements</h3>
+
+      <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 my-6 not-prose">
+        <p class="font-semibold text-yellow-800 mb-2">Official OSHA Standard:</p>
+        <p class="text-yellow-700">1 toilet per 20 workers for a 40-hour work week. However, most contractors use <strong>1 toilet per 10 workers</strong> to reduce wait times and maintain productivity.</p>
+      </div>
+
+      <h3>Construction Site Chart</h3>
+
+      <div class="overflow-x-auto my-8 not-prose">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Workers</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Porta Potties</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Hand Wash Stations</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {constructionTable.map((row, i) => (
+              <tr class={i % 2 === 1 ? 'bg-gray-50' : ''}>
+                <td class="px-6 py-4 text-sm font-medium text-gray-900">{row.workers}</td>
+                <td class="px-6 py-4 text-sm text-gray-600">{row.units}</td>
+                <td class="px-6 py-4 text-sm text-gray-600">{row.handwash}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Special Construction Considerations</h3>
+
       <ul>
-        <li>2-3 standard units (exceeds OSHA minimum)</li>
-        <li>1 hand wash station</li>
-        <li>Weekly servicing</li>
+        <li><strong>Multi-story buildings:</strong> OSHA requires toilets within 200 feet or 1 floor of workers. For high-rise construction, rent crane-liftable units or high-rise specific models.</li>
+        <li><strong>Remote sites:</strong> Sites far from service routes may need larger holding tanks or more frequent servicing.</li>
+        <li><strong>Long-term projects:</strong> Monthly rentals offer significant savings—typically $175-400/month vs. $125-195/week.</li>
+        <li><strong>Winter conditions:</strong> In cold climates, request units with antifreeze additives to prevent freezing.</li>
       </ul>
 
-      <h2 id="mistakes">Common Mistakes</h2>
+      <p>Learn more about regulations in our <a href="/blog/construction-site-restroom-requirements/">OSHA construction restroom requirements guide</a>.</p>
+
+      <h2 id="weddings">Weddings & Formal Events</h2>
+
+      <p>Weddings have unique restroom needs. Your guests expect a nicer experience than a standard construction unit. The two main options are multiple standard/deluxe porta potties or a luxury restroom trailer.</p>
+
+      <h3>Wedding Calculation Chart</h3>
+
+      <div class="overflow-x-auto my-8 not-prose">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900">Guests</th>
+              <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900">Standard Units</th>
+              <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900">Luxury Trailer</th>
+              <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900">Notes</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {weddingTable.map((row, i) => (
+              <tr class={i % 2 === 1 ? 'bg-gray-50' : ''}>
+                <td class="px-4 py-4 text-sm font-medium text-gray-900">{row.guests}</td>
+                <td class="px-4 py-4 text-sm text-gray-600">{row.standard}</td>
+                <td class="px-4 py-4 text-sm text-gray-600">{row.luxury}</td>
+                <td class="px-4 py-4 text-sm text-gray-600">{row.notes}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Standard Units vs. Luxury Trailers</h3>
+
+      <p><strong>Choose standard/deluxe porta potties if:</strong></p>
+      <ul>
+        <li>Budget is a primary concern ($300-600 vs $800-2,500)</li>
+        <li>Casual or rustic wedding vibe</li>
+        <li>Venue has some indoor facilities and you just need overflow</li>
+      </ul>
+
+      <p><strong>Choose a luxury restroom trailer if:</strong></p>
+      <ul>
+        <li>Formal or upscale wedding</li>
+        <li>Venue has no existing facilities</li>
+        <li>You want flushing toilets, running water, AC, and mirrors</li>
+        <li>Guest experience is a high priority</li>
+      </ul>
+
+      <p>Compare options in detail: <a href="/blog/wedding-restroom-trailer-vs-porta-potty/">Wedding Restroom Trailer vs. Porta Potty</a></p>
+
+      <AdSlot slot="content" />
+
+      <h2 id="factors">Factors That Change Your Count</h2>
+
+      <h3>1. Alcohol Service (+20-40%)</h3>
+      <p>Alcohol is a diuretic—it increases urination. Events with open bars see 30-40% more restroom visits. Add at least 20% more units when alcohol is served. Beer and mixed drinks have a bigger impact than wine.</p>
+
+      <h3>2. Event Duration</h3>
+      <p>A 4-hour event is the baseline. For every 2 hours beyond that, add 25% more units. An 8-hour event needs roughly double what a 4-hour event requires.</p>
+
+      <h3>3. Guest Demographics</h3>
+      <p>Women take 2-3 times longer in the restroom than men. If your guest list skews heavily female (bridal showers, certain corporate events), add 20-25% more units. Events with many elderly guests or children also need additional capacity.</p>
+
+      <h3>4. Food and Beverage</h3>
+      <p>Heavy food and drink service increases usage. Coffee service is especially impactful. If your event features a lot of beverages (even non-alcoholic), plan for higher restroom traffic.</p>
+
+      <h3>5. Peak Usage Times</h3>
+      <p>Think about when everyone will need to go at once: right after a ceremony, during intermission, after the main meal. For events with predictable peaks, add extra capacity to handle the surge.</p>
+
+      <h3>6. Weather</h3>
+      <p>Hot weather means more drinking, which means more restroom visits. Cold weather can slow down usage slightly. Extreme heat also requires units placed in shade to remain bearable.</p>
+
+      <h2 id="ada">ADA Accessibility Requirements</h2>
+
+      <p>ADA (Americans with Disabilities Act) compliance isn't optional for public events. Here's what you need to know:</p>
+
+      <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 my-6 not-prose">
+        <p class="font-semibold text-blue-800 mb-2">ADA Minimum Standard:</p>
+        <p class="text-blue-700">At least 1 ADA-accessible porta potty per 20 standard units, with a <strong>minimum of 1 for any public event</strong>.</p>
+      </div>
+
+      <h3>ADA Unit Features</h3>
+      <ul>
+        <li>Wider door (minimum 32" clear opening)</li>
+        <li>Interior space for wheelchair maneuverability (60" turning radius)</li>
+        <li>Grab bars on both sides of the toilet</li>
+        <li>Lower toilet seat height or adjustable</li>
+        <li>Ramped or level entry</li>
+      </ul>
+
+      <h3>When ADA Units Are Required</h3>
+      <ul>
+        <li>Any event open to the public</li>
+        <li>Permitted events (check local requirements)</li>
+        <li>Events at public venues</li>
+        <li>Any event where attendees may include people with disabilities</li>
+      </ul>
+
+      <p>ADA units cost 25-50% more than standard units but are essential for compliance and inclusivity. Learn more in our <a href="/blog/ada-porta-potty-requirements/">ADA porta potty requirements guide</a>.</p>
+
+      <h2 id="hand-washing">Hand Washing Stations</h2>
+
+      <p>Hand washing isn't just nice to have—it's expected and often required:</p>
+
+      <ul>
+        <li><strong>Standard ratio:</strong> 1 hand washing station per 4 porta potties</li>
+        <li><strong>Food service events:</strong> Often required by health departments</li>
+        <li><strong>Construction sites:</strong> OSHA requires hand washing facilities</li>
+        <li><strong>Cost:</strong> $50-100 per week for standalone stations</li>
+      </ul>
+
+      <p>Options include standalone foot-pump stations, trailer-mounted sinks, and portable sinks with fresh water tanks. Luxury restroom trailers typically include built-in sinks.</p>
+
+      <h2 id="mistakes">Common Mistakes to Avoid</h2>
 
       <ol>
         <li>
-          <strong>Ordering the bare minimum</strong><br>
-          Long lines frustrate guests. When in doubt, order one more unit than you think you need.
+          <strong>Cutting it too close</strong><br>
+          Renting the bare minimum saves a few hundred dollars but creates long lines and unhappy guests. Always round up and add one extra unit.
         </li>
         <li>
           <strong>Forgetting ADA requirements</strong><br>
-          Public events need accessible units. Generally 1 ADA unit per 20 standard units, minimum 1.
+          Skipping the accessible unit can result in complaints, legal issues, and excluding guests with disabilities.
         </li>
         <li>
-          <strong>Skipping hand washing</strong><br>
-          Guests expect it. Budget for hand wash stations or sanitizer dispensers.
+          <strong>No hand washing</strong><br>
+          In a post-pandemic world, guests expect hand washing facilities. Don't skip this.
         </li>
         <li>
-          <strong>Not accounting for alcohol</strong><br>
-          That open bar means 25% more bathroom trips. Plan accordingly.
+          <strong>Ignoring the alcohol factor</strong><br>
+          That open bar will send 30-40% more guests to the restroom. Plan for it.
+        </li>
+        <li>
+          <strong>Bad placement</strong><br>
+          Units too far away get underused while guests hold it. Units too close to dining create complaints. Read our <a href="/blog/porta-potty-placement-tips/">placement guide</a>.
+        </li>
+        <li>
+          <strong>Booking too late</strong><br>
+          Peak season (April-October) and holiday weekends book up fast. Reserve 2-4 weeks ahead.
+        </li>
+        <li>
+          <strong>Not planning for servicing</strong><br>
+          All-day events need mid-day servicing. A standard unit is good for about 100-125 uses before it needs service.
         </li>
       </ol>
 
-      <h2 id="bottom-line">The Bottom Line</h2>
+      <h2 id="faqs">Frequently Asked Questions</h2>
+    </div>
 
+    <!-- FAQ Section -->
+    <div class="my-12 space-y-4 not-prose">
+      {howManyFAQs.map((faq) => (
+        <details class="group bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+          <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 transition-colors">
+            <h3 class="font-semibold text-gray-900 pr-4 text-left">{faq.q}</h3>
+            <span class="flex-shrink-0 ml-4 text-gray-400 group-open:rotate-180 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-5 pb-5 border-t border-gray-100 pt-4">
+            <p class="text-gray-600">{faq.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <div class="prose prose-lg max-w-none">
       <p>
-        Use our <a href="/calculator/"><strong>free calculator</strong></a> for a personalized recommendation, or follow this simple formula:
+        Have more questions? Check out our <a href="/faq/">complete FAQ section</a> or <a href="/contact/">contact us</a> for personalized guidance.
       </p>
 
-      <div class="bg-gray-100 border border-gray-300 rounded-xl p-6 my-6 text-center">
-        <p class="text-xl font-mono text-gray-800">
-          (Guests ÷ 100) × (Hours ÷ 4) + Extra for Alcohol = Units Needed
-        </p>
-      </div>
+      <h2>The Bottom Line</h2>
 
       <p>
-        Round up, add an extra unit for safety, and you're set.
+        The right number of porta potties keeps your event running smoothly and your guests comfortable. Use these guidelines:
       </p>
 
+      <ul>
+        <li><strong>Events:</strong> 1 per 50-100 guests (4-hour baseline), add 20% for alcohol</li>
+        <li><strong>Construction:</strong> 1 per 10-20 workers (OSHA compliant)</li>
+        <li><strong>Weddings:</strong> 1 per 25-35 guests, or 1 luxury trailer per 75-100</li>
+        <li><strong>Always:</strong> At least 1 ADA unit, hand washing for every 4 units</li>
+      </ul>
+
+      <p>
+        When in doubt, <a href="/calculator/"><strong>use our free calculator</strong></a> for a personalized recommendation, then <a href="/">find trusted providers in your area</a> to get quotes.
+      </p>
     </div>
 
     <!-- CTA -->
-    <div class="mt-12 bg-gradient-to-br from-primary-50 to-blue-50 rounded-2xl p-8 text-center border border-primary-100">
-      <h3 class="text-2xl font-bold text-gray-900 mb-3">Get Your Exact Count</h3>
-      <p class="text-gray-600 mb-6">Use our free calculator for a personalized recommendation</p>
-      <a href="/calculator/" class="inline-flex items-center bg-primary-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-700 transition-colors">
-        Try the Calculator
-      </a>
+    <div class="mt-12 bg-gradient-to-br from-primary-600 to-blue-700 rounded-2xl p-8 text-center text-white">
+      <h3 class="text-2xl font-bold mb-3">Ready to Get Started?</h3>
+      <p class="text-blue-100 mb-6">Calculate your needs and find local providers</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/calculator/" class="inline-flex items-center justify-center bg-white text-primary-600 px-8 py-4 rounded-xl font-semibold hover:bg-blue-50 transition-colors">
+          Use Calculator
+        </a>
+        <a href="/" class="inline-flex items-center justify-center border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/10 transition-colors">
+          Find Providers
+        </a>
+      </div>
     </div>
 
     <!-- Related -->
@@ -289,7 +574,7 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
       <h2 class="text-2xl font-bold text-gray-900 mb-8">Related Articles</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {relatedPosts.map((related) => (
-          <a href={`/blog/${related.slug}`} class="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
+          <a href={`/blog/${related.slug}/`} class="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
             <span class="text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-700">{related.category}</span>
             <h3 class="text-lg font-semibold text-gray-900 mt-3 line-clamp-2">{related.title}</h3>
           </a>
@@ -298,3 +583,9 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
     </section>
   </article>
 </BaseLayout>
+
+<style>
+  details[open] summary {
+    background-color: #f9fafb;
+  }
+</style>
