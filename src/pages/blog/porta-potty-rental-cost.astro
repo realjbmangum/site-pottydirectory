@@ -8,11 +8,51 @@ import blogPosts from '../../data/blog-posts.json';
 const post = blogPosts.find(p => p.slug === 'porta-potty-rental-cost')!;
 const siteUrl = `https://${siteConfig.domain}`;
 
+// FAQ data for this post (embedded for SEO)
+const pricingFAQs = [
+  {
+    q: "How much does it cost to rent a porta potty for a day?",
+    a: "Most rental companies charge the same rate for 1-7 days, typically $125-$195 for a standard unit or $150-$225 for a deluxe unit. True single-day rentals are rare; expect to pay the weekly rate even for short events."
+  },
+  {
+    q: "Why do porta potty prices vary so much by location?",
+    a: "Prices reflect local labor costs, fuel prices, competition, and demand. High cost-of-living areas like California, New York, and Hawaii typically see prices 20-40% higher than the national average. Rural areas with fewer providers may also charge more due to longer delivery distances."
+  },
+  {
+    q: "What's included in the rental price?",
+    a: "Standard rentals typically include delivery, placement, weekly servicing (pumping, cleaning, restocking toilet paper and hand sanitizer), and pickup. Some companies include the first service; others charge separately. Always confirm what's included before booking."
+  },
+  {
+    q: "Are there hidden fees I should watch for?",
+    a: "Common additional charges include: delivery/pickup fees ($50-$150 each way if not included), damage waivers ($10-$25), after-hours delivery surcharges (25-50%), fuel surcharges, and cleaning fees for excessively dirty units. Ask for an all-inclusive quote."
+  },
+  {
+    q: "Is it cheaper to rent monthly vs weekly?",
+    a: "Yes, significantly. A standard unit might cost $150/week but only $250-$400/month—essentially getting 3 weeks free. For projects lasting more than 2 weeks, monthly rates almost always make sense."
+  },
+  {
+    q: "How much do luxury restroom trailers cost?",
+    a: "Luxury restroom trailers range from $800-$2,500+ for a weekend event. Multi-stall trailers for large weddings can exceed $3,000. Monthly rates for trailers range from $4,800-$10,000. The premium is worth it for upscale events where guest experience matters."
+  }
+];
+
+// Build FAQ schema for this page
+const faqSchemaData = {
+  mainEntity: pricingFAQs.map(faq => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a
+    }
+  }))
+};
+
 const articleData = {
   headline: post.title,
   description: post.description,
   datePublished: post.publishedAt,
-  dateModified: post.updatedAt,
+  dateModified: new Date().toISOString().split('T')[0],
   author: {
     '@type': 'Person',
     name: post.author.name,
@@ -23,14 +63,29 @@ const articleData = {
     name: siteConfig.name,
     logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
   },
-  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}/` }
 };
 
 const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+
+// State pricing data (based on cost of living adjustments)
+const statePricing = [
+  { state: 'California', standard: '$175-$275', deluxe: '$225-$350', ada: '$250-$400' },
+  { state: 'New York', standard: '$175-$275', deluxe: '$225-$350', ada: '$250-$400' },
+  { state: 'Texas', standard: '$125-$200', deluxe: '$175-$275', ada: '$200-$325' },
+  { state: 'Florida', standard: '$125-$200', deluxe: '$175-$275', ada: '$200-$325' },
+  { state: 'Illinois', standard: '$150-$225', deluxe: '$200-$300', ada: '$225-$350' },
+  { state: 'Pennsylvania', standard: '$125-$200', deluxe: '$175-$275', ada: '$200-$325' },
+  { state: 'Ohio', standard: '$100-$175', deluxe: '$150-$250', ada: '$175-$300' },
+  { state: 'Georgia', standard: '$125-$200', deluxe: '$175-$275', ada: '$200-$325' },
+  { state: 'Colorado', standard: '$150-$250', deluxe: '$200-$325', ada: '$225-$375' },
+  { state: 'Arizona', standard: '$125-$200', deluxe: '$175-$275', ada: '$200-$325' },
+];
 ---
 
 <BaseLayout title={post.title} description={post.description}>
   <StructuredData type="Article" data={articleData} />
+  <StructuredData type="FAQPage" data={faqSchemaData} />
 
   <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Breadcrumb -->
@@ -48,9 +103,11 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
     <header class="mb-10">
       <span class="inline-block bg-green-100 text-green-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Pricing</span>
       <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-        {post.title}
+        How Much Does It Cost to Rent a Porta Potty? (2025 Pricing Guide)
       </h1>
-      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <p class="text-xl text-gray-600 leading-relaxed">
+        Complete breakdown of portable restroom rental prices by type, duration, and location. Plus state-by-state pricing, money-saving tips, and answers to common questions.
+      </p>
       <div class="mt-6 flex items-center gap-4">
         <div class="flex items-center">
           <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
@@ -58,150 +115,331 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
           </div>
           <div>
             <p class="font-medium text-gray-900">{post.author.name}</p>
-            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated January 2025</p>
           </div>
         </div>
       </div>
     </header>
 
+    <!-- Quick Answer Box -->
+    <div class="bg-gradient-to-r from-primary-50 to-blue-50 border border-primary-200 rounded-xl p-6 mb-10">
+      <h2 class="text-lg font-bold text-gray-900 mb-3">Quick Answer</h2>
+      <p class="text-gray-700">
+        <strong>Standard porta potty:</strong> $125-$195 per week<br>
+        <strong>Deluxe/Event unit:</strong> $150-$275 per week<br>
+        <strong>ADA accessible:</strong> $150-$300 per week<br>
+        <strong>Luxury trailer:</strong> $800-$2,500 per event<br><br>
+        Most companies charge the <strong>same rate for 1-7 days</strong>. Monthly rentals offer the best value at $175-$400/month for standard units.
+      </p>
+    </div>
+
     <!-- Content -->
     <div class="prose prose-lg max-w-none">
 
       <p>
-        If you're planning an event, managing a construction site, or hosting a wedding, one of your first questions is probably: <strong>how much does it cost to rent a porta potty?</strong>
+        Whether you're planning a backyard wedding, managing a construction site, or organizing a community festival, knowing what to budget for portable restroom rentals is essential. Prices vary significantly based on the type of unit, your location, rental duration, and time of year.
       </p>
 
       <p>
-        The short answer: <strong>$125 to $2,000+ per unit</strong>, depending on the type, duration, and your location. Most providers charge the same rate for 1-7 days (daily/weekly). Let's break down exactly what you can expect to pay.
+        This guide breaks down everything you need to know about porta potty rental costs in 2025, including real pricing data from providers across the country.
       </p>
+
+      <!-- Table of Contents -->
+      <div class="bg-gray-50 rounded-xl p-6 my-8 not-prose">
+        <h3 class="text-lg font-bold text-gray-900 mb-4">In This Guide</h3>
+        <ul class="space-y-2 text-gray-700">
+          <li><a href="#average-costs" class="text-primary-600 hover:underline">Average Rental Costs by Type</a></li>
+          <li><a href="#state-pricing" class="text-primary-600 hover:underline">Prices by State</a></li>
+          <li><a href="#factors" class="text-primary-600 hover:underline">What Affects Pricing</a></li>
+          <li><a href="#how-many" class="text-primary-600 hover:underline">How Many Do You Need?</a></li>
+          <li><a href="#hidden-costs" class="text-primary-600 hover:underline">Hidden Costs to Watch For</a></li>
+          <li><a href="#save-money" class="text-primary-600 hover:underline">How to Save Money</a></li>
+          <li><a href="#faqs" class="text-primary-600 hover:underline">Frequently Asked Questions</a></li>
+        </ul>
+      </div>
 
       <AdSlot slot="content" />
 
-      <h2 id="average-costs">Average Porta Potty Rental Costs in 2025</h2>
+      <h2 id="average-costs">Average Porta Potty Rental Costs by Type (2025)</h2>
 
-      <p>Here's what you can expect to pay for different types of portable restrooms:</p>
+      <p>Here's what you can expect to pay for different types of portable restrooms. Note that most providers charge the same rate whether you rent for 1 day or 7 days—true daily rentals are uncommon.</p>
 
-      <div class="overflow-x-auto my-8">
+      <div class="overflow-x-auto my-8 not-prose">
         <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
           <thead class="bg-gray-50">
             <tr>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Type</th>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Daily/Weekly (1-7 days)</th>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Monthly Rate</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Unit Type</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Weekly (1-7 days)</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Monthly (28+ days)</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Best For</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
             <tr>
-              <td class="px-6 py-4 text-sm text-gray-900">Standard Unit (Construction)</td>
+              <td class="px-6 py-4 text-sm text-gray-900 font-medium">Standard Unit</td>
               <td class="px-6 py-4 text-sm text-gray-600">$125 - $195</td>
               <td class="px-6 py-4 text-sm text-gray-600">$175 - $400</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Construction sites</td>
             </tr>
             <tr class="bg-gray-50">
-              <td class="px-6 py-4 text-sm text-gray-900">Deluxe Unit (Events)</td>
-              <td class="px-6 py-4 text-sm text-gray-600">$150 - $225</td>
-              <td class="px-6 py-4 text-sm text-gray-600">$600 - $900</td>
+              <td class="px-6 py-4 text-sm text-gray-900 font-medium">Deluxe/Flushable</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$150 - $275</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$600 - $1,100</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Parties, outdoor events</td>
             </tr>
             <tr>
-              <td class="px-6 py-4 text-sm text-gray-900">ADA Accessible</td>
-              <td class="px-6 py-4 text-sm text-gray-600">$150 - $250</td>
-              <td class="px-6 py-4 text-sm text-gray-600">$600 - $1,000</td>
+              <td class="px-6 py-4 text-sm text-gray-900 font-medium">ADA Accessible</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$150 - $300</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$600 - $1,200</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Public events, compliance</td>
             </tr>
             <tr class="bg-gray-50">
-              <td class="px-6 py-4 text-sm text-gray-900">Hand Wash Station</td>
-              <td class="px-6 py-4 text-sm text-gray-600">$125 - $200</td>
-              <td class="px-6 py-4 text-sm text-gray-600">$500 - $1,000</td>
+              <td class="px-6 py-4 text-sm text-gray-900 font-medium">Hand Wash Station</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$75 - $150</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$300 - $600</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Add-on for any rental</td>
             </tr>
             <tr>
-              <td class="px-6 py-4 text-sm text-gray-900">Luxury Restroom Trailer</td>
-              <td class="px-6 py-4 text-sm text-gray-600">$1,200 - $2,000</td>
-              <td class="px-6 py-4 text-sm text-gray-600">$4,800 - $10,000</td>
+              <td class="px-6 py-4 text-sm text-gray-900 font-medium">High-Rise Unit</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$200 - $350</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$800 - $1,400</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Multi-story construction</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900 font-medium">Luxury 2-Station Trailer</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$800 - $1,500</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$3,200 - $6,000</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Weddings, VIP events</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900 font-medium">Luxury 4+ Station Trailer</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$1,500 - $3,000+</td>
+              <td class="px-6 py-4 text-sm text-gray-600">$6,000 - $12,000</td>
+              <td class="px-6 py-4 text-sm text-gray-600">Large upscale events</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <p class="text-sm text-gray-600 italic">Note: Most providers charge the same rate for 1-7 days. Monthly rates represent significant savings for longer projects.</p>
+      <p class="text-sm text-gray-600 italic">Prices reflect national averages. Your area may be higher or lower—see state-by-state pricing below.</p>
+
+      <h2 id="state-pricing">Porta Potty Rental Prices by State</h2>
+
+      <p>Location significantly impacts rental costs. High cost-of-living states like California and New York typically see prices 20-40% above the national average, while states in the Midwest and South often have lower rates.</p>
+
+      <div class="overflow-x-auto my-8 not-prose">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">State</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Standard (Weekly)</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Deluxe (Weekly)</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">ADA (Weekly)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {statePricing.map((row, i) => (
+              <tr class={i % 2 === 1 ? 'bg-gray-50' : ''}>
+                <td class="px-6 py-4 text-sm text-gray-900 font-medium">{row.state}</td>
+                <td class="px-6 py-4 text-sm text-gray-600">{row.standard}</td>
+                <td class="px-6 py-4 text-sm text-gray-600">{row.deluxe}</td>
+                <td class="px-6 py-4 text-sm text-gray-600">{row.ada}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        <a href="/states/">Browse providers in your state</a> to get accurate local quotes. Prices can vary significantly even within the same state based on urban vs. rural location.
+      </p>
 
       <h2 id="factors">What Affects Porta Potty Rental Prices?</h2>
 
       <h3>1. Type of Unit</h3>
       <p>
-        Standard units are the most affordable option. If you need features like hand-washing stations, flushing capability, or climate control, expect to pay more.
+        Standard construction units are the most affordable. Each step up—deluxe features, ADA compliance, flushing capability, climate control—adds to the cost. Luxury restroom trailers with running water, mirrors, and AC can cost 10x more than basic units.
       </p>
 
       <h3>2. Rental Duration</h3>
       <p>
-        Longer rentals typically offer better daily rates. A monthly rental often costs only slightly more than a weekly rate, making it more economical for construction projects.
+        Here's the pricing structure most companies use:
+      </p>
+      <ul>
+        <li><strong>1-7 days:</strong> Same flat rate (the "weekly" rate)</li>
+        <li><strong>2-4 weeks:</strong> Often charged as 2-4x weekly rate</li>
+        <li><strong>Monthly (28+ days):</strong> Best per-day value, includes weekly servicing</li>
+      </ul>
+      <p>
+        For example, if a standard unit costs $150/week, renting for one month might only be $300-$400—essentially getting 2+ weeks free compared to weekly billing.
       </p>
 
-      <h3>3. Delivery Location</h3>
+      <h3>3. Delivery Distance</h3>
       <p>
-        Most companies include delivery within a certain radius (usually 20-30 miles). Beyond that, expect delivery fees of $2-5 per mile.
+        Most providers include delivery within 20-30 miles. Beyond that, expect charges of $2-5 per mile each way. Remote locations may face minimum delivery fees of $100-200.
       </p>
 
       <h3>4. Servicing Frequency</h3>
       <p>
-        Standard rentals include weekly servicing. High-traffic events may need daily cleaning, which adds $50-100 per service visit.
+        Standard rentals include weekly servicing (pumping waste, restocking supplies, cleaning). High-traffic situations need more frequent service:
+      </p>
+      <ul>
+        <li><strong>Weekly service:</strong> Included in base price</li>
+        <li><strong>Twice-weekly:</strong> Add $50-75 per extra service</li>
+        <li><strong>Daily service:</strong> Add $75-125 per day</li>
+      </ul>
+
+      <h3>5. Seasonality and Demand</h3>
+      <p>
+        Expect to pay 15-30% more during peak season (April through October). Major holidays, graduation season, and wedding season (May-June, September-October) see highest demand. Book 3-4 weeks ahead for peak dates.
       </p>
 
-      <h3>5. Seasonality & Demand</h3>
+      <h3>6. Special Requirements</h3>
       <p>
-        Peak season (April-October) and holidays see higher prices. Book early for summer events and expect to pay 20-30% more during busy periods.
+        Additional costs may apply for:
+      </p>
+      <ul>
+        <li>Weekend or after-hours delivery (25-50% surcharge)</li>
+        <li>Difficult access locations (stairs, narrow gates, soft ground)</li>
+        <li>Events requiring attendants ($150-300/day)</li>
+        <li>Cold weather additives for winter rentals</li>
+      </ul>
+
+      <AdSlot slot="content" />
+
+      <h2 id="how-many">How Many Porta Potties Do You Need?</h2>
+
+      <p>Getting the right number of units is crucial—too few leads to long lines and unhappy guests, too many wastes money. Here's a quick reference:</p>
+
+      <div class="overflow-x-auto my-8 not-prose">
+        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Situation</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Recommendation</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Example</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900 font-medium">4-hour event (no alcohol)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">1 per 100-125 guests</td>
+              <td class="px-6 py-4 text-sm text-gray-600">200 guests = 2 units</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900 font-medium">4-hour event (with alcohol)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">1 per 75-100 guests</td>
+              <td class="px-6 py-4 text-sm text-gray-600">200 guests = 2-3 units</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900 font-medium">All-day event (8+ hours)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">1 per 50-75 guests</td>
+              <td class="px-6 py-4 text-sm text-gray-600">200 guests = 3-4 units</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900 font-medium">Construction site (OSHA)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">1 per 10-20 workers</td>
+              <td class="px-6 py-4 text-sm text-gray-600">30 workers = 2-3 units</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900 font-medium">Wedding (with trailer)</td>
+              <td class="px-6 py-4 text-sm text-gray-600">2-station trailer per 150 guests</td>
+              <td class="px-6 py-4 text-sm text-gray-600">200 guests = 3-4 station trailer</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 text-sm text-gray-900 font-medium">Multi-day festival</td>
+              <td class="px-6 py-4 text-sm text-gray-600">1 per 40-50 attendees</td>
+              <td class="px-6 py-4 text-sm text-gray-600">500 attendees = 10-12 units</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        <strong>Pro tip:</strong> Always add at least one ADA-accessible unit for public events. It's often required by local regulations and ensures all guests are accommodated.
+      </p>
+
+      <p>
+        Use our <a href="/calculator/">free porta potty calculator</a> to get a personalized recommendation based on your specific event details.
       </p>
 
       <h2 id="hidden-costs">Hidden Costs to Watch For</h2>
 
+      <p>Always ask for an all-inclusive quote. Here are fees that can surprise first-time renters:</p>
+
       <ul>
-        <li><strong>Delivery & pickup fees</strong> - Often $50-150 each way if not included</li>
-        <li><strong>Damage waiver</strong> - $10-25 per unit for insurance</li>
-        <li><strong>After-hours delivery</strong> - 25-50% surcharge for weekends/evenings</li>
-        <li><strong>Relocation fees</strong> - $50-100 if you need to move the unit</li>
-        <li><strong>Cleaning fees</strong> - Extra charge if unit is returned excessively dirty</li>
+        <li><strong>Delivery and pickup fees:</strong> $50-$150 each way if not included in the quote</li>
+        <li><strong>Fuel surcharges:</strong> Variable based on current gas prices</li>
+        <li><strong>Damage waiver/insurance:</strong> $10-$25 per unit, often optional but recommended</li>
+        <li><strong>After-hours delivery:</strong> 25-50% surcharge for weekends, evenings, or holidays</li>
+        <li><strong>Relocation fee:</strong> $50-$100 if you need to move the unit during your rental</li>
+        <li><strong>Excessive cleaning fee:</strong> $50-$200 if unit is returned in poor condition</li>
+        <li><strong>Permit fees:</strong> Some cities require permits for street placement ($25-$100)</li>
+        <li><strong>Extended rental charges:</strong> Daily rate if you keep the unit past your agreed pickup date</li>
       </ul>
 
       <h2 id="save-money">How to Save Money on Porta Potty Rentals</h2>
 
       <ol>
-        <li><strong>Book early</strong> - Last-minute rentals cost more, especially during peak season</li>
-        <li><strong>Rent multiple units</strong> - Most companies offer bulk discounts</li>
-        <li><strong>Choose the right type</strong> - Don't overpay for features you don't need</li>
-        <li><strong>Compare quotes</strong> - Get at least 3 quotes from different providers</li>
-        <li><strong>Ask about package deals</strong> - Event packages often include hand-washing stations</li>
+        <li><strong>Book early:</strong> Last-minute rentals during peak season can cost 30-50% more. Book 2-4 weeks ahead for best rates and availability.</li>
+        <li><strong>Compare multiple quotes:</strong> Get at least 3 quotes from different providers. Prices can vary by 30% or more for the same service.</li>
+        <li><strong>Choose monthly over weekly:</strong> If your project lasts more than 2 weeks, monthly rates offer significant savings.</li>
+        <li><strong>Right-size your units:</strong> Don't pay for deluxe features you don't need. Standard units work fine for construction and casual events.</li>
+        <li><strong>Bundle services:</strong> Rent multiple units for bulk discounts, or ask about package deals that include hand-washing stations.</li>
+        <li><strong>Off-peak timing:</strong> If flexible, schedule events during fall/winter for lower rates (10-20% savings).</li>
+        <li><strong>Reduce servicing frequency:</strong> For light-use situations, bi-weekly service may suffice instead of weekly.</li>
       </ol>
 
-      <h2 id="how-many">How Many Porta Potties Do You Need?</h2>
+      <h2 id="faqs">Frequently Asked Questions</h2>
+    </div>
 
-      <p>The general rule of thumb:</p>
+    <!-- FAQ Section -->
+    <div class="my-12 space-y-6 not-prose">
+      {pricingFAQs.map((faq) => (
+        <details class="group bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+          <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 transition-colors">
+            <h3 class="font-semibold text-gray-900 pr-4 text-left">{faq.q}</h3>
+            <span class="flex-shrink-0 ml-4 text-gray-400 group-open:rotate-180 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-5 pb-5 border-t border-gray-100 pt-4">
+            <p class="text-gray-600">{faq.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
 
-      <ul>
-        <li><strong>Events:</strong> 1 unit per 100-125 guests for a 4-hour event</li>
-        <li><strong>Construction:</strong> 1 unit per 10-20 workers (OSHA requirement)</li>
-        <li><strong>Weddings:</strong> Consider a luxury restroom trailer for 100-175 guests</li>
-      </ul>
-
+    <div class="prose prose-lg max-w-none">
       <p>
-        Use our <a href="/calculator/">free porta potty calculator</a> to get an exact count for your needs.
+        Have more questions? Check out our <a href="/faq/">complete FAQ section</a> or <a href="/contact/">contact us</a>.
       </p>
 
-      <h2 id="bottom-line">The Bottom Line</h2>
+      <h2>The Bottom Line</h2>
 
       <p>
-        For a standard weekend event, budget <strong>$150-225 per deluxe unit</strong> (same price for 1-7 days). Construction sites can expect <strong>$175-400/month</strong> for standard units with weekly servicing. Luxury events requiring restroom trailers should budget <strong>$1,200-2,000</strong> for the same 1-7 day period.
+        For a typical weekend event, budget <strong>$150-275 per unit</strong> for deluxe porta potties (same price for 1-7 days). Construction projects can expect <strong>$175-400/month</strong> for standard units with weekly servicing. Weddings and upscale events requiring luxury restroom trailers should budget <strong>$800-2,500</strong> depending on size and features.
       </p>
 
       <p>
-        The best way to get an accurate price? <a href="/">Search for providers in your area</a> and request quotes from multiple companies. Prices vary significantly by location and provider.
+        The best way to get accurate pricing is to <a href="/">search for providers in your area</a> and request quotes from 2-3 companies. Prices vary significantly by location, and local providers often beat national chains on price and service.
       </p>
-
     </div>
 
     <!-- CTA -->
-    <div class="mt-12 bg-gradient-to-br from-primary-50 to-blue-50 rounded-2xl p-8 text-center border border-primary-100">
-      <h3 class="text-2xl font-bold text-gray-900 mb-3">Ready to Get a Quote?</h3>
-      <p class="text-gray-600 mb-6">Find trusted porta potty rental companies in your area</p>
-      <a href="/" class="inline-flex items-center bg-primary-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-700 transition-colors">
-        Search Providers Near You
-      </a>
+    <div class="mt-12 bg-gradient-to-br from-primary-600 to-blue-700 rounded-2xl p-8 text-center text-white">
+      <h3 class="text-2xl font-bold mb-3">Ready to Get Quotes?</h3>
+      <p class="text-blue-100 mb-6">Compare prices from trusted porta potty rental companies in your area</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/" class="inline-flex items-center justify-center bg-white text-primary-600 px-8 py-4 rounded-xl font-semibold hover:bg-blue-50 transition-colors">
+          Find Local Providers
+        </a>
+        <a href="/calculator/" class="inline-flex items-center justify-center border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/10 transition-colors">
+          Use Our Calculator
+        </a>
+      </div>
     </div>
 
     <!-- Related -->
@@ -209,7 +447,7 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
       <h2 class="text-2xl font-bold text-gray-900 mb-8">Related Articles</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {relatedPosts.map((related) => (
-          <a href={`/blog/${related.slug}`} class="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
+          <a href={`/blog/${related.slug}/`} class="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
             <span class="text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-700">{related.category}</span>
             <h3 class="text-lg font-semibold text-gray-900 mt-3 line-clamp-2">{related.title}</h3>
           </a>
@@ -218,3 +456,9 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
     </section>
   </article>
 </BaseLayout>
+
+<style>
+  details[open] summary {
+    background-color: #f9fafb;
+  }
+</style>
