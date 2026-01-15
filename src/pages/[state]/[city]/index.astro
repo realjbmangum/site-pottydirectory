@@ -95,7 +95,7 @@ try {
 
 const breadcrumbs = [
   { label: 'Home', href: '/' },
-  { label: stateName, href: `/${stateSlug}` },
+  { label: stateName, href: `/${stateSlug}/` },
   { label: cityName }
 ];
 
@@ -202,7 +202,7 @@ const servicesOffered = vendors.length > 0
 
           <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
             <a
-              href="/submit"
+              href="/submit/"
               class="inline-flex items-center justify-center bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors"
             >
               <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -211,7 +211,7 @@ const servicesOffered = vendors.length > 0
               List Your Business
             </a>
             <a
-              href={`/${stateSlug}`}
+              href={`/${stateSlug}/`}
               class="inline-flex items-center justify-center border-2 border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors"
             >
               Browse Other {stateName} Cities
@@ -286,7 +286,7 @@ const servicesOffered = vendors.length > 0
 
       <p class="text-sm text-gray-500">
         * Prices are estimates based on {stateName} market rates. Contact providers directly for accurate quotes.
-        <a href="/pricing" class="text-primary-600 hover:underline ml-1">View full pricing guide →</a>
+        <a href="/pricing/" class="text-primary-600 hover:underline ml-1">View full pricing guide →</a>
       </p>
     </div>
 
@@ -380,7 +380,7 @@ const servicesOffered = vendors.length > 0
       </div>
 
       <div class="mt-6 text-center">
-        <a href="/calculator" class="inline-flex items-center text-primary-700 font-medium hover:text-primary-800">
+        <a href="/calculator/" class="inline-flex items-center text-primary-700 font-medium hover:text-primary-800">
           <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
           </svg>
@@ -417,7 +417,7 @@ const servicesOffered = vendors.length > 0
           <p class="text-gray-600">
             A general rule is 1 unit per 50-100 guests for a 4-hour event. Construction sites typically need 1 unit per 10 workers.
             Add more if serving alcohol, for all-day events, or if you expect a majority female crowd.
-            <a href="/blog/how-many-porta-potties-do-i-need" class="text-primary-600 hover:underline ml-1">Read our full guide →</a>
+            <a href="/blog/how-many-porta-potties-do-i-need/" class="text-primary-600 hover:underline ml-1">Read our full guide →</a>
           </p>
         </div>
 
@@ -494,7 +494,7 @@ const servicesOffered = vendors.length > 0
       <p class="text-gray-600">
         All providers in our {cityName} directory are verified for legitimacy and service quality. We confirm contact information,
         check service areas, and monitor customer feedback to ensure you're connecting with reputable companies.
-        <a href="/about" class="text-primary-600 hover:underline ml-1">Learn about our verification process →</a>
+        <a href="/about/" class="text-primary-600 hover:underline ml-1">Learn about our verification process →</a>
       </p>
     </div>
 
@@ -513,11 +513,11 @@ const servicesOffered = vendors.length > 0
             View {cityName} Providers
           </a>
         ) : (
-          <a href={`/${stateSlug}`} class="inline-flex items-center justify-center bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors">
+          <a href={`/${stateSlug}/`} class="inline-flex items-center justify-center bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors">
             Browse {stateName} Cities
           </a>
         )}
-        <a href="/calculator" class="inline-flex items-center justify-center border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors">
+        <a href="/calculator/" class="inline-flex items-center justify-center border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors">
           Calculate How Many You Need
         </a>
       </div>

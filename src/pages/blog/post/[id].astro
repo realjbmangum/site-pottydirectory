@@ -82,7 +82,7 @@ const categoryColors: Record<string, string> = {
       <ol class="flex items-center space-x-2 text-sm text-gray-500">
         <li><a href="/" class="hover:text-primary-600">Home</a></li>
         <li>/</li>
-        <li><a href="/blog" class="hover:text-primary-600">Blog</a></li>
+        <li><a href="/blog/" class="hover:text-primary-600">Blog</a></li>
         <li>/</li>
         <li class="text-gray-900 truncate max-w-[200px]">{post.question}</li>
       </ol>
@@ -137,7 +137,7 @@ const categoryColors: Record<string, string> = {
           {relatedPosts.map((related) => {
             const relatedCategory = related.category?.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'General';
             return (
-              <a href={`/blog/post/${related.id}`} class="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
+              <a href={`/blog/post/${related.id}/`} class="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
                 <span class={`text-xs font-semibold px-3 py-1 rounded-full ${categoryColors[relatedCategory] || 'bg-gray-100 text-gray-700'}`}>
                   {relatedCategory}
                 </span>

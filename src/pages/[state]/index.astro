@@ -94,7 +94,7 @@ const citiesWithProviders = citiesWithVendors.length;
 
 const breadcrumbs = [
   { label: 'Home', href: '/' },
-  { label: 'States', href: '/states' },
+  { label: 'States', href: '/states/' },
   { label: state.name }
 ];
 ---
@@ -240,7 +240,7 @@ const breadcrumbs = [
     <div id="cities-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
       {allCities.map((cityData) => (
         <a
-          href={`/${state.slug}/${citySlug(cityData.city)}`}
+          href={`/${state.slug}/${citySlug(cityData.city)}/`}
           class={`city-card group bg-white rounded-xl border p-5 shadow-sm hover:shadow-lg transition-all duration-200 ${
             cityData.count > 0
               ? 'border-primary-200 hover:border-primary-400'
@@ -287,7 +287,7 @@ const breadcrumbs = [
           <p class="text-gray-600">Get listed in our directory and reach customers searching for portable restrooms.</p>
         </div>
         <a
-          href="/submit"
+          href="/submit/"
           class="inline-flex items-center bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors whitespace-nowrap"
         >
           <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

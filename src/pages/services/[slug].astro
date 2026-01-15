@@ -15,7 +15,7 @@ const { category } = Astro.props;
 
 const breadcrumbs = [
   { label: 'Home', href: '/' },
-  { label: 'Services', href: '/services' },
+  { label: 'Services', href: '/services/' },
   { label: category.name }
 ];
 
@@ -294,7 +294,7 @@ const content = serviceContent[category.slug] || {
           <p><strong>Service Type:</strong> {category.type === 'equipment' ? 'Equipment Rental' : 'Use Case'}</p>
           <p><strong>Availability:</strong> Nationwide</p>
           <p><strong>Booking:</strong> 1-4 weeks advance recommended</p>
-          <a href="/calculator" class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium mt-2">
+          <a href="/calculator/" class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium mt-2">
             Calculate how many units you need
             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -337,13 +337,13 @@ const content = serviceContent[category.slug] || {
         </div>
         <div class="flex gap-4">
           <a
-            href="/states"
+            href="/states/"
             class="inline-flex items-center bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors"
           >
             Browse by State
           </a>
           <a
-            href="/pricing"
+            href="/pricing/"
             class="inline-flex items-center border-2 border-primary-600 text-primary-600 px-6 py-3 rounded-lg font-medium hover:bg-primary-50 transition-colors"
           >
             View Pricing Guide

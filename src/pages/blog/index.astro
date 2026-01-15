@@ -56,7 +56,7 @@ const categoryColors: Record<string, string> = {
 };
 
 function getPostUrl(post: typeof sortedPosts[0]) {
-  return post.isDynamic ? `/blog/post/${post.slug}` : `/blog/${post.slug}`;
+  return post.isDynamic ? `/blog/post/${post.slug}/` : `/blog/${post.slug}/`;
 }
 ---
 

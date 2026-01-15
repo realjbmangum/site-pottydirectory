@@ -1,11 +1,11 @@
 # Robots.txt for Potty Directory
-# https://www.pottydirectory.com
+# https://pottydirectory.com
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://www.pottydirectory.com/sitemap-index.xml
+Sitemap: https://pottydirectory.com/sitemap-index.xml
 
 # AI Crawlers - Welcome!
 User-agent: GPTBot
