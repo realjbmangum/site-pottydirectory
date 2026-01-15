@@ -8,11 +8,59 @@ import blogPosts from '../../data/blog-posts.json';
 const post = blogPosts.find(p => p.slug === 'wedding-restroom-trailer-vs-porta-potty')!;
 const siteUrl = `https://${siteConfig.domain}`;
 
+// FAQ data for this post
+const weddingFAQs = [
+  {
+    q: "How much does a luxury restroom trailer cost for a wedding?",
+    a: "Luxury restroom trailers typically cost $800-$2,500 for a weekend wedding, depending on size and features. A 2-stall trailer runs $800-$1,200, while a 4-6 stall trailer for larger weddings costs $1,500-$2,500. This usually includes delivery, setup, and pickup."
+  },
+  {
+    q: "How many restroom stalls do I need for my wedding?",
+    a: "Plan for 1 restroom stall per 25-35 guests for weddings. For 100 guests, you need a 3-4 stall trailer or 4 deluxe porta potties. Add 1 extra unit for the wedding party. If serving alcohol, add 15-20% more capacity."
+  },
+  {
+    q: "Can you decorate porta potties for a wedding?",
+    a: "Yes! Popular decorating options include: privacy screens or fabric draping, potted plants and greenery, string lights on paths, cute signage ('The Loo,' 'Powder Room'), flower arrangements, and wedding-themed hand towels. Always check with your rental company first for approval."
+  },
+  {
+    q: "Do restroom trailers need electricity?",
+    a: "Yes, most luxury restroom trailers require electricity for lighting, ventilation, flushing systems, and climate control. If your venue lacks power access, you'll need a generator rental ($150-$300 extra). Some trailers have built-in generators."
+  },
+  {
+    q: "How far in advance should I book wedding restroom rentals?",
+    a: "Book restroom trailers 2-4 months before your wedding date. During peak wedding season (May-October), book even earlier—popular trailers can be reserved 6+ months out. For porta potties, 3-4 weeks is usually sufficient, but book early for Saturday weddings."
+  },
+  {
+    q: "What's the difference between a porta potty and a restroom trailer?",
+    a: "Porta potties are self-contained single units with holding tanks—no running water or flushing (though some deluxe models have flushing). Restroom trailers are full mobile bathrooms with flushing toilets, running water sinks, climate control, mirrors, and elegant interiors similar to indoor restrooms."
+  },
+  {
+    q: "Can porta potties work for a formal wedding?",
+    a: "Deluxe or VIP porta potties can work for smaller formal weddings (under 75 guests) if properly presented. Key strategies: choose the highest-grade units available, add hand washing stations, create privacy screening, provide quality supplies, and ensure mid-event servicing for longer receptions."
+  },
+  {
+    q: "What questions should I ask a wedding restroom rental company?",
+    a: "Key questions: Can I see photos of the actual unit? What's included in the price? Do you provide cleaning supplies? What power/water do you need? Can you deliver the day before? What's your cancellation policy? Do you offer attendant service? How recently was the unit manufactured/refurbished?"
+  }
+];
+
+// Build FAQ schema
+const faqSchemaData = {
+  mainEntity: weddingFAQs.map(faq => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a
+    }
+  }))
+};
+
 const articleData = {
   headline: post.title,
   description: post.description,
   datePublished: post.publishedAt,
-  dateModified: post.updatedAt,
+  dateModified: new Date().toISOString().split('T')[0],
   author: {
     '@type': 'Person',
     name: post.author.name,
@@ -23,14 +71,25 @@ const articleData = {
     name: siteConfig.name,
     logo: { '@type': 'ImageObject', url: `${siteUrl}/images/PottyDirectory_Logo.png` }
   },
-  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}` }
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${post.slug}/` }
 };
 
 const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+
+// Cost breakdown table
+const costTable = [
+  { guests: '50', trailer: '$800-1,200', trailerType: '2-stall', portaPotty: '$400-600', ppUnits: '2-3 deluxe' },
+  { guests: '75', trailer: '$1,000-1,500', trailerType: '3-stall', portaPotty: '$500-750', ppUnits: '3-4 deluxe' },
+  { guests: '100', trailer: '$1,200-1,800', trailerType: '3-4 stall', portaPotty: '$650-900', ppUnits: '4 deluxe' },
+  { guests: '150', trailer: '$1,500-2,200', trailerType: '4-5 stall', portaPotty: '$850-1,200', ppUnits: '5-6 deluxe' },
+  { guests: '200', trailer: '$2,000-2,800', trailerType: '5-6 stall', portaPotty: '$1,100-1,500', ppUnits: '6-8 deluxe' },
+  { guests: '250+', trailer: '$2,500-3,500+', trailerType: '6-8 stall or 2 trailers', portaPotty: '$1,400-1,800', ppUnits: '8-10 deluxe' },
+];
 ---
 
 <BaseLayout title={post.title} description={post.description}>
   <StructuredData type="Article" data={articleData} />
+  <StructuredData type="FAQPage" data={faqSchemaData} />
 
   <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Breadcrumb -->
@@ -48,9 +107,11 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
     <header class="mb-10">
       <span class="inline-block bg-pink-100 text-pink-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Weddings</span>
       <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-        {post.title}
+        Wedding Restroom Trailer vs. Porta Potty: Complete 2025 Guide
       </h1>
-      <p class="text-xl text-gray-600 leading-relaxed">{post.description}</p>
+      <p class="text-xl text-gray-600 leading-relaxed">
+        The complete comparison of luxury restroom trailers versus upscale porta potties for outdoor weddings. Includes costs, features, how many you need, and expert tips for making either option work beautifully.
+      </p>
       <div class="mt-6 flex items-center gap-4">
         <div class="flex items-center">
           <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
@@ -58,268 +119,427 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
           </div>
           <div>
             <p class="font-medium text-gray-900">{post.author.name}</p>
-            <p class="text-sm text-gray-500">{post.readTime} • Updated December 2024</p>
+            <p class="text-sm text-gray-500">{post.readTime} • Updated January 2025</p>
           </div>
         </div>
       </div>
     </header>
 
+    <!-- Quick Answer Box -->
+    <div class="bg-gradient-to-r from-pink-50 to-purple-50 border border-pink-200 rounded-xl p-6 mb-10">
+      <h2 class="text-lg font-bold text-gray-900 mb-3">Quick Answer</h2>
+      <p class="text-gray-700 mb-4">
+        <strong>Choose a restroom trailer if:</strong> 75+ guests, formal wedding, budget $800+, venue has power<br>
+        <strong>Choose upscale porta potties if:</strong> Under 75 guests, casual/rustic theme, tight budget, limited access
+      </p>
+      <p class="text-gray-600 text-sm">
+        <strong>Cost comparison for 100 guests:</strong> Trailer $1,200-1,800 total | Porta potties $650-900 total (4 deluxe units + hand wash)
+      </p>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="bg-gray-50 rounded-xl p-6 mb-10 not-prose">
+      <h3 class="text-lg font-bold text-gray-900 mb-4">In This Guide</h3>
+      <ul class="space-y-2 text-gray-700">
+        <li><a href="#comparison" class="text-primary-600 hover:underline">Side-by-Side Comparison</a></li>
+        <li><a href="#luxury-trailer" class="text-primary-600 hover:underline">Luxury Restroom Trailers Explained</a></li>
+        <li><a href="#upscale-porta-potty" class="text-primary-600 hover:underline">Upscale Porta Potties Explained</a></li>
+        <li><a href="#how-many" class="text-primary-600 hover:underline">How Many Do You Need?</a></li>
+        <li><a href="#cost-breakdown" class="text-primary-600 hover:underline">Full Cost Breakdown</a></li>
+        <li><a href="#venue-considerations" class="text-primary-600 hover:underline">Venue Considerations</a></li>
+        <li><a href="#decoration" class="text-primary-600 hover:underline">Decorating & Disguising Tips</a></li>
+        <li><a href="#questions-to-ask" class="text-primary-600 hover:underline">Questions to Ask Providers</a></li>
+        <li><a href="#verdict" class="text-primary-600 hover:underline">The Final Verdict</a></li>
+        <li><a href="#faqs" class="text-primary-600 hover:underline">Frequently Asked Questions</a></li>
+      </ul>
+    </div>
+
     <!-- Content -->
     <div class="prose prose-lg max-w-none">
 
       <p>
-        Planning an outdoor or rustic wedding? One detail that often gets overlooked: <strong>restroom facilities</strong>. Your guests will thank you for getting this right—and judge you (silently) if you don't.
+        Planning an outdoor or rustic wedding? Your guests will remember two things: the food and the restrooms. One wrong decision here can overshadow everything you've planned—but get it right, and no one will even think about it (which is exactly what you want).
       </p>
 
       <p>
-        The two main options: <strong>luxury restroom trailers</strong> or <strong>upscale porta potties</strong>. Here's how to decide.
+        The two main options are <strong>luxury restroom trailers</strong> (mobile bathrooms that rival indoor facilities) and <strong>upscale porta potties</strong> (premium single units with nicer features). This guide breaks down everything you need to make the right choice for your wedding.
       </p>
 
       <AdSlot slot="content" />
 
-      <h2 id="comparison">Quick Comparison</h2>
+      <h2 id="comparison">Side-by-Side Comparison</h2>
 
-      <div class="overflow-x-auto my-8">
+      <div class="overflow-x-auto my-8 not-prose">
         <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
-          <thead class="bg-gray-50">
+          <thead class="bg-pink-50">
             <tr>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Feature</th>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Restroom Trailer</th>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Upscale Porta Potty</th>
+              <th class="px-4 py-4 text-left text-sm font-semibold text-gray-900">Feature</th>
+              <th class="px-4 py-4 text-left text-sm font-semibold text-gray-900">Luxury Restroom Trailer</th>
+              <th class="px-4 py-4 text-left text-sm font-semibold text-gray-900">Upscale Porta Potty</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
             <tr>
-              <td class="px-6 py-4 text-sm text-gray-900">Cost</td>
-              <td class="px-6 py-4 text-sm text-gray-600">$500-$2,000+</td>
-              <td class="px-6 py-4 text-sm text-gray-600">$150-$300 each</td>
+              <td class="px-4 py-4 text-sm font-medium text-gray-900">Cost (100 guests)</td>
+              <td class="px-4 py-4 text-sm text-gray-600">$1,200-1,800</td>
+              <td class="px-4 py-4 text-sm text-gray-600">$650-900</td>
             </tr>
             <tr class="bg-gray-50">
-              <td class="px-6 py-4 text-sm text-gray-900">Flushing toilets</td>
-              <td class="px-6 py-4 text-sm text-green-600">✓ Yes</td>
-              <td class="px-6 py-4 text-sm text-gray-600">Some models</td>
+              <td class="px-4 py-4 text-sm font-medium text-gray-900">Flushing toilets</td>
+              <td class="px-4 py-4 text-sm text-green-600 font-semibold">Yes - porcelain</td>
+              <td class="px-4 py-4 text-sm text-gray-600">Some models only</td>
             </tr>
             <tr>
-              <td class="px-6 py-4 text-sm text-gray-900">Running water sinks</td>
-              <td class="px-6 py-4 text-sm text-green-600">✓ Yes</td>
-              <td class="px-6 py-4 text-sm text-red-600">✗ No</td>
+              <td class="px-4 py-4 text-sm font-medium text-gray-900">Running water sinks</td>
+              <td class="px-4 py-4 text-sm text-green-600 font-semibold">Yes - hot & cold</td>
+              <td class="px-4 py-4 text-sm text-red-600">No (add separate station)</td>
             </tr>
             <tr class="bg-gray-50">
-              <td class="px-6 py-4 text-sm text-gray-900">Climate control</td>
-              <td class="px-6 py-4 text-sm text-green-600">✓ A/C & Heat</td>
-              <td class="px-6 py-4 text-sm text-red-600">✗ No</td>
+              <td class="px-4 py-4 text-sm font-medium text-gray-900">Climate control</td>
+              <td class="px-4 py-4 text-sm text-green-600 font-semibold">A/C + heat</td>
+              <td class="px-4 py-4 text-sm text-red-600">No</td>
             </tr>
             <tr>
-              <td class="px-6 py-4 text-sm text-gray-900">Mirrors</td>
-              <td class="px-6 py-4 text-sm text-green-600">✓ Full-length</td>
-              <td class="px-6 py-4 text-sm text-gray-600">Small/none</td>
+              <td class="px-4 py-4 text-sm font-medium text-gray-900">Full-length mirrors</td>
+              <td class="px-4 py-4 text-sm text-green-600 font-semibold">Yes</td>
+              <td class="px-4 py-4 text-sm text-gray-600">Small or none</td>
             </tr>
             <tr class="bg-gray-50">
-              <td class="px-6 py-4 text-sm text-gray-900">Interior lighting</td>
-              <td class="px-6 py-4 text-sm text-green-600">✓ Elegant</td>
-              <td class="px-6 py-4 text-sm text-gray-600">Basic</td>
+              <td class="px-4 py-4 text-sm font-medium text-gray-900">Interior finishes</td>
+              <td class="px-4 py-4 text-sm text-gray-600">Wood, granite, tile</td>
+              <td class="px-4 py-4 text-sm text-gray-600">Plastic/fiberglass</td>
             </tr>
             <tr>
-              <td class="px-6 py-4 text-sm text-gray-900">Capacity</td>
-              <td class="px-6 py-4 text-sm text-gray-600">2-10 stalls</td>
-              <td class="px-6 py-4 text-sm text-gray-600">1 per unit</td>
+              <td class="px-4 py-4 text-sm font-medium text-gray-900">Electricity required</td>
+              <td class="px-4 py-4 text-sm text-gray-600">Yes (or generator)</td>
+              <td class="px-4 py-4 text-sm text-green-600 font-semibold">No</td>
             </tr>
             <tr class="bg-gray-50">
-              <td class="px-6 py-4 text-sm text-gray-900">Space required</td>
-              <td class="px-6 py-4 text-sm text-gray-600">Large (trailer + steps)</td>
-              <td class="px-6 py-4 text-sm text-gray-600">Minimal</td>
+              <td class="px-4 py-4 text-sm font-medium text-gray-900">Space required</td>
+              <td class="px-4 py-4 text-sm text-gray-600">20x10+ feet, vehicle access</td>
+              <td class="px-4 py-4 text-sm text-green-600 font-semibold">4x4 feet per unit</td>
             </tr>
             <tr>
-              <td class="px-6 py-4 text-sm text-gray-900">Power required</td>
-              <td class="px-6 py-4 text-sm text-gray-600">Yes (or generator)</td>
-              <td class="px-6 py-4 text-sm text-gray-600">No</td>
+              <td class="px-4 py-4 text-sm font-medium text-gray-900">Guest experience</td>
+              <td class="px-4 py-4 text-sm text-green-600 font-semibold">Like indoor bathroom</td>
+              <td class="px-4 py-4 text-sm text-gray-600">Acceptable with upgrades</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-4 py-4 text-sm font-medium text-gray-900">Booking lead time</td>
+              <td class="px-4 py-4 text-sm text-gray-600">2-4 months</td>
+              <td class="px-4 py-4 text-sm text-gray-600">2-4 weeks</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <h2 id="luxury-trailer">Luxury Restroom Trailers</h2>
+      <h2 id="luxury-trailer">Luxury Restroom Trailers: The Premium Choice</h2>
 
       <p>
-        Restroom trailers are essentially <strong>mobile bathrooms</strong> that look and feel like indoor facilities. They're the gold standard for upscale outdoor events.
+        Restroom trailers are essentially <strong>mobile indoor bathrooms</strong>. They're pulled by truck, set up at your venue, and connected to power. Inside, your guests find an experience nearly identical to a nice restaurant restroom—flushing toilets, running water, climate control, and elegant finishes.
       </p>
 
-      <h3>What You Get</h3>
+      <h3>What's Included</h3>
       <ul>
-        <li>Porcelain flushing toilets</li>
-        <li>Running water with vanity sinks</li>
-        <li>Climate control (A/C in summer, heat in winter)</li>
-        <li>Full-length mirrors for dress adjustments</li>
-        <li>Elegant interior finishes (wood, granite, tile)</li>
-        <li>Stereo/ambient music in some models</li>
-        <li>Separate men's and women's sides</li>
+        <li><strong>Porcelain flushing toilets</strong> (2-10 stalls depending on trailer size)</li>
+        <li><strong>Running water vanity sinks</strong> with hot and cold water</li>
+        <li><strong>Climate control</strong> - A/C for summer weddings, heat for winter</li>
+        <li><strong>Full-length mirrors</strong> for dress adjustments and photos</li>
+        <li><strong>Elegant interior finishes</strong> - hardwood floors, granite counters, decorative lighting</li>
+        <li><strong>Separate men's and women's sides</strong> on larger trailers</li>
+        <li><strong>Sound system/ambient music</strong> in premium models</li>
+        <li><strong>Fresh water tank and waste holding tank</strong> - fully self-contained</li>
       </ul>
 
-      <h3>Best For</h3>
+      <h3>Types of Restroom Trailers</h3>
       <ul>
-        <li>Weddings with 75+ guests</li>
-        <li>Black-tie or formal events</li>
-        <li>Venues with no indoor restrooms nearby</li>
-        <li>Events where photos may be taken near restrooms</li>
-        <li>Multi-hour receptions (5+ hours)</li>
+        <li><strong>2-stall (2+0 or 1+1):</strong> Smallest option, good for 50-75 guests. $800-1,200</li>
+        <li><strong>3-stall (2+1):</strong> Popular for 75-125 guests. Often has 2 women's + 1 men's. $1,000-1,500</li>
+        <li><strong>4-stall (2+2):</strong> Equal men's and women's, 100-175 guests. $1,300-2,000</li>
+        <li><strong>6-8 stall:</strong> Large trailers for 175-300+ guests. $2,000-3,500</li>
+        <li><strong>ADA-accessible trailers:</strong> Wheelchair-accessible options. Add $200-400</li>
       </ul>
 
-      <h3>Considerations</h3>
+      <h3>When to Choose a Trailer</h3>
       <ul>
-        <li><strong>Access:</strong> Needs a flat area and truck access for delivery</li>
-        <li><strong>Power:</strong> Requires electrical hookup or generator</li>
-        <li><strong>Cost:</strong> $500-$2,000+ depending on size and features</li>
-        <li><strong>Booking:</strong> Reserve 2-3 months ahead for peak wedding season</li>
+        <li>75+ guests (where the cost-per-person makes sense)</li>
+        <li>Formal, black-tie, or upscale wedding</li>
+        <li>Venue has no indoor restrooms or only very limited facilities</li>
+        <li>Hot summer or cold winter wedding (climate control matters)</li>
+        <li>Photos may be taken near the restroom area</li>
+        <li>Long reception (5+ hours) where guests will use facilities multiple times</li>
       </ul>
 
-      <h2 id="upscale-porta-potty">Upscale Porta Potties</h2>
+      <h3>Trailer Requirements</h3>
+      <ul>
+        <li><strong>Power:</strong> 110V/20-30 amp electrical hookup OR generator rental ($150-300)</li>
+        <li><strong>Access:</strong> Truck must be able to deliver—check for low branches, narrow paths, soft ground</li>
+        <li><strong>Space:</strong> Approximately 20x10 feet for a 3-stall trailer, plus approach area</li>
+        <li><strong>Level ground:</strong> Trailer needs reasonably level placement (small adjustments possible)</li>
+        <li><strong>Water/waste:</strong> Self-contained tanks; no hookups needed for most events under 8 hours</li>
+      </ul>
+
+      <h2 id="upscale-porta-potty">Upscale Porta Potties: The Budget-Friendly Option</h2>
 
       <p>
-        Not all porta potties are created equal. <strong>Deluxe or "VIP" units</strong> offer significant upgrades over standard construction-site models.
+        Not all porta potties are the blue boxes you see at construction sites. <strong>Deluxe, VIP, and "wedding-grade" porta potties</strong> offer significant upgrades in size, features, and appearance.
       </p>
 
-      <h3>What You Get</h3>
+      <h3>Types of Upscale Units</h3>
       <ul>
-        <li>Larger interior space</li>
+        <li><strong>Deluxe/VIP units:</strong> Larger interior, better ventilation, nicer appearance. $150-225/unit</li>
+        <li><strong>Flushable units:</strong> Foot-pump or battery-powered flushing. $175-275/unit</li>
+        <li><strong>High-rise units:</strong> Taller ceiling, more spacious feel. $150-250/unit</li>
+        <li><strong>ADA-accessible units:</strong> Wheelchair accessible, handrails, larger space. $200-350/unit</li>
+      </ul>
+
+      <h3>What You Get (and Don't Get)</h3>
+      <p><strong>Included:</strong></p>
+      <ul>
+        <li>Larger interior space than standard units</li>
         <li>Flushing capability (some models)</li>
         <li>Hand sanitizer dispensers</li>
-        <li>Coat hooks and shelves</li>
-        <li>Better ventilation</li>
-        <li>Cleaner appearance</li>
-        <li>Solar lighting</li>
+        <li>Coat hooks, shelves, mirrors (small)</li>
+        <li>Better ventilation and deodorizers</li>
+        <li>Solar-powered interior lighting</li>
+        <li>Cleaner, newer appearance</li>
       </ul>
 
-      <h3>Best For</h3>
+      <p><strong>Not included (add separately):</strong></p>
+      <ul>
+        <li>Running water sinks → Add portable hand wash station ($75-150)</li>
+        <li>Climate control → Not available; place in shade</li>
+        <li>Full-length mirrors → Provide a freestanding mirror nearby</li>
+      </ul>
+
+      <h3>When to Choose Porta Potties</h3>
       <ul>
         <li>Smaller weddings (under 75 guests)</li>
-        <li>Budget-conscious couples</li>
-        <li>Backup facilities when venue has limited indoor restrooms</li>
-        <li>Casual or rustic weddings where formality isn't critical</li>
+        <li>Budget is the primary concern</li>
+        <li>Casual, rustic, or backyard wedding vibe</li>
+        <li>Venue has some indoor facilities but needs overflow capacity</li>
+        <li>Limited space or vehicle access for trailer delivery</li>
+        <li>No power available at the venue</li>
       </ul>
 
-      <h3>How to Make Them Work</h3>
-      <ul>
-        <li><strong>Dress them up:</strong> Add a tent or screen, potted plants, signage</li>
-        <li><strong>Add hand washing:</strong> Rent a separate hand wash station</li>
-        <li><strong>Stock supplies:</strong> Extra toilet paper, hand towels, mints</li>
-        <li><strong>Light the path:</strong> String lights or solar path lights leading to units</li>
-        <li><strong>Schedule cleaning:</strong> Mid-reception service for events over 4 hours</li>
-      </ul>
+      <AdSlot slot="content" />
 
       <h2 id="how-many">How Many Do You Need?</h2>
 
-      <p>For weddings, the formula is more generous than typical events because of dress complexity and drink consumption:</p>
+      <p>Weddings need more restroom capacity than typical events due to dress complexity, alcohol service, and longer duration. Use this formula:</p>
 
-      <div class="bg-pink-50 border border-pink-200 rounded-xl p-6 my-6">
-        <p class="text-lg font-semibold text-pink-800 mb-2">Wedding Formula</p>
+      <div class="bg-pink-50 border border-pink-200 rounded-xl p-6 my-6 not-prose">
+        <p class="text-lg font-semibold text-pink-800 mb-2">Wedding Restroom Formula</p>
         <p class="text-pink-700">
           <strong>1 restroom stall per 25-35 guests</strong><br>
-          + 1 dedicated unit for bridal party
+          <span class="text-pink-600">+ 1 dedicated unit for wedding party (optional but recommended)</span><br>
+          <span class="text-pink-600">+ 15-20% more if open bar</span>
         </p>
       </div>
 
-      <div class="overflow-x-auto my-8">
+      <h2 id="cost-breakdown">Full Cost Breakdown by Guest Count</h2>
+
+      <div class="overflow-x-auto my-8 not-prose">
         <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
           <thead class="bg-gray-50">
             <tr>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Guest Count</th>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Trailer Option</th>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Porta Potty Option</th>
+              <th class="px-3 py-4 text-left text-sm font-semibold text-gray-900">Guests</th>
+              <th class="px-3 py-4 text-left text-sm font-semibold text-gray-900">Trailer Cost</th>
+              <th class="px-3 py-4 text-left text-sm font-semibold text-gray-900">Trailer Size</th>
+              <th class="px-3 py-4 text-left text-sm font-semibold text-gray-900">Porta Potty Cost*</th>
+              <th class="px-3 py-4 text-left text-sm font-semibold text-gray-900">Units Needed</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
-            <tr>
-              <td class="px-6 py-4 text-sm text-gray-900">50 guests</td>
-              <td class="px-6 py-4 text-sm text-gray-600">2-stall trailer</td>
-              <td class="px-6 py-4 text-sm text-gray-600">2-3 deluxe units</td>
-            </tr>
-            <tr class="bg-gray-50">
-              <td class="px-6 py-4 text-sm text-gray-900">100 guests</td>
-              <td class="px-6 py-4 text-sm text-gray-600">3-stall trailer</td>
-              <td class="px-6 py-4 text-sm text-gray-600">4 deluxe units</td>
-            </tr>
-            <tr>
-              <td class="px-6 py-4 text-sm text-gray-900">150 guests</td>
-              <td class="px-6 py-4 text-sm text-gray-600">4-stall trailer</td>
-              <td class="px-6 py-4 text-sm text-gray-600">5-6 deluxe units</td>
-            </tr>
-            <tr class="bg-gray-50">
-              <td class="px-6 py-4 text-sm text-gray-900">200 guests</td>
-              <td class="px-6 py-4 text-sm text-gray-600">5-6 stall trailer</td>
-              <td class="px-6 py-4 text-sm text-gray-600">6-8 deluxe units</td>
-            </tr>
+            {costTable.map((row, i) => (
+              <tr class={i % 2 === 1 ? 'bg-gray-50' : ''}>
+                <td class="px-3 py-4 text-sm font-medium text-gray-900">{row.guests}</td>
+                <td class="px-3 py-4 text-sm text-gray-600">{row.trailer}</td>
+                <td class="px-3 py-4 text-sm text-gray-600">{row.trailerType}</td>
+                <td class="px-3 py-4 text-sm text-gray-600">{row.portaPotty}</td>
+                <td class="px-3 py-4 text-sm text-gray-600">{row.ppUnits}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
 
-      <h2 id="cost-comparison">Real Cost Comparison</h2>
+      <p class="text-sm text-gray-600 italic">*Porta potty costs include hand washing stations. Add $100-200 for delivery if not included.</p>
 
-      <p>For a 100-guest wedding:</p>
-
-      <h3>Restroom Trailer</h3>
+      <h3>Additional Costs to Budget</h3>
       <ul>
-        <li>3-stall luxury trailer: $800-1,500</li>
-        <li>Delivery/pickup: Usually included</li>
-        <li>Generator rental (if needed): $150-300</li>
-        <li><strong>Total: $800-1,800</strong></li>
+        <li><strong>Generator rental</strong> (if no power): $150-300</li>
+        <li><strong>Attendant service</strong> (restroom monitor): $150-250 for 4-6 hours</li>
+        <li><strong>Extra supplies basket:</strong> $30-50 (hairspray, mints, safety pins)</li>
+        <li><strong>Decorations:</strong> $50-150 (signage, flowers, lighting)</li>
+        <li><strong>Mid-event servicing</strong> (events 6+ hours): $50-100</li>
       </ul>
 
-      <h3>Upscale Porta Potties</h3>
+      <h2 id="venue-considerations">Venue Considerations</h2>
+
+      <h3>Farm & Barn Weddings</h3>
       <ul>
-        <li>4 deluxe units @ $200 each: $800</li>
-        <li>2 hand wash stations: $150</li>
-        <li>Delivery/pickup: $100-200</li>
-        <li><strong>Total: $1,050-1,150</strong></li>
+        <li>Check venue access—many farms have narrow lanes or soft ground</li>
+        <li>Restroom trailers work well but confirm truck access with venue</li>
+        <li>Power may not be available; budget for generator</li>
+        <li>Place restrooms on firm, level ground (not grass that could get muddy)</li>
+        <li>Consider distance from barn—guests shouldn't walk too far at night</li>
       </ul>
 
-      <p>
-        The cost difference is often smaller than expected, especially for larger weddings. Trailers become more cost-effective as guest count increases.
-      </p>
+      <h3>Backyard Weddings</h3>
+      <ul>
+        <li>Space is often limited; porta potties may fit better than trailers</li>
+        <li>Trailer delivery may require crossing neighbor's property</li>
+        <li>HOA rules may restrict what you can place and for how long</li>
+        <li>Indoor home bathrooms may serve as backup, but don't rely on them solely</li>
+      </ul>
 
-      <h2 id="verdict">The Verdict</h2>
+      <h3>Winery & Estate Venues</h3>
+      <ul>
+        <li>Often have some facilities but need overflow capacity</li>
+        <li>Aesthetic standards may be higher—trailers often preferred</li>
+        <li>Venue may have preferred vendors or requirements</li>
+        <li>Power hookups usually available</li>
+      </ul>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+      <h3>Beach & Waterfront</h3>
+      <ul>
+        <li>Sand makes trailer placement difficult; porta potties often better</li>
+        <li>Wind direction matters for placement</li>
+        <li>May need extra servicing due to sand/humidity</li>
+        <li>Check permit requirements for temporary structures</li>
+      </ul>
+
+      <h2 id="decoration">Decorating & Disguising Tips</h2>
+
+      <p>Whether you choose trailers or porta potties, presentation matters. Here's how to elevate the experience:</p>
+
+      <h3>For Restroom Trailers</h3>
+      <ul>
+        <li><strong>Entry décor:</strong> Potted plants, flowers, or greenery at the entrance</li>
+        <li><strong>Pathway lighting:</strong> String lights or luminaries leading to the trailer</li>
+        <li><strong>Interior touches:</strong> Fresh flowers, nice hand towels, ambient scent</li>
+        <li><strong>Signage:</strong> Elegant "Restrooms" sign matching your wedding style</li>
+        <li><strong>Amenity basket:</strong> Hairspray, mints, pain relievers, tissues, sewing kit</li>
+      </ul>
+
+      <h3>For Porta Potties</h3>
+      <ul>
+        <li><strong>Privacy screening:</strong> Fabric panels, lattice walls, or freestanding screens</li>
+        <li><strong>Create a "room":</strong> Tent or canopy over the unit entrance</li>
+        <li><strong>Greenery camouflage:</strong> Potted plants, hedge panels, or arbors</li>
+        <li><strong>Pathway treatment:</strong> Gravel path, stepping stones, or outdoor rugs</li>
+        <li><strong>Lighting:</strong> Solar path lights, battery lanterns, or string lights</li>
+        <li><strong>Signage:</strong> Fun or elegant signs—"The Loo," "Powder Room," "Pit Stop"</li>
+        <li><strong>Freestanding mirror:</strong> Full-length mirror near the units</li>
+        <li><strong>Hand washing station:</strong> Style it with flowers, nice soap, real towels</li>
+      </ul>
+
+      <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 my-6 not-prose">
+        <p class="font-semibold text-yellow-800 mb-2">Pro Tip: Always check with your rental company before decorating.</p>
+        <p class="text-yellow-700">
+          Most allow exterior decorations but may restrict interior modifications. Get approval first to avoid damage charges.
+        </p>
+      </div>
+
+      <h2 id="questions-to-ask">Questions to Ask Your Provider</h2>
+
+      <ol>
+        <li><strong>Can I see photos of the actual unit I'll receive?</strong> (Not stock photos)</li>
+        <li><strong>What's included in the price?</strong> (Delivery, setup, pickup, supplies)</li>
+        <li><strong>What year was this unit manufactured/refurbished?</strong></li>
+        <li><strong>What power/water hookups do you need?</strong></li>
+        <li><strong>Can you deliver the day before?</strong> (Reduces wedding-day stress)</li>
+        <li><strong>What's your cancellation/weather policy?</strong></li>
+        <li><strong>Do you offer attendant service?</strong> (Someone to monitor cleanliness)</li>
+        <li><strong>What cleaning supplies are provided?</strong></li>
+        <li><strong>Do you have backup units available?</strong> (In case of emergency)</li>
+        <li><strong>Have you serviced this venue before?</strong> (They'll know access issues)</li>
+      </ol>
+
+      <h2 id="verdict">The Final Verdict</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8 not-prose">
         <div class="bg-green-50 border border-green-200 rounded-xl p-6">
-          <h4 class="font-bold text-green-800 mb-2">Choose a Restroom Trailer If:</h4>
-          <ul class="text-green-700 space-y-1">
+          <h4 class="font-bold text-green-800 mb-3">Choose a Restroom Trailer If:</h4>
+          <ul class="text-green-700 space-y-2">
             <li>• 75+ guests</li>
-            <li>• Formal/upscale event</li>
-            <li>• Budget allows $800+</li>
-            <li>• You have power access</li>
-            <li>• Hot or cold weather expected</li>
+            <li>• Formal or upscale wedding</li>
+            <li>• Budget allows $800-2,500</li>
+            <li>• Venue has power access</li>
+            <li>• Hot summer or cold winter wedding</li>
+            <li>• Venue has no or very limited indoor facilities</li>
+            <li>• Guest experience is a top priority</li>
           </ul>
         </div>
         <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
-          <h4 class="font-bold text-blue-800 mb-2">Choose Upscale Porta Potties If:</h4>
-          <ul class="text-blue-700 space-y-1">
+          <h4 class="font-bold text-blue-800 mb-3">Choose Upscale Porta Potties If:</h4>
+          <ul class="text-blue-700 space-y-2">
             <li>• Under 75 guests</li>
-            <li>• Casual/rustic theme</li>
-            <li>• Tight budget</li>
-            <li>• Limited space/access</li>
-            <li>• Backup to indoor facilities</li>
+            <li>• Casual, rustic, or backyard theme</li>
+            <li>• Budget under $800 for restrooms</li>
+            <li>• Limited space or vehicle access</li>
+            <li>• No power available</li>
+            <li>• Supplementing indoor facilities</li>
+            <li>• Short event (under 4 hours)</li>
           </ul>
         </div>
       </div>
 
-      <h2 id="tips">Pro Tips for Wedding Restrooms</h2>
+      <h3>The Bottom Line</h3>
 
-      <ol>
-        <li><strong>Book early</strong> - Wedding season (May-October) fills up fast</li>
-        <li><strong>Visit in person</strong> - Ask to see the actual unit you'll receive</li>
-        <li><strong>Communicate with your planner</strong> - Ensure delivery timing works with setup</li>
-        <li><strong>Prepare a basket</strong> - Stock with hairspray, safety pins, mints, pain relievers</li>
-        <li><strong>Add signage</strong> - Cute signs pointing to "The Loo" or "Powder Room"</li>
-      </ol>
+      <p>
+        For most weddings with 75+ guests, a <strong>luxury restroom trailer is worth the investment</strong>. The cost difference isn't as dramatic as you'd expect (often just $300-600 more than porta potties with hand washing), and the guest experience is dramatically better.
+      </p>
 
+      <p>
+        For smaller, casual weddings or venues with access challenges, <strong>well-presented upscale porta potties</strong> work beautifully. Invest in decorations, add hand washing stations, and stock supplies—no one will complain.
+      </p>
+
+      <p>
+        Ready to find options in your area? Browse <a href="/services/weddings/">wedding restroom rentals</a> or <a href="/">search by location</a> to compare local providers. <a href="/texas/">Texas</a>, <a href="/california/">California</a>, <a href="/florida/">Florida</a>, and <a href="/new-york/">New York</a> have extensive options for wedding rentals.
+      </p>
+
+      <h2 id="faqs">Frequently Asked Questions</h2>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="my-12 space-y-4 not-prose">
+      {weddingFAQs.map((faq) => (
+        <details class="group bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+          <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 transition-colors">
+            <h3 class="font-semibold text-gray-900 pr-4 text-left">{faq.q}</h3>
+            <span class="flex-shrink-0 ml-4 text-gray-400 group-open:rotate-180 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-5 pb-5 border-t border-gray-100 pt-4">
+            <p class="text-gray-600">{faq.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <div class="prose prose-lg max-w-none">
+      <p>
+        Have more questions? Check out our <a href="/blog/porta-potty-farm-wedding-outdoor-venue/">farm wedding guide</a>, our <a href="/faq/">complete FAQ section</a>, or <a href="/contact/">contact us</a> for personalized recommendations.
+      </p>
     </div>
 
     <!-- CTA -->
-    <div class="mt-12 bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl p-8 text-center border border-pink-100">
-      <h3 class="text-2xl font-bold text-gray-900 mb-3">Planning Your Wedding?</h3>
-      <p class="text-gray-600 mb-6">Find luxury restroom providers in your area</p>
-      <a href="/services/weddings" class="inline-flex items-center bg-primary-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-700 transition-colors">
-        View Wedding Restroom Options
-      </a>
+    <div class="mt-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl p-8 text-center text-white">
+      <h3 class="text-2xl font-bold mb-3">Planning Your Wedding?</h3>
+      <p class="text-pink-100 mb-6">Find luxury restroom providers who specialize in weddings</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/services/weddings/" class="inline-flex items-center justify-center bg-white text-pink-600 px-8 py-4 rounded-xl font-semibold hover:bg-pink-50 transition-colors">
+          Wedding Restrooms
+        </a>
+        <a href="/" class="inline-flex items-center justify-center border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/10 transition-colors">
+          Search by Location
+        </a>
+      </div>
     </div>
 
     <!-- Related -->
@@ -327,7 +547,7 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
       <h2 class="text-2xl font-bold text-gray-900 mb-8">Related Articles</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {relatedPosts.map((related) => (
-          <a href={`/blog/${related.slug}`} class="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
+          <a href={`/blog/${related.slug}/`} class="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
             <span class="text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-700">{related.category}</span>
             <h3 class="text-lg font-semibold text-gray-900 mt-3 line-clamp-2">{related.title}</h3>
           </a>
@@ -336,3 +556,9 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
     </section>
   </article>
 </BaseLayout>
+
+<style>
+  details[open] summary {
+    background-color: #f9fafb;
+  }
+</style>
