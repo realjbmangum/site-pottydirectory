@@ -1,0 +1,85 @@
+# Potty Directory - Progress Log
+
+## Current State (as of Jan 21, 2026)
+
+### Site Stats
+- **Live URL:** https://pottydirectory.com
+- **Vendors:** ~5,850
+- **Pages:** 7,400+
+- **Blog Posts:** 30 articles
+
+### Monetization Status
+
+| Revenue Stream | Status | Notes |
+|----------------|--------|-------|
+| Google AdSense | Pending approval | Code added (ca-pub-2962780862577949), awaiting Google |
+| Verified Badge Program | Live | Backlink exchange - vendors get badge for linking back |
+| Featured Listings | DB ready, no payment | `featured` flag exists, no Stripe/payment flow |
+| Affiliate Links | Not implemented | No affiliate programs joined yet |
+
+### Indexing Status
+- **Jan 8:** Fixed www→non-www canonical URL mismatch
+- **Jan 8:** Resubmitted sitemap to Google Search Console
+- **Status:** Awaiting reindexing (expected 2-4 weeks)
+
+### Recent Work (Jan 15)
+- Expanded 4 blog posts to 2,500-3,000 words for SEO competition
+- Added FAQPage structured data to expanded posts
+- Verified badge program launched (Jan 12)
+
+---
+
+## Questions to Resolve
+
+### 1. Indexing
+- [ ] Check Google Search Console - what's current index status?
+- [ ] Which page types are failing to index? (city, vendor, blog?)
+- [ ] Any new errors since Jan 8 fixes?
+
+### 2. AdSense
+- [ ] Was AdSense rejected or still pending?
+- [ ] If rejected, what was the reason?
+- [ ] What's the resubmission cycle/waiting period?
+
+### 3. Monetization Strategy
+- [ ] What's current traffic level? (determines which streams make sense)
+- [ ] Priority order for revenue streams?
+- [ ] Premium listings: build payment flow or manual outreach first?
+- [ ] Affiliate: which programs to join? (equipment, event supplies?)
+
+---
+
+## Session Log
+
+### 2026-01-21 - Indexing Fix & Monetization Strategy
+
+**Completed:**
+- Updated blog-posts.json metadata for 4 expanded posts (readTime, updatedAt)
+- Diagnosed Google Search Console indexing issues:
+  - 5,560 pages "Not indexed" - mostly city pages with 0 vendors
+  - 4,952 pages "Discovered - currently not indexed"
+  - Root cause: Generating city pages for ALL top-cities.json (1,000 cities) regardless of vendor count
+- **Fixed getStaticPaths** to only generate city pages for cities with vendors or content
+- Added sitemap filter to exclude /api/ and /search pages
+- Added `getCitiesWithContent()` function to supabase.ts
+
+**Results:**
+- City pages reduced from ~5,000+ to **2,924** (only cities with vendors)
+- Total pages: 7,246 (down from ~7,400)
+- Empty city pages no longer generated or in sitemap
+
+**Files Modified:**
+- `src/data/blog-posts.json` - Updated readTime and updatedAt for expanded posts
+- `src/pages/[state]/[city]/index.astro` - New getStaticPaths logic, removed top-cities dependency
+- `src/lib/supabase.ts` - Added getCitiesWithContent() function
+- `astro.config.mjs` - Added sitemap filter
+- `progress.txt` - Created this file
+
+**Next Steps:**
+- [ ] Deploy fix and resubmit sitemap to Google Search Console
+- [ ] Review AdSense status and resubmission cycle
+- [ ] Plan monetization strategy (premium listings, affiliates, backlinks)
+
+---
+
+*See SESSION-HISTORY.md for detailed session logs prior to Jan 21, 2026*

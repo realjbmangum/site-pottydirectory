@@ -9,6 +9,17 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
+      // Filter out pages that shouldn't be in sitemap
+      // Note: Empty city pages are no longer generated (fixed in getStaticPaths)
+      // This filter is a safety net for any edge cases
+      filter: (page) => {
+        // Exclude any API routes (if they exist)
+        if (page.includes('/api/')) return false;
+        // Exclude search results page (dynamic content)
+        if (page.includes('/search')) return false;
+        // Include everything else
+        return true;
+      },
       // Customize priority for different page types
       serialize(item) {
         // Home page gets highest priority

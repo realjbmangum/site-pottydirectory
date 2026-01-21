@@ -5,8 +5,7 @@ import VendorCard from '../../../components/VendorCard.astro';
 import VendorFilter from '../../../components/VendorFilter.astro';
 import AdSlot from '../../../components/AdSlot.astro';
 import states from '../../../data/states.json';
-import topCities from '../../../data/top-cities.json';
-import { getAllCitiesWithState, getVendorsByCity, getCityContent, type CityContent } from '../../../lib/supabase';
+import { getAllCitiesWithState, getVendorsByCity, getCityContent, getCitiesWithContent, type CityContent } from '../../../lib/supabase';
 import { citySlug, cityFromSlug } from '../../../lib/utils';
 
 export async function getStaticPaths() {
@@ -18,45 +17,30 @@ export async function getStaticPaths() {
     console.error('Error fetching cities:', error);
   }
 
-  // Create a Set of existing city-state combinations for quick lookup
-  const existingCities = new Set(
-    citiesWithVendors.map(c => `${c.city}-${c.state}`)
-  );
+  // Get cities that have published content (even if no vendors)
+  let citiesWithContent: { city: string; state: string }[] = [];
+  try {
+    citiesWithContent = await getCitiesWithContent();
+  } catch (error) {
+    console.error('Error fetching cities with content:', error);
+  }
 
-  // Build paths for all top cities from each state
+  // Create a Set to track which cities we've added (to avoid duplicates)
+  const addedCities = new Set<string>();
+
+  // Build paths ONLY for cities with vendors or content (not all top-cities)
   const allPaths: Array<{
     params: { state: string; city: string };
     props: { stateName: string; stateSlug: string; stateAbbr: string; cityName: string; citySlugValue: string };
   }> = [];
 
-  // Add all top cities for each state
-  for (const stateInfo of states) {
-    const stateCities = (topCities as Record<string, string[]>)[stateInfo.name] || [];
-
-    for (const city of stateCities) {
-      allPaths.push({
-        params: {
-          state: stateInfo.slug,
-          city: citySlug(city)
-        },
-        props: {
-          stateName: stateInfo.name,
-          stateSlug: stateInfo.slug,
-          stateAbbr: stateInfo.abbr,
-          cityName: city,
-          citySlugValue: citySlug(city)
-        }
-      });
-    }
-  }
-
-  // Add any cities with vendors that aren't already in our list
+  // Add cities that have vendors
   for (const cityData of citiesWithVendors) {
     const stateInfo = states.find(s => s.name === cityData.state);
-    const stateCities = (topCities as Record<string, string[]>)[cityData.state] || [];
+    const key = `${cityData.city}-${cityData.state}`;
 
-    // Only add if not already in top cities
-    if (!stateCities.includes(cityData.city)) {
+    if (!addedCities.has(key)) {
+      addedCities.add(key);
       allPaths.push({
         params: {
           state: stateInfo?.slug || cityData.state.toLowerCase().replace(/\s+/g, '-'),
@@ -72,6 +56,31 @@ export async function getStaticPaths() {
       });
     }
   }
+
+  // Add cities that have content but no vendors (so content is still accessible)
+  for (const cityData of citiesWithContent) {
+    const stateInfo = states.find(s => s.name === cityData.state);
+    const key = `${cityData.city}-${cityData.state}`;
+
+    if (!addedCities.has(key)) {
+      addedCities.add(key);
+      allPaths.push({
+        params: {
+          state: stateInfo?.slug || cityData.state.toLowerCase().replace(/\s+/g, '-'),
+          city: citySlug(cityData.city)
+        },
+        props: {
+          stateName: cityData.state,
+          stateSlug: stateInfo?.slug || cityData.state.toLowerCase().replace(/\s+/g, '-'),
+          stateAbbr: stateInfo?.abbr || '',
+          cityName: cityData.city,
+          citySlugValue: citySlug(cityData.city)
+        }
+      });
+    }
+  }
+
+  console.log(`[City Pages] Generated ${allPaths.length} city pages (${citiesWithVendors.length} with vendors, ${citiesWithContent.length} with content)`);
 
   return allPaths;
 }

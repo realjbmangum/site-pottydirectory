@@ -474,6 +474,20 @@ export async function getCityContent(city: string, state: string): Promise<CityC
   return data as CityContent;
 }
 
+// Get all cities that have published city_content (for generating pages even without vendors)
+export async function getCitiesWithContent(): Promise<{ city: string; state: string }[]> {
+  const { data, error } = await supabase
+    .from('city_content')
+    .select('city, state')
+    .eq('status', 'published');
+
+  if (error) {
+    console.error('Error fetching cities with content:', error);
+    return [];
+  }
+  return data || [];
+}
+
 export async function getSiteStats() {
   // Paginate to get all vendors for accurate stats
   const allData: { state: string; city: string; rating: number | null }[] = [];
