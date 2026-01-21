@@ -1,0 +1,1252 @@
+[
+  {
+    "city": "New York",
+    "state": "New York",
+    "vendor_count": 50
+  },
+  {
+    "city": "Brooklyn",
+    "state": "New York",
+    "vendor_count": 28
+  },
+  {
+    "city": "Charlotte",
+    "state": "North Carolina",
+    "vendor_count": 22
+  },
+  {
+    "city": "Houston",
+    "state": "Texas",
+    "vendor_count": 21
+  },
+  {
+    "city": "San Antonio",
+    "state": "Texas",
+    "vendor_count": 16
+  },
+  {
+    "city": "Midland",
+    "state": "Texas",
+    "vendor_count": 13
+  },
+  {
+    "city": "Nashville",
+    "state": "Tennessee",
+    "vendor_count": 13
+  },
+  {
+    "city": "Fresno",
+    "state": "California",
+    "vendor_count": 12
+  },
+  {
+    "city": "Unknown",
+    "state": "North Carolina",
+    "vendor_count": 12
+  },
+  {
+    "city": "Austin",
+    "state": "Texas",
+    "vendor_count": 11
+  },
+  {
+    "city": "Fayetteville",
+    "state": "North Carolina",
+    "vendor_count": 10
+  },
+  {
+    "city": "Greensboro",
+    "state": "North Carolina",
+    "vendor_count": 10
+  },
+  {
+    "city": "Bakersfield",
+    "state": "California",
+    "vendor_count": 9
+  },
+  {
+    "city": "Des Moines",
+    "state": "Iowa",
+    "vendor_count": 9
+  },
+  {
+    "city": "Fort Worth",
+    "state": "Texas",
+    "vendor_count": 9
+  },
+  {
+    "city": "Portland",
+    "state": "Oregon",
+    "vendor_count": 9
+  },
+  {
+    "city": "Richmond",
+    "state": "Virginia",
+    "vendor_count": 9
+  },
+  {
+    "city": "Salt Lake City",
+    "state": "Utah",
+    "vendor_count": 9
+  },
+  {
+    "city": "Williston",
+    "state": "Vermont",
+    "vendor_count": 9
+  },
+  {
+    "city": "Amarillo",
+    "state": "Texas",
+    "vendor_count": 8
+  },
+  {
+    "city": "Greenville",
+    "state": "North Carolina",
+    "vendor_count": 8
+  },
+  {
+    "city": "Jersey City",
+    "state": "New Jersey",
+    "vendor_count": 8
+  },
+  {
+    "city": "Las Vegas",
+    "state": "Nevada",
+    "vendor_count": 8
+  },
+  {
+    "city": "Memphis",
+    "state": "Tennessee",
+    "vendor_count": 8
+  },
+  {
+    "city": "Miami",
+    "state": "Florida",
+    "vendor_count": 8
+  },
+  {
+    "city": "Newport News",
+    "state": "Virginia",
+    "vendor_count": 8
+  },
+  {
+    "city": "Oklahoma City",
+    "state": "Oklahoma",
+    "vendor_count": 8
+  },
+  {
+    "city": "Phoenix",
+    "state": "Arizona",
+    "vendor_count": 8
+  },
+  {
+    "city": "Plattsburgh",
+    "state": "New York",
+    "vendor_count": 8
+  },
+  {
+    "city": "Bronx",
+    "state": "New York",
+    "vendor_count": 7
+  },
+  {
+    "city": "Charlottesville",
+    "state": "Virginia",
+    "vendor_count": 7
+  },
+  {
+    "city": "Dallas",
+    "state": "Texas",
+    "vendor_count": 7
+  },
+  {
+    "city": "Harrisonburg",
+    "state": "Virginia",
+    "vendor_count": 7
+  },
+  {
+    "city": "Kerrville",
+    "state": "Texas",
+    "vendor_count": 7
+  },
+  {
+    "city": "Lincoln",
+    "state": "Nebraska",
+    "vendor_count": 7
+  },
+  {
+    "city": "Lubbock",
+    "state": "Texas",
+    "vendor_count": 7
+  },
+  {
+    "city": "Lynchburg",
+    "state": "Virginia",
+    "vendor_count": 7
+  },
+  {
+    "city": "Roanoke",
+    "state": "Virginia",
+    "vendor_count": 7
+  },
+  {
+    "city": "Savannah",
+    "state": "Georgia",
+    "vendor_count": 7
+  },
+  {
+    "city": "Sioux Falls",
+    "state": "South Dakota",
+    "vendor_count": 7
+  },
+  {
+    "city": "Tulsa",
+    "state": "Oklahoma",
+    "vendor_count": 7
+  },
+  {
+    "city": "Uvalde",
+    "state": "Texas",
+    "vendor_count": 7
+  },
+  {
+    "city": "Wichita Falls",
+    "state": "Texas",
+    "vendor_count": 7
+  },
+  {
+    "city": "Albuquerque",
+    "state": "New Mexico",
+    "vendor_count": 6
+  },
+  {
+    "city": "Columbus",
+    "state": "Ohio",
+    "vendor_count": 6
+  },
+  {
+    "city": "El Paso",
+    "state": "Texas",
+    "vendor_count": 6
+  },
+  {
+    "city": "Kansas City",
+    "state": "Missouri",
+    "vendor_count": 6
+  },
+  {
+    "city": "Moses Lake",
+    "state": "Washington",
+    "vendor_count": 6
+  },
+  {
+    "city": "New Orleans",
+    "state": "Louisiana",
+    "vendor_count": 6
+  },
+  {
+    "city": "Odessa",
+    "state": "Texas",
+    "vendor_count": 6
+  },
+  {
+    "city": "Raleigh",
+    "state": "North Carolina",
+    "vendor_count": 6
+  },
+  {
+    "city": "Seattle",
+    "state": "Washington",
+    "vendor_count": 6
+  },
+  {
+    "city": "Sterling",
+    "state": "Virginia",
+    "vendor_count": 6
+  },
+  {
+    "city": "Virginia Beach",
+    "state": "Virginia",
+    "vendor_count": 6
+  },
+  {
+    "city": "West Bend",
+    "state": "Wisconsin",
+    "vendor_count": 6
+  },
+  {
+    "city": "Wichita",
+    "state": "Kansas",
+    "vendor_count": 6
+  },
+  {
+    "city": "Winston-Salem",
+    "state": "North Carolina",
+    "vendor_count": 6
+  },
+  {
+    "city": "Atlanta",
+    "state": "Georgia",
+    "vendor_count": 5
+  },
+  {
+    "city": "Charleston",
+    "state": "West Virginia",
+    "vendor_count": 5
+  },
+  {
+    "city": "Clifton",
+    "state": "New Jersey",
+    "vendor_count": 5
+  },
+  {
+    "city": "Evansville",
+    "state": "Indiana",
+    "vendor_count": 5
+  },
+  {
+    "city": "Fairfax",
+    "state": "Virginia",
+    "vendor_count": 5
+  },
+  {
+    "city": "Granbury",
+    "state": "Texas",
+    "vendor_count": 5
+  },
+  {
+    "city": "Harrisburg",
+    "state": "Pennsylvania",
+    "vendor_count": 5
+  },
+  {
+    "city": "Huntsville",
+    "state": "Texas",
+    "vendor_count": 5
+  },
+  {
+    "city": "Indianapolis",
+    "state": "Indiana",
+    "vendor_count": 5
+  },
+  {
+    "city": "Jackson",
+    "state": "Mississippi",
+    "vendor_count": 5
+  },
+  {
+    "city": "Knoxville",
+    "state": "Tennessee",
+    "vendor_count": 5
+  },
+  {
+    "city": "Lexington",
+    "state": "Kentucky",
+    "vendor_count": 5
+  },
+  {
+    "city": "Louisville",
+    "state": "Kentucky",
+    "vendor_count": 5
+  },
+  {
+    "city": "Marble Falls",
+    "state": "Texas",
+    "vendor_count": 5
+  },
+  {
+    "city": "Newark",
+    "state": "New Jersey",
+    "vendor_count": 5
+  },
+  {
+    "city": "North Bergen",
+    "state": "New Jersey",
+    "vendor_count": 5
+  },
+  {
+    "city": "Ogden",
+    "state": "Utah",
+    "vendor_count": 5
+  },
+  {
+    "city": "Orlando",
+    "state": "Florida",
+    "vendor_count": 5
+  },
+  {
+    "city": "Pittsburgh",
+    "state": "Pennsylvania",
+    "vendor_count": 5
+  },
+  {
+    "city": "Salinas",
+    "state": "California",
+    "vendor_count": 5
+  },
+  {
+    "city": "Secaucus",
+    "state": "New Jersey",
+    "vendor_count": 5
+  },
+  {
+    "city": "Spokane",
+    "state": "Washington",
+    "vendor_count": 5
+  },
+  {
+    "city": "Traverse City",
+    "state": "Michigan",
+    "vendor_count": 5
+  },
+  {
+    "city": "Waco",
+    "state": "Texas",
+    "vendor_count": 5
+  },
+  {
+    "city": "Altoona",
+    "state": "Pennsylvania",
+    "vendor_count": 4
+  },
+  {
+    "city": "Asheville",
+    "state": "North Carolina",
+    "vendor_count": 4
+  },
+  {
+    "city": "Augusta",
+    "state": "Georgia",
+    "vendor_count": 4
+  },
+  {
+    "city": "Beaumont",
+    "state": "Texas",
+    "vendor_count": 4
+  },
+  {
+    "city": "Bellevue",
+    "state": "Washington",
+    "vendor_count": 4
+  },
+  {
+    "city": "Checotah",
+    "state": "Oklahoma",
+    "vendor_count": 4
+  },
+  {
+    "city": "Clarksville",
+    "state": "Tennessee",
+    "vendor_count": 4
+  },
+  {
+    "city": "Colorado Springs",
+    "state": "Colorado",
+    "vendor_count": 4
+  },
+  {
+    "city": "Columbia",
+    "state": "South Carolina",
+    "vendor_count": 4
+  },
+  {
+    "city": "Columbia",
+    "state": "Tennessee",
+    "vendor_count": 4
+  },
+  {
+    "city": "Culpeper",
+    "state": "Virginia",
+    "vendor_count": 4
+  },
+  {
+    "city": "Denver",
+    "state": "North Carolina",
+    "vendor_count": 4
+  },
+  {
+    "city": "Durham",
+    "state": "North Carolina",
+    "vendor_count": 4
+  },
+  {
+    "city": "Fort Myers",
+    "state": "Florida",
+    "vendor_count": 4
+  },
+  {
+    "city": "Fort Wayne",
+    "state": "Indiana",
+    "vendor_count": 4
+  },
+  {
+    "city": "Gillette",
+    "state": "Wyoming",
+    "vendor_count": 4
+  },
+  {
+    "city": "Hampton",
+    "state": "Virginia",
+    "vendor_count": 4
+  },
+  {
+    "city": "Hobbs",
+    "state": "New Mexico",
+    "vendor_count": 4
+  },
+  {
+    "city": "Huntington",
+    "state": "West Virginia",
+    "vendor_count": 4
+  },
+  {
+    "city": "Jacksonville",
+    "state": "Florida",
+    "vendor_count": 4
+  },
+  {
+    "city": "Kalispell",
+    "state": "Montana",
+    "vendor_count": 4
+  },
+  {
+    "city": "Kennewick",
+    "state": "Washington",
+    "vendor_count": 4
+  },
+  {
+    "city": "Kingsport",
+    "state": "Tennessee",
+    "vendor_count": 4
+  },
+  {
+    "city": "Lafayette",
+    "state": "Louisiana",
+    "vendor_count": 4
+  },
+  {
+    "city": "Leesburg",
+    "state": "Virginia",
+    "vendor_count": 4
+  },
+  {
+    "city": "Lenoir City",
+    "state": "Tennessee",
+    "vendor_count": 4
+  },
+  {
+    "city": "Lewiston",
+    "state": "Idaho",
+    "vendor_count": 4
+  },
+  {
+    "city": "Los Angeles",
+    "state": "California",
+    "vendor_count": 4
+  },
+  {
+    "city": "Martinsville",
+    "state": "Virginia",
+    "vendor_count": 4
+  },
+  {
+    "city": "Mt Airy",
+    "state": "North Carolina",
+    "vendor_count": 4
+  },
+  {
+    "city": "Murfreesboro",
+    "state": "Tennessee",
+    "vendor_count": 4
+  },
+  {
+    "city": "Myrtle Beach",
+    "state": "South Carolina",
+    "vendor_count": 4
+  },
+  {
+    "city": "Norfolk",
+    "state": "Virginia",
+    "vendor_count": 4
+  },
+  {
+    "city": "Omaha",
+    "state": "Nebraska",
+    "vendor_count": 4
+  },
+  {
+    "city": "Pasco",
+    "state": "Washington",
+    "vendor_count": 4
+  },
+  {
+    "city": "Plano",
+    "state": "Texas",
+    "vendor_count": 4
+  },
+  {
+    "city": "Princeton",
+    "state": "West Virginia",
+    "vendor_count": 4
+  },
+  {
+    "city": "Riverside",
+    "state": "California",
+    "vendor_count": 4
+  },
+  {
+    "city": "Saddle Brook",
+    "state": "New Jersey",
+    "vendor_count": 4
+  },
+  {
+    "city": "San Francisco",
+    "state": "California",
+    "vendor_count": 4
+  },
+  {
+    "city": "San Marcos",
+    "state": "Texas",
+    "vendor_count": 4
+  },
+  {
+    "city": "Santa Fe",
+    "state": "New Mexico",
+    "vendor_count": 4
+  },
+  {
+    "city": "St. Louis",
+    "state": "Missouri",
+    "vendor_count": 4
+  },
+  {
+    "city": "Stroudsburg",
+    "state": "Pennsylvania",
+    "vendor_count": 4
+  },
+  {
+    "city": "Tacoma",
+    "state": "Washington",
+    "vendor_count": 4
+  },
+  {
+    "city": "Tampa",
+    "state": "FL",
+    "vendor_count": 4
+  },
+  {
+    "city": "Union City",
+    "state": "New Jersey",
+    "vendor_count": 4
+  },
+  {
+    "city": "Vancouver",
+    "state": "Washington",
+    "vendor_count": 4
+  },
+  {
+    "city": "Washington",
+    "state": "District Of Columbia",
+    "vendor_count": 4
+  },
+  {
+    "city": "Wilkes-Barre",
+    "state": "Pennsylvania",
+    "vendor_count": 4
+  },
+  {
+    "city": "Winchester",
+    "state": "Virginia",
+    "vendor_count": 4
+  },
+  {
+    "city": "Wisconsin Rapids",
+    "state": "Wisconsin",
+    "vendor_count": 4
+  },
+  {
+    "city": "Zanesville",
+    "state": "Ohio",
+    "vendor_count": 4
+  },
+  {
+    "city": "Abilene",
+    "state": "Texas",
+    "vendor_count": 3
+  },
+  {
+    "city": "Allentown",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Anderson",
+    "state": "South Carolina",
+    "vendor_count": 3
+  },
+  {
+    "city": "Angleton",
+    "state": "Texas",
+    "vendor_count": 3
+  },
+  {
+    "city": "Aurora",
+    "state": "Colorado",
+    "vendor_count": 3
+  },
+  {
+    "city": "Baton Rouge",
+    "state": "Louisiana",
+    "vendor_count": 3
+  },
+  {
+    "city": "Bellefonte",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Bennington",
+    "state": "Vermont",
+    "vendor_count": 3
+  },
+  {
+    "city": "Bethlehem",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Big Spring",
+    "state": "Texas",
+    "vendor_count": 3
+  },
+  {
+    "city": "Boise",
+    "state": "Idaho",
+    "vendor_count": 3
+  },
+  {
+    "city": "Boston",
+    "state": "Massachusetts",
+    "vendor_count": 3
+  },
+  {
+    "city": "Bradford",
+    "state": "Vermont",
+    "vendor_count": 3
+  },
+  {
+    "city": "Bridgeport",
+    "state": "Connecticut",
+    "vendor_count": 3
+  },
+  {
+    "city": "Bridgeville",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Brookings",
+    "state": "South Dakota",
+    "vendor_count": 3
+  },
+  {
+    "city": "Buffalo",
+    "state": "New York",
+    "vendor_count": 3
+  },
+  {
+    "city": "Burlington",
+    "state": "Vermont",
+    "vendor_count": 3
+  },
+  {
+    "city": "Canandaigua",
+    "state": "New York",
+    "vendor_count": 3
+  },
+  {
+    "city": "Cape May Court House",
+    "state": "New Jersey",
+    "vendor_count": 3
+  },
+  {
+    "city": "Casper",
+    "state": "Wyoming",
+    "vendor_count": 3
+  },
+  {
+    "city": "Chambersburg",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Charlotte",
+    "state": "NC",
+    "vendor_count": 3
+  },
+  {
+    "city": "Chicago",
+    "state": "Illinois",
+    "vendor_count": 3
+  },
+  {
+    "city": "Christiansburg",
+    "state": "Virginia",
+    "vendor_count": 3
+  },
+  {
+    "city": "Cincinnati",
+    "state": "Ohio",
+    "vendor_count": 3
+  },
+  {
+    "city": "Conway",
+    "state": "South Carolina",
+    "vendor_count": 3
+  },
+  {
+    "city": "Cookeville",
+    "state": "Tennessee",
+    "vendor_count": 3
+  },
+  {
+    "city": "Corpus Christi",
+    "state": "Texas",
+    "vendor_count": 3
+  },
+  {
+    "city": "Cranberry Twp",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Cumming",
+    "state": "Georgia",
+    "vendor_count": 3
+  },
+  {
+    "city": "Danville",
+    "state": "Virginia",
+    "vendor_count": 3
+  },
+  {
+    "city": "De Queen",
+    "state": "Arkansas",
+    "vendor_count": 3
+  },
+  {
+    "city": "Denver",
+    "state": "Colorado",
+    "vendor_count": 3
+  },
+  {
+    "city": "Downingtown",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Eau Claire",
+    "state": "Wisconsin",
+    "vendor_count": 3
+  },
+  {
+    "city": "Elizabethtown",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Erie",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Fallon",
+    "state": "Nevada",
+    "vendor_count": 3
+  },
+  {
+    "city": "Falls Church",
+    "state": "Virginia",
+    "vendor_count": 3
+  },
+  {
+    "city": "Farmington",
+    "state": "New Mexico",
+    "vendor_count": 3
+  },
+  {
+    "city": "Fredericksburg",
+    "state": "Virginia",
+    "vendor_count": 3
+  },
+  {
+    "city": "Front Royal",
+    "state": "Virginia",
+    "vendor_count": 3
+  },
+  {
+    "city": "Garland",
+    "state": "Texas",
+    "vendor_count": 3
+  },
+  {
+    "city": "Gig Harbor",
+    "state": "Washington",
+    "vendor_count": 3
+  },
+  {
+    "city": "Gloucester",
+    "state": "Virginia",
+    "vendor_count": 3
+  },
+  {
+    "city": "Great Falls",
+    "state": "Montana",
+    "vendor_count": 3
+  },
+  {
+    "city": "Greencastle",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Greeneville",
+    "state": "Tennessee",
+    "vendor_count": 3
+  },
+  {
+    "city": "Greensburg",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Greenville",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Greenville",
+    "state": "Texas",
+    "vendor_count": 3
+  },
+  {
+    "city": "Hackensack",
+    "state": "New Jersey",
+    "vendor_count": 3
+  },
+  {
+    "city": "Hamburg",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Hattiesburg",
+    "state": "Mississippi",
+    "vendor_count": 3
+  },
+  {
+    "city": "Hayward",
+    "state": "Wisconsin",
+    "vendor_count": 3
+  },
+  {
+    "city": "Hermitage",
+    "state": "Tennessee",
+    "vendor_count": 3
+  },
+  {
+    "city": "High Point",
+    "state": "North Carolina",
+    "vendor_count": 3
+  },
+  {
+    "city": "Huntsville",
+    "state": "AL",
+    "vendor_count": 3
+  },
+  {
+    "city": "Idaho Falls",
+    "state": "Idaho",
+    "vendor_count": 3
+  },
+  {
+    "city": "Jim Thorpe",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Joplin",
+    "state": "Missouri",
+    "vendor_count": 3
+  },
+  {
+    "city": "Killeen",
+    "state": "Texas",
+    "vendor_count": 3
+  },
+  {
+    "city": "La Feria",
+    "state": "Texas",
+    "vendor_count": 3
+  },
+  {
+    "city": "Lake Havasu City",
+    "state": "Arizona",
+    "vendor_count": 3
+  },
+  {
+    "city": "Latrobe",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Lawrenceburg",
+    "state": "Tennessee",
+    "vendor_count": 3
+  },
+  {
+    "city": "Lawton",
+    "state": "Oklahoma",
+    "vendor_count": 3
+  },
+  {
+    "city": "Livingston",
+    "state": "Texas",
+    "vendor_count": 3
+  },
+  {
+    "city": "Logan",
+    "state": "Ohio",
+    "vendor_count": 3
+  },
+  {
+    "city": "Longview",
+    "state": "Texas",
+    "vendor_count": 3
+  },
+  {
+    "city": "Lynden",
+    "state": "Washington",
+    "vendor_count": 3
+  },
+  {
+    "city": "Macon",
+    "state": "Georgia",
+    "vendor_count": 3
+  },
+  {
+    "city": "Marshall",
+    "state": "Texas",
+    "vendor_count": 3
+  },
+  {
+    "city": "Martinsburg",
+    "state": "West Virginia",
+    "vendor_count": 3
+  },
+  {
+    "city": "Maryville",
+    "state": "Tennessee",
+    "vendor_count": 3
+  },
+  {
+    "city": "McMinnville",
+    "state": "Tennessee",
+    "vendor_count": 3
+  },
+  {
+    "city": "Mechanicsburg",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Mesa",
+    "state": "Arizona",
+    "vendor_count": 3
+  },
+  {
+    "city": "Metairie",
+    "state": "Louisiana",
+    "vendor_count": 3
+  },
+  {
+    "city": "Mineral Wells",
+    "state": "Texas",
+    "vendor_count": 3
+  },
+  {
+    "city": "Missoula",
+    "state": "Montana",
+    "vendor_count": 3
+  },
+  {
+    "city": "Mooresville",
+    "state": "North Carolina",
+    "vendor_count": 3
+  },
+  {
+    "city": "Morristown",
+    "state": "Tennessee",
+    "vendor_count": 3
+  },
+  {
+    "city": "New Berlin",
+    "state": "Wisconsin",
+    "vendor_count": 3
+  },
+  {
+    "city": "New Braunfels",
+    "state": "Texas",
+    "vendor_count": 3
+  },
+  {
+    "city": "Orem",
+    "state": "Utah",
+    "vendor_count": 3
+  },
+  {
+    "city": "Orlando",
+    "state": "FL",
+    "vendor_count": 3
+  },
+  {
+    "city": "Oshkosh",
+    "state": "Wisconsin",
+    "vendor_count": 3
+  },
+  {
+    "city": "Paducah",
+    "state": "Kentucky",
+    "vendor_count": 3
+  },
+  {
+    "city": "Paterson",
+    "state": "New Jersey",
+    "vendor_count": 3
+  },
+  {
+    "city": "Pendleton",
+    "state": "Oregon",
+    "vendor_count": 3
+  },
+  {
+    "city": "Penn Yan",
+    "state": "New York",
+    "vendor_count": 3
+  },
+  {
+    "city": "Philadelphia",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Pierre",
+    "state": "South Dakota",
+    "vendor_count": 3
+  },
+  {
+    "city": "Porterville",
+    "state": "California",
+    "vendor_count": 3
+  },
+  {
+    "city": "Providence",
+    "state": "Rhode Island",
+    "vendor_count": 3
+  },
+  {
+    "city": "Quarryville",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Rapid City",
+    "state": "South Dakota",
+    "vendor_count": 3
+  },
+  {
+    "city": "Reading",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Rio Rancho",
+    "state": "New Mexico",
+    "vendor_count": 3
+  },
+  {
+    "city": "Salem",
+    "state": "Oregon",
+    "vendor_count": 3
+  },
+  {
+    "city": "San Diego",
+    "state": "California",
+    "vendor_count": 3
+  },
+  {
+    "city": "Shreveport",
+    "state": "Louisiana",
+    "vendor_count": 3
+  },
+  {
+    "city": "South Burlington",
+    "state": "Vermont",
+    "vendor_count": 3
+  },
+  {
+    "city": "Sparks",
+    "state": "Nevada",
+    "vendor_count": 3
+  },
+  {
+    "city": "Spokane Valley",
+    "state": "Washington",
+    "vendor_count": 3
+  },
+  {
+    "city": "Spring City",
+    "state": "Pennsylvania",
+    "vendor_count": 3
+  },
+  {
+    "city": "Springfield",
+    "state": "Missouri",
+    "vendor_count": 3
+  },
+  {
+    "city": "St. George",
+    "state": "Utah",
+    "vendor_count": 3
+  },
+  {
+    "city": "Staten Island",
+    "state": "New York",
+    "vendor_count": 3
+  },
+  {
+    "city": "Staunton",
+    "state": "Virginia",
+    "vendor_count": 3
+  },
+  {
+    "city": "Summerville",
+    "state": "South Carolina",
+    "vendor_count": 3
+  },
+  {
+    "city": "Tampa",
+    "state": "Florida",
+    "vendor_count": 3
+  },
+  {
+    "city": "Tomahawk",
+    "state": "Wisconsin",
+    "vendor_count": 3
+  },
+  {
+    "city": "Tooele",
+    "state": "Utah",
+    "vendor_count": 3
+  }
+]

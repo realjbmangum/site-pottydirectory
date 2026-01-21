@@ -51,6 +51,27 @@
 
 ## Session Log
 
+### 2026-01-21 (Session 2) - City Content Generation
+
+**Completed:**
+- Created `scripts/generate-city-content-sql.cjs` - Script to generate SQL INSERT statements using Claude API
+- Generated unique SEO content for all 249 top cities (by vendor count)
+- Content includes: intro_paragraph, local_tips, peak_season, popular_for
+- SQL file saved to `data/city-content-inserts.sql` (2,500 lines, 249 cities)
+
+**Files Created:**
+- `scripts/generate-city-content-sql.cjs` - SQL generator script
+- `data/city-content-inserts.sql` - Ready to paste in Supabase SQL editor
+
+**Next Steps:**
+- [ ] Paste SQL in Supabase SQL editor to insert city content
+- [ ] Rebuild and deploy site to see new city page content
+- [ ] Monitor Google indexing over next 2-3 weeks
+- [ ] Resubmit AdSense application after indexing improves
+- [ ] Revisit monetization strategy (premium listings, affiliates, backlinks)
+
+---
+
 ### 2026-01-21 - Indexing Fix & Monetization Strategy
 
 **Completed:**

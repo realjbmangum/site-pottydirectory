@@ -1,0 +1,70 @@
+============================================================
+NEW VENDORS REPORT
+Generated: 2025-12-29T19:48:35.357Z
+============================================================
+
+SUMMARY
+----------------------------------------
+Existing Supabase records:  2,219
+Outscraper records:         6,650
+NEW vendors to insert:      3,632
+
+BY STATE
+----------------------------------------
+Texas                   515
+Pennsylvania            427
+New York                338
+Virginia                291
+Wisconsin               227
+Ohio                    180
+Tennessee               177
+New Jersey              166
+Oklahoma                107
+South Dakota            105
+Vermont                 101
+Washington               98
+West Virginia            98
+South Carolina           76
+New Hampshire            62
+Nebraska                 62
+New Mexico               58
+Wyoming                  48
+Utah                     36
+California               34
+Florida                  34
+Maryland                 33
+Indiana                  30
+Oregon                   28
+Michigan                 28
+Kentucky                 27
+North Dakota             26
+Rhode Island             26
+Nevada                   20
+North Carolina           19
+Minnesota                19
+Iowa                     18
+Massachusetts            14
+Missouri                 14
+Georgia                  13
+Colorado                 12
+Kansas                   11
+Connecticut               9
+Alabama                   8
+Illinois                  6
+Idaho                     5
+Arizona                   4
+Arkansas                  4
+Mississippi               4
+Louisiana                 3
+Delaware                  3
+Maine                     3
+District Of Columbia      2
+Montana                   2
+Alaska                    1
+
+WITH DATA
+----------------------------------------
+With email:     3,332
+With website:   3,632
+With phone:     3,618
+With rating:    3,632

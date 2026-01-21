@@ -1,0 +1,115 @@
+============================================================
+MERGE REPORT
+Generated: 2025-12-29T18:42:24.484Z
+============================================================
+
+STATISTICS
+----------------------------------------
+Total Supabase records:     2,219
+Matched with Outscraper:    988 (45%)
+No match found:             1,231 (55%)
+
+Records needing email:      1,887
+Records needing website:    1,412
+
+Emails to be updated:       762
+Websites to be updated:     624
+Already complete:           56
+
+============================================================
+SAMPLE UPDATES (first 20)
+----------------------------------------
+Jack of All Trailers (Pecatonica, Illinois)
+  → email = 'dhessrentals@gmail.com', website = 'https://www.jackofalltrailers.com/'
+Full Service Septic (Salisbury, North Carolina)
+  → facebook_url = 'https://www.facebook.com/101649845781522'
+JT Services (Claremore, Oklahoma)
+  → email = 'info@jtserviceco.com', website = 'https://jtserviceco.com/', facebook_url = 'https://www.facebook.com/jtsepticco/', instagram_url = 'https://www.instagram.com/jtservicesco', linkedin_url = 'http://www.linkedin.com/company/8049975'
+United Rentals - Reliable Onsite Services (Portland, Oregon)
+  → website = 'https://www.unitedrentals.com/locations/or/portland/sanitation-rentals/f16%3Futm_source%3Dgoogle%26utm_medium%3Ddistrib%26utm_campaign%3Dyext', facebook_url = 'http://www.facebook.com/united-rentals-200631115132', linkedin_url = 'https://www.linkedin.com/company/united-rental-trench-safety', twitter_url = 'http://www.x.com/unitedrentals'
+Homepro Medical Supplies, LLC (Brooklyn, New York)
+  → email = 'dsschwartz@homepromedical.com', website = 'http://homepromedical.com/', facebook_url = 'https://www.facebook.com/homepromedical/'
+Porta Potty Rentals of Albuquerque (Albuquerque, New Mexico)
+  → email = 'info@proportapottyrental.com', website = 'https://proportapottyrental.com/locations/albuquerque-nm'
+MR BIFFY (Mcgregor, Minnesota)
+  → email = 'ccoroon@mrbiffy.com', website = 'http://mrbiffy.com/', facebook_url = 'https://facebook.com/Mr-Biffy-LLC-1730382147243585', twitter_url = 'https://twitter.com/MrBiffyLLC'
+McGraw Event Pros (Moncks Corner, South Carolina)
+  → email = 'sales@mcgraweventpros.com', facebook_url = 'https://www.facebook.com/mcgraweventpros', instagram_url = 'https://www.instagram.com/mcgraweventpros'
+West Toi | Portable Toilet Rentals | Toilet Rentals | Tampa, FL (Tampa, Florida)
+  → email = 'lopezyosbany110@gmail.com', facebook_url = 'https://www.facebook.com/3-Brothers-Tree-Service-101035035633671/'
+Tallahassee Porta Potty Rental | PortaPlus (Tallahassee, Florida)
+  → facebook_url = 'https://www.facebook.com/tallahasseeportapottyrentalportaplus/', instagram_url = 'https://www.instagram.com/tallahasseeportapottyrental', linkedin_url = 'https://www.linkedin.com/company/tallahassee-porta-potty-rental-portaplus', twitter_url = 'https://twitter.com/tallahasseepot'
+Brickhouse Porta Potties Rental (Virginia Beach, Virginia)
+  → email = 'info@brickhouseportapottiesrental.com', website = 'https://brickhouseportapottiesrental.com/'
+Central Washington Septic (Ellensburg, Washington)
+  → email = 'info@centralwaseptic.com', website = 'http://centralwashingtonseptic.com/'
+Portable Toilets Champ (Peoria, Arizona)
+  → email = 'info@portabletoiletschamp.com', website = 'https://portabletoiletschamp.com/location/top-notch-portable-toilet-services-in-peoria'
+Apple Valley Pumping Inc. (East Wenatchee, Washington)
+  → email = 'avinfo@avpumping.com', website = 'http://www.applevalleypumpingsvc.com/', facebook_url = 'https://www.facebook.com/Applevalleypumping/', instagram_url = 'https://instagram.com/dexyphq', twitter_url = 'http://twitter.com/intent/'
+Southwest Waste Services (Lamar, Missouri)
+  → website = 'http://southwestwasteservices.com/'
+Waters Waste Services (Glennville, Georgia)
+  → email = 'sales@waterswasteservices.com'
+Restroom Trailer Solutions (Bessemer City, North Carolina)
+  → facebook_url = 'https://www.facebook.com/RoyalRestroomsCarolinas/', instagram_url = 'https://www.instagram.com/royal_restrooms_carolinas', twitter_url = 'https://twitter.com/MarkPacker/'
+J&J PortaPotty, Inc. (Gretna, Virginia)
+  → email = 'jandjportapotty@gmail.com', website = 'http://jandjportapotty.com/'
+Jack's Site Services (Orem, Utah)
+  → email = 'jack@jackssiteservices.com', website = 'https://jackssiteservices.com/', instagram_url = 'https://www.instagram.com/squarespace'
+Can-Doo Budjet Rentals (Abilene, Texas)
+  → email = 'g.danielski@candooportablerestrooms.com', linkedin_url = 'https://www.linkedin.com/company/can-doo-budjet-rentals-inc'
+
+============================================================
+NO MATCHES NEEDING DATA (first 50)
+----------------------------------------
+K-Fex Inc. (New Carlisle, Indiana) - needs: email, website
+Construction Porta Potty Rental LLC (Battle Ground, WA) - needs: email, website
+Jamey Portable Toilet Rental (Meriden, Connecticut) - needs: email, website
+Fisher Enterprises Portable (Burlington, Iowa) - needs: email, website
+Rockstar Rentals (Vidalia, Louisiana) - needs: email, website
+Shur Clean Portable Toilets (Kalispell, Montana) - needs: email, website
+Area Portable Services (Rancho Cordova, California) - needs: email
+Prarthana Rental Services (Wichita, Kansas) - needs: email, website
+Organizational Change Management Group (Keyport, New Jersey) - needs: email, website
+Arrowse Potties (Fayetteville, North Carolina) - needs: email, website
+Imperial Industries Inc (Rothschild, Wisconsin) - needs: email, website
+Cal's Septic Services Inc (Lincoln, Maine) - needs: email, website
+SnapSpace Solutions (Brewer, Maine) - needs: email, website
+MD Portable Toilets (Cary, NC) - needs: email
+Greer Port-A-Potty (Augusta, Illinois) - needs: email, website
+WillScot (Shakopee, Minnesota) - needs: email, website
+Sayers Ace Hardware Inc. (Independence, Kansas) - needs: email, website
+Portable Sanitation Systems (East Peoria, Illinois) - needs: email, website
+Sanitation Solutions (Seeley Lake, Montana) - needs: email, website
+Cen Cal Portables (Turlock, California) - needs: email
+PolyJohn Oregon Service Center (Hillsboro, Oregon) - needs: email, website
+Marigold Portable Toilet Care (Las Vegas, Nevada) - needs: email, website
+TT Porta Toilet (Montgomery, Alabama) - needs: email, website
+Hoffman Plumbing (Carson City, Nevada) - needs: email, website
+Hallmans Septic And Portable Toilets LLC (Portsmouth, RI) - needs: email
+Cleta Portable Toilet Rental (Yakima, WA) - needs: email, website
+Pit Stop of Michigan (Kalamazoo, Michigan) - needs: email, website
+Chemi-Toi (Kapolei, Hawaii) - needs: email, website
+Luxrooms (Crystal, Minnesota) - needs: email, website
+DEF Rentals, LLC (Westlake, Louisiana) - needs: email, website
+American Rentals (Lansing, Michigan) - needs: email, website
+Hill's Septic Service & Toilet Rental (Russell Springs, Kentucky) - needs: email, website
+Fancy Fanny LLC (Dassel, Minnesota) - needs: email, website
+Fresh & Clean Portable Restrooms (Albuquerque, New Mexico) - needs: email, website
+Above All Sanitation, Inc (Eugene, Oregon) - needs: email, website
+Total Venue LLC (Kansas City, Missouri) - needs: email, website
+OnSite Companies, LLC (Hardeeville, South Carolina) - needs: email, website
+Halftime Rentals (Denver, North Carolina) - needs: email
+Jackson Portable Toilet Rentals (Savannah, Georgia) - needs: email, website
+Luxury Restroom Trailers by Privy Chambers (Tacoma, WA) - needs: email
+3 P's Platte Valley Porta Pots & Septic Pumping (Encampment, Wyoming) - needs: email, website
+Myers Septic Service, L.L.C. (Elk Mound, Wisconsin) - needs: email, website
+Preston Truck Center (Lund, NV) - needs: email, website
+Mace Portable Toilet Rentals (Greensboro, North Carolina) - needs: email, website
+Anni Portable Toilet Solution (Newark, California) - needs: email, website
+Andrews Portable Toilets (Cambridge, Massachusetts) - needs: email, website
+Honey Bucket (Ogden, Utah) - needs: email
+Reynolds Pumping and Septic Services (Liberty, Mississippi) - needs: email, website
+Ethereal Haven Portable Toilets (Newark, New Jersey) - needs: email, website
+Gerken Rent-All (Paola, Kansas) - needs: email, website

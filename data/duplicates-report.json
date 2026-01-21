@@ -1,0 +1,1144 @@
+{
+  "generated": "2025-12-28T14:32:45.306Z",
+  "totalRecords": 2219,
+  "duplicateGroups": 27,
+  "recordsToDelete": 27,
+  "duplicates": [
+    {
+      "key": "royal restrooms savannah hilton head island|garden city|georgia",
+      "count": 2,
+      "records": [
+        {
+          "id": "02541a30-163e-464d-abda-59acc1288b51",
+          "business_name": "Royal Restrooms Savannah/Hilton Head Island",
+          "city": "Garden City",
+          "state": "Georgia",
+          "slug": "royal-restrooms-savannah-hilton-head-island",
+          "phone": "(912) 234-6800",
+          "email": "",
+          "website": "https://georgiaportablerestrooms.com",
+          "rating": "4.9",
+          "review_count": "0",
+          "verified": "false",
+          "score": 58
+        },
+        {
+          "id": "862aea16-6e75-468e-a915-ac2c22a0c846",
+          "business_name": "Royal Restrooms Savannah/Hilton Head Island",
+          "city": "Garden City",
+          "state": "Georgia",
+          "slug": "royal-restrooms-savannah-hilton-head-island-garden-city",
+          "phone": "(912) 234-6800",
+          "email": "",
+          "website": "",
+          "rating": "4.9",
+          "review_count": "74",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    },
+    {
+      "key": "mcgraw event pros|moncks corner|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "03b52d89-1096-47f3-b484-bfa13aba771d",
+          "business_name": "McGraw Event Pros",
+          "city": "Moncks Corner",
+          "state": "South Carolina",
+          "slug": "mcgraw-event-pros",
+          "phone": "(843) 754-7605",
+          "email": "",
+          "website": "https://mcgraweventpros.com",
+          "rating": "5.0",
+          "review_count": "0",
+          "verified": "false",
+          "score": 56
+        },
+        {
+          "id": "8ebb371d-8566-468d-819d-d8b61a094f25",
+          "business_name": "McGraw Event Pros",
+          "city": "Moncks Corner",
+          "state": "South Carolina",
+          "slug": "mcgraw-event-pros-moncks-corner",
+          "phone": "(843) 754-7605",
+          "email": "",
+          "website": "",
+          "rating": "5.0",
+          "review_count": "33",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    },
+    {
+      "key": "elvis|myrtle beach|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "418f4fae-a571-4d7a-83e6-93f503e91ef8",
+          "business_name": "Elvis Service Company",
+          "city": "Myrtle Beach",
+          "state": "South Carolina",
+          "slug": "elvis-service-company",
+          "phone": "(843) 448-5016",
+          "email": "",
+          "website": "https://elvisservicecompany.com",
+          "rating": "4.7",
+          "review_count": "0",
+          "verified": "false",
+          "score": 57
+        },
+        {
+          "id": "044b9e8b-037e-4d7e-a019-06ca6621a9a1",
+          "business_name": "Elvis Service Company",
+          "city": "Myrtle Beach",
+          "state": "South Carolina",
+          "slug": "elvis-service-company-myrtle-beach",
+          "phone": "(843) 448-5016",
+          "email": "",
+          "website": "",
+          "rating": "4.7",
+          "review_count": "146",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    },
+    {
+      "key": "onsite companies|hardeeville|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "87df0f91-4d44-41a6-830e-5459e76bfabd",
+          "business_name": "OnSite Companies, LLC",
+          "city": "Hardeeville",
+          "state": "South Carolina",
+          "slug": "onsite-companies-llc",
+          "phone": "(843) 379-9911",
+          "email": "",
+          "website": "https://www.onsitellc.net",
+          "rating": "5.0",
+          "review_count": "0",
+          "verified": "false",
+          "score": 54
+        },
+        {
+          "id": "08059750-154f-46ca-a93d-54ff8f0b8776",
+          "business_name": "OnSite Companies, LLC",
+          "city": "Hardeeville",
+          "state": "South Carolina",
+          "slug": "onsite-companies-llc-hardeeville",
+          "phone": "(843) 379-9911",
+          "email": "",
+          "website": "",
+          "rating": "5.0",
+          "review_count": "9",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    },
+    {
+      "key": "halftime|denver|north carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "084c3eb4-2d6a-4199-a10e-b68d7c0ad43a",
+          "business_name": "Halftime Rentals",
+          "city": "Denver",
+          "state": "North Carolina",
+          "slug": "halftime-rentals",
+          "phone": "(980) 410-8463",
+          "email": "",
+          "website": "https://www.halftimerentals.com/",
+          "rating": "5.0",
+          "review_count": "211",
+          "verified": "false",
+          "score": 63
+        },
+        {
+          "id": "10727a03-c40a-47bf-843f-c9c0e5ee2c60",
+          "business_name": "Halftime Rentals",
+          "city": "Denver",
+          "state": "North Carolina",
+          "slug": "halftime-rentals-denver",
+          "phone": "(980) 410-8463",
+          "email": "",
+          "website": "",
+          "rating": "5.0",
+          "review_count": "213",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    },
+    {
+      "key": "honey bucket|salem|oregon",
+      "count": 2,
+      "records": [
+        {
+          "id": "1965dafc-238b-4ef2-97db-9a3dff0c5d93",
+          "business_name": "Honey Bucket Portable Restrooms",
+          "city": "Salem",
+          "state": "Oregon",
+          "slug": "honey-bucket-portable-restrooms-salem",
+          "phone": "(503) 973-5675",
+          "email": "",
+          "website": "",
+          "rating": "3.3",
+          "review_count": "12",
+          "verified": "false",
+          "score": 38
+        },
+        {
+          "id": "1087abfa-0dfa-4d7d-941d-2caadf4e85f2",
+          "business_name": "Honey Bucket",
+          "city": "Salem",
+          "state": "Oregon",
+          "slug": "honey-bucket-salem-or",
+          "phone": "(800) 778-4707",
+          "email": "",
+          "website": "https://www.honeybucket.com",
+          "rating": "",
+          "review_count": "",
+          "verified": "false",
+          "score": 35
+        }
+      ]
+    },
+    {
+      "key": "safety quip|memphis|tennessee",
+      "count": 2,
+      "records": [
+        {
+          "id": "13d72eb7-d82b-4c46-9902-80908797c8e0",
+          "business_name": "Safety Quip Inc",
+          "city": "Memphis",
+          "state": "Tennessee",
+          "slug": "safety-quip-inc-memphis",
+          "phone": "(901) 452-7040",
+          "email": "",
+          "website": "",
+          "rating": "3.3",
+          "review_count": "12",
+          "verified": "false",
+          "score": 48
+        },
+        {
+          "id": "2aca7c2f-94d8-439f-aec8-50aaa8d4bec4",
+          "business_name": "Safety Quip",
+          "city": "Memphis",
+          "state": "Tennessee",
+          "slug": "safety-quip-memphis",
+          "phone": "(901) 329-7289",
+          "email": "",
+          "website": "",
+          "rating": "3.5",
+          "review_count": "",
+          "verified": "false",
+          "score": 33
+        }
+      ]
+    },
+    {
+      "key": "backwoods portalet|st george|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "8b6b4765-b204-41d9-b6b3-5d0f85fd810f",
+          "business_name": "Backwoods Portalet Rentals, LLC",
+          "city": "St George",
+          "state": "South Carolina",
+          "slug": "backwoods-portalet-rentals-llc",
+          "phone": "(843) 563-7729",
+          "email": "",
+          "website": "",
+          "rating": "",
+          "review_count": "0",
+          "verified": "false",
+          "score": 33
+        },
+        {
+          "id": "16200815-729a-44a8-ad10-366cc3892a8a",
+          "business_name": "Backwoods Portalet Rentals, LLC",
+          "city": "St George",
+          "state": "South Carolina",
+          "slug": "backwoods-portalet-rentals-llc-st-george",
+          "phone": "(843) 563-7729",
+          "email": "",
+          "website": "",
+          "rating": "",
+          "review_count": "",
+          "verified": "false",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "key": "bar environmental|wellford|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "3c2759a0-7ea5-464e-86b8-329d2413a652",
+          "business_name": "BAR Environmental Services LLC",
+          "city": "Wellford",
+          "state": "South Carolina",
+          "slug": "bar-environmental-services-llc",
+          "phone": "(864) 336-5243",
+          "email": "",
+          "website": "https://baressc.com",
+          "rating": "5.0",
+          "review_count": "0",
+          "verified": "false",
+          "score": 56
+        },
+        {
+          "id": "1a1303e5-22c5-4d3d-b249-cdb2f904d163",
+          "business_name": "BAR Environmental Services LLC",
+          "city": "Wellford",
+          "state": "South Carolina",
+          "slug": "bar-environmental-services-llc-wellford",
+          "phone": "(864) 336-5243",
+          "email": "",
+          "website": "",
+          "rating": "5.0",
+          "review_count": "17",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    },
+    {
+      "key": "toi toi usa|florence|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "ece4b649-fa36-415b-b155-3c2f3734e6bc",
+          "business_name": "TOI TOI USA",
+          "city": "Florence",
+          "state": "South Carolina",
+          "slug": "toi-toi-usa-florence-sc",
+          "phone": "(843) 286-4787",
+          "email": "sales@toitoiusa.com",
+          "website": "https://toitoiusa.com",
+          "rating": "",
+          "review_count": "",
+          "verified": "false",
+          "score": 50
+        },
+        {
+          "id": "3136b3f2-1405-4500-b016-03bcbe9d5cd6",
+          "business_name": "TOI TOI USA",
+          "city": "Florence",
+          "state": "South Carolina",
+          "slug": "toi-toi-usa-florence",
+          "phone": "(910) 248-4043",
+          "email": "",
+          "website": "",
+          "rating": "3.0",
+          "review_count": "2",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    },
+    {
+      "key": "portable restroom trailers|lake wylie|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "3b611126-ab82-4c9b-b52d-91eb7876f029",
+          "business_name": "Portable Restroom Trailers, LLC",
+          "city": "Lake Wylie",
+          "state": "South Carolina",
+          "slug": "portable-restroom-trailers-llc",
+          "phone": "(803) 810-2924",
+          "email": "jennpiorkowski@gmail.com",
+          "website": "https://www.portablerestroomtrailers.com/",
+          "rating": "4.7",
+          "review_count": "23",
+          "verified": "false",
+          "score": 63
+        },
+        {
+          "id": "339a0536-bf12-4f2c-9697-f1c00d4858b7",
+          "business_name": "Portable Restroom Trailers, LLC",
+          "city": "Lake Wylie",
+          "state": "South Carolina",
+          "slug": "portable-restroom-trailers-llc-lake-wylie",
+          "phone": "(803) 810-2924",
+          "email": "",
+          "website": "",
+          "rating": "4.7",
+          "review_count": "23",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    },
+    {
+      "key": "right a way sewer|joplin|missouri",
+      "count": 2,
+      "records": [
+        {
+          "id": "3638c484-57f5-49a5-ab17-4f85c9586c06",
+          "business_name": "Right A Way Sewer Portable Toilets",
+          "city": "Joplin",
+          "state": "Missouri",
+          "slug": "right-a-way-sewer-portable-toilets-joplin",
+          "phone": "(417) 850-1838",
+          "email": "",
+          "website": "",
+          "rating": "5.0",
+          "review_count": "8",
+          "verified": "false",
+          "score": 38
+        },
+        {
+          "id": "53dc9b17-3e4f-4b0a-899a-eccef14ee9cd",
+          "business_name": "Right A Way Sewer Service",
+          "city": "Joplin",
+          "state": "Missouri",
+          "slug": "right-a-way-sewer-service-joplin",
+          "phone": "(417) 623-1507",
+          "email": "",
+          "website": "",
+          "rating": "4.2",
+          "review_count": "24",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    },
+    {
+      "key": "toilets of charleston|summerville|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "38984bf8-9dab-4362-a5a7-77c4411e71bd",
+          "business_name": "Toilets of Charleston LLC",
+          "city": "Summerville",
+          "state": "South Carolina",
+          "slug": "toilets-of-charleston-llc-summerville",
+          "phone": "(843) 800-8345",
+          "email": "",
+          "website": "",
+          "rating": "5.0",
+          "review_count": "1",
+          "verified": "false",
+          "score": 38
+        },
+        {
+          "id": "e83d2dd6-5c2c-4eef-8468-359f93e9f734",
+          "business_name": "Toilets of Charleston LLC",
+          "city": "Summerville",
+          "state": "South Carolina",
+          "slug": "toilets-of-charleston-llc",
+          "phone": "(843) 800-8345",
+          "email": "",
+          "website": "",
+          "rating": "5.0",
+          "review_count": "0",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    },
+    {
+      "key": "access|north charleston|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "3a457da3-af1d-4137-a693-38b529016ae0",
+          "business_name": "Access Portable Toilets",
+          "city": "North Charleston",
+          "state": "South Carolina",
+          "slug": "access-portable-toilets",
+          "phone": "(843) 824-2954",
+          "email": "accessportables@gmail.com",
+          "website": "https://www.accessportabletoilets.com",
+          "rating": "3.6",
+          "review_count": "0",
+          "verified": "false",
+          "score": 68
+        },
+        {
+          "id": "3b7190e3-5c19-4f0e-bd6e-e9287f3d3949",
+          "business_name": "Access Portable Toilets",
+          "city": "North Charleston",
+          "state": "South Carolina",
+          "slug": "access-portable-toilets-north-charleston",
+          "phone": "(843) 824-2954",
+          "email": "",
+          "website": "",
+          "rating": "3.6",
+          "review_count": "20",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    },
+    {
+      "key": "barnhills|lexington|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "e50324e7-2afc-44fb-86c5-b23378c238ec",
+          "business_name": "Barnhill's Services Inc.",
+          "city": "Lexington",
+          "state": "South Carolina",
+          "slug": "barnhill-s-services-inc",
+          "phone": "(803) 618-3600",
+          "email": "",
+          "website": "https://www.barnhillsservices.com",
+          "rating": "4.6",
+          "review_count": "0",
+          "verified": "false",
+          "score": 48
+        },
+        {
+          "id": "4347a742-4f50-4eb0-b7bb-4ff4b0bf908b",
+          "business_name": "Barnhill's Services Inc.",
+          "city": "Lexington",
+          "state": "South Carolina",
+          "slug": "barnhill-s-services-inc-lexington",
+          "phone": "(803) 618-3600",
+          "email": "",
+          "website": "",
+          "rating": "4.7",
+          "review_count": "49",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    },
+    {
+      "key": "turner|lake orion|michigan",
+      "count": 2,
+      "records": [
+        {
+          "id": "4a785ba3-760f-4780-a632-45ff0764eb90",
+          "business_name": "Turner Sanitation",
+          "city": "Lake Orion",
+          "state": "Michigan",
+          "slug": "turner-sanitation-lake-orion",
+          "phone": "(248) 693-0998",
+          "email": "turnerbob3@hotmail.com",
+          "website": "http://www.turnersanitationlo.com/",
+          "rating": "4.8",
+          "review_count": "122",
+          "verified": "false",
+          "score": 71
+        },
+        {
+          "id": "dd1d1816-f30d-4ced-80f0-55ced92ade16",
+          "business_name": "Turner Sanitation, Inc.",
+          "city": "Lake Orion",
+          "state": "Michigan",
+          "slug": "turner-sanitation-inc-lake-orion",
+          "phone": "(248) 693-0998",
+          "email": "",
+          "website": "",
+          "rating": "4.8",
+          "review_count": "122",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    },
+    {
+      "key": "ameri cans|summerville|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "4b919657-50b3-429a-876d-f1565ced1a90",
+          "business_name": "AMERI-CANS",
+          "city": "Summerville",
+          "state": "South Carolina",
+          "slug": "ameri-cans",
+          "phone": "(203) 803-4924",
+          "email": "",
+          "website": "https://ameri-cans.com",
+          "rating": "",
+          "review_count": "0",
+          "verified": "false",
+          "score": 31
+        },
+        {
+          "id": "d23badb4-0bb3-4efe-82d3-5f73148b9fae",
+          "business_name": "AMERI-CANS",
+          "city": "Summerville",
+          "state": "South Carolina",
+          "slug": "ameri-cans-summerville",
+          "phone": "(203) 803-4924",
+          "email": "",
+          "website": "",
+          "rating": "",
+          "review_count": "",
+          "verified": "false",
+          "score": 8
+        }
+      ]
+    },
+    {
+      "key": "portable toilets champ|charlotte|north carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "54f3f1c3-d29b-483c-a437-00db8881abf5",
+          "business_name": "Portable Toilets Champ",
+          "city": "Charlotte",
+          "state": "North Carolina",
+          "slug": "portable-toilets-champ",
+          "phone": "(704) 440-3491",
+          "email": "brooklyn@portabletoiletschamp.com",
+          "website": "https://portabletoiletschamp.com/location/portable-toilet-services-in-charlotte-your-comprehensive-guide",
+          "rating": "5.0",
+          "review_count": "1",
+          "verified": "false",
+          "score": 73
+        },
+        {
+          "id": "b37f6e82-65ae-4d1d-a6c2-2a204e358d8b",
+          "business_name": "Portable Toilets Champ",
+          "city": "Charlotte",
+          "state": "North Carolina",
+          "slug": "portable-toilets-champ-charlotte",
+          "phone": "(704) 440-3491",
+          "email": "",
+          "website": "",
+          "rating": "5.0",
+          "review_count": "2",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    },
+    {
+      "key": "west haven|west haven|connecticut",
+      "count": 2,
+      "records": [
+        {
+          "id": "5cb43602-5b00-4998-932d-91bc85309148",
+          "business_name": "West Haven Portable Toilet Rentals",
+          "city": "West Haven",
+          "state": "Connecticut",
+          "slug": "west-haven-portable-toilet-rentals-west-haven",
+          "phone": "(475) 203-2620",
+          "email": "",
+          "website": "",
+          "rating": "",
+          "review_count": "",
+          "verified": "false",
+          "score": 28
+        },
+        {
+          "id": "65c23f81-dd12-42c0-bea7-682a834eb011",
+          "business_name": "West Haven Portable Toilet",
+          "city": "West Haven",
+          "state": "Connecticut",
+          "slug": "west-haven-portable-toilet-west-haven",
+          "phone": "(475) 203-4344",
+          "email": "",
+          "website": "",
+          "rating": "",
+          "review_count": "",
+          "verified": "false",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "key": "party john|anderson|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "94568853-459a-4c76-86f3-590c783f046f",
+          "business_name": "Party John LLC",
+          "city": "Anderson",
+          "state": "South Carolina",
+          "slug": "party-john-llc",
+          "phone": "(864) 863-5874",
+          "email": "",
+          "website": "https://partyjohn.com/%3Futm_source%3Dgoogle%26utm_medium%3Dorganic%26utm_campaign%3Dgmb-listing",
+          "rating": "5.0",
+          "review_count": "0",
+          "verified": "false",
+          "score": 48
+        },
+        {
+          "id": "7460b04f-d9a1-4f3c-82d7-2a7a03a1dd35",
+          "business_name": "Party John LLC",
+          "city": "Anderson",
+          "state": "South Carolina",
+          "slug": "party-john-llc-anderson",
+          "phone": "(864) 863-5874",
+          "email": "",
+          "website": "",
+          "rating": "5.0",
+          "review_count": "16",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    },
+    {
+      "key": "charleston restroom trailers|huger|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "89998cc8-65db-4e7d-842a-64832da713a5",
+          "business_name": "Charleston Restroom Trailers",
+          "city": "Huger",
+          "state": "South Carolina",
+          "slug": "charleston-restroom-trailers",
+          "phone": "(843) 693-3699",
+          "email": "605a7baede844d278b89dc95ae0a9123@sentry-next.wixpress.com",
+          "website": "https://www.quotecharlestonrestroomtrailers.com/about-us",
+          "rating": "5.0",
+          "review_count": "0",
+          "verified": "false",
+          "score": 66
+        },
+        {
+          "id": "82cbf1a5-6de6-46cd-9a52-70f5547de70a",
+          "business_name": "Charleston Restroom Trailers",
+          "city": "Huger",
+          "state": "South Carolina",
+          "slug": "charleston-restroom-trailers-huger",
+          "phone": "(843) 693-3699",
+          "email": "",
+          "website": "",
+          "rating": "5.0",
+          "review_count": "3",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    },
+    {
+      "key": "palmetto|myrtle beach|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "f8b4f518-196b-465b-8abf-cb9197c9861f",
+          "business_name": "Palmetto Portables",
+          "city": "Myrtle Beach",
+          "state": "South Carolina",
+          "slug": "palmetto-portables",
+          "phone": "(843) 602-4888",
+          "email": "palmettoportable@gmail.com",
+          "website": "https://palmettoportables.com",
+          "rating": "5.0",
+          "review_count": "0",
+          "verified": "false",
+          "score": 68
+        },
+        {
+          "id": "856d8a55-0197-40d7-80ab-8e8e3fce5279",
+          "business_name": "Palmetto Portables",
+          "city": "Myrtle Beach",
+          "state": "South Carolina",
+          "slug": "palmetto-portables-myrtle-beach",
+          "phone": "(843) 602-4888",
+          "email": "",
+          "website": "",
+          "rating": "5.0",
+          "review_count": "2",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    },
+    {
+      "key": "chastains septic tank services llc and chastains|anderson|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "d32db49c-9425-4859-b30f-f7a245e817b9",
+          "business_name": "Chastains Septic Tank Services, LLC and Chastain's Portable Toilets, LLC",
+          "city": "Anderson",
+          "state": "South Carolina",
+          "slug": "chastains-septic-tank-services-llc-and-chastain-s-portable-toilets-llc",
+          "phone": "(864) 991-4470",
+          "email": "",
+          "website": "https://www.chastainssepticservices.com",
+          "rating": "4.9",
+          "review_count": "0",
+          "verified": "false",
+          "score": 35
+        },
+        {
+          "id": "87d738c0-015d-43e7-9aa8-81a22da8d699",
+          "business_name": "Chastains Septic Tank Services, LLC and Chastain's Portable Toilets, LLC",
+          "city": "Anderson",
+          "state": "South Carolina",
+          "slug": "chastains-septic-tank-services-llc-and-chastain-s-portable-toilets-llc-anderson",
+          "phone": "(864) 991-4470",
+          "email": "",
+          "website": "",
+          "rating": "4.9",
+          "review_count": "145",
+          "verified": "false",
+          "score": 18
+        }
+      ]
+    },
+    {
+      "key": "portable services inc columbia|columbia|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "93c3651f-d01f-4a9f-b888-841440395afe",
+          "business_name": "Portable Services, Inc. - Columbia",
+          "city": "Columbia",
+          "state": "South Carolina",
+          "slug": "portable-services-inc-columbia",
+          "phone": "(803) 754-5768",
+          "email": "",
+          "website": "https://portableservices.net/%3Fy_source%3D1_MzI2NzU1MDEtNzE1LWxvY2F0aW9uLndlYnNpdGU%253D",
+          "rating": "4.3",
+          "review_count": "0",
+          "verified": "false",
+          "score": 48
+        },
+        {
+          "id": "db83d3d6-a8ab-40c4-868f-08b2648aaf4a",
+          "business_name": "Portable Services, Inc. - Columbia",
+          "city": "Columbia",
+          "state": "South Carolina",
+          "slug": "portable-services-inc-columbia-columbia",
+          "phone": "(803) 590-3956",
+          "email": "",
+          "website": "",
+          "rating": "4.3",
+          "review_count": "6",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    },
+    {
+      "key": "rickys|myrtle beach|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "d7ba98cb-e23f-425a-b602-adda190a7c31",
+          "business_name": "Ricky's Portable Toilet Solutions",
+          "city": "Myrtle Beach",
+          "state": "South Carolina",
+          "slug": "ricky-s-portable-toilet-solutions",
+          "phone": "(843) 508-4355",
+          "email": "",
+          "website": "https://www.rickyspottysolutions.com",
+          "rating": "",
+          "review_count": "0",
+          "verified": "false",
+          "score": 51
+        },
+        {
+          "id": "b255cc68-c76b-4329-8b9a-db8a46104ded",
+          "business_name": "Ricky's Portable Toilet Solutions",
+          "city": "Myrtle Beach",
+          "state": "South Carolina",
+          "slug": "ricky-s-portable-toilet-solutions-myrtle-beach",
+          "phone": "(843) 508-4355",
+          "email": "",
+          "website": "",
+          "rating": "",
+          "review_count": "",
+          "verified": "false",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "key": "pushup|columbia|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "cd223216-d4e2-4ed8-b15e-cc33c97ed2b4",
+          "business_name": "Pushup Toilet Rentals",
+          "city": "Columbia",
+          "state": "South Carolina",
+          "slug": "pushup-toilet-rentals",
+          "phone": "",
+          "email": "",
+          "website": "https://sites.google.com/view/rentportabletoilets",
+          "rating": "",
+          "review_count": "0",
+          "verified": "false",
+          "score": 48
+        },
+        {
+          "id": "b726086d-1e9c-4933-907c-65f278aa5cae",
+          "business_name": "Pushup Toilet Rentals",
+          "city": "Columbia",
+          "state": "South Carolina",
+          "slug": "pushup-toilet-rentals-columbia",
+          "phone": "",
+          "email": "",
+          "website": "",
+          "rating": "",
+          "review_count": "",
+          "verified": "false",
+          "score": 23
+        }
+      ]
+    },
+    {
+      "key": "grand|clover|south carolina",
+      "count": 2,
+      "records": [
+        {
+          "id": "cf15ba64-2915-4be3-be33-cba13e9295c1",
+          "business_name": "Grand Restrooms",
+          "city": "Clover",
+          "state": "South Carolina",
+          "slug": "grand-restrooms",
+          "phone": "(803) 628-7600",
+          "email": "info@grandrestrooms.com",
+          "website": "https://www.grandrestrooms.com/",
+          "rating": "4.9",
+          "review_count": "30",
+          "verified": "false",
+          "score": 73
+        },
+        {
+          "id": "e6f2d64c-232e-4764-b228-0fe8f8be107d",
+          "business_name": "Grand Restrooms",
+          "city": "Clover",
+          "state": "South Carolina",
+          "slug": "grand-restrooms-clover",
+          "phone": "(803) 628-7600",
+          "email": "",
+          "website": "",
+          "rating": "4.9",
+          "review_count": "30",
+          "verified": "false",
+          "score": 38
+        }
+      ]
+    }
+  ],
+  "toDelete": [
+    {
+      "id": "862aea16-6e75-468e-a915-ac2c22a0c846",
+      "business_name": "Royal Restrooms Savannah/Hilton Head Island",
+      "city": "Garden City",
+      "state": "Georgia",
+      "slug": "royal-restrooms-savannah-hilton-head-island-garden-city",
+      "reason": "Duplicate of 02541a30-163e-464d-abda-59acc1288b51 (lower score: 38 vs 58)"
+    },
+    {
+      "id": "8ebb371d-8566-468d-819d-d8b61a094f25",
+      "business_name": "McGraw Event Pros",
+      "city": "Moncks Corner",
+      "state": "South Carolina",
+      "slug": "mcgraw-event-pros-moncks-corner",
+      "reason": "Duplicate of 03b52d89-1096-47f3-b484-bfa13aba771d (lower score: 38 vs 56)"
+    },
+    {
+      "id": "044b9e8b-037e-4d7e-a019-06ca6621a9a1",
+      "business_name": "Elvis Service Company",
+      "city": "Myrtle Beach",
+      "state": "South Carolina",
+      "slug": "elvis-service-company-myrtle-beach",
+      "reason": "Duplicate of 418f4fae-a571-4d7a-83e6-93f503e91ef8 (lower score: 38 vs 57)"
+    },
+    {
+      "id": "08059750-154f-46ca-a93d-54ff8f0b8776",
+      "business_name": "OnSite Companies, LLC",
+      "city": "Hardeeville",
+      "state": "South Carolina",
+      "slug": "onsite-companies-llc-hardeeville",
+      "reason": "Duplicate of 87df0f91-4d44-41a6-830e-5459e76bfabd (lower score: 38 vs 54)"
+    },
+    {
+      "id": "10727a03-c40a-47bf-843f-c9c0e5ee2c60",
+      "business_name": "Halftime Rentals",
+      "city": "Denver",
+      "state": "North Carolina",
+      "slug": "halftime-rentals-denver",
+      "reason": "Duplicate of 084c3eb4-2d6a-4199-a10e-b68d7c0ad43a (lower score: 38 vs 63)"
+    },
+    {
+      "id": "1087abfa-0dfa-4d7d-941d-2caadf4e85f2",
+      "business_name": "Honey Bucket",
+      "city": "Salem",
+      "state": "Oregon",
+      "slug": "honey-bucket-salem-or",
+      "reason": "Duplicate of 1965dafc-238b-4ef2-97db-9a3dff0c5d93 (lower score: 35 vs 38)"
+    },
+    {
+      "id": "2aca7c2f-94d8-439f-aec8-50aaa8d4bec4",
+      "business_name": "Safety Quip",
+      "city": "Memphis",
+      "state": "Tennessee",
+      "slug": "safety-quip-memphis",
+      "reason": "Duplicate of 13d72eb7-d82b-4c46-9902-80908797c8e0 (lower score: 33 vs 48)"
+    },
+    {
+      "id": "16200815-729a-44a8-ad10-366cc3892a8a",
+      "business_name": "Backwoods Portalet Rentals, LLC",
+      "city": "St George",
+      "state": "South Carolina",
+      "slug": "backwoods-portalet-rentals-llc-st-george",
+      "reason": "Duplicate of 8b6b4765-b204-41d9-b6b3-5d0f85fd810f (lower score: 28 vs 33)"
+    },
+    {
+      "id": "1a1303e5-22c5-4d3d-b249-cdb2f904d163",
+      "business_name": "BAR Environmental Services LLC",
+      "city": "Wellford",
+      "state": "South Carolina",
+      "slug": "bar-environmental-services-llc-wellford",
+      "reason": "Duplicate of 3c2759a0-7ea5-464e-86b8-329d2413a652 (lower score: 38 vs 56)"
+    },
+    {
+      "id": "3136b3f2-1405-4500-b016-03bcbe9d5cd6",
+      "business_name": "TOI TOI USA",
+      "city": "Florence",
+      "state": "South Carolina",
+      "slug": "toi-toi-usa-florence",
+      "reason": "Duplicate of ece4b649-fa36-415b-b155-3c2f3734e6bc (lower score: 38 vs 50)"
+    },
+    {
+      "id": "339a0536-bf12-4f2c-9697-f1c00d4858b7",
+      "business_name": "Portable Restroom Trailers, LLC",
+      "city": "Lake Wylie",
+      "state": "South Carolina",
+      "slug": "portable-restroom-trailers-llc-lake-wylie",
+      "reason": "Duplicate of 3b611126-ab82-4c9b-b52d-91eb7876f029 (lower score: 38 vs 63)"
+    },
+    {
+      "id": "53dc9b17-3e4f-4b0a-899a-eccef14ee9cd",
+      "business_name": "Right A Way Sewer Service",
+      "city": "Joplin",
+      "state": "Missouri",
+      "slug": "right-a-way-sewer-service-joplin",
+      "reason": "Duplicate of 3638c484-57f5-49a5-ab17-4f85c9586c06 (lower score: 38 vs 38)"
+    },
+    {
+      "id": "e83d2dd6-5c2c-4eef-8468-359f93e9f734",
+      "business_name": "Toilets of Charleston LLC",
+      "city": "Summerville",
+      "state": "South Carolina",
+      "slug": "toilets-of-charleston-llc",
+      "reason": "Duplicate of 38984bf8-9dab-4362-a5a7-77c4411e71bd (lower score: 38 vs 38)"
+    },
+    {
+      "id": "3b7190e3-5c19-4f0e-bd6e-e9287f3d3949",
+      "business_name": "Access Portable Toilets",
+      "city": "North Charleston",
+      "state": "South Carolina",
+      "slug": "access-portable-toilets-north-charleston",
+      "reason": "Duplicate of 3a457da3-af1d-4137-a693-38b529016ae0 (lower score: 38 vs 68)"
+    },
+    {
+      "id": "4347a742-4f50-4eb0-b7bb-4ff4b0bf908b",
+      "business_name": "Barnhill's Services Inc.",
+      "city": "Lexington",
+      "state": "South Carolina",
+      "slug": "barnhill-s-services-inc-lexington",
+      "reason": "Duplicate of e50324e7-2afc-44fb-86c5-b23378c238ec (lower score: 38 vs 48)"
+    },
+    {
+      "id": "dd1d1816-f30d-4ced-80f0-55ced92ade16",
+      "business_name": "Turner Sanitation, Inc.",
+      "city": "Lake Orion",
+      "state": "Michigan",
+      "slug": "turner-sanitation-inc-lake-orion",
+      "reason": "Duplicate of 4a785ba3-760f-4780-a632-45ff0764eb90 (lower score: 38 vs 71)"
+    },
+    {
+      "id": "d23badb4-0bb3-4efe-82d3-5f73148b9fae",
+      "business_name": "AMERI-CANS",
+      "city": "Summerville",
+      "state": "South Carolina",
+      "slug": "ameri-cans-summerville",
+      "reason": "Duplicate of 4b919657-50b3-429a-876d-f1565ced1a90 (lower score: 8 vs 31)"
+    },
+    {
+      "id": "b37f6e82-65ae-4d1d-a6c2-2a204e358d8b",
+      "business_name": "Portable Toilets Champ",
+      "city": "Charlotte",
+      "state": "North Carolina",
+      "slug": "portable-toilets-champ-charlotte",
+      "reason": "Duplicate of 54f3f1c3-d29b-483c-a437-00db8881abf5 (lower score: 38 vs 73)"
+    },
+    {
+      "id": "65c23f81-dd12-42c0-bea7-682a834eb011",
+      "business_name": "West Haven Portable Toilet",
+      "city": "West Haven",
+      "state": "Connecticut",
+      "slug": "west-haven-portable-toilet-west-haven",
+      "reason": "Duplicate of 5cb43602-5b00-4998-932d-91bc85309148 (lower score: 28 vs 28)"
+    },
+    {
+      "id": "7460b04f-d9a1-4f3c-82d7-2a7a03a1dd35",
+      "business_name": "Party John LLC",
+      "city": "Anderson",
+      "state": "South Carolina",
+      "slug": "party-john-llc-anderson",
+      "reason": "Duplicate of 94568853-459a-4c76-86f3-590c783f046f (lower score: 38 vs 48)"
+    },
+    {
+      "id": "82cbf1a5-6de6-46cd-9a52-70f5547de70a",
+      "business_name": "Charleston Restroom Trailers",
+      "city": "Huger",
+      "state": "South Carolina",
+      "slug": "charleston-restroom-trailers-huger",
+      "reason": "Duplicate of 89998cc8-65db-4e7d-842a-64832da713a5 (lower score: 38 vs 66)"
+    },
+    {
+      "id": "856d8a55-0197-40d7-80ab-8e8e3fce5279",
+      "business_name": "Palmetto Portables",
+      "city": "Myrtle Beach",
+      "state": "South Carolina",
+      "slug": "palmetto-portables-myrtle-beach",
+      "reason": "Duplicate of f8b4f518-196b-465b-8abf-cb9197c9861f (lower score: 38 vs 68)"
+    },
+    {
+      "id": "87d738c0-015d-43e7-9aa8-81a22da8d699",
+      "business_name": "Chastains Septic Tank Services, LLC and Chastain's Portable Toilets, LLC",
+      "city": "Anderson",
+      "state": "South Carolina",
+      "slug": "chastains-septic-tank-services-llc-and-chastain-s-portable-toilets-llc-anderson",
+      "reason": "Duplicate of d32db49c-9425-4859-b30f-f7a245e817b9 (lower score: 18 vs 35)"
+    },
+    {
+      "id": "db83d3d6-a8ab-40c4-868f-08b2648aaf4a",
+      "business_name": "Portable Services, Inc. - Columbia",
+      "city": "Columbia",
+      "state": "South Carolina",
+      "slug": "portable-services-inc-columbia-columbia",
+      "reason": "Duplicate of 93c3651f-d01f-4a9f-b888-841440395afe (lower score: 38 vs 48)"
+    },
+    {
+      "id": "b255cc68-c76b-4329-8b9a-db8a46104ded",
+      "business_name": "Ricky's Portable Toilet Solutions",
+      "city": "Myrtle Beach",
+      "state": "South Carolina",
+      "slug": "ricky-s-portable-toilet-solutions-myrtle-beach",
+      "reason": "Duplicate of d7ba98cb-e23f-425a-b602-adda190a7c31 (lower score: 28 vs 51)"
+    },
+    {
+      "id": "b726086d-1e9c-4933-907c-65f278aa5cae",
+      "business_name": "Pushup Toilet Rentals",
+      "city": "Columbia",
+      "state": "South Carolina",
+      "slug": "pushup-toilet-rentals-columbia",
+      "reason": "Duplicate of cd223216-d4e2-4ed8-b15e-cc33c97ed2b4 (lower score: 23 vs 48)"
+    },
+    {
+      "id": "e6f2d64c-232e-4764-b228-0fe8f8be107d",
+      "business_name": "Grand Restrooms",
+      "city": "Clover",
+      "state": "South Carolina",
+      "slug": "grand-restrooms-clover",
+      "reason": "Duplicate of cf15ba64-2915-4be3-be33-cba13e9295c1 (lower score: 38 vs 73)"
+    }
+  ]
+}

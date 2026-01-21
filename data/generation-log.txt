@@ -1,0 +1,261 @@
+=== City Content SQL Generator ===
+
+Loaded 249 valid cities from top 250
+Will generate content for 249 cities
+
+[1/249] New York, New York (50 vendors)... ✓ generated
+[2/249] Brooklyn, New York (28 vendors)... ✓ generated
+[3/249] Charlotte, North Carolina (22 vendors)... ✓ generated
+[4/249] Houston, Texas (21 vendors)... ✓ generated
+[5/249] San Antonio, Texas (16 vendors)... ✓ generated
+[6/249] Midland, Texas (13 vendors)... ✓ generated
+[7/249] Nashville, Tennessee (13 vendors)... ✓ generated
+[8/249] Fresno, California (12 vendors)... ✓ generated
+[9/249] Austin, Texas (11 vendors)... ✓ generated
+[10/249] Fayetteville, North Carolina (10 vendors)... ✓ generated
+[11/249] Greensboro, North Carolina (10 vendors)... ✓ generated
+[12/249] Bakersfield, California (9 vendors)... ✓ generated
+[13/249] Des Moines, Iowa (9 vendors)... ✓ generated
+[14/249] Fort Worth, Texas (9 vendors)... ✓ generated
+[15/249] Portland, Oregon (9 vendors)... ✓ generated
+[16/249] Richmond, Virginia (9 vendors)... ✓ generated
+[17/249] Salt Lake City, Utah (9 vendors)... ✓ generated
+[18/249] Williston, Vermont (9 vendors)... ✓ generated
+[19/249] Amarillo, Texas (8 vendors)... ✓ generated
+[20/249] Greenville, North Carolina (8 vendors)... ✓ generated
+[21/249] Jersey City, New Jersey (8 vendors)... ✓ generated
+[22/249] Las Vegas, Nevada (8 vendors)... ✓ generated
+[23/249] Memphis, Tennessee (8 vendors)... ✓ generated
+[24/249] Miami, Florida (8 vendors)... ✓ generated
+[25/249] Newport News, Virginia (8 vendors)... ✓ generated
+[26/249] Oklahoma City, Oklahoma (8 vendors)... ✓ generated
+[27/249] Phoenix, Arizona (8 vendors)... ✓ generated
+[28/249] Plattsburgh, New York (8 vendors)... ✓ generated
+[29/249] Bronx, New York (7 vendors)... ✓ generated
+[30/249] Charlottesville, Virginia (7 vendors)... ✓ generated
+[31/249] Dallas, Texas (7 vendors)... ✓ generated
+[32/249] Harrisonburg, Virginia (7 vendors)... ✓ generated
+[33/249] Kerrville, Texas (7 vendors)... ✓ generated
+[34/249] Lincoln, Nebraska (7 vendors)... ✓ generated
+[35/249] Lubbock, Texas (7 vendors)... ✓ generated
+[36/249] Lynchburg, Virginia (7 vendors)... ✓ generated
+[37/249] Roanoke, Virginia (7 vendors)... ✓ generated
+[38/249] Savannah, Georgia (7 vendors)... ✓ generated
+[39/249] Sioux Falls, South Dakota (7 vendors)... ✓ generated
+[40/249] Tulsa, Oklahoma (7 vendors)... ✓ generated
+[41/249] Uvalde, Texas (7 vendors)... ✓ generated
+[42/249] Wichita Falls, Texas (7 vendors)... ✓ generated
+[43/249] Albuquerque, New Mexico (6 vendors)... ✓ generated
+[44/249] Columbus, Ohio (6 vendors)... ✓ generated
+[45/249] El Paso, Texas (6 vendors)... ✓ generated
+[46/249] Kansas City, Missouri (6 vendors)... ✓ generated
+[47/249] Moses Lake, Washington (6 vendors)... ✓ generated
+[48/249] New Orleans, Louisiana (6 vendors)... ✓ generated
+[49/249] Odessa, Texas (6 vendors)... ✓ generated
+[50/249] Raleigh, North Carolina (6 vendors)... ✓ generated
+[51/249] Seattle, Washington (6 vendors)... ✓ generated
+[52/249] Sterling, Virginia (6 vendors)... ✓ generated
+[53/249] Virginia Beach, Virginia (6 vendors)... ✓ generated
+[54/249] West Bend, Wisconsin (6 vendors)... ✓ generated
+[55/249] Wichita, Kansas (6 vendors)... ✓ generated
+[56/249] Winston-Salem, North Carolina (6 vendors)... ✓ generated
+[57/249] Atlanta, Georgia (5 vendors)... ✓ generated
+[58/249] Charleston, West Virginia (5 vendors)... ✓ generated
+[59/249] Clifton, New Jersey (5 vendors)... ✓ generated
+[60/249] Evansville, Indiana (5 vendors)... ✓ generated
+[61/249] Fairfax, Virginia (5 vendors)... ✓ generated
+[62/249] Granbury, Texas (5 vendors)... ✓ generated
+[63/249] Harrisburg, Pennsylvania (5 vendors)... ✓ generated
+[64/249] Huntsville, Texas (5 vendors)... ✓ generated
+[65/249] Indianapolis, Indiana (5 vendors)... ✓ generated
+[66/249] Jackson, Mississippi (5 vendors)... ✓ generated
+[67/249] Knoxville, Tennessee (5 vendors)... ✓ generated
+[68/249] Lexington, Kentucky (5 vendors)... ✓ generated
+[69/249] Louisville, Kentucky (5 vendors)... ✓ generated
+[70/249] Marble Falls, Texas (5 vendors)... ✓ generated
+[71/249] Newark, New Jersey (5 vendors)... ✓ generated
+[72/249] North Bergen, New Jersey (5 vendors)... ✓ generated
+[73/249] Ogden, Utah (5 vendors)... ✓ generated
+[74/249] Orlando, Florida (5 vendors)... ✓ generated
+[75/249] Pittsburgh, Pennsylvania (5 vendors)... ✓ generated
+[76/249] Salinas, California (5 vendors)... ✓ generated
+[77/249] Secaucus, New Jersey (5 vendors)... ✓ generated
+[78/249] Spokane, Washington (5 vendors)... ✓ generated
+[79/249] Traverse City, Michigan (5 vendors)... ✓ generated
+[80/249] Waco, Texas (5 vendors)... ✓ generated
+[81/249] Altoona, Pennsylvania (4 vendors)... ✓ generated
+[82/249] Asheville, North Carolina (4 vendors)... ✓ generated
+[83/249] Augusta, Georgia (4 vendors)... ✓ generated
+[84/249] Beaumont, Texas (4 vendors)... ✓ generated
+[85/249] Bellevue, Washington (4 vendors)... ✓ generated
+[86/249] Checotah, Oklahoma (4 vendors)... ✓ generated
+[87/249] Clarksville, Tennessee (4 vendors)... ✓ generated
+[88/249] Colorado Springs, Colorado (4 vendors)... ✓ generated
+[89/249] Columbia, South Carolina (4 vendors)... ✓ generated
+[90/249] Columbia, Tennessee (4 vendors)... ✓ generated
+[91/249] Culpeper, Virginia (4 vendors)... ✓ generated
+[92/249] Denver, North Carolina (4 vendors)... ✓ generated
+[93/249] Durham, North Carolina (4 vendors)... ✓ generated
+[94/249] Fort Myers, Florida (4 vendors)... ✓ generated
+[95/249] Fort Wayne, Indiana (4 vendors)... ✓ generated
+[96/249] Gillette, Wyoming (4 vendors)... ✓ generated
+[97/249] Hampton, Virginia (4 vendors)... ✓ generated
+[98/249] Hobbs, New Mexico (4 vendors)... ✓ generated
+[99/249] Huntington, West Virginia (4 vendors)... ✓ generated
+[100/249] Jacksonville, Florida (4 vendors)... ✓ generated
+[101/249] Kalispell, Montana (4 vendors)... ✓ generated
+[102/249] Kennewick, Washington (4 vendors)... ✓ generated
+[103/249] Kingsport, Tennessee (4 vendors)... ✓ generated
+[104/249] Lafayette, Louisiana (4 vendors)... ✓ generated
+[105/249] Leesburg, Virginia (4 vendors)... ✓ generated
+[106/249] Lenoir City, Tennessee (4 vendors)... ✓ generated
+[107/249] Lewiston, Idaho (4 vendors)... ✓ generated
+[108/249] Los Angeles, California (4 vendors)... ✓ generated
+[109/249] Martinsville, Virginia (4 vendors)... ✓ generated
+[110/249] Mt Airy, North Carolina (4 vendors)... ✓ generated
+[111/249] Murfreesboro, Tennessee (4 vendors)... ✓ generated
+[112/249] Myrtle Beach, South Carolina (4 vendors)... ✓ generated
+[113/249] Norfolk, Virginia (4 vendors)... ✓ generated
+[114/249] Omaha, Nebraska (4 vendors)... ✓ generated
+[115/249] Pasco, Washington (4 vendors)... ✓ generated
+[116/249] Plano, Texas (4 vendors)... ✓ generated
+[117/249] Princeton, West Virginia (4 vendors)... ✓ generated
+[118/249] Riverside, California (4 vendors)... ✓ generated
+[119/249] Saddle Brook, New Jersey (4 vendors)... ✓ generated
+[120/249] San Francisco, California (4 vendors)... ✓ generated
+[121/249] San Marcos, Texas (4 vendors)... ✓ generated
+[122/249] Santa Fe, New Mexico (4 vendors)... ✓ generated
+[123/249] St. Louis, Missouri (4 vendors)... ✓ generated
+[124/249] Stroudsburg, Pennsylvania (4 vendors)... ✓ generated
+[125/249] Tacoma, Washington (4 vendors)... ✓ generated
+[126/249] Tampa, FL (4 vendors)... ✓ generated
+[127/249] Union City, New Jersey (4 vendors)... ✓ generated
+[128/249] Vancouver, Washington (4 vendors)... ✓ generated
+[129/249] Washington, District Of Columbia (4 vendors)... ✓ generated
+[130/249] Wilkes-Barre, Pennsylvania (4 vendors)... ✓ generated
+[131/249] Winchester, Virginia (4 vendors)... ✓ generated
+[132/249] Wisconsin Rapids, Wisconsin (4 vendors)... ✓ generated
+[133/249] Zanesville, Ohio (4 vendors)... ✓ generated
+[134/249] Abilene, Texas (3 vendors)... ✓ generated
+[135/249] Allentown, Pennsylvania (3 vendors)... ✓ generated
+[136/249] Anderson, South Carolina (3 vendors)... ✓ generated
+[137/249] Angleton, Texas (3 vendors)... ✓ generated
+[138/249] Aurora, Colorado (3 vendors)... ✓ generated
+[139/249] Baton Rouge, Louisiana (3 vendors)... ✓ generated
+[140/249] Bellefonte, Pennsylvania (3 vendors)... ✓ generated
+[141/249] Bennington, Vermont (3 vendors)... ✓ generated
+[142/249] Bethlehem, Pennsylvania (3 vendors)... ✓ generated
+[143/249] Big Spring, Texas (3 vendors)... ✓ generated
+[144/249] Boise, Idaho (3 vendors)... ✓ generated
+[145/249] Boston, Massachusetts (3 vendors)... ✓ generated
+[146/249] Bradford, Vermont (3 vendors)... ✓ generated
+[147/249] Bridgeport, Connecticut (3 vendors)... ✓ generated
+[148/249] Bridgeville, Pennsylvania (3 vendors)... ✓ generated
+[149/249] Brookings, South Dakota (3 vendors)... ✓ generated
+[150/249] Buffalo, New York (3 vendors)... ✓ generated
+[151/249] Burlington, Vermont (3 vendors)... ✓ generated
+[152/249] Canandaigua, New York (3 vendors)... ✓ generated
+[153/249] Cape May Court House, New Jersey (3 vendors)... ✓ generated
+[154/249] Casper, Wyoming (3 vendors)... ✓ generated
+[155/249] Chambersburg, Pennsylvania (3 vendors)... ✓ generated
+[156/249] Charlotte, NC (3 vendors)... ✓ generated
+[157/249] Chicago, Illinois (3 vendors)... ✓ generated
+[158/249] Christiansburg, Virginia (3 vendors)... ✓ generated
+[159/249] Cincinnati, Ohio (3 vendors)... ✓ generated
+[160/249] Conway, South Carolina (3 vendors)... ✓ generated
+[161/249] Cookeville, Tennessee (3 vendors)... ✓ generated
+[162/249] Corpus Christi, Texas (3 vendors)... ✓ generated
+[163/249] Cranberry Twp, Pennsylvania (3 vendors)... ✓ generated
+[164/249] Cumming, Georgia (3 vendors)... ✓ generated
+[165/249] Danville, Virginia (3 vendors)... ✓ generated
+[166/249] De Queen, Arkansas (3 vendors)... ✓ generated
+[167/249] Denver, Colorado (3 vendors)... ✓ generated
+[168/249] Downingtown, Pennsylvania (3 vendors)... ✓ generated
+[169/249] Eau Claire, Wisconsin (3 vendors)... ✓ generated
+[170/249] Elizabethtown, Pennsylvania (3 vendors)... ✓ generated
+[171/249] Erie, Pennsylvania (3 vendors)... ✓ generated
+[172/249] Fallon, Nevada (3 vendors)... ✓ generated
+[173/249] Falls Church, Virginia (3 vendors)... ✓ generated
+[174/249] Farmington, New Mexico (3 vendors)... ✓ generated
+[175/249] Fredericksburg, Virginia (3 vendors)... ✓ generated
+[176/249] Front Royal, Virginia (3 vendors)... ✓ generated
+[177/249] Garland, Texas (3 vendors)... ✓ generated
+[178/249] Gig Harbor, Washington (3 vendors)... ✓ generated
+[179/249] Gloucester, Virginia (3 vendors)... ✓ generated
+[180/249] Great Falls, Montana (3 vendors)... ✓ generated
+[181/249] Greencastle, Pennsylvania (3 vendors)... ✓ generated
+[182/249] Greeneville, Tennessee (3 vendors)... ✓ generated
+[183/249] Greensburg, Pennsylvania (3 vendors)... ✓ generated
+[184/249] Greenville, Pennsylvania (3 vendors)... ✓ generated
+[185/249] Greenville, Texas (3 vendors)... ✓ generated
+[186/249] Hackensack, New Jersey (3 vendors)... ✓ generated
+[187/249] Hamburg, Pennsylvania (3 vendors)... ✓ generated
+[188/249] Hattiesburg, Mississippi (3 vendors)... ✓ generated
+[189/249] Hayward, Wisconsin (3 vendors)... ✓ generated
+[190/249] Hermitage, Tennessee (3 vendors)... ✓ generated
+[191/249] High Point, North Carolina (3 vendors)... ✓ generated
+[192/249] Huntsville, AL (3 vendors)... ✓ generated
+[193/249] Idaho Falls, Idaho (3 vendors)... ✓ generated
+[194/249] Jim Thorpe, Pennsylvania (3 vendors)... ✓ generated
+[195/249] Joplin, Missouri (3 vendors)... ✓ generated
+[196/249] Killeen, Texas (3 vendors)... ✓ generated
+[197/249] La Feria, Texas (3 vendors)... ✓ generated
+[198/249] Lake Havasu City, Arizona (3 vendors)... ✓ generated
+[199/249] Latrobe, Pennsylvania (3 vendors)... ✓ generated
+[200/249] Lawrenceburg, Tennessee (3 vendors)... ✓ generated
+[201/249] Lawton, Oklahoma (3 vendors)... ✓ generated
+[202/249] Livingston, Texas (3 vendors)... ✓ generated
+[203/249] Logan, Ohio (3 vendors)... ✓ generated
+[204/249] Longview, Texas (3 vendors)... ✓ generated
+[205/249] Lynden, Washington (3 vendors)... ✓ generated
+[206/249] Macon, Georgia (3 vendors)... ✓ generated
+[207/249] Marshall, Texas (3 vendors)... ✓ generated
+[208/249] Martinsburg, West Virginia (3 vendors)... ✓ generated
+[209/249] Maryville, Tennessee (3 vendors)... ✓ generated
+[210/249] McMinnville, Tennessee (3 vendors)... ✓ generated
+[211/249] Mechanicsburg, Pennsylvania (3 vendors)... ✓ generated
+[212/249] Mesa, Arizona (3 vendors)... ✓ generated
+[213/249] Metairie, Louisiana (3 vendors)... ✓ generated
+[214/249] Mineral Wells, Texas (3 vendors)... ✓ generated
+[215/249] Missoula, Montana (3 vendors)... ✓ generated
+[216/249] Mooresville, North Carolina (3 vendors)... ✓ generated
+[217/249] Morristown, Tennessee (3 vendors)... ✓ generated
+[218/249] New Berlin, Wisconsin (3 vendors)... ✓ generated
+[219/249] New Braunfels, Texas (3 vendors)... ✓ generated
+[220/249] Orem, Utah (3 vendors)... ✓ generated
+[221/249] Orlando, FL (3 vendors)... ✓ generated
+[222/249] Oshkosh, Wisconsin (3 vendors)... ✓ generated
+[223/249] Paducah, Kentucky (3 vendors)... ✓ generated
+[224/249] Paterson, New Jersey (3 vendors)... ✓ generated
+[225/249] Pendleton, Oregon (3 vendors)... ✓ generated
+[226/249] Penn Yan, New York (3 vendors)... ✓ generated
+[227/249] Philadelphia, Pennsylvania (3 vendors)... ✓ generated
+[228/249] Pierre, South Dakota (3 vendors)... ✓ generated
+[229/249] Porterville, California (3 vendors)... ✓ generated
+[230/249] Providence, Rhode Island (3 vendors)... ✓ generated
+[231/249] Quarryville, Pennsylvania (3 vendors)... ✓ generated
+[232/249] Rapid City, South Dakota (3 vendors)... ✓ generated
+[233/249] Reading, Pennsylvania (3 vendors)... ✓ generated
+[234/249] Rio Rancho, New Mexico (3 vendors)... ✓ generated
+[235/249] Salem, Oregon (3 vendors)... ✓ generated
+[236/249] San Diego, California (3 vendors)... ✓ generated
+[237/249] Shreveport, Louisiana (3 vendors)... ✓ generated
+[238/249] South Burlington, Vermont (3 vendors)... ✓ generated
+[239/249] Sparks, Nevada (3 vendors)... ✓ generated
+[240/249] Spokane Valley, Washington (3 vendors)... ✓ generated
+[241/249] Spring City, Pennsylvania (3 vendors)... ✓ generated
+[242/249] Springfield, Missouri (3 vendors)... ✓ generated
+[243/249] St. George, Utah (3 vendors)... ✓ generated
+[244/249] Staten Island, New York (3 vendors)... ✓ generated
+[245/249] Staunton, Virginia (3 vendors)... ✓ generated
+[246/249] Summerville, South Carolina (3 vendors)... ✓ generated
+[247/249] Tampa, Florida (3 vendors)... ✓ generated
+[248/249] Tomahawk, Wisconsin (3 vendors)... ✓ generated
+[249/249] Tooele, Utah (3 vendors)... ✓ generated
+
+=== Complete ===
+Success: 249
+Failed: 0
+
+SQL output sent to stdout. Redirect to file with:
+  node scripts/generate-city-content-sql.cjs > city-content.sql
