@@ -3,188 +3,193 @@
     {
       "id": "sanitation",
       "name": "Sanitation Essentials",
-      "description": "Keep your portable restrooms clean and well-stocked"
+      "description": "Keep your portable restrooms clean and well-stocked",
+      "image": "/images/categories/sanitation.jpg"
     },
     {
       "id": "odor-control",
       "name": "Odor Control",
-      "description": "Eliminate unpleasant odors and keep units fresh"
+      "description": "Eliminate unpleasant odors and keep units fresh",
+      "image": "/images/categories/odor-control.jpg"
     },
     {
       "id": "event-supplies",
       "name": "Event Supplies",
-      "description": "Signage, safety equipment, and event accessories"
+      "description": "Signage, safety equipment, and event accessories",
+      "image": "/images/categories/event-supplies.jpg"
     },
     {
       "id": "cleaning",
       "name": "Cleaning Supplies",
-      "description": "Industrial-strength cleaners and protective gear"
+      "description": "Industrial-strength cleaners and protective gear",
+      "image": "/images/categories/cleaning.jpg"
     },
     {
       "id": "emergency",
       "name": "Emergency & Camping",
-      "description": "Portable toilets, waste bags, and privacy solutions"
+      "description": "Portable toilets, waste bags, and privacy solutions",
+      "image": "/images/categories/emergency.jpg"
     }
   ],
   "products": [
     {
       "id": "toilet-paper-bulk",
-      "name": "Amazon Commercial Toilet Paper (80 Rolls)",
-      "description": "Bulk 2-ply toilet paper for high-traffic portable restrooms and events.",
+      "name": "AmazonCommercial 2-Ply Toilet Paper (80 Rolls)",
+      "description": "Bulk 2-ply toilet paper for high-traffic portable restrooms and events. FSC-Certified, 400 sheets per roll.",
       "priceRange": "$45-60",
-      "asin": "B0858LSWWX",
+      "asin": "B07KWNSTRR",
       "category": "sanitation"
     },
     {
       "id": "hand-sanitizer-gallon",
-      "name": "PURELL Advanced Hand Sanitizer (1 Gallon)",
+      "name": "PURELL Advanced Hand Sanitizer Gel (64 oz Refill)",
       "description": "Professional-grade gel sanitizer for refilling dispensers. Kills 99.99% of germs.",
       "priceRange": "$30-45",
-      "asin": "B003SLPD2O",
+      "asin": "B08D6V7BLY",
       "category": "sanitation"
     },
     {
       "id": "foam-soap-refill",
-      "name": "GOJO Foam Hand Soap Refill (2 Pack)",
-      "description": "Premium foaming hand soap for portable hand wash stations.",
+      "name": "GOJO Premium Foam Handwash Refill (2 Pack)",
+      "description": "Premium foaming hand soap for portable hand wash stations. 1200 mL per refill, up to 2000 uses each.",
       "priceRange": "$25-35",
-      "asin": "B000AP7HJS",
+      "asin": "B00U90PQ00",
       "category": "sanitation"
     },
     {
       "id": "paper-towels-bulk",
-      "name": "Scott Essential Multifold Paper Towels",
-      "description": "Commercial-grade paper towels for hand wash stations and restroom trailers.",
+      "name": "Scott Essential Multifold Paper Towels (16 Packs)",
+      "description": "Commercial-grade paper towels for hand wash stations and restroom trailers. 250 towels per pack.",
       "priceRange": "$35-50",
-      "asin": "B0040ZOFQQ",
+      "asin": "B001AZKS4W",
       "category": "sanitation"
     },
     {
       "id": "deodorizer-packets",
-      "name": "Camco TST RV Toilet Treatment (30 Pack)",
-      "description": "Drop-in deodorizer packets that neutralize odors. Works in porta potties and RV toilets.",
+      "name": "Camco TST MAX RV Toilet Treatment (30 Pack)",
+      "description": "Drop-in deodorizer packets that neutralize odors. Works in porta potties and RV toilets. Orange scent.",
       "priceRange": "$15-25",
-      "asin": "B0014JMZWI",
+      "asin": "B016V2B1Z8",
       "category": "odor-control"
     },
     {
       "id": "enzyme-treatment",
       "name": "Walex Porta-Pak Holding Tank Deodorizer (50 Pack)",
-      "description": "Professional-grade packets that break down waste and eliminate odors.",
+      "description": "Professional-grade packets that break down waste and eliminate odors. Formaldehyde-free and septic safe.",
       "priceRange": "$25-35",
-      "asin": "B001Q37YGU",
+      "asin": "B005FIHDNE",
       "category": "odor-control"
     },
     {
       "id": "blue-chemical",
-      "name": "Camco TST Blue Enzyme Holding Tank Treatment",
-      "description": "Concentrated blue deodorizing liquid for portable toilets. Formaldehyde-free.",
+      "name": "Camco TST Blue Enzyme Holding Tank Treatment (1 Gallon)",
+      "description": "Concentrated blue deodorizing liquid for portable toilets. Formaldehyde-free, treats up to 40 gallons.",
       "priceRange": "$15-25",
-      "asin": "B000BUU5YU",
+      "asin": "B007H2PGOE",
       "category": "odor-control"
     },
     {
       "id": "air-freshener-spray",
-      "name": "Febreze Air Heavy Duty (8.8 oz, 3 Pack)",
-      "description": "Industrial strength air freshener spray for instant odor elimination.",
+      "name": "Febreze Air Heavy Duty Crisp Clean (8.8 oz, 3 Pack)",
+      "description": "Industrial strength air freshener spray for instant odor elimination. Uses 100% natural propellants.",
       "priceRange": "$12-18",
-      "asin": "B07GXJY2HM",
+      "asin": "B01M4RLBJU",
       "category": "odor-control"
     },
     {
       "id": "restroom-signs",
-      "name": "Restroom Directional Signs (2 Pack)",
-      "description": "Weather-resistant directional signs to guide guests to portable restroom locations.",
+      "name": "Restroom Directional Signs with Arrow (4 Pack)",
+      "description": "Weather-resistant directional signs to guide guests to portable restroom locations. Acrylic, 9x3 inches.",
       "priceRange": "$15-25",
-      "asin": "B07PFLBNJH",
+      "asin": "B07QWTP62M",
       "category": "event-supplies"
     },
     {
       "id": "safety-cones",
       "name": "28 Inch Traffic Safety Cones (6 Pack)",
-      "description": "Reflective safety cones for marking restroom areas and directing traffic.",
+      "description": "Reflective safety cones for marking restroom areas and directing traffic. PVC with dual reflective collars.",
       "priceRange": "$40-55",
-      "asin": "B000NY4LES",
+      "asin": "B071VB38LD",
       "category": "event-supplies"
     },
     {
       "id": "solar-lights",
       "name": "SOLPEX Solar Pathway Lights (12 Pack)",
-      "description": "Solar-powered LED lights to illuminate pathways to portable restrooms at night.",
+      "description": "Solar-powered LED lights to illuminate pathways to portable restrooms at night. Stainless steel, waterproof.",
       "priceRange": "$25-40",
-      "asin": "B07WTCTSGS",
+      "asin": "B0816856CC",
       "category": "event-supplies"
     },
     {
       "id": "caution-tape",
       "name": "Yellow Caution Tape (1000 ft Roll)",
-      "description": "Bright yellow caution tape for marking off areas and guiding foot traffic.",
+      "description": "Bright yellow caution tape for marking off areas and guiding foot traffic. 3 inches wide, non-adhesive.",
       "priceRange": "$8-15",
-      "asin": "B01MU3RZXK",
+      "asin": "B0831F71G6",
       "category": "event-supplies"
     },
     {
       "id": "industrial-cleaner",
       "name": "Simple Green Industrial Cleaner (1 Gallon)",
-      "description": "Heavy-duty all-purpose cleaner for portable restroom interiors.",
+      "description": "Heavy-duty all-purpose cleaner for portable restroom interiors. Non-toxic, biodegradable, EPA Safer Choice.",
       "priceRange": "$15-25",
-      "asin": "B00065V8QK",
+      "asin": "B00DSXTK16",
       "category": "cleaning"
     },
     {
       "id": "nitrile-gloves",
       "name": "MedPride Nitrile Gloves (1000 Count)",
-      "description": "Disposable nitrile gloves for sanitary cleaning and maintenance.",
+      "description": "Disposable powder-free nitrile gloves for sanitary cleaning and maintenance. Latex-free, case of 10 boxes.",
       "priceRange": "$45-65",
-      "asin": "B08CV499V4",
+      "asin": "B0143X56Y4",
       "category": "cleaning"
     },
     {
       "id": "scrub-brush-set",
       "name": "Heavy-Duty Scrub Brush Set (3 Pack)",
-      "description": "Industrial scrub brushes for thorough portable restroom cleaning.",
+      "description": "Industrial scrub brushes for thorough portable restroom cleaning. Includes long handle, handheld, and detail brush.",
       "priceRange": "$12-20",
-      "asin": "B07K82V5DP",
+      "asin": "B0921KYLZQ",
       "category": "cleaning"
     },
     {
       "id": "spray-bottles",
       "name": "Heavy Duty Spray Bottles (3 Pack, 32 oz)",
-      "description": "Commercial spray bottles for cleaning solutions.",
+      "description": "Commercial chemical-resistant spray bottles for cleaning solutions. Adjustable nozzle, leak-proof design.",
       "priceRange": "$10-15",
-      "asin": "B01LERRZLA",
+      "asin": "B074PTQZRP",
       "category": "cleaning"
     },
     {
       "id": "portable-toilet-camping",
       "name": "Camco Portable Travel Toilet (5.3 Gallon)",
-      "description": "Portable toilet for camping, emergencies, or small outdoor events.",
+      "description": "Portable toilet for camping, emergencies, or small outdoor events. Detachable holding tank with bellow flush.",
       "priceRange": "$80-110",
-      "asin": "B002V90TXK",
+      "asin": "B004SFKJIQ",
       "category": "emergency"
     },
     {
       "id": "waste-bags",
       "name": "Reliance Double Doodie Waste Bags (6 Pack)",
-      "description": "Waste bags with bio-gel for portable and emergency toilets.",
+      "description": "Waste bags with bio-gel for portable and emergency toilets. Double-bagged design for leak protection.",
       "priceRange": "$15-25",
-      "asin": "B000FIAPXO",
+      "asin": "B001123ATE",
       "category": "emergency"
     },
     {
       "id": "privacy-tent",
       "name": "GigaTent Pop Up Privacy Tent",
-      "description": "Instant pop-up privacy tent for portable toilets at camping or events.",
+      "description": "Instant pop-up privacy tent for portable toilets at camping or events. 74 inches tall, lightweight and foldable.",
       "priceRange": "$35-55",
-      "asin": "B005HFJ9FO",
+      "asin": "B00CP8SJVW",
       "category": "emergency"
     },
     {
       "id": "emergency-bucket-toilet",
-      "name": "Luggable Loo Portable Toilet",
-      "description": "Emergency bucket toilet with snap-on seat. Great for disaster preparedness.",
+      "name": "Reliance Products Luggable Loo Portable Toilet",
+      "description": "Emergency bucket toilet with snap-on seat. Great for disaster preparedness, camping, and hunting.",
       "priceRange": "$20-30",
-      "asin": "B000FIOGNQ",
+      "asin": "B000FIAPXO",
       "category": "emergency"
     }
   ]
