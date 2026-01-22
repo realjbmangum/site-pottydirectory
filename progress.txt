@@ -1,6 +1,34 @@
 # Potty Directory - Progress Log
 
+## Quick Reference
+- **Live URL:** https://pottydirectory.com
+- **Supplies Page:** https://pottydirectory.com/supplies
+- **Amazon Tag:** jbmangum27-20
+- **Vendors:** ~5,850 | **Pages:** 7,247 | **Blog Posts:** 30
+
 ## Current State (as of Jan 21, 2026)
+
+### Session - Jan 21, 2026 (Session 4) - Bug Fixes
+
+**Completed:**
+- Fixed Amazon affiliate links (404 errors)
+  - Updated products.json with real verified ASINs
+  - Removed broken imageUrl fields from all products
+  - Simplified ProductCard.astro to work without images (card-based design)
+- Triggered rebuild for featured vendors data
+  - **Important:** This is a STATIC site - database changes only appear after a rebuild
+  - Featured vendors in Supabase must be set BEFORE build time
+
+**Commits:**
+- `fix: Use real Amazon ASINs and simplify product cards`
+- `chore: Trigger rebuild for featured vendors data`
+
+**Notes for Featured Listings:**
+- Verify in Supabase that `featured = true` (boolean, not string "true")
+- State name must match exactly (e.g., "Texas" not "TX")
+- If no vendors have `featured=true`, fallback shows vendors with rating >= 4.5 AND review_count >= 10
+
+---
 
 ### Session - Jan 21, 2026 (Session 3) - Monetization Implementation
 
@@ -47,11 +75,12 @@
 - Build successful: 7,247 pages generated
 
 **Next Steps:**
-- [ ] Mark a test vendor as `featured=true` in Supabase to verify featured display
-- [ ] Test affiliate links on /supplies page
+- [x] Mark a test vendor as `featured=true` in Supabase to verify featured display
+- [x] Test affiliate links on /supplies page - Fixed ASINs in Session 4
+- [x] Deploy to production - Pushed to Cloudflare Pages
 - [ ] Monitor affiliate conversions in Amazon Associates dashboard
 - [ ] Consider adding more products to catalog
-- [ ] Deploy to production
+- [ ] Add product images (optional - currently text-only cards)
 
 ---
 
@@ -67,8 +96,8 @@
 |----------------|--------|-------|
 | Google AdSense | Pending approval | Code added (ca-pub-2962780862577949), awaiting Google |
 | Verified Badge Program | Live | Backlink exchange - vendors get badge for linking back |
-| Featured Listings | DB ready, no payment | `featured` flag exists, no Stripe/payment flow |
-| Affiliate Links | Not implemented | No affiliate programs joined yet |
+| Featured Listings | **Live** | UI complete, `featured` flag in DB, no payment flow yet |
+| Amazon Affiliates | **Live** | Tag: `jbmangum27-20`, /supplies page, blog integrations |
 
 ### Indexing Status
 - **Jan 8:** Fixed www→non-www canonical URL mismatch
@@ -82,23 +111,18 @@
 
 ---
 
-## Questions to Resolve
+## Outstanding Items
 
-### 1. Indexing
-- [ ] Check Google Search Console - what's current index status?
-- [ ] Which page types are failing to index? (city, vendor, blog?)
-- [ ] Any new errors since Jan 8 fixes?
+### Verify After Deploy
+- [ ] Featured listings showing on /texas (and other states with featured vendors)
+- [ ] Amazon links working on /supplies page
+- [ ] Affiliate links in blog posts working
 
-### 2. AdSense
-- [ ] Was AdSense rejected or still pending?
-- [ ] If rejected, what was the reason?
-- [ ] What's the resubmission cycle/waiting period?
-
-### 3. Monetization Strategy
-- [ ] What's current traffic level? (determines which streams make sense)
-- [ ] Priority order for revenue streams?
-- [ ] Premium listings: build payment flow or manual outreach first?
-- [ ] Affiliate: which programs to join? (equipment, event supplies?)
+### Pending Decisions
+- [ ] Premium listings: build Stripe payment flow or manual outreach first?
+- [ ] Add product images to supplies page? (currently text-only cards)
+- [ ] Check Google Search Console - indexing status after Jan 8 fixes
+- [ ] AdSense approval status
 
 ---
 
