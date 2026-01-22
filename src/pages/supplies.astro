@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import ProductCard from '../components/ProductCard.astro';
+import AdSlot from '../components/AdSlot.astro';
+import productsData from '../data/products.json';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Supplies' }
+];
+
+// Group products by category
+const productsByCategory = productsData.categories.map(category => ({
+  ...category,
+  products: productsData.products.filter(p => p.category === category.id)
+}));
+---
+
+<BaseLayout
+  title="Porta Potty Supplies & Equipment | Potty Directory"
+  description="Shop essential portable restroom supplies including sanitation products, odor control, cleaning equipment, and emergency toilet solutions. Trusted recommendations from Potty Directory."
+>
+  <!-- Hero -->
+  <section class="relative min-h-[300px] flex items-center overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="/images/herotile.jpeg" alt="" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-primary-900/90 to-slate-900/80"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-slate-900/50"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+      <Breadcrumb items={breadcrumbs} />
+      <div class="mt-6">
+        <div class="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-4">
+          <svg class="w-5 h-5 text-amber-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+          <span class="text-sm font-medium text-white">Recommended Supplies</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">
+          Portable Restroom Supplies
+        </h1>
+        <p class="text-xl text-blue-100 max-w-2xl">
+          Essential products for keeping your porta potties clean, fresh, and well-stocked. Curated recommendations from industry professionals.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- FTC Affiliate Disclosure -->
+    <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-8">
+      <div class="flex items-start gap-3">
+        <svg class="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <div>
+          <p class="text-sm text-amber-800">
+            <strong>Affiliate Disclosure:</strong> Potty Directory participates in the Amazon Associates Program. We may earn a commission when you purchase through our links at no extra cost to you. This helps support our free directory service.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="bg-white rounded-xl border border-gray-200 p-6 mb-10">
+      <h2 class="font-semibold text-gray-900 mb-4">Jump to Category</h2>
+      <div class="flex flex-wrap gap-2">
+        {productsByCategory.map(category => (
+          <a
+            href={`#${category.id}`}
+            class="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-primary-100 hover:text-primary-700 rounded-lg text-sm font-medium text-gray-700 transition-colors"
+          >
+            {category.name}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Ad -->
+    <div class="mb-10">
+      <AdSlot slot="header" />
+    </div>
+
+    <!-- Category Sections -->
+    {productsByCategory.map((category, index) => (
+      <>
+        <section id={category.id} class="mb-12 scroll-mt-24">
+          <div class="flex items-center gap-3 mb-2">
+            <h2 class="text-2xl font-bold text-gray-900">{category.name}</h2>
+          </div>
+          <p class="text-gray-600 mb-6">{category.description}</p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {category.products.map(product => (
+              <ProductCard product={product} variant="default" />
+            ))}
+          </div>
+        </section>
+
+        {/* Ad between sections (after every 2 categories) */}
+        {(index + 1) % 2 === 0 && index < productsByCategory.length - 1 && (
+          <div class="mb-12">
+            <AdSlot slot="in-content" />
+          </div>
+        )}
+      </>
+    ))}
+
+    <!-- CTA Section -->
+    <div class="mt-12 bg-gradient-to-r from-primary-50 to-blue-50 rounded-xl p-8 border border-primary-100">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <h2 class="text-xl font-bold text-gray-900 mb-2">Need Porta Potty Rentals?</h2>
+          <p class="text-gray-600">Find and compare local portable restroom rental companies in your area.</p>
+        </div>
+        <div class="flex flex-wrap gap-4">
+          <a
+            href="/states/"
+            class="inline-flex items-center bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors"
+          >
+            Find Providers
+          </a>
+          <a
+            href="/calculator/"
+            class="inline-flex items-center border-2 border-primary-600 text-primary-600 px-6 py-3 rounded-lg font-medium hover:bg-primary-50 transition-colors"
+          >
+            How Many Do I Need?
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Ad -->
+    <div class="mt-12">
+      <AdSlot slot="footer" />
+    </div>
+  </div>
+</BaseLayout>

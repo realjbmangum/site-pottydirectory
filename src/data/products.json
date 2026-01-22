@@ -1,0 +1,211 @@
+{
+  "categories": [
+    {
+      "id": "sanitation",
+      "name": "Sanitation Essentials",
+      "description": "Keep your portable restrooms clean and well-stocked"
+    },
+    {
+      "id": "odor-control",
+      "name": "Odor Control",
+      "description": "Eliminate unpleasant odors and keep units fresh"
+    },
+    {
+      "id": "event-supplies",
+      "name": "Event Supplies",
+      "description": "Signage, safety equipment, and event accessories"
+    },
+    {
+      "id": "cleaning",
+      "name": "Cleaning Supplies",
+      "description": "Industrial-strength cleaners and protective gear"
+    },
+    {
+      "id": "emergency",
+      "name": "Emergency & Camping",
+      "description": "Portable toilets, waste bags, and privacy solutions"
+    }
+  ],
+  "products": [
+    {
+      "id": "toilet-paper-bulk",
+      "name": "Commercial Toilet Paper (96 Rolls)",
+      "description": "Bulk pack of 2-ply toilet paper, perfect for high-traffic portable restrooms and events.",
+      "priceRange": "$45-65",
+      "asin": "B07D3NQSQH",
+      "imageUrl": "https://m.media-amazon.com/images/I/81Qy8R9CESL._AC_SL1500_.jpg",
+      "category": "sanitation"
+    },
+    {
+      "id": "hand-sanitizer-gallon",
+      "name": "Hand Sanitizer Gel (1 Gallon)",
+      "description": "70% alcohol gel sanitizer for refilling dispensers. Kills 99.9% of germs.",
+      "priceRange": "$20-35",
+      "asin": "B086DKMR7P",
+      "imageUrl": "https://m.media-amazon.com/images/I/71Pq-xLJheL._AC_SL1500_.jpg",
+      "category": "sanitation"
+    },
+    {
+      "id": "foam-soap-refill",
+      "name": "Foaming Hand Soap Refill (1 Gallon)",
+      "description": "Concentrated foaming hand soap for portable hand wash stations.",
+      "priceRange": "$25-40",
+      "asin": "B00BHMCL4K",
+      "imageUrl": "https://m.media-amazon.com/images/I/71Ew3KGrHPL._AC_SL1500_.jpg",
+      "category": "sanitation"
+    },
+    {
+      "id": "paper-towels-bulk",
+      "name": "C-Fold Paper Towels (2400 Count)",
+      "description": "Commercial-grade paper towels for hand wash stations and restroom trailers.",
+      "priceRange": "$35-55",
+      "asin": "B00006IANH",
+      "imageUrl": "https://m.media-amazon.com/images/I/81dZJqkHDrL._AC_SL1500_.jpg",
+      "category": "sanitation"
+    },
+    {
+      "id": "deodorizer-blocks",
+      "name": "Porta Potty Deodorizer Blocks (12 Pack)",
+      "description": "Long-lasting deodorizer blocks that neutralize odors for up to 30 days.",
+      "priceRange": "$25-40",
+      "asin": "B000N4L2VG",
+      "imageUrl": "https://m.media-amazon.com/images/I/71mANwH0gRL._AC_SL1500_.jpg",
+      "category": "odor-control"
+    },
+    {
+      "id": "enzyme-treatment",
+      "name": "Enzyme Waste Treatment (5 Gallon)",
+      "description": "Professional-grade enzymatic treatment that breaks down waste and eliminates odors.",
+      "priceRange": "$65-95",
+      "asin": "B00KL5EDPS",
+      "imageUrl": "https://m.media-amazon.com/images/I/71yB9JNKUML._AC_SL1500_.jpg",
+      "category": "odor-control"
+    },
+    {
+      "id": "blue-chemical",
+      "name": "Porta Potty Blue Chemical (5 Gallon)",
+      "description": "Concentrated blue deodorizing chemical for portable toilets. Non-formaldehyde formula.",
+      "priceRange": "$40-60",
+      "asin": "B07GXFVFZX",
+      "imageUrl": "https://m.media-amazon.com/images/I/71LIAMCm7VL._AC_SL1500_.jpg",
+      "category": "odor-control"
+    },
+    {
+      "id": "air-freshener-spray",
+      "name": "Industrial Air Freshener (Case of 12)",
+      "description": "Professional strength air freshener spray for instant odor elimination.",
+      "priceRange": "$30-45",
+      "asin": "B00GZ9G9EW",
+      "imageUrl": "https://m.media-amazon.com/images/I/71BPIEj3nSL._AC_SL1500_.jpg",
+      "category": "odor-control"
+    },
+    {
+      "id": "restroom-signs",
+      "name": "Portable Restroom Signs (Set of 4)",
+      "description": "Weather-resistant directional signs to guide guests to portable restroom locations.",
+      "priceRange": "$25-40",
+      "asin": "B07WNKB9F7",
+      "imageUrl": "https://m.media-amazon.com/images/I/61MlZJPBLgL._AC_SL1500_.jpg",
+      "category": "event-supplies"
+    },
+    {
+      "id": "safety-cones",
+      "name": "Traffic Safety Cones (6 Pack)",
+      "description": "28-inch reflective safety cones for marking restroom areas and directing traffic.",
+      "priceRange": "$35-55",
+      "asin": "B0117R7CI8",
+      "imageUrl": "https://m.media-amazon.com/images/I/61g7xHl1CUL._AC_SL1500_.jpg",
+      "category": "event-supplies"
+    },
+    {
+      "id": "solar-lights",
+      "name": "Solar LED Pathway Lights (8 Pack)",
+      "description": "Solar-powered LED lights to illuminate pathways to portable restrooms at night events.",
+      "priceRange": "$25-45",
+      "asin": "B07BFSD1YS",
+      "imageUrl": "https://m.media-amazon.com/images/I/71Oy-XgpkjL._AC_SL1500_.jpg",
+      "category": "event-supplies"
+    },
+    {
+      "id": "caution-tape",
+      "name": "Caution Tape (1000 ft Roll)",
+      "description": "Bright yellow caution tape for marking off areas and guiding foot traffic.",
+      "priceRange": "$10-20",
+      "asin": "B0779GNVL1",
+      "imageUrl": "https://m.media-amazon.com/images/I/71rp6uOJLLL._AC_SL1500_.jpg",
+      "category": "event-supplies"
+    },
+    {
+      "id": "industrial-cleaner",
+      "name": "Industrial All-Purpose Cleaner (4 Gallon)",
+      "description": "Heavy-duty cleaner for deep cleaning portable restroom interiors.",
+      "priceRange": "$45-70",
+      "asin": "B07JQV7M7Z",
+      "imageUrl": "https://m.media-amazon.com/images/I/71Gn0RcCuvL._AC_SL1500_.jpg",
+      "category": "cleaning"
+    },
+    {
+      "id": "nitrile-gloves",
+      "name": "Nitrile Gloves (1000 Count)",
+      "description": "Disposable nitrile gloves for sanitary cleaning and maintenance.",
+      "priceRange": "$40-60",
+      "asin": "B08CXVJMS8",
+      "imageUrl": "https://m.media-amazon.com/images/I/61Q7aKKlTdL._AC_SL1000_.jpg",
+      "category": "cleaning"
+    },
+    {
+      "id": "pressure-washer",
+      "name": "Electric Pressure Washer (2000 PSI)",
+      "description": "Powerful pressure washer for deep cleaning portable restroom exteriors and trailers.",
+      "priceRange": "$150-250",
+      "asin": "B07D39SPZR",
+      "imageUrl": "https://m.media-amazon.com/images/I/71G+g-MhPML._AC_SL1500_.jpg",
+      "category": "cleaning"
+    },
+    {
+      "id": "scrub-brush-set",
+      "name": "Heavy-Duty Scrub Brush Set",
+      "description": "Set of industrial scrub brushes for thorough portable restroom cleaning.",
+      "priceRange": "$20-35",
+      "asin": "B01GTLLHGS",
+      "imageUrl": "https://m.media-amazon.com/images/I/81S2QgXZqBL._AC_SL1500_.jpg",
+      "category": "cleaning"
+    },
+    {
+      "id": "portable-toilet-camping",
+      "name": "Portable Camping Toilet",
+      "description": "Compact portable toilet perfect for camping, emergencies, or small outdoor events.",
+      "priceRange": "$80-150",
+      "asin": "B00DGZT1AQ",
+      "imageUrl": "https://m.media-amazon.com/images/I/71M7xtSgX1L._AC_SL1500_.jpg",
+      "category": "emergency"
+    },
+    {
+      "id": "waste-bags",
+      "name": "Portable Toilet Waste Bags (50 Pack)",
+      "description": "Biodegradable waste bags with gelling powder for portable and emergency toilets.",
+      "priceRange": "$25-40",
+      "asin": "B07KJZ3RNJ",
+      "imageUrl": "https://m.media-amazon.com/images/I/71IhbGCYg7L._AC_SL1500_.jpg",
+      "category": "emergency"
+    },
+    {
+      "id": "privacy-tent",
+      "name": "Pop-Up Privacy Tent",
+      "description": "Instant pop-up privacy tent for portable toilets at camping sites or outdoor events.",
+      "priceRange": "$45-75",
+      "asin": "B07PPJXT8S",
+      "imageUrl": "https://m.media-amazon.com/images/I/716ZPAT3xyL._AC_SL1500_.jpg",
+      "category": "emergency"
+    },
+    {
+      "id": "emergency-bucket-toilet",
+      "name": "Emergency Bucket Toilet Kit",
+      "description": "Complete emergency toilet kit with bucket, seat, and waste bags for disaster preparedness.",
+      "priceRange": "$35-55",
+      "asin": "B00A3DKPXA",
+      "imageUrl": "https://m.media-amazon.com/images/I/61cUqHRLyoL._AC_SL1200_.jpg",
+      "category": "emergency"
+    }
+  ]
+}

@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import StructuredData from '../../components/StructuredData.astro';
 import AdSlot from '../../components/AdSlot.astro';
+import RecommendedProducts from '../../components/RecommendedProducts.astro';
 import siteConfig from '../../data/site-config.json';
 import blogPosts from '../../data/blog-posts.json';
 
@@ -259,6 +260,8 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
           <a href="/services/fairs-festivals" class="font-semibold underline">Browse festival porta potty providers →</a>
         </p>
       </div>
+
+      <RecommendedProducts categoryId="sanitation" limit={4} title="Festival Survival Kit Essentials" />
 
     </div>
 

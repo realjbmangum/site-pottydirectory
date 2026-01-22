@@ -262,6 +262,50 @@ export async function getVendorsByCity(state: string, city: string) {
   return data as Vendor[];
 }
 
+export async function getFeaturedVendorsByState(state: string, limit = 6): Promise<Vendor[]> {
+  // First try to get explicitly featured vendors in this state
+  const { data, error } = await supabase
+    .from('potty')
+    .select('*')
+    .eq('state', state)
+    .eq('featured', true)
+    .limit(limit);
+
+  if (error) throw error;
+
+  // If we have featured vendors, return them
+  if (data && data.length > 0) {
+    return data as Vendor[];
+  }
+
+  // Fallback: get highest rated vendors in this state with good review counts
+  const { data: fallbackData, error: fallbackError } = await supabase
+    .from('potty')
+    .select('*')
+    .eq('state', state)
+    .gte('rating', 4.5)
+    .gte('review_count', 10)
+    .order('rating', { ascending: false })
+    .order('review_count', { ascending: false })
+    .limit(limit);
+
+  if (fallbackError) throw fallbackError;
+  return (fallbackData || []) as Vendor[];
+}
+
+export async function getFeaturedVendorsByCity(state: string, city: string): Promise<Vendor[]> {
+  // Get explicitly featured vendors in this city
+  const { data, error } = await supabase
+    .from('potty')
+    .select('*')
+    .eq('state', state)
+    .eq('city', city)
+    .eq('featured', true);
+
+  if (error) throw error;
+  return (data || []) as Vendor[];
+}
+
 export async function getCitiesByState(state: string) {
   const { data, error } = await supabase
     .from('potty')

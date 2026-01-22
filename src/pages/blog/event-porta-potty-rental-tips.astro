@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import StructuredData from '../../components/StructuredData.astro';
 import AdSlot from '../../components/AdSlot.astro';
+import RecommendedProducts from '../../components/RecommendedProducts.astro';
 import siteConfig from '../../data/site-config.json';
 import blogPosts from '../../data/blog-posts.json';
 
@@ -238,6 +239,8 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
       <p>
         The key to porta potty success at your event: <strong>plan early, order enough, and place them strategically</strong>. Your guests won't remember the restrooms if they're done right—but they'll definitely remember if they're not.
       </p>
+
+      <RecommendedProducts categoryId="event-supplies" limit={4} title="Event Planning Supplies" />
 
     </div>
 

@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import StructuredData from '../../components/StructuredData.astro';
 import AdSlot from '../../components/AdSlot.astro';
+import RecommendedProducts from '../../components/RecommendedProducts.astro';
 import siteConfig from '../../data/site-config.json';
 import blogPosts from '../../data/blog-posts.json';
 
@@ -580,6 +581,8 @@ const costTable = [
       <p>
         Ready to get compliant? <a href="/services/construction/">Find construction porta potty providers</a> who understand OSHA requirements, or use our <a href="/calculator/">free calculator</a> to determine exactly what you need.
       </p>
+
+      <RecommendedProducts categoryId="cleaning" limit={4} title="Construction Site Cleaning Supplies" />
     </div>
 
     <!-- CTA -->

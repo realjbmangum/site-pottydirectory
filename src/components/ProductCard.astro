@@ -1,0 +1,113 @@
+---
+import siteConfig from '../data/site-config.json';
+
+interface Product {
+  id: string;
+  name: string;
+  description: string;
+  priceRange: string;
+  asin: string;
+  imageUrl: string;
+  category: string;
+}
+
+interface Props {
+  product: Product;
+  variant?: 'default' | 'compact' | 'horizontal';
+}
+
+const { product, variant = 'default' } = Astro.props;
+const amazonTag = siteConfig.monetization?.amazonTag || '';
+const affiliateUrl = `https://www.amazon.com/dp/${product.asin}?tag=${amazonTag}`;
+---
+
+{variant === 'default' && (
+  <div class="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col h-full">
+    <div class="aspect-square bg-gray-50 p-4 flex items-center justify-center">
+      <img
+        src={product.imageUrl}
+        alt={product.name}
+        class="max-h-full max-w-full object-contain"
+        loading="lazy"
+      />
+    </div>
+    <div class="p-4 flex flex-col flex-grow">
+      <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2">{product.name}</h3>
+      <p class="text-sm text-gray-600 mb-3 line-clamp-2 flex-grow">{product.description}</p>
+      <div class="flex items-center justify-between mt-auto">
+        <span class="text-lg font-bold text-gray-900">{product.priceRange}</span>
+        <a
+          href={affiliateUrl}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          class="inline-flex items-center bg-gradient-to-r from-amber-400 to-orange-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-amber-500 hover:to-orange-600 transition-all shadow-sm"
+        >
+          <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+          Buy on Amazon
+        </a>
+      </div>
+    </div>
+  </div>
+)}
+
+{variant === 'compact' && (
+  <div class="bg-white rounded-lg border border-gray-200 p-3 hover:shadow-md transition-all duration-200">
+    <div class="flex items-center gap-3">
+      <div class="w-16 h-16 bg-gray-50 rounded-lg flex-shrink-0 flex items-center justify-center p-1">
+        <img
+          src={product.imageUrl}
+          alt={product.name}
+          class="max-h-full max-w-full object-contain"
+          loading="lazy"
+        />
+      </div>
+      <div class="flex-grow min-w-0">
+        <h4 class="font-medium text-gray-900 text-sm line-clamp-1">{product.name}</h4>
+        <p class="text-xs text-gray-500 mb-1">{product.priceRange}</p>
+        <a
+          href={affiliateUrl}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          class="text-xs font-medium text-amber-600 hover:text-amber-700"
+        >
+          View on Amazon &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+)}
+
+{variant === 'horizontal' && (
+  <div class="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-200 overflow-hidden">
+    <div class="flex flex-col sm:flex-row">
+      <div class="sm:w-48 h-48 sm:h-auto bg-gray-50 p-4 flex items-center justify-center flex-shrink-0">
+        <img
+          src={product.imageUrl}
+          alt={product.name}
+          class="max-h-full max-w-full object-contain"
+          loading="lazy"
+        />
+      </div>
+      <div class="p-4 flex flex-col flex-grow">
+        <h3 class="font-semibold text-gray-900 mb-2">{product.name}</h3>
+        <p class="text-sm text-gray-600 mb-3 flex-grow">{product.description}</p>
+        <div class="flex items-center justify-between">
+          <span class="text-lg font-bold text-gray-900">{product.priceRange}</span>
+          <a
+            href={affiliateUrl}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            class="inline-flex items-center bg-gradient-to-r from-amber-400 to-orange-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-amber-500 hover:to-orange-600 transition-all shadow-sm"
+          >
+            <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            Buy on Amazon
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+)}

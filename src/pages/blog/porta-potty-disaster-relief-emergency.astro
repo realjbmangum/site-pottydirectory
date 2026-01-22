@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import StructuredData from '../../components/StructuredData.astro';
 import AdSlot from '../../components/AdSlot.astro';
+import RecommendedProducts from '../../components/RecommendedProducts.astro';
 import siteConfig from '../../data/site-config.json';
 import blogPosts from '../../data/blog-posts.json';
 
@@ -234,6 +235,8 @@ const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
         <li><strong>State Emergency Management Agencies:</strong> Coordinate state-level response</li>
         <li><strong>Local Emergency Management:</strong> First point of contact for community needs</li>
       </ul>
+
+      <RecommendedProducts categoryId="emergency" limit={4} title="Emergency Sanitation Supplies" />
 
     </div>
 
