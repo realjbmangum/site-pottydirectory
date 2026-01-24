@@ -4,9 +4,51 @@
 - **Live URL:** https://pottydirectory.com
 - **Supplies Page:** https://pottydirectory.com/supplies
 - **Amazon Tag:** jbmangum27-20
-- **Vendors:** ~5,850 | **Pages:** 7,247 | **Blog Posts:** 30
+- **Vendors:** ~5,827 (after duplicate cleanup) | **Pages:** 7,247 | **Blog Posts:** 30
 
-## Current State (as of Jan 21, 2026)
+## Current State (as of Jan 24, 2026)
+
+### Session - Jan 24, 2026 - Database Cleanup & Analytics Setup
+
+**Problem Identified:**
+- Email outreach links returning 404s for Arkansas, Alabama, Alaska, and other states
+- Root cause: Database had inconsistent state formats (some "AL", some "Alabama")
+- Site built pages at `/al/...` but Factory generated links to `/alabama/...`
+
+**Database Fixes:**
+- Found 26 states stored as abbreviations instead of full names
+- Deleted 23 duplicate vendors (same business existed with both "AL" and "Alabama")
+- Updated all remaining abbreviations to full state names
+- SQL: `UPDATE potty SET state = 'Alabama' WHERE state = 'AL';` (for all 26 states)
+
+**Analytics Review (Dec 27, 2025 - Jan 23, 2026):**
+- 12,287 total sessions - but 98% was "Direct" (likely bot traffic)
+- Real organic search traffic: 123 sessions with 54% engagement rate
+- Bot traffic: 3 second visits, 5% engagement - not real users
+- Organic users: 32 second visits, 6.5 pages viewed - actual humans
+
+**GA4 Improvements:**
+- Enabled Google Signals data collection
+- Restricted Signals to USA only (no need for international data)
+- Activated internal traffic filter
+- Added UTM parameters to email outreach links (in Directory Factory)
+  - Links now include: `?utm_source=email&utm_medium=outreach&utm_campaign=[template]`
+  - Email clicks will show as "Email" channel instead of "Direct"
+
+**Commits:**
+- `chore: trigger rebuild after fixing state abbreviations in database` (potty site)
+- `feat: Add UTM tracking parameters to email outreach links` (directory-factory)
+
+**Files Modified:**
+- `site-directory-factory/src/lib/api/outreach.ts` - Added UTM params to renderTemplate()
+
+**Next Steps:**
+- [ ] Monitor GA4 for email traffic appearing correctly
+- [ ] Check Search Console as pages re-index with correct URLs
+- [ ] Continue email outreach campaign (Email 2 sequence)
+- [ ] Review Search Console performance data
+
+---
 
 ### Session - Jan 21, 2026 (Session 4) - Bug Fixes
 
