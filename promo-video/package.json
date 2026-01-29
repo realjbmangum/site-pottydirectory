@@ -1,0 +1,21 @@
+{
+  "name": "potty-directory-wwett-promo",
+  "version": "1.0.0",
+  "description": "WWETT 2026 Promo Video for Potty Directory",
+  "scripts": {
+    "start": "remotion preview",
+    "build": "remotion render src/index.ts WWETTPromo out/wwett-promo.mp4",
+    "build-vertical": "remotion render src/index.ts WWETTPromoVertical out/wwett-promo-vertical.mp4",
+    "build-horizontal": "remotion render src/index.ts WWETTPromoHorizontal out/wwett-promo-horizontal.mp4"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remotion": "^4.0.0"
+  },
+  "devDependencies": {
+    "@remotion/cli": "^4.0.0",
+    "@types/react": "^18.2.0",
+    "typescript": "^5.0.0"
+  }
+}

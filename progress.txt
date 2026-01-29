@@ -43,11 +43,23 @@
 - All submissions will appear in Supabase submissions table filtered by source='wwett2026'
 - Follow up with leads mentioning "WWETT2026" code for 20% discount
 
+**Promo Video Created:**
+- Built professional 20-second motion graphics promo video using Remotion
+- Modern design: glassmorphism, gradient text, cinematic animations, ambient lighting
+- 6 scenes: Opening splash, animated stats, benefits grid, comparison, CTA with QR code, WWETT special
+- 3 formats ready: Horizontal (1920x1080), Vertical (1080x1920), Square (1080x1080)
+- Technologies: React, Remotion, spring animations, bezier easing, count-up effects
+- Location: `/Users/jbm/new-project/site-pottydirectory/promo-video/`
+- Preview: `npm start` at http://localhost:3000
+- Render: `npm run build-horizontal` or `npm run build-vertical`
+
 **Next Steps:**
+- [ ] Render final video files for social media distribution
 - [ ] Add WWETT logo to landing page (cre26wet-wwett-oneinforma-logo-rgb-highres.webp)
 - [ ] Integrate Stripe payment links for Featured/Verified upgrades (if immediate billing desired)
 - [ ] Monitor submissions from WWETT show in Supabase
 - [ ] Follow up with leads offering WWETT discount
+- [ ] Share promo video on LinkedIn, Twitter, and email to attendees
 
 ---
 
