@@ -6,7 +6,84 @@
 - **Amazon Tag:** jbmangum27-20
 - **Vendors:** ~5,827 (after duplicate cleanup) | **Pages:** 7,247 | **Blog Posts:** 30
 
-## Current State (as of Jan 24, 2026)
+## Current State (as of Jan 29, 2026)
+
+### Session - Jan 29, 2026 - WWETT 2026 Trade Show Landing Page
+
+**Completed:**
+- Created `/wwett` landing page for WWETT 2026 trade show
+  - Mock featured listing preview showing what vendors get (Featured badge, Verified badge, 5-star rating, services, contact info, service area map)
+  - Full submission form capturing: business name, contact info, location, website, services offered
+  - Premium upgrade checkboxes: Featured Listing ($99/mo) and Verified Badge ($149 one-time)
+  - WWETT 2026 special offer: 20% off first year of Featured Listing
+  - Source tracking: All submissions tagged with `source: "wwett2026"` for ROI measurement
+- Created `/wwett-success` thank you page with next steps and discount reminder
+- Created `/api/wwett-submission` endpoint to save form data to Supabase submissions table
+- Created print-ready flyer PDF (8.5x11", 300 DPI) with QR code pointing to landing page
+- Added Sierra Portables Inc. (Acampo, CA) to directory
+- Added Golden Thronez (Riverside, CA) to directory with Instagram and Facebook links
+
+**Files Created:**
+- `src/pages/wwett.astro` - WWETT landing page
+- `src/pages/wwett-success.astro` - Success/thank you page
+- `src/pages/api/wwett-submission.ts` - Form submission handler
+- `public/WWETT-Potty-Directory-PRINT.pdf` - Print-ready flyer
+
+**SQL Executed:**
+- Inserted Sierra Portables Inc. (24/7 service, bilingual staff, serves 5 Central Valley CA counties)
+- Inserted Golden Thronez (luxury restroom trailers, climate-controlled, wedding/event focus)
+
+**Decisions:**
+- WWETT landing page uses mock listing preview instead of requiring users to imagine what they'll get
+- Form captures premium interest via checkboxes but no immediate billing (follow up manually with discount)
+- QR code points to https://pottydirectory.com/wwett/ for easy trade show distribution
+
+**Client Action Items:**
+- Waste Rentals (Mesa, AZ) will distribute flyers at WWETT show
+- All submissions will appear in Supabase submissions table filtered by source='wwett2026'
+- Follow up with leads mentioning "WWETT2026" code for 20% discount
+
+**Next Steps:**
+- [ ] Add WWETT logo to landing page (cre26wet-wwett-oneinforma-logo-rgb-highres.webp)
+- [ ] Integrate Stripe payment links for Featured/Verified upgrades (if immediate billing desired)
+- [ ] Monitor submissions from WWETT show in Supabase
+- [ ] Follow up with leads offering WWETT discount
+
+---
+
+## Current State (as of Jan 26, 2026)
+
+### Session - Jan 26, 2026 - City Content SEO & Search Console Review
+
+**Completed:**
+- Updated KJ Event Rentals in database (review_count: 18, hours added)
+- Reviewed Google Search Console indexing issues:
+  - 472 "Not found (404)" - Expected behavior from Jan 24 cleanup (deleted duplicates, non-porta-potty businesses like Ace Hardware, Macy's, etc.)
+  - 4,028 "Discovered - not indexed" - Normal crawl queue backlog, no action needed
+  - 242 "Excluded by noindex" - Empty city pages, intentional
+  - 211 "Page with redirect" - www→non-www redirects, expected
+- **Ran city content SQL** - Added unique SEO content to 249 top cities
+  - Each city now has: custom intro paragraph, local tips, peak season info, popular_for tags
+  - File: `data/city-content-inserts.sql`
+- Triggered rebuild to deploy city content
+
+**Decisions:**
+- Google review auto-update: Keep manual via email outreach (Places API costs ~$100/refresh for 5,800 vendors)
+- Search Console 404s: Do nothing - Google will naturally drop them in 4-8 weeks
+- AdSense: Still waiting on approval (first submittal failed, resubmitting in a few months)
+- Featured Listings payment flow: 30-60 days out
+
+**Notes:**
+- City content SQL ran successfully - verified Houston record exists in city_content table with status='published'
+- Content not yet visible on live site - may need rebuild to complete or cache to clear
+
+**Next Steps:**
+- [ ] Verify city content showing on Houston page (check after Cloudflare build completes)
+- [ ] Send Email 3 outreach in ~1 week
+- [ ] Monitor GA4 for email traffic (UTM tracking from Jan 24)
+- [ ] Check Search Console indexing improvement over next 2-4 weeks
+
+---
 
 ### Session - Jan 24, 2026 - Database Cleanup & Analytics Setup
 
