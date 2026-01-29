@@ -1,0 +1,377 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SEOHead from '../components/SEOHead.astro';
+
+const pageTitle = "Get Your Business Listed - WWETT 2026 Special";
+const pageDescription = "See what your listing could look like on Potty Directory. Join 4,500+ providers connecting with customers nationwide.";
+---
+
+<Layout>
+  <SEOHead
+    slot="head"
+    title={pageTitle}
+    description={pageDescription}
+    noindex={false}
+  />
+
+  <!-- Hero Section -->
+  <div class="bg-gradient-to-br from-blue-900 to-blue-600 text-white py-12">
+    <div class="container mx-auto px-4 text-center">
+      <div class="text-5xl mb-3">🚽</div>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 font-fredoka">Welcome WWETT Attendees!</h1>
+      <p class="text-xl md:text-2xl opacity-95">See what YOUR listing could look like below 👇</p>
+    </div>
+  </div>
+
+  <!-- Mock Listing Preview -->
+  <div class="container mx-auto px-4 py-12 max-w-5xl">
+
+    <!-- Featured Badge -->
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-yellow-900 px-6 py-3 rounded-full font-bold text-lg shadow-lg">
+        👑 FEATURED LISTING
+      </div>
+    </div>
+
+    <!-- Mock Listing Card -->
+    <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border-4 border-yellow-400">
+
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-slate-50 to-slate-100 p-8 border-b-2 border-slate-200">
+        <div class="flex items-start justify-between flex-wrap gap-4">
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-3">
+              <h2 class="text-3xl md:text-4xl font-bold text-slate-900 font-fredoka">Your Company Name Here</h2>
+              <div class="bg-blue-600 text-white px-3 py-1 rounded-lg text-sm font-bold flex items-center gap-1">
+                ✓ Verified
+              </div>
+            </div>
+            <div class="flex items-center gap-4 flex-wrap mb-4">
+              <div class="flex items-center gap-1">
+                <span class="text-2xl">⭐⭐⭐⭐⭐</span>
+                <span class="font-bold text-lg">4.8</span>
+                <span class="text-slate-600">(23 reviews)</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 text-slate-700 text-lg mb-2">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+              </svg>
+              <span class="font-semibold">Phoenix, Arizona</span>
+            </div>
+            <p class="text-slate-600 text-lg leading-relaxed">
+              Arizona's premier portable restroom rental experts serving the greater Phoenix metropolitan area.
+              Family-owned and operated since 2010. Available 24/7 for emergency service.
+            </p>
+          </div>
+
+          <!-- Mock Image -->
+          <div class="w-full md:w-64 h-48 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center text-6xl border-2 border-blue-300">
+            🚻
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div class="mt-6">
+          <h3 class="font-bold text-lg mb-3 text-slate-800">Services Offered:</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-orange-100 text-orange-800 px-4 py-2 rounded-lg font-semibold text-sm">Standard Units</span>
+            <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-lg font-semibold text-sm">Luxury Trailers</span>
+            <span class="bg-green-100 text-green-800 px-4 py-2 rounded-lg font-semibold text-sm">ADA Accessible</span>
+            <span class="bg-red-100 text-red-800 px-4 py-2 rounded-lg font-semibold text-sm">Emergency 24/7</span>
+            <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-semibold text-sm">Construction Sites</span>
+            <span class="bg-pink-100 text-pink-800 px-4 py-2 rounded-lg font-semibold text-sm">Wedding Packages</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Section -->
+      <div class="p-8 bg-white">
+        <div class="grid md:grid-cols-3 gap-6">
+          <a href="tel:555-123-4567" class="flex items-center gap-3 p-4 bg-blue-50 rounded-xl hover:bg-blue-100 transition">
+            <div class="text-3xl">📞</div>
+            <div>
+              <div class="text-sm text-slate-600">Call Now</div>
+              <div class="font-bold text-blue-600">(555) 123-4567</div>
+            </div>
+          </a>
+
+          <a href="https://yourwebsite.com" class="flex items-center gap-3 p-4 bg-blue-50 rounded-xl hover:bg-blue-100 transition">
+            <div class="text-3xl">🌐</div>
+            <div>
+              <div class="text-sm text-slate-600">Visit Website</div>
+              <div class="font-bold text-blue-600">yourwebsite.com</div>
+            </div>
+          </a>
+
+          <a href="mailto:info@yourcompany.com" class="flex items-center gap-3 p-4 bg-blue-50 rounded-xl hover:bg-blue-100 transition">
+            <div class="text-3xl">✉️</div>
+            <div>
+              <div class="text-sm text-slate-600">Email Us</div>
+              <div class="font-bold text-blue-600">Get a Quote</div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Service Area Map Placeholder -->
+        <div class="mt-6 p-6 bg-slate-50 rounded-xl border-2 border-slate-200">
+          <h3 class="font-bold text-lg mb-3">Service Area:</h3>
+          <div class="h-48 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex items-center justify-center text-6xl">
+            🗺️
+          </div>
+          <p class="text-center text-slate-600 mt-3">
+            Serving Phoenix, Scottsdale, Mesa, Tempe, Chandler, Gilbert, Glendale, Peoria & surrounding areas
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA Banner -->
+    <div class="my-12 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-400 rounded-2xl p-8 text-center shadow-2xl transform hover:scale-105 transition-transform">
+      <p class="text-3xl md:text-4xl font-bold text-yellow-900 mb-2 font-fredoka">
+        👆 This Could Be YOUR Listing!
+      </p>
+      <p class="text-xl text-yellow-800 font-semibold">
+        Get started below in just 60 seconds 👇
+      </p>
+    </div>
+
+    <!-- Submission Form -->
+    <div class="bg-white rounded-2xl shadow-2xl p-8 md:p-12 border-t-8 border-blue-600">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-3 font-fredoka">
+          Claim Your Free Listing Now
+        </h2>
+        <p class="text-xl text-slate-600">
+          Join 4,500+ providers connecting with customers nationwide
+        </p>
+      </div>
+
+      <form action="/api/wwett-submission" method="POST" class="space-y-6">
+
+        <!-- Business Info -->
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <label for="business_name" class="block text-sm font-bold text-slate-700 mb-2">
+              Business Name *
+            </label>
+            <input
+              type="text"
+              id="business_name"
+              name="business_name"
+              required
+              class="w-full px-4 py-3 border-2 border-slate-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition text-lg"
+              placeholder="Your Company LLC"
+            />
+          </div>
+
+          <div>
+            <label for="contact_name" class="block text-sm font-bold text-slate-700 mb-2">
+              Your Name *
+            </label>
+            <input
+              type="text"
+              id="contact_name"
+              name="contact_name"
+              required
+              class="w-full px-4 py-3 border-2 border-slate-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition text-lg"
+              placeholder="John Smith"
+            />
+          </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <label for="email" class="block text-sm font-bold text-slate-700 mb-2">
+              Email Address *
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="w-full px-4 py-3 border-2 border-slate-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition text-lg"
+              placeholder="john@yourcompany.com"
+            />
+          </div>
+
+          <div>
+            <label for="phone" class="block text-sm font-bold text-slate-700 mb-2">
+              Phone Number *
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              required
+              class="w-full px-4 py-3 border-2 border-slate-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition text-lg"
+              placeholder="(555) 123-4567"
+            />
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <label for="city" class="block text-sm font-bold text-slate-700 mb-2">
+              City *
+            </label>
+            <input
+              type="text"
+              id="city"
+              name="city"
+              required
+              class="w-full px-4 py-3 border-2 border-slate-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition text-lg"
+              placeholder="Phoenix"
+            />
+          </div>
+
+          <div>
+            <label for="state" class="block text-sm font-bold text-slate-700 mb-2">
+              State *
+            </label>
+            <input
+              type="text"
+              id="state"
+              name="state"
+              required
+              class="w-full px-4 py-3 border-2 border-slate-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition text-lg"
+              placeholder="Arizona"
+            />
+          </div>
+        </div>
+
+        <!-- Website -->
+        <div>
+          <label for="website" class="block text-sm font-bold text-slate-700 mb-2">
+            Website (optional)
+          </label>
+          <input
+            type="url"
+            id="website"
+            name="website"
+            class="w-full px-4 py-3 border-2 border-slate-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition text-lg"
+            placeholder="https://yourcompany.com"
+          />
+        </div>
+
+        <!-- Services Offered -->
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-3">
+            Services Offered (check all that apply)
+          </label>
+          <div class="grid md:grid-cols-3 gap-4">
+            <label class="flex items-center gap-2 p-3 bg-slate-50 rounded-lg hover:bg-slate-100 cursor-pointer">
+              <input type="checkbox" name="services" value="Standard Units" class="w-5 h-5 text-blue-600"/>
+              <span>Standard Units</span>
+            </label>
+            <label class="flex items-center gap-2 p-3 bg-slate-50 rounded-lg hover:bg-slate-100 cursor-pointer">
+              <input type="checkbox" name="services" value="Luxury Trailers" class="w-5 h-5 text-blue-600"/>
+              <span>Luxury Trailers</span>
+            </label>
+            <label class="flex items-center gap-2 p-3 bg-slate-50 rounded-lg hover:bg-slate-100 cursor-pointer">
+              <input type="checkbox" name="services" value="ADA Accessible" class="w-5 h-5 text-blue-600"/>
+              <span>ADA Accessible</span>
+            </label>
+            <label class="flex items-center gap-2 p-3 bg-slate-50 rounded-lg hover:bg-slate-100 cursor-pointer">
+              <input type="checkbox" name="services" value="VIP Trailers" class="w-5 h-5 text-blue-600"/>
+              <span>VIP Trailers</span>
+            </label>
+            <label class="flex items-center gap-2 p-3 bg-slate-50 rounded-lg hover:bg-slate-100 cursor-pointer">
+              <input type="checkbox" name="services" value="Shower Units" class="w-5 h-5 text-blue-600"/>
+              <span>Shower Units</span>
+            </label>
+            <label class="flex items-center gap-2 p-3 bg-slate-50 rounded-lg hover:bg-slate-100 cursor-pointer">
+              <input type="checkbox" name="services" value="Hand Washing Stations" class="w-5 h-5 text-blue-600"/>
+              <span>Hand Wash Stations</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Premium Options -->
+        <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 border-2 border-yellow-300 rounded-xl p-6">
+          <h3 class="font-bold text-xl text-slate-900 mb-4 flex items-center gap-2">
+            <span>⭐</span> Premium Options
+          </h3>
+
+          <label class="flex items-start gap-3 mb-4 cursor-pointer group">
+            <input type="checkbox" name="interested_featured" value="yes" class="w-6 h-6 text-yellow-600 mt-1"/>
+            <div>
+              <span class="font-bold text-lg text-slate-900 group-hover:text-yellow-600 transition">
+                👑 Featured Listing - $99/month
+              </span>
+              <p class="text-slate-700 text-sm mt-1">
+                Get premium placement, gold badge, and 3x more visibility in search results
+              </p>
+            </div>
+          </label>
+
+          <label class="flex items-start gap-3 cursor-pointer group">
+            <input type="checkbox" name="interested_verified" value="yes" class="w-6 h-6 text-blue-600 mt-1"/>
+            <div>
+              <span class="font-bold text-lg text-slate-900 group-hover:text-blue-600 transition">
+                ✓ Verified Badge - $149 one-time
+              </span>
+              <p class="text-slate-700 text-sm mt-1">
+                Build instant trust with customers. Includes background check and verification.
+              </p>
+            </div>
+          </label>
+        </div>
+
+        <!-- WWETT Special -->
+        <div class="bg-gradient-to-r from-red-50 to-pink-50 border-2 border-red-300 rounded-xl p-6 text-center">
+          <p class="text-2xl font-bold text-red-600 mb-2">🎉 WWETT 2026 SPECIAL</p>
+          <p class="text-lg text-slate-700">
+            Mention "WWETT2026" when we contact you for <strong>20% off your first year</strong> of Featured Listing!
+          </p>
+        </div>
+
+        <!-- Hidden field to track source -->
+        <input type="hidden" name="source" value="wwett2026" />
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold text-xl py-5 px-8 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-200"
+        >
+          Get My Free Listing →
+        </button>
+
+        <p class="text-center text-sm text-slate-500 mt-4">
+          * Required fields. We'll review your submission and have your listing live within 48 hours.
+        </p>
+      </form>
+    </div>
+
+    <!-- Trust Signals -->
+    <div class="mt-12 grid md:grid-cols-3 gap-6 text-center">
+      <div class="bg-white rounded-xl p-6 shadow-lg">
+        <div class="text-5xl mb-3">🚀</div>
+        <div class="text-3xl font-bold text-blue-600 mb-2">4,500+</div>
+        <div class="text-slate-600">Active Listings</div>
+      </div>
+      <div class="bg-white rounded-xl p-6 shadow-lg">
+        <div class="text-5xl mb-3">📍</div>
+        <div class="text-3xl font-bold text-blue-600 mb-2">50</div>
+        <div class="text-slate-600">States Covered</div>
+      </div>
+      <div class="bg-white rounded-xl p-6 shadow-lg">
+        <div class="text-5xl mb-3">👥</div>
+        <div class="text-3xl font-bold text-blue-600 mb-2">25,000+</div>
+        <div class="text-slate-600">Monthly Searches</div>
+      </div>
+    </div>
+
+  </div>
+</Layout>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
+
+  .font-fredoka {
+    font-family: 'Fredoka', sans-serif;
+  }
+</style>

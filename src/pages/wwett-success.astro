@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SEOHead from '../components/SEOHead.astro';
+
+const pageTitle = "Thank You - WWETT 2026";
+const pageDescription = "Your listing submission has been received!";
+---
+
+<Layout>
+  <SEOHead
+    slot="head"
+    title={pageTitle}
+    description={pageDescription}
+    noindex={true}
+  />
+
+  <div class="min-h-screen bg-gradient-to-br from-blue-900 via-blue-600 to-blue-500 flex items-center justify-center px-4 py-12">
+    <div class="max-w-2xl w-full">
+
+      <!-- Success Card -->
+      <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 text-center">
+
+        <!-- Checkmark Animation -->
+        <div class="mb-8">
+          <div class="inline-flex items-center justify-center w-24 h-24 bg-green-100 rounded-full">
+            <svg class="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Success Message -->
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4 font-fredoka">
+          You're All Set!
+        </h1>
+
+        <p class="text-xl text-slate-600 mb-8">
+          Thanks for submitting your listing at WWETT 2026!
+        </p>
+
+        <!-- What's Next -->
+        <div class="bg-blue-50 rounded-2xl p-6 mb-8 text-left">
+          <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+            <span>📋</span> What Happens Next
+          </h2>
+
+          <ol class="space-y-4 text-slate-700">
+            <li class="flex gap-3">
+              <span class="font-bold text-blue-600 flex-shrink-0">1.</span>
+              <span>We'll review your submission within <strong>24-48 hours</strong></span>
+            </li>
+            <li class="flex gap-3">
+              <span class="font-bold text-blue-600 flex-shrink-0">2.</span>
+              <span>You'll receive an email at the address you provided with your live listing URL</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="font-bold text-blue-600 flex-shrink-0">3.</span>
+              <span>If you checked interest in <strong>Featured Listing</strong> or <strong>Verified Badge</strong>, we'll reach out with details and your exclusive WWETT discount</span>
+            </li>
+          </ol>
+        </div>
+
+        <!-- WWETT Discount Reminder -->
+        <div class="bg-gradient-to-r from-yellow-50 to-yellow-100 border-2 border-yellow-300 rounded-2xl p-6 mb-8">
+          <p class="text-xl font-bold text-yellow-900 mb-2">
+            🎉 Don't Forget Your WWETT Discount!
+          </p>
+          <p class="text-lg text-yellow-800">
+            You'll get <strong>20% off your first year</strong> of Featured Listing when we contact you.
+          </p>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/"
+            class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-200"
+          >
+            Visit Potty Directory
+          </a>
+
+          <a
+            href="/wwett"
+            class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-lg py-4 px-8 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-200"
+          >
+            Submit Another Listing
+          </a>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="mt-8 pt-8 border-t-2 border-slate-200">
+          <p class="text-slate-600">
+            Questions? Email us at <a href="mailto:info@pottydirectory.com" class="text-blue-600 font-semibold hover:underline">info@pottydirectory.com</a>
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Back to Show -->
+      <div class="text-center mt-8">
+        <p class="text-white text-lg">
+          Enjoy the rest of WWETT 2026! 👋
+        </p>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
+
+  .font-fredoka {
+    font-family: 'Fredoka', sans-serif;
+  }
+</style>
