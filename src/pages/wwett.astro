@@ -1,18 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import SEOHead from '../components/SEOHead.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const pageTitle = "Get Your Business Listed - WWETT 2026 Special";
 const pageDescription = "See what your listing could look like on Potty Directory. Join 4,500+ providers connecting with customers nationwide.";
 ---
 
-<Layout>
-  <SEOHead
-    slot="head"
-    title={pageTitle}
-    description={pageDescription}
-    noindex={false}
-  />
+<BaseLayout pageTitle={pageTitle} pageDescription={pageDescription}>
 
   <!-- Hero Section -->
   <div class="bg-gradient-to-br from-blue-900 to-blue-600 text-white py-12">
@@ -366,7 +359,7 @@ const pageDescription = "See what your listing could look like on Potty Director
     </div>
 
   </div>
-</Layout>
+</BaseLayout>
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');

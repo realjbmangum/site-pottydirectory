@@ -1,18 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import SEOHead from '../components/SEOHead.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const pageTitle = "Thank You - WWETT 2026";
 const pageDescription = "Your listing submission has been received!";
 ---
 
-<Layout>
-  <SEOHead
-    slot="head"
-    title={pageTitle}
-    description={pageDescription}
-    noindex={true}
-  />
+<BaseLayout pageTitle={pageTitle} pageDescription={pageDescription} noindex={true}>
 
   <div class="min-h-screen bg-gradient-to-br from-blue-900 via-blue-600 to-blue-500 flex items-center justify-center px-4 py-12">
     <div class="max-w-2xl w-full">
@@ -105,7 +98,7 @@ const pageDescription = "Your listing submission has been received!";
 
     </div>
   </div>
-</Layout>
+</BaseLayout>
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
